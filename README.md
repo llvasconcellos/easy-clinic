@@ -6,4 +6,4 @@ Sistema de gerenciamento de informações para Clínicas Médicas.
 * Iron Meteor (https://github.com/iron-meteor)
 * Bootstrap
 
-DevHouse.com.br
+www.devhouse.com.br
