@@ -37,3 +37,4 @@ zimme:active-route
 accounts-password
 accounts-base
 iron:dynamic-template
+tap:i18n@1.8.2
