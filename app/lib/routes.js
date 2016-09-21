@@ -1,31 +1,56 @@
-/*Router.configure({
-  layoutTemplate: 'MasterLayout',
-  loadingTemplate: 'Loading',
-  notFoundTemplate: 'NotFound'
+Router.configure({
+  //layoutTemplate: 'blankLayout',
+  //loadingTemplate: 'Loading',
+  notFoundTemplate: 'notFoundTemplate'
 });
 
 
 Router.route('/', {
-  name: 'home',
-  controller: 'HomeController',
+  name: 'index',
+  controller: 'indexController',
   where: 'client'
-});*/
+});
 
 
-FlowRouter.route('/', {
+Router.onBeforeAction(function () {
+  // all properties available in the route function
+  // are also available here such as this.params
+
+  if (!Meteor.userId()) {
+    // if the user is not logged in, render the Login template
+    this.render('blankLayout', {data: function () {
+      return {content: 'login'};
+    }
+  });
+  } else {
+    // otherwise don't hold up the rest of hooks or our route/action function
+    // from running
+    this.next();
+  }
+});
+
+/*
+Router.route('/', {
     action: function() {
-        FlowRouter.go('/home');
+      Router.go('/dashboard');
     }
 });
 
-FlowRouter.route('/home', {
+Router.route('/login', {
+    action: function() {
+        BlazeLayout.render("blankLayout", {content: "login"});
+    }
+});
+
+Router.route('/dashboard', {
     action: function() {
         BlazeLayout.render("mainLayout", {content: "home"});
     }
 });
 
-FlowRouter.route('/pagina2', {
+Router.route('/pagina2', {
     action: function() {
         BlazeLayout.render("mainLayout", {content: "pagina2"});
     }
 });
+*/

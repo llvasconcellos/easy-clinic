@@ -1,4 +1,4 @@
-HomeController = RouteController.extend({
+indexController = RouteController.extend({
   
   // A place to put your subscriptions
   // this.subscribe('items');
