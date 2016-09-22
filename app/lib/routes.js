@@ -1,9 +1,8 @@
 Router.configure({
-  //layoutTemplate: 'blankLayout',
+  layoutTemplate: 'mainLayout',
   //loadingTemplate: 'Loading',
-  notFoundTemplate: 'notFoundTemplate'
+  notFoundTemplate: 'notFound'
 });
-
 
 Router.route('/', {
   name: 'index',
@@ -11,46 +10,36 @@ Router.route('/', {
   where: 'client'
 });
 
+Router.route('/login', {
+  name: 'login',
+  controller: 'loginController',
+  layoutTemplate: 'blankLayout',
+  where: 'client'
+});
 
-Router.onBeforeAction(function () {
-  // all properties available in the route function
-  // are also available here such as this.params
+Router.route('/register', {
+  name: 'register',
+  controller: 'registerController',
+  layoutTemplate: 'blankLayout',
+  where: 'client'
+});
 
-  if (!Meteor.userId()) {
-    // if the user is not logged in, render the Login template
-    this.render('blankLayout', {data: function () {
-      return {content: 'login'};
-    }
-  });
-  } else {
-    // otherwise don't hold up the rest of hooks or our route/action function
-    // from running
-    this.next();
+Router.route('/notFound', function () {
+  this.layout('blankLayout');
+  this.render('notFound');
+});
+
+Router.route('/(.*)', {
+  name: 'allElse',
+  action: function() {
+    this.redirect('notFound');
   }
 });
 
-/*
-Router.route('/', {
-    action: function() {
-      Router.go('/dashboard');
-    }
-});
-
-Router.route('/login', {
-    action: function() {
-        BlazeLayout.render("blankLayout", {content: "login"});
-    }
-});
-
-Router.route('/dashboard', {
-    action: function() {
-        BlazeLayout.render("mainLayout", {content: "home"});
-    }
-});
-
-Router.route('/pagina2', {
-    action: function() {
-        BlazeLayout.render("mainLayout", {content: "pagina2"});
-    }
-});
-*/
+Router.onBeforeAction(function (route, something, someFn) {
+  if (!Meteor.userId()) {
+    this.redirect('login');
+  } else {
+    this.next();
+  }
+}, { except: ['login', 'register', 'notFound', 'allElse'] });
