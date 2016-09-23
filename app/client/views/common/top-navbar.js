@@ -36,6 +36,10 @@ Template.topNavbar.events({
             // Remove all inline style from jquery fadeIn function to reset menu state
             $('#side-menu').removeAttr('style');
         }
+    },
+
+    'click .logout': ()=> {
+        Meteor.logout();
     }
 
 });

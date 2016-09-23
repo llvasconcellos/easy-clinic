@@ -21,6 +21,7 @@ shell-server            # Server-side component of the `meteor shell` command
 iron:router
 aldeed:autoform
 aldeed:collection2
+aldeed:template-extension
 less
 twbs:bootstrap
 fortawesome:fontawesome
@@ -32,9 +33,13 @@ random
 ejson
 check
 spacebars
-kadira:blaze-layout
+# kadira:blaze-layout
 zimme:active-route
 accounts-password
 accounts-base
 iron:dynamic-template
 tap:i18n@1.8.2
+useraccounts:bootstrap
+raix:handlebar-helpers
+softwarerero:accounts-t9n
+useraccounts:iron-routing

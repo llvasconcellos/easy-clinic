@@ -17,16 +17,25 @@ Router.route('/login', {
   where: 'client'
 });
 
-Router.route('/register', {
-  name: 'register',
-  controller: 'registerController',
-  layoutTemplate: 'blankLayout',
-  where: 'client'
+Router.route('/register', function () {
+  this.layout('blankLayout');
+  this.render('login');
+  AccountsTemplates.setState('signUp');
 });
 
 Router.route('/notFound', function () {
   this.layout('blankLayout');
   this.render('notFound');
+});
+
+Router.route('/privacy', function () {
+  this.layout('blankLayout');
+  this.render('privacy');
+});
+
+Router.route('/terms-of-use', function () {
+  this.layout('blankLayout');
+  this.render('terms');
 });
 
 Router.route('/(.*)', {
@@ -42,4 +51,4 @@ Router.onBeforeAction(function (route, something, someFn) {
   } else {
     this.next();
   }
-}, { except: ['login', 'register', 'notFound', 'allElse'] });
+}, { except: ['login', 'register', 'notFound', 'privacy', 'terms-of-use', 'allElse'] });

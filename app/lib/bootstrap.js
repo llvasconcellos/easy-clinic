@@ -1,10 +1,13 @@
-getUserLanguage = function () {
-  var language = window.navigator.language.substr(0, 2);
-  //return language;
-  return 'pt-BR';
-};
-
 if (Meteor.isClient) {
+
+  var getUserLanguage = function () {
+    var language = window.navigator.language.substr(0, 2);
+    if (language == 'en') return language;
+    else return window.navigator.language;
+  };
+  
+  T9n.setLanguage(getUserLanguage());
+
   Meteor.startup(function () {
     TAPi18n.setLanguage(getUserLanguage()).done(function () {
         //Session.set("showLoadingIndicator", false);
@@ -14,10 +17,17 @@ if (Meteor.isClient) {
         console.log(error_message);
       });
   });
+
 }
 
-
-
+// Meteor.startup(function () {
+// WebApp.rawConnectHandlers.use(function(req, res, next)
+//   {
+//     console.log(req);
+//     // res.setHeader("X-Clacks-Overhead", "GNU Terry Pratchett");
+//     // return next();
+//   })
+// });
 
 
 /*
@@ -25,14 +35,7 @@ if (Meteor.isClient) {
 Changing language
 To set and change the language that a user is seeing, you should call TAPi18n.setLanguage(fn), where fn is a (possibly reactive) function that returns the current language. For instance you could write
 
-1
-2
-3
-4
-5
-6
-7
-8
+
 // A store to use for the current language
 export const CurrentLanguage = new ReactiveVar('en');
 

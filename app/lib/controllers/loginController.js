@@ -47,6 +47,7 @@ loginController = RouteController.extend({
 
   action: function () {
     this.render('login');
+    AccountsTemplates.setState('signIn');
   },
   onAfterAction: function () {
   },
