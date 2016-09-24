@@ -29,7 +29,13 @@ AccountsTemplates.configure({
   // onLogoutHook: myLogoutFunc,
   // onSubmitHook: mySubmitFunc,
   // preSignUpHook: myPreSubmitFunc,
-  // postSignUpHook: myPostSubmitFunc,
+  postSignUpHook: function(userId, info) {
+    Meteor.users.update(userId, {
+      $set: {
+        isUserEnabled: false
+      }
+    });
+  }
 });
 
 var password = AccountsTemplates.removeField('password');
@@ -96,25 +102,31 @@ Accounts.emailTemplates.verifyEmail = {
 
 AccountsTemplates.configureRoute('signIn', {
   name: 'signIn',
+  template: 'login',
   layoutTemplate: 'blankLayout'
 });
 AccountsTemplates.configureRoute('signUp', {
   name: 'signUp',
+  template: 'login',
   layoutTemplate: 'blankLayout'
 });
 AccountsTemplates.configureRoute('forgotPwd', {
   name: 'forgotPwd',
+  template: 'login',
   layoutTemplate: 'blankLayout'
 });
 AccountsTemplates.configureRoute('changePwd', {
   name: 'changePwd',
+  template: 'login',
   layoutTemplate: 'blankLayout'
 });
 AccountsTemplates.configureRoute('resetPwd', {
   name: 'resetPwd',
+  template: 'login',
   layoutTemplate: 'blankLayout'
 });
 AccountsTemplates.configureRoute('verifyEmail', {
+  template: 'login',
   name: 'verifyEmail',
   layoutTemplate: 'blankLayout'
 });

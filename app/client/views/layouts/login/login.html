@@ -1,10 +1,14 @@
 <template name="login">
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
-            <div>
-                <a class="logo" href="/">
-                    <h1>{{_ 'common_app-name'}}</h1>
-                </a>
+            <div class="login-logo-wrapper">
+                <div>
+                    <a class="logo" href="/">
+                        <h1>{{_ 'common_app-name'}}</h1>
+                    </a>
+                </div>
+                <h3>{{_ 'login_welcome'}}</h3>
+                <p>{{_ 'login_welcome-sub'}}</p>
             </div>
             {{> atForm}}
             <p class="m-t"> <small>{{_ 'common_developed-by'}} <a target="_blank" href="http://www.devhouse.com.br">DevHouse</a> &copy; 2016-2017</small></p>

@@ -1,3 +1,5 @@
+// Verify accounts-config.js to accounts specific routes
+
 Router.configure({
   layoutTemplate: 'mainLayout',
   //loadingTemplate: 'Loading', #TODO: Loading Template? Do we need one?
@@ -8,43 +10,6 @@ Router.route('/', {
   name: 'index',
   controller: 'indexController',
   where: 'client'
-});
-
-Router.route('/login', {
-  name: 'login',
-  controller: 'loginController',
-  layoutTemplate: 'blankLayout',
-  where: 'client'
-});
-
-Router.route('/register', function () {
-  this.layout('blankLayout');
-  this.render('login');
-  AccountsTemplates.setState('signUp');
-},{
-  name: 'register'
-});
-
-Router.route('/resend-verification-link', function () {
-  this.layout('blankLayout');
-  this.render('login');
-  AccountsTemplates.setState('resendVerificationEmail');
-},{
-  name: 'resend-verification-link'
-});
-
-Router.route('/#/verify-email/:token', function () {
-  console.log(error.reason);
-  Accounts.verifyEmail( params.token, (error) =>{
-    if (error) {
-      //Bert.alert(error.reason, 'danger');
-      console.log(error.reason);
-    } else {
-      console.log("email verified");
-      //Router.go('resend-verification-link');
-      //Bert.alert('Email verified! Thanks!', 'success');
-    }
-  });
 });
 
 Router.route('/notFound', function () {
@@ -68,14 +33,7 @@ Router.route('/terms-of-use', function () {
   name: 'terms'
 });
 
-Router.route('/email-confirmation', function () {
-  this.layout('blankLayout');
-  this.render('emailConfirmation');
-},{
-  name: 'email-confirmation'
-});
-
-// All the other routes: notFound
+//All the other routes: notFound
 Router.route('/(.*)', {
   name: 'allElse',
   action: function() {
@@ -86,30 +44,31 @@ Router.route('/(.*)', {
 //Before executing the route, some security validations
 Router.onBeforeAction(function (route, something, someFn) {
   if (!Meteor.userId()) {
-    this.redirect('login');
+    this.redirect('signIn');
   } else {
     this.next();
   }
 
-  // Don't allow users without email verification
-  if (Meteor.user() && !Meteor.user().emails[0].verified) {
-    Accounts.logout();
-    // this.layout('blankLayout');
-    // this.render('emailConfirmation');
-    this.redirect('email-confirmation');
-  } else {
-    this.next();
-  }
+// // Don't allow users without email verification
+// if (Meteor.user() && !Meteor.user().emails[0].verified) {
+//   Accounts.logout();
+//   // this.layout('blankLayout');
+//   // this.render('emailConfirmation');
+//   //this.redirect('email-confirmation');
+//   //this.redirect('verifyEmail');
+// } else {
+//   this.next();
+// }
 },{
   except: [
-  'login', 
-  'register', 
+  'signIn', 
+  'signUp', 
+  'forgotPwd',
+  'changePwd',
+  'resetPwd',
+  'verifyEmail',
   'notFound', 
   'privacy', 
   'terms-of-use', 
-  'email-confirmation', 
-  'resend-verification-link',
-  'verify-email',
   'allElse'
 ]});
-

@@ -1,3 +1,6 @@
+.login-logo-wrapper{
+	margin-bottom: 26px;
+}
 .at-form {
     margin-top: 0px;
     margin-bottom: 0px;
@@ -10,4 +13,9 @@ small, .small {
 .at-form p {
     font-size: 13px;
     line-height: 1.42857143;
+}
+#at-btn.btn-default {
+    background-color: #1ab394 !important;
+	border-color: #1ab394 !important;
+	color: #FFFFFF !important;
 }
