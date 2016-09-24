@@ -43,3 +43,4 @@ useraccounts:bootstrap
 raix:handlebar-helpers
 softwarerero:accounts-t9n
 useraccounts:iron-routing
+email

@@ -1,8 +1,5 @@
-import { TAPi18n } from 'meteor/tap:i18n';
-
 AccountsTemplates.configure({
   confirmPassword: false,
-  sendVerificationEmail: true,
   focusFirstInput: true, //!Meteor.isCordova
   showForgotPasswordLink: true,
   showLabels: false,
@@ -14,15 +11,15 @@ AccountsTemplates.configure({
   showValidating: true,
   privacyUrl: 'privacy',
   termsUrl: 'terms-of-use',
-
-//When set to true together with sendVerificationEmail, forbids user login unless the email address is verified. Warning: experimental! Use it only if you have accounts-password as the only service!!!
-//enforceEmailVerification: true
+  enablePasswordChange: true,
+  sendVerificationEmail: true,
+  enforceEmailVerification: true,
 
 //Specifies whether to forbid user registration from the client side. In case it is set to true, neither the link for user registration nor the sign up form will be shown
 //forbidClientAccountCreation: true
 
 //Specifies whether to display a link to the resend verification email page/form 
-//showResendVerificationEmailLink: true,
+  showResendVerificationEmailLink: true,
 
   // Redirects
   homeRoutePath: '/',
@@ -79,3 +76,45 @@ AccountsTemplates.addFields([{
   re: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
   errStr: 'At least 1 digit, 1 lowercase and 1 uppercase',
 }*/
+
+/*
+Accounts.emailTemplates.verifyEmail = {
+  subject() {
+    return "[Clínica Fácil] Verify Your Email Address";
+  },
+  text( user, url ) {
+    let emailAddress   = user.emails[0].address,
+        urlWithoutHash = url.replace( '#/', '' ),
+        supportEmail   = "support@godunk.com",
+        emailBody      = `To verify your email address (${emailAddress}) visit the following link:\n\n${urlWithoutHash}\n\n If you did not request this verification, please ignore this email. If you feel something is wrong, please contact our support team: ${supportEmail}.`;
+
+    return emailBody;
+  }
+};*/
+
+
+
+AccountsTemplates.configureRoute('signIn', {
+  name: 'signIn',
+  layoutTemplate: 'blankLayout'
+});
+AccountsTemplates.configureRoute('signUp', {
+  name: 'signUp',
+  layoutTemplate: 'blankLayout'
+});
+AccountsTemplates.configureRoute('forgotPwd', {
+  name: 'forgotPwd',
+  layoutTemplate: 'blankLayout'
+});
+AccountsTemplates.configureRoute('changePwd', {
+  name: 'changePwd',
+  layoutTemplate: 'blankLayout'
+});
+AccountsTemplates.configureRoute('resetPwd', {
+  name: 'resetPwd',
+  layoutTemplate: 'blankLayout'
+});
+AccountsTemplates.configureRoute('verifyEmail', {
+  name: 'verifyEmail',
+  layoutTemplate: 'blankLayout'
+});

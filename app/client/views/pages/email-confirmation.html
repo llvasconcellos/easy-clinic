@@ -1,0 +1,23 @@
+<template name="emailConfirmation">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <a class="logo" href="/">
+                    <h1>{{_ 'common_app-name'}}</h1>
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+    <div class="wide-box text-center loginscreen animated fadeInDown">
+        {{#unless currentUser.emails.[0].verified}}
+            <p class="alert alert-warning">You need to verify your email address before using Clínica Fácil. <br><br> <a href="{{pathFor route='resend-verification-link'}}" class="resend-verification-link alert-link">Resend verification link</a></p>
+        {{else}}
+             <p class="alert alert-success">E-mail verificado com sucesso. <a href="{{pathFor route='login'}}" class="login alert-link">Entrar</a></p>
+        {{/unless}}
+    </div>
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <p class="m-t"> <small>{{_ 'common_developed-by'}} <a target="_blank" href="http://www.devhouse.com.br">DevHouse</a> &copy; 2016-2017</small></p>
+    </div>
+</template>
