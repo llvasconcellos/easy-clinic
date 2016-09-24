@@ -1,9 +1,2 @@
 login_welcome: Welcome to Clínica Fácil
 login_welcome-sub: We developed this application to better serve you.
-login_start: Login to start.
-login_user: Username
-login_password: Password
-login_login: Login
-login_forgot-password: Forgot password?
-login_no-account: Do not have an account?
-login_create-account: Create an account

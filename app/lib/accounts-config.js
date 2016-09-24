@@ -14,11 +14,6 @@ AccountsTemplates.configure({
   enablePasswordChange: true,
   sendVerificationEmail: true,
   enforceEmailVerification: true,
-
-//Specifies whether to forbid user registration from the client side. In case it is set to true, neither the link for user registration nor the sign up form will be shown
-//forbidClientAccountCreation: true
-
-//Specifies whether to display a link to the resend verification email page/form 
   showResendVerificationEmailLink: true,
 
   // Redirects
@@ -30,6 +25,7 @@ AccountsTemplates.configure({
   // onSubmitHook: mySubmitFunc,
   // preSignUpHook: myPreSubmitFunc,
   postSignUpHook: function(userId, info) {
+    Roles.addUsersToRoles(userId, ['default', info.profile.group, 'super-admin']); // #TODO: remove super-admin
     Meteor.users.update(userId, {
       $set: {
         isUserEnabled: false
@@ -37,6 +33,10 @@ AccountsTemplates.configure({
     });
   }
 });
+
+if (Meteor.isClient) {
+  Template['atSelectInputOverride'].replaces('atSelectInput');
+}
 
 var password = AccountsTemplates.removeField('password');
 var email = AccountsTemplates.removeField('email');
@@ -50,7 +50,6 @@ AccountsTemplates.addFields([{
   },
   required: true,
   minLength: 1,
-  //trim: true
 },{
   _id: 'lastName',
   type: 'text',
@@ -60,8 +59,30 @@ AccountsTemplates.addFields([{
   },
   required: true,
   minLength: 1,
-  //trim: true
+},{
+ _id: "group",
+  type: "select",
+  showLabels: false,
+  displayName: T9n.get('group'),
+  required: true,
+  select: [{
+    text: T9n.get('group'),
+    value: ""
+  },{
+    text: T9n.get('groupMD'),
+    value: "medical_doctor"
+  },{
+    text: T9n.get('groupNurse'),
+    value: "nurse"
+  },{
+    text: T9n.get('groupReception'),
+    value: "recepcionist"
+  },{
+    text: T9n.get('groupAdmin'),
+    value: "administration"
+  }]
 }, email, password]);
+
 
 /*
 ,{

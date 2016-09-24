@@ -1,3 +1,8 @@
+medical_doctor: Médico(a)
+nurse: Enfermeiro(a)
+recepcionist: Recepcionista
+administration: Administração
+
 common_app-name: Clínica Fácil
 common_developed-by: Desenvolvido por
 common_500: Erro Interno do Servidor
@@ -6,3 +11,5 @@ common_404: Página Não Encontrada
 common_404-message: Desculpe mas a página que você está procurando não foi encontrada. Tente verificar a URL ou faça uma busca no nosso aplicativo.
 common_search-page: Pesquisar pela página
 common_search: Pesquisar
+common_dashboard: Painel de Controle
+common_logout: Sair

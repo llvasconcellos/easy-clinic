@@ -1,3 +1,8 @@
+medical_doctor: Medical Doctor
+nurse: Nurse
+recepcionist: Recepcionist
+administration: Administration
+
 common_app-name: Clínica Fácil
 common_developed-by: Developed by
 common_500: Internal Server Error
@@ -6,3 +11,5 @@ common_404: Page Not Found
 common_404-message: Sorry, but the page you are looking for has note been found. Try checking the URL for error, then hit the refresh button on your browser or try found something else in our app.
 common_search-page: Search for page
 common_search: Search
+common_dashboard: Dashboard
+common_logout: Logout

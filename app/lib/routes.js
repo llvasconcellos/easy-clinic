@@ -12,6 +12,12 @@ Router.route('/', {
   where: 'client'
 });
 
+Router.route('/users', {
+  name: 'users',
+  controller: 'userController',
+  where: 'client'
+});
+
 Router.route('/notFound', function () {
   this.layout('blankLayout');
   this.render('notFound');

@@ -1,4 +1,4 @@
-registerController = RouteController.extend({
+userController = RouteController.extend({
 
   // A place to put your subscriptions
   // this.subscribe('items');
@@ -46,7 +46,7 @@ registerController = RouteController.extend({
   //  action: 'myActionFunction'
 
   action: function () {
-    this.render();
+    this.render('users');
   },
   onAfterAction: function () {
   },
