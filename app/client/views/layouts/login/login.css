@@ -6,6 +6,7 @@
     margin-bottom: 0px;
     padding: 0px;
     border-radius: 0px;
+    overflow: hidden;
 }
 small, .small {
     font-size: 81%;

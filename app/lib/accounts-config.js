@@ -36,6 +36,7 @@ AccountsTemplates.configure({
 
 if (Meteor.isClient) {
   Template['atSelectInputOverride'].replaces('atSelectInput');
+  Template['atPwdFormBtnOverride'].replaces('atPwdFormBtn');
 }
 
 var password = AccountsTemplates.removeField('password');

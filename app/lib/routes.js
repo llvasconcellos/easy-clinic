@@ -3,6 +3,7 @@
 Router.configure({
   layoutTemplate: 'mainLayout',
   //loadingTemplate: 'Loading', #TODO: Loading Template? Do we need one?
+  //loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'
 });
 
