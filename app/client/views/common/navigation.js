@@ -1,13 +1,16 @@
 Template.navigation.rendered = function(){
 	// Initialize metisMenu
 	$('#side-menu').metisMenu();
-
-	if(Meteor.user()) {
-		var email = Meteor.user().emails[0].address;
-		var url = Gravatar.imageUrl(email, {
-			size: 50,
-			default: 'images/default-user-image.png'
-		});
-		$('#mini-profile-img').attr('src', url);
-	}
+	this.autorun(function(c) {
+		if(Meteor.user()) {
+			var email = Meteor.user().emails[0].address;
+			var url = Gravatar.imageUrl(email, {
+				size: 50,
+				//default: Meteor.absoluteUrl() + 'images/default-user-image.png'
+				default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'
+			});
+			$('#mini-profile-img').attr('src', url);
+			c.stop();
+		}
+	});
 };

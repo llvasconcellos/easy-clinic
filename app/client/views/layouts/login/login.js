@@ -1,7 +1,7 @@
-import '/imports/ladda/spin.min.js';
-import '/imports/ladda/ladda.min.js';
-import '/imports/ladda/ladda.jquery.min.js';
-import '/imports/ladda/ladda.min.css';
+import '/imports/client/ladda/spin.min.js';
+import '/imports/client/ladda/ladda.min.js';
+import '/imports/client/ladda/ladda.jquery.min.js';
+import '/imports/client/ladda/ladda.min.css';
 
 Template.login.rendered = function(){
 	$('.ladda-button').ladda('bind', {timeout: 15000});

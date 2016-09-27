@@ -46,5 +46,8 @@ useraccounts:iron-routing
 email
 meteortoys:allthings
 alanning:roles
-ephemer:reactive-datatables
 jparker:gravatar
+# arunoda:fast-render
+# promise
+abpetkov:switchery
+datatables
