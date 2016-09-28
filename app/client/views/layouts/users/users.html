@@ -14,42 +14,44 @@
 					<div class="ibox-content">
 						{{> ReactiveDatatable tableData=reactiveDataFunction options=optionsObject}}
 					</div>
-					<div class="ibox-footer">
-						<span class="pull-right">
-							Teste 1
-						</span>
-						Teste 2
-					</div>
+					<div id="table-footer" class="ibox-footer"></div>
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="ibox ">
 					<div class="ibox-title">
-						<h5>Bla bla bla 2
-							<small class="m-l-sm">fdafda fda fda</small>
-						</h5>
-						{{>iboxTools}}
+						<h5>{{_ 'users_edituser'}}</h5>
 					</div>
 					<div class="ibox-content">
-						<h2 >
-							Bla bla bla<br/>
-						</h2>
-						<p>
-							<strong>Lorem ipsum dolor</strong>
-							Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-						</p>
-						<p>
-							<small>
-							Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
-							</small>
-						</p>
+                        <form role="form">
+                        	<div class="form-group">
+                            	<label>{{_'users_firstName'}}</label>
+                            	<input type="input" placeholder="{{_'users_firstNamePlaceholder'}}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                            	<label>{{_'users_lastName'}}</label>
+                            	<input type="input" placeholder="{{_'users_lastNamePlaceholder'}}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                            	<label>{{_'users_email'}}</label>
+                            	<input type="email" placeholder="{{_'users_emailPlaceholder'}}" class="form-control">
+                            </div>
+                            <div class="form-group">
+                            	<label>{{_'users_password'}}</label>
+                            	<input type="password" placeholder="{{_'users_passwordPlaceholder'}}" class="form-control">
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Log in</strong></button>
+                                <div class="checkbox checkbox-success">
+                                    <input id="checkbox3" type="checkbox">
+                                    <label for="checkbox3">
+                                        {{_ 'users_enabled'}}
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
 					</div>
-					<div class="ibox-footer">
-						<span class="pull-right">
-							fda fda
-						</span>
-						as afda fda
-					</div>
+					<div class="ibox-footer">&nbsp;</div>
 				</div>
 			</div>
 		</div>

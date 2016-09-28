@@ -6,6 +6,7 @@ userController = RouteController.extend({
   // this.subscribe('item', this.params._id).wait();
 
   subscriptions: function() {
+    this.subscribe('allUsers');
   },
 
   // Subscriptions or other things we want to "wait" on. This also
@@ -14,6 +15,7 @@ userController = RouteController.extend({
   // return Meteor.subscribe('post', this.params._id);
 
   waitOn: function () {
+    return Meteor.subscribe('allUsers');
   },
 
   // A data function that can be used to automatically set the data context for
@@ -23,6 +25,7 @@ userController = RouteController.extend({
   // return Posts.findOne({_id: this.params._id});
 
   data: function () {
+    return Meteor.users.find({});
   },
 
   // You can provide any of the hook options

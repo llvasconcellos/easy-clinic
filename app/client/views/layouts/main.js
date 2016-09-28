@@ -35,6 +35,15 @@ Template.mainLayout.rendered = function(){
     });
 
 
+    // $(window).on('beforeunload', function () {
+    //     // You can either remove the login tokens manually from localstorage like this:
+    //     // localStorage.removeItem(key);
+
+    //     // Alternatively you should be able to log out Meteor here (not tested), eg:
+    //     // Meteor.logout();
+    // });
+
+
     // SKIN OPTIONS
     // Uncomment this if you want to have different skin option:
     // Available skin: (skin-1 or skin-3, skin-2 deprecated)

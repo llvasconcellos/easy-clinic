@@ -1,13 +1,10 @@
 ReactiveDatatable = function(options) {
 	var self = this;
-
 	this.options = options = _.defaults(options, {
-		// Any of these can be overriden by passing an options 
-		// object into your ReactiveDatatable template (see readme)
 		stateSave: true,
 		stateDuration: -1, // Store data for session only
-		pageLength: 5,
-		lengthMenu: [3, 5, 10, 50, 100],
+		pageLength: 20,
+		lengthMenu: [3, 5, 10, 20, 50, 100],
 		columnDefs: [{ // Global default blank value to avoid popup on missing data
 			targets: '_all',
 			defaultContent: '–––'
@@ -17,6 +14,12 @@ ReactiveDatatable = function(options) {
 			self.page = data.start / data.length;
 		}
 	});
+
+	if (UserLanguage != 'en') {
+		this.options.language = {
+			url: "/packages/datatables/" + UserLanguage + ".json"
+		};
+	}
 };
 
 ReactiveDatatable.prototype.update = function(data) {

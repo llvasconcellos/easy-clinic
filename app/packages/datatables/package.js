@@ -17,6 +17,10 @@ Package.onUse(function(api) {
     'templating'
   ], 'client');
   api.mainModule('datatables.js');
+  api.addAssets([
+    'pt-BR.json',
+    'es.json'
+  ], 'client');
   api.addFiles([
     'jquery-datatables.js',
     'jquery-datatables.css',

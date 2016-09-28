@@ -5,11 +5,13 @@ if (Meteor.isClient) {
     if (language == 'en') return language;
     else return window.navigator.language;
   };
-  
-  T9n.setLanguage(getUserLanguage());
+
+  UserLanguage = getUserLanguage();
+
+  T9n.setLanguage(UserLanguage);
 
   Meteor.startup(function () {
-    TAPi18n.setLanguage(getUserLanguage()).done(function () {
+    TAPi18n.setLanguage(UserLanguage).done(function () {
         //Session.set("showLoadingIndicator", false);
       })
       .fail(function (error_message) {

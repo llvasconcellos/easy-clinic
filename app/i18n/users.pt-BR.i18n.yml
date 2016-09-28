@@ -1,2 +1,13 @@
 users_users: Usuários
+users_edituser: Editar usuário
 users_management: Gerenciamento de usuários do sistema
+users_firstName: Primeiro Nome
+users_lastName: Sobrenome
+users_email: E-mail
+users_password: Senha
+users_firstNamePlaceholder: Informe o Primeiro Nome
+users_lastNamePlaceholder: Informe o Sobrenome
+users_emailPlaceholder: Informe o E-mail
+users_passwordPlaceholder: Informe a Senha
+users_enabled: Ativo
+users_disabled: Inativo

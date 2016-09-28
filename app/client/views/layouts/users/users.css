@@ -1,0 +1,14 @@
+.profile-pic {
+	width: 28px;
+	border-radius: 50%;
+}
+.dataTable {
+	margin-top: 1em !important;
+}
+.user-id {
+	font-size: 1.15em;
+	cursor: pointer;
+}
+.user-id:hover {
+	color: #1c84c6;
+}

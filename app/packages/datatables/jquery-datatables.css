@@ -12,10 +12,10 @@
 
 table.dataTable {
   clear: both;
-  margin-top: 6px !important;
-  margin-bottom: 6px !important;
-  max-width: none !important;
-  border-collapse: separate !important;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  max-width: none;
+  border-collapse: separate;
 }
 table.dataTable td,
 table.dataTable th {

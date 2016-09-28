@@ -1,2 +1,13 @@
 users_users: Users
+users_edituser: Edit user
 users_management: System's user management
+users_firstName: First Name
+users_lastName: Last Name
+users_email: Email
+users_password: Password
+users_firstNamePlaceholder: Enter First Name
+users_lastNamePlaceholder: Enter Last Name
+users_emailPlaceholder: Enter Email
+users_passwordPlaceholder: Enter Password
+users_enabled: Enabled
+users_disabled: Disabled

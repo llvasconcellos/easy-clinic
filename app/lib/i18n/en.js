@@ -5,5 +5,11 @@ T9n.map('en', {
 	groupMD: "Medical Doctor",
 	groupNurse: "Nurse",
 	groupReception: "Receptionist",
-	groupAdmin: "Administration"
+	groupAdmin: "Administration",
+	common_copy: "Copy",
+	common_print: "Print",
+	name: "Name",
+	enabled: "Enabled",
+	disabled: "Disabled",
+	edit: "Edit"
 });
