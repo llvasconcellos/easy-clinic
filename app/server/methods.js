@@ -3,7 +3,10 @@
 /*****************************************************************************/
 
 Meteor.methods({
-  'server/method_name': function () {
-    // server method logic
-  }
+	updateUser: function (userId, data) {
+		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
+			//Meteor.users.update(user._id, {$set: data});
+			Meteor.users.update(userId, {$set: data});
+		}
+	}
 });

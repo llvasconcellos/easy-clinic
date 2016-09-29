@@ -11,3 +11,4 @@ users_emailPlaceholder: Enter Email
 users_passwordPlaceholder: Enter Password
 users_enabled: Enabled
 users_disabled: Disabled
+users_changepassword: Change Password

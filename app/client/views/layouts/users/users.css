@@ -12,3 +12,6 @@
 .user-id:hover {
 	color: #1c84c6;
 }
+.checkbox {
+	display: inline-block;
+}

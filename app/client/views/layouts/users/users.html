@@ -23,33 +23,35 @@
 						<h5>{{_ 'users_edituser'}}</h5>
 					</div>
 					<div class="ibox-content">
-                        <form role="form">
-                        	<div class="form-group">
-                            	<label>{{_'users_firstName'}}</label>
-                            	<input type="input" placeholder="{{_'users_firstNamePlaceholder'}}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                            	<label>{{_'users_lastName'}}</label>
-                            	<input type="input" placeholder="{{_'users_lastNamePlaceholder'}}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                            	<label>{{_'users_email'}}</label>
-                            	<input type="email" placeholder="{{_'users_emailPlaceholder'}}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                            	<label>{{_'users_password'}}</label>
-                            	<input type="password" placeholder="{{_'users_passwordPlaceholder'}}" class="form-control">
-                            </div>
-                            <div>
-                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Log in</strong></button>
-                                <div class="checkbox checkbox-success">
-                                    <input id="checkbox3" type="checkbox">
-                                    <label for="checkbox3">
-                                        {{_ 'users_enabled'}}
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
+						<form id="user-form" role="form">
+							<div class="form-group">
+								<label>{{_'users_firstName'}}</label>
+								<input type="input" name="firstName" placeholder="{{_'users_firstNamePlaceholder'}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>{{_'users_lastName'}}</label>
+								<input type="input" name="lastName" placeholder="{{_'users_lastNamePlaceholder'}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>{{_'users_email'}}</label>
+								<input type="email" name="email" placeholder="{{_'users_emailPlaceholder'}}" class="form-control">
+							</div>
+							<div class="form-group">
+								<label>{{_'users_password'}}</label>
+								<input type="password" name="password" placeholder="{{_'users_passwordPlaceholder'}}" class="form-control">
+							</div>
+							<div>
+								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+									<strong>{{_ 'common_save'}}</strong>
+								</button>
+								<div class="checkbox checkbox-success">
+									<input type="checkbox" name="enabled">
+									<label for="enabled">
+										{{_ 'users_enabled'}}
+									</label>
+								</div>
+							</div>
+						</form>
 					</div>
 					<div class="ibox-footer">&nbsp;</div>
 				</div>

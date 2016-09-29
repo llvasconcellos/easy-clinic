@@ -111,6 +111,63 @@ Template.users.helpers({
 
 Template.users.events({
 	'click .user-id': function(event, template) {
-		console.log(event.currentTarget.dataset.userid);
+		var userId = event.currentTarget.dataset.userid;
+		// var user = Meteor.users.findOne({_id: userId});
+		// var form = $('form#user-form');
+		// var firstName = form.find('input[name=firstName]');
+		// var lastName = form.find('input[name=lastName]');
+		// var email = form.find('input[name=email]');
+		// var password = form.find('input[name=password]');
+		// var enabled = form.find('input[name=enabled]');
+		// firstName.val(user.profile.firstName);
+		// lastName.val(user.profile.lastName);
+		// email.val(user.emails[0].address);
+		// password.attr('placeholder', TAPi18n.__('users_changepassword'));
+		// enabled.attr('checked', user.isUserEnabled);
+
+		var edit = new userEdit();
+		edit.loadForm(userId);
 	}
 });
+
+
+var userEdit = function(){
+	var form = $('form#user-form');
+	var firstName = form.find('input[name=firstName]');
+	var lastName = form.find('input[name=lastName]');
+	var email = form.find('input[name=email]');
+	var password = form.find('input[name=password]');
+	var enabled = form.find('input[name=enabled]');
+	var save = form.find('button[type=submit]');
+
+	var user = null;
+
+	(function() {
+		form.submit(function(event) {
+			Meteor.call('updateUser', user._id, {
+				emails: {
+					0: {
+						address: email.val(),
+					}
+				},
+				profile: {
+					firstName: firstName.val(),
+					lastName: lastName.val(),
+				}
+			});
+			event.preventDefault();
+		});
+	})();
+
+	return {
+		loadForm(userId) {
+			user = Meteor.users.findOne({_id: userId});
+			firstName.val(user.profile.firstName);
+			lastName.val(user.profile.lastName);
+			email.val(user.emails[0].address);
+			password.attr('placeholder', TAPi18n.__('users_changepassword'));
+			enabled.attr('checked', user.isUserEnabled);
+		},
+
+	}
+};
