@@ -113,27 +113,63 @@ Template.users.helpers({
 	}
 });
 
-Template.users.events({
-	'click .user-id': function(event, template) {
-		var userId = event.currentTarget.dataset.userid;
-		var edit = new userEdit();
-		edit.loadForm(userId);
-	}
-});
+var userEdit = (function(){
+	var form = null;
+	var firstName = null;
+	var lastName = null;
+	var email = null;
+	var password = null;
+	var enabled = null;
+	var save = null;
 
+	var _findElements = function() {
+		form = $('form#user-form');
+		firstName = form.find('input[name=firstName]');
+		lastName = form.find('input[name=lastName]');
+		email = form.find('input[name=email]');
+		password = form.find('input[name=password]');
+		enabled = form.find('input[name=enabled]');
+		save = form.find('button[type=submit]');
+	};
 
-var userEdit = function(){
-	var form = $('form#user-form');
-	var firstName = form.find('input[name=firstName]');
-	var lastName = form.find('input[name=lastName]');
-	var email = form.find('input[name=email]');
-	var password = form.find('input[name=password]');
-	var enabled = form.find('input[name=enabled]');
-	var save = form.find('button[type=submit]');
+	var _prepareForm = function(userId) {
+		if($('#formbox').hasClass('col-sm-0')){
+			$('#tablebox').toggleClass('col-sm-12 col-sm-8');
+			$('#formbox').toggleClass('col-sm-0 col-sm-4');
+			_findElements();
+		}
+		if(userId){
+			password.attr('required', false);
+		}
+		else {
+			password.attr('required', true);
+		}
+		form.off('submit');
+		form.submit(function(event) {
+			var newPassword = null;
+			if(password.val().trim().length > 0) {
+				newPassword = password.val().trim();
+			}
+			Meteor.call('updateUser', userId, newPassword, {
+				"emails.0.address": email.val(),
+				"profile.firstName": firstName.val(),
+				"profile.lastName": lastName.val(),
+				"isUserEnabled": enabled.is(':checked')
+			}, function(error, result){
+				if (error) {
+					toastr['error'](error.message, TAPi18n.__('common_error'));
+				}
+				if (result) {
+					toastr['success'](result, TAPi18n.__('common_success'));
+					_clearForm();
+					_hideForm();
+				}
+			});
+			event.preventDefault();
+		});
+	};
 
-	var user = null;
-
-	var clearForm = function() {
+	var _clearForm = function() {
 		firstName.val('');
 		lastName.val('');
 		email.val('');
@@ -142,56 +178,43 @@ var userEdit = function(){
 		form.off('submit');
 	};
 
-	(function() {
-		form.off('submit');
-		form.submit(function(event) {
-			var newPassword = null;
-			if(password.val().trim().length > 0) {
-				newPassword = password.val().trim();
-			}
-			Meteor.call('updateUser', user._id, newPassword, {
-				emails: {
-					0: {
-						address: email.val(),
-					}
-				},
-				profile: {
-					firstName: firstName.val(),
-					lastName: lastName.val(),
-				},
-				isUserEnabled: enabled.is(':checked')
-			}, function(error, result){
-				if (error) {
-					console.log(error);
-					toastr['error'](error.message, TAPi18n.__('common_error'));
-				}
-				if (result) {
-					toastr['success'](result, TAPi18n.__('common_success'));
-					clearForm();
-					$('#tablebox').toggleClass('col-sm-8 col-sm-12');
-    				$('#formbox').toggleClass('col-sm-4 col-sm-0');
-				}
-			});
-			event.preventDefault();
-		});
-	})();
+	var _hideForm = function() {
+		if($('#formbox').hasClass('col-sm-4')){
+			$('#tablebox').toggleClass('col-sm-8 col-sm-12');
+			$('#formbox').toggleClass('col-sm-4 col-sm-0');
+		}
+	}
 
 	return {
 		loadForm(userId) {
-			user = Meteor.users.findOne({_id: userId});
-			firstName.val(user.profile.firstName);
-			lastName.val(user.profile.lastName);
-			email.val(user.emails[0].address);
-			password.attr('placeholder', TAPi18n.__('users_changepassword'));
-			if (user.isUserEnabled) {
-				enabled.iCheck('check');
+			_prepareForm(userId);
+			if(userId){
+				var user = Meteor.users.findOne({_id: userId});
+				firstName.val(user.profile.firstName);
+				lastName.val(user.profile.lastName);
+				email.val(user.emails[0].address);
+				password.attr('placeholder', TAPi18n.__('users_changepassword'));
+				if (user.isUserEnabled) {
+					enabled.iCheck('check');
+				}
+				else {
+					enabled.iCheck('uncheck');
+				}
 			}
-			else {
-				enabled.iCheck('uncheck');
-			}
-			$('#tablebox').toggleClass('col-sm-12 col-sm-8');
-    		$('#formbox').toggleClass('col-sm-0 col-sm-4');
 		},
-
+		hideForm: function() {
+			_hideForm();
+		}
 	}
-};
+})();
+
+
+Template.users.events({
+	'click .user-id': function(event, template) {
+		var userId = event.currentTarget.dataset.userid;
+		userEdit.loadForm(userId);
+	},
+	'click .new-user': function(event, template) {
+		userEdit.loadForm(null);
+	}
+});

@@ -24,7 +24,7 @@
 }
 
 .col-sm-0 {
+	overflow: hidden;
 	width: 0 !important;
 	float:left;
-	overflow: hidden;
 }

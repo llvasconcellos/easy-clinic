@@ -1,5 +1,6 @@
 users_users: Usuários
-users_edituser: Editar usuário
+users_newuser: Novo Usuário
+users_edituser: Editar Usuário
 users_management: Gerenciamento de usuários do sistema
 users_firstName: Primeiro Nome
 users_lastName: Sobrenome

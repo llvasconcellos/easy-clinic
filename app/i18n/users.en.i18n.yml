@@ -1,5 +1,6 @@
 users_users: Users
-users_edituser: Edit user
+users_newuser: New User
+users_edituser: Edit User
 users_management: System's user management
 users_firstName: First Name
 users_lastName: Last Name

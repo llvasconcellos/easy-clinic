@@ -9,7 +9,10 @@
 						<h5>{{_ 'users_users'}}
 							<small class="m-l-sm">{{_ 'users_management'}}</small>
 						</h5>
-						{{>iboxTools}}
+						{{!-->iboxTools--}}
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
+							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'New User'}}</strong>
+						</button>
 					</div>
 					<div class="ibox-content">
 						{{> ReactiveDatatable tableData=reactiveDataFunction options=optionsObject}}
