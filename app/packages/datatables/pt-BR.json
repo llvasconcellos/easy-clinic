@@ -1,5 +1,3 @@
-
-
 {
     "sEmptyTable": "Nenhum registro encontrado",
     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -13,10 +11,10 @@
     "sZeroRecords": "Nenhum registro encontrado",
     "sSearch": "Pesquisar",
     "oPaginate": {
-        "sNext": "Próximo",
-        "sPrevious": "Anterior",
-        "sFirst": "Primeiro",
-        "sLast": "Último"
+        "sFirst":    "<i class=\"fa fa-fast-backward\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Primeiro",
+        "sLast":     "Último&nbsp;&nbsp;<i class=\"fa fa-fast-forward\" aria-hidden=\"true\"></i>",
+        "sNext":     "Próximo&nbsp;&nbsp;<i class=\"fa fa-step-forward\" aria-hidden=\"true\"></i>",
+        "sPrevious": "<i class=\"fa fa-step-backward\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Anterior"
     },
     "oAria": {
         "sSortAscending": ": Ordenar colunas de forma ascendente",

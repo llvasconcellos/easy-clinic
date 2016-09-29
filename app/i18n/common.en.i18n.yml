@@ -14,3 +14,6 @@ common_search: Search
 common_dashboard: Dashboard
 common_logout: Logout
 common_save: Save
+common_success: Success
+common_error: Error
+common_save-success: Data saved with success.

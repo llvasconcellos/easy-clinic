@@ -18,6 +18,7 @@ Package.onUse(function(api) {
   ], 'client');
   api.mainModule('datatables.js');
   api.addAssets([
+    'en.json',
     'pt-BR.json',
     'es.json'
   ], 'client');

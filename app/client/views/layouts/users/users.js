@@ -4,7 +4,11 @@ Template.users.onCreated(function(){
 	// });
 });
 
-Template.users.rendered = function(){};
+Template.users.rendered = function(){
+	$('.i-checks').iCheck({
+        checkboxClass: 'icheckbox_square-green'
+    });
+};
 
 Template.users.destroyed = function(){};
 
@@ -58,7 +62,7 @@ Template.users.helpers({
 		},
 		columns: [{
 			title: '',
-			width: '1%',
+			//width: '1%',
 			data: 'profile.picture',
 			orderable: false,
 			render: function(cellData, renderType, currentRow) {
@@ -84,7 +88,7 @@ Template.users.helpers({
 			}
 		},{
 			title: T9n.get('enabled'),
-			width: '1%',
+			//width: '1%',
 			orderable: false,
 			data: 'profile.firstName',
 			render: function(cellData, renderType, currentRow) {
@@ -100,7 +104,7 @@ Template.users.helpers({
 			}
 		},{
 			//title: T9n.get('edit'),
-			width: '1%',
+			//width: '1%',
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
 				return '<i class="fa fa-pencil user-id" aria-hidden="true" data-userid="' + cellData + '"></i>';
@@ -112,19 +116,6 @@ Template.users.helpers({
 Template.users.events({
 	'click .user-id': function(event, template) {
 		var userId = event.currentTarget.dataset.userid;
-		// var user = Meteor.users.findOne({_id: userId});
-		// var form = $('form#user-form');
-		// var firstName = form.find('input[name=firstName]');
-		// var lastName = form.find('input[name=lastName]');
-		// var email = form.find('input[name=email]');
-		// var password = form.find('input[name=password]');
-		// var enabled = form.find('input[name=enabled]');
-		// firstName.val(user.profile.firstName);
-		// lastName.val(user.profile.lastName);
-		// email.val(user.emails[0].address);
-		// password.attr('placeholder', TAPi18n.__('users_changepassword'));
-		// enabled.attr('checked', user.isUserEnabled);
-
 		var edit = new userEdit();
 		edit.loadForm(userId);
 	}
@@ -142,9 +133,23 @@ var userEdit = function(){
 
 	var user = null;
 
+	var clearForm = function() {
+		firstName.val('');
+		lastName.val('');
+		email.val('');
+		password.val('');
+		enabled.iCheck('uncheck');
+		form.off('submit');
+	};
+
 	(function() {
+		form.off('submit');
 		form.submit(function(event) {
-			Meteor.call('updateUser', user._id, {
+			var newPassword = null;
+			if(password.val().trim().length > 0) {
+				newPassword = password.val().trim();
+			}
+			Meteor.call('updateUser', user._id, newPassword, {
 				emails: {
 					0: {
 						address: email.val(),
@@ -153,6 +158,18 @@ var userEdit = function(){
 				profile: {
 					firstName: firstName.val(),
 					lastName: lastName.val(),
+				},
+				isUserEnabled: enabled.is(':checked')
+			}, function(error, result){
+				if (error) {
+					console.log(error);
+					toastr['error'](error.message, TAPi18n.__('common_error'));
+				}
+				if (result) {
+					toastr['success'](result, TAPi18n.__('common_success'));
+					clearForm();
+					$('#tablebox').toggleClass('col-sm-8 col-sm-12');
+    				$('#formbox').toggleClass('col-sm-4 col-sm-0');
 				}
 			});
 			event.preventDefault();
@@ -166,7 +183,14 @@ var userEdit = function(){
 			lastName.val(user.profile.lastName);
 			email.val(user.emails[0].address);
 			password.attr('placeholder', TAPi18n.__('users_changepassword'));
-			enabled.attr('checked', user.isUserEnabled);
+			if (user.isUserEnabled) {
+				enabled.iCheck('check');
+			}
+			else {
+				enabled.iCheck('uncheck');
+			}
+			$('#tablebox').toggleClass('col-sm-12 col-sm-8');
+    		$('#formbox').toggleClass('col-sm-0 col-sm-4');
 		},
 
 	}

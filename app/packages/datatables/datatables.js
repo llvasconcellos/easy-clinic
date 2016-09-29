@@ -15,11 +15,9 @@ ReactiveDatatable = function(options) {
 		}
 	});
 
-	if (UserLanguage != 'en') {
-		this.options.language = {
-			url: "/packages/datatables/" + UserLanguage + ".json"
-		};
-	}
+	this.options.language = {
+		url: "/packages/datatables/" + UserLanguage + ".json"
+	};
 };
 
 ReactiveDatatable.prototype.update = function(data) {

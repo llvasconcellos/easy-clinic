@@ -1,5 +1,3 @@
-
-
 {
 	"sProcessing":     "Procesando...",
 	"sLengthMenu":     "Mostrar _MENU_ registros",
@@ -14,10 +12,10 @@
 	"sInfoThousands":  ",",
 	"sLoadingRecords": "Cargando...",
 	"oPaginate": {
-		"sFirst":    "Primero",
-		"sLast":     "Último",
-		"sNext":     "Siguiente",
-		"sPrevious": "Anterior"
+		"sFirst":    "<i class=\"fa fa-fast-backward\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Primero",
+        "sLast":     "Último&nbsp;&nbsp;<i class=\"fa fa-fast-forward\" aria-hidden=\"true\"></i>",
+        "sNext":     "Siguiente&nbsp;&nbsp;<i class=\"fa fa-step-forward\" aria-hidden=\"true\"></i>",
+        "sPrevious": "<i class=\"fa fa-step-backward\" aria-hidden=\"true\"></i>&nbsp;&nbsp;Anterior"
 	},
 	"oAria": {
 		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",

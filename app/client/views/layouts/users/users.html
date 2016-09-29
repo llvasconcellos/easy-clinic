@@ -3,7 +3,7 @@
 
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-12" id="tablebox">
 				<div class="ibox ">
 					<div class="ibox-title">
 						<h5>{{_ 'users_users'}}
@@ -17,7 +17,7 @@
 					<div id="table-footer" class="ibox-footer"></div>
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-0" id="formbox">
 				<div class="ibox ">
 					<div class="ibox-title">
 						<h5>{{_ 'users_edituser'}}</h5>
@@ -26,15 +26,15 @@
 						<form id="user-form" role="form">
 							<div class="form-group">
 								<label>{{_'users_firstName'}}</label>
-								<input type="input" name="firstName" placeholder="{{_'users_firstNamePlaceholder'}}" class="form-control">
+								<input type="input" name="firstName" placeholder="{{_'users_firstNamePlaceholder'}}" class="form-control" required>
 							</div>
 							<div class="form-group">
 								<label>{{_'users_lastName'}}</label>
-								<input type="input" name="lastName" placeholder="{{_'users_lastNamePlaceholder'}}" class="form-control">
+								<input type="input" name="lastName" placeholder="{{_'users_lastNamePlaceholder'}}" class="form-control" required>
 							</div>
 							<div class="form-group">
 								<label>{{_'users_email'}}</label>
-								<input type="email" name="email" placeholder="{{_'users_emailPlaceholder'}}" class="form-control">
+								<input type="email" name="email" placeholder="{{_'users_emailPlaceholder'}}" class="form-control" required>
 							</div>
 							<div class="form-group">
 								<label>{{_'users_password'}}</label>
@@ -42,14 +42,12 @@
 							</div>
 							<div>
 								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
-									<strong>{{_ 'common_save'}}</strong>
+									<strong><i class="fa fa-floppy-o" aria-hidden="true"></i> {{_ 'common_save'}}</strong>
 								</button>
-								<div class="checkbox checkbox-success">
-									<input type="checkbox" name="enabled">
-									<label for="enabled">
-										{{_ 'users_enabled'}}
-									</label>
-								</div>
+								<label>
+									<input type="checkbox" name="enabled" class="i-checks">
+									{{_ 'users_enabled'}}
+								</label>
 							</div>
 						</form>
 					</div>
