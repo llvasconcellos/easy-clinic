@@ -43,14 +43,20 @@
 								<label>{{_'users_password'}}</label>
 								<input type="password" name="password" placeholder="{{_'users_passwordPlaceholder'}}" class="form-control">
 							</div>
-							<div>
-								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
-									<strong><i class="fa fa-floppy-o" aria-hidden="true"></i> {{_ 'common_save'}}</strong>
-								</button>
+							<div class="form-group">
 								<label>
 									<input type="checkbox" name="enabled" class="i-checks">
 									{{_ 'users_enabled'}}
 								</label>
+							</div>
+							<div>
+								<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+									<strong><i class="fa fa-floppy-o" aria-hidden="true"></i> {{_ 'common_save'}}</strong>
+								</button>
+								<button class="btn btn-sm btn-white pull-right m-t-n-xs cancel" type="reset">
+									<strong><i class="fa fa-ban" aria-hidden="true"></i> {{_ 'common_cancel'}}</strong>
+								</button>
+								<label></label>
 							</div>
 						</form>
 					</div>

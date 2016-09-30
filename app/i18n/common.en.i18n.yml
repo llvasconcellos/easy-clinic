@@ -14,6 +14,9 @@ common_search: Search
 common_dashboard: Dashboard
 common_logout: Logout
 common_save: Save
+common_cancel: Cancel
 common_success: Success
 common_error: Error
 common_save-success: Data saved with success.
+common_access-denied: Access Denied
+common_access-denied-message: You don't have permission to execute this task.

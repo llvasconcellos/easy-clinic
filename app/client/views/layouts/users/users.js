@@ -216,5 +216,8 @@ Template.users.events({
 	},
 	'click .new-user': function(event, template) {
 		userEdit.loadForm(null);
+	},
+	'click .cancel': function(event, template) {
+		userEdit.hideForm();
 	}
 });

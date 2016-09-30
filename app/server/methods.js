@@ -23,7 +23,7 @@ Meteor.methods({
 			}
 		}
 		else {
-			//throw new Meteor.Error("logged-out", "The user must be logged in to post a comment.");
+			throw new Meteor.Error(TAPi18n.__('common_access-denied'), TAPi18n.__('common_access-denied-message'));
 		}
 		return TAPi18n.__('common_save-success');
 	}
