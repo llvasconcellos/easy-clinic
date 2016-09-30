@@ -51,3 +51,5 @@ jparker:gravatar
 # promise
 abpetkov:switchery
 datatables
+gwendall:simple-schema-i18n
+gwendall:autoform-i18n

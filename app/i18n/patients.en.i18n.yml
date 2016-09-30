@@ -1,0 +1,33 @@
+patients_patients: Patients
+patients_create-form-title: Edit Patient Information
+patients_newpatient: New Patient
+patients_list: List Patients
+schemas:
+  patients:
+    name: Name
+    bed: Bed
+    records: Records
+    createdAt: Register Date
+    dateOfBirth: Date of Birth
+    enabled: Enabled
+    healthInsurance: Health Insurance
+    code: Code
+    gender: Gender
+    maritalStatus: Marital Status
+    skinColor: Skin Color
+    placeOfBirth: Place of Birth
+    literacy: Literacy
+    CPF: CPF
+    titularCPF: Titular CPF
+    occupation: Occupation
+    prevRetorno: Prev. Retorno
+    email: Email
+    phone: Phone
+    mobile: Mobile
+    obs: Observations
+    streetAddress_1: Street Address
+    streetAddress_2: Complemento
+    bairro: Bairro
+    city: City
+    state: State
+    zip: Zip Code

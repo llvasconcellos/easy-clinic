@@ -19,6 +19,20 @@ Router.route('/users', {
   where: 'client'
 });
 
+Router.route('/patients/create', {
+  name: 'createPatient',
+  controller: 'patientController',
+  action: 'create',
+  where: 'client'
+});
+
+Router.route('/patients/list', {
+  name: 'listPatients',
+  controller: 'patientController',
+  action: 'list',
+  where: 'client'
+});
+
 Router.route('/notFound', function () {
   this.layout('blankLayout');
   this.render('notFound');

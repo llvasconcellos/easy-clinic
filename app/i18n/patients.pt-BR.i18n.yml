@@ -1,0 +1,33 @@
+patients_patients: Pacientes
+patients_create-form-title: Edite Informações do Paciente
+patients_newpatient: Novo Paciente
+patients_list: Listar Pacientes
+schemas:
+  patients:
+    name: Nome
+    bed: Leito
+    records: Prontuário
+    createdAt: Data Cadastro
+    dateOfBirth: Data de Nascimento
+    enabled: Ativo
+    healthInsurance: Convênio
+    code: Matrícula
+    gender: Genero
+    maritalStatus: Estado Civil
+    skinColor: Cor
+    placeOfBirth: Naturalidade
+    literacy: Grau de Instrução
+    CPF: CPF
+    titularCPF: Titular CPF
+    occupation: Profissão
+    prevRetorno: Prev. Retorno
+    email: E-mail
+    phone: Telefone
+    mobile: Celular
+    obs: Observações
+    streetAddress_1: Endereço
+    streetAddress_2: Complemento
+    bairro: Bairro
+    city: Cidade
+    state: Estado
+    zip: CEP

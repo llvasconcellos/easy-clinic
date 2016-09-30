@@ -34,9 +34,27 @@
                         CF
                     </div>
                 </li>
+
                 <li class="{{isActivePath regex='index'}}">
                     <a href="{{pathFor route='index'}}"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
                 </li>
+
+                <li class="{{isActivePath regex='createPatient|graphSparkline|graphChartist'}}">
+                    <a href="{{pathFor route='createPatient'}}">
+                        <i class="fa fa-male"></i><i class="fa fa-female"></i>
+                        <span class="nav-label">{{_ 'common_patients'}}</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse {{isActivePath regex='createPatient|graphFlot|graphChartist' className='in'}}">
+                        <li class="{{isActivePath regex='createPatient'}}">
+                            <a href="{{pathFor route='createPatient'}}">{{_ 'patients_newpatient'}}</a>
+                        </li>
+                        <li class="{{isActivePath regex='listPatients'}}">
+                            <a href="{{pathFor route='listPatients'}}">{{_ 'patients_list'}}</a>
+                        </li>
+                    </ul>
+                </li>
+
                 {{#if isInRole 'super-admin'}}
                     <li class="{{isActivePath regex='users'}}">
                         <a href="{{pathFor route='users'}}"><i class="fa fa-users"></i> <span class="nav-label">{{_ 'users_users'}}</span></a>
