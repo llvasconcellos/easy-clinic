@@ -1,0 +1,32 @@
+.raspberry-pi.gray-bg , .raspberry-pi .gray-bg, .raspberry-pi .navbar {
+	background-color: #cccccc;
+}
+
+.raspberry-pi input.form-control {
+	border: 1px solid #aaaaaa;
+	color: #222222;
+}
+
+.raspberry-pi #top-search {
+	border: none;
+}
+
+.raspberry-pi .form-control::-moz-placeholder {
+	color: #666666;
+}
+
+.raspberry-pi .table-bordered {
+    border: 1px solid #bbb;
+}
+
+.raspberry-pi .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #ddd;
+}
+
+.raspberry-pi .table > thead > tr > th, .raspberry-pi .table > tbody > tr > th, .raspberry-pi .table > tfoot > tr > th, .raspberry-pi .table > thead > tr > td, .raspberry-pi .table > tbody > tr > td, .raspberry-pi .table > tfoot > tr > td {
+    border-top: 1px solid #bbb;
+}
+
+.raspberry-pi .table-bordered > thead > tr > th, .raspberry-pi .table-bordered > tbody > tr > th, .raspberry-pi .table-bordered > tfoot > tr > th, .raspberry-pi .table-bordered > thead > tr > td, .raspberry-pi .table-bordered > tbody > tr > td, .raspberry-pi .table-bordered > tfoot > tr > td {
+    border: 1px solid #ccc;
+}

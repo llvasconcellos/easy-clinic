@@ -18,6 +18,9 @@ if (Meteor.isClient) {
         // Handle the situation
         console.log(error_message);
       });
+
+      if(navigator.userAgent.indexOf("armv7l")>-1)
+        $("body").addClass("raspberry-pi");
   });
 
 }
