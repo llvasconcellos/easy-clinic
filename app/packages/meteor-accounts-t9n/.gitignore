@@ -1,0 +1,6 @@
+.build*
+*.iml
+smart.lock
+.meteor
+packages
+.versions

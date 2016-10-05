@@ -19,6 +19,7 @@ if (Meteor.isClient) {
         console.log(error_message);
       });
 
+      // add raspberry pi css class to change colors #TODO: use a proper user agent
       if(navigator.userAgent.indexOf("armv7l")>-1)
         $("body").addClass("raspberry-pi");
   });
