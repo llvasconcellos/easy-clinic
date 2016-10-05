@@ -1,30 +1,3 @@
-if (Meteor.isClient) {
-
-  var getUserLanguage = function () {
-    var language = window.navigator.language.substr(0, 2);
-    if (language == 'en') return language;
-    else return window.navigator.language;
-  };
-
-  UserLanguage = getUserLanguage();
-
-  T9n.setLanguage(UserLanguage);
-
-  Meteor.startup(function () {
-    TAPi18n.setLanguage(UserLanguage).done(function () {
-        //Session.set("showLoadingIndicator", false);
-      })
-      .fail(function (error_message) {
-        // Handle the situation
-        console.log(error_message);
-      });
-
-      // add raspberry pi css class to change colors #TODO: use a proper user agent
-      if(navigator.userAgent.indexOf("armv7l")>-1)
-        $("body").addClass("raspberry-pi");
-  });
-
-}
 
 // Meteor.startup(function () {
 // WebApp.rawConnectHandlers.use(function(req, res, next)

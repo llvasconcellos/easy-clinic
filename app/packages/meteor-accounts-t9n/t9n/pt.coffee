@@ -17,7 +17,7 @@ pt =
   dontHaveAnAccount: "Não tem conta?"
   email: "E-mail"
   emailAddress: "Endereço de e-mail"
-  emailResetLink: "E-mail com link para gerar Nova Senha"
+  emailResetLink: "Enviar E-mail"
   forgotPassword: "Esqueceu sua senha?"
   ifYouAlreadyHaveAnAccount: "Se você já tem uma conta"
   newPassword: "Nova Senha"
@@ -73,6 +73,9 @@ pt =
   "At least 1 digit, 1 lowercase and 1 uppercase": "Pelo menos 1 número, 1 letra minúscula and 1 maiúscula"      
   "Please verify your email first. Check the email and follow the link!": "Por favor, verifique seu e-mail primeiro. Verifique o e-mail e abra o link!"
   "A new email has been sent to you. If the email doesn't show up in your inbox, be sure to check your spam folder.": "Um novo e-mail foi enviado para você. Se o e-mail não aparecer na sua caixa de entrada, verifique a sua caixa de spam."
+  "Minimum required length: 6": "Tamanho mínimo requerido: 6"
+  "Required Field" : "Campo obrigatório"
+  "Successful Registration! Please check your email and follow the instructions.": "Registro efetuado com sucesso! Por favor verifique seu email e siga as instruções."
 
   info:
     emailSent: "E-mail enviado"

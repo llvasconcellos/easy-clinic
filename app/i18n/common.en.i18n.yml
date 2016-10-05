@@ -3,7 +3,7 @@ nurse: Nurse
 recepcionist: Recepcionist
 administration: Administration
 
-common_app-name: Clínica Fácil
+common_app-name: Easy Clinic
 common_developed-by: Developed by
 common_500: Internal Server Error
 common_500-generic-message: The server encountered something unexpected that didn't allow it to complete the request. We apologize.

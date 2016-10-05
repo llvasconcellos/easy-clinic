@@ -1,4 +1,4 @@
-// Verify accounts-config.js to accounts specific routes
+// Verify user-accounts-config.js to accounts specific routes
 
 Router.configure({
   layoutTemplate: 'mainLayout',
