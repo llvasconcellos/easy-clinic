@@ -46,6 +46,8 @@ Template.patientForm.onRendered(function () {
 	$('input[type=checkbox]').addClass('i-checks').iCheck({
 		checkboxClass: 'icheckbox_square-green'
 	});
+
+	$('.patient-form button[type=submit]').parent().css('float', 'right');
 });
 
 Template.patientForm.onDestroyed(function () {

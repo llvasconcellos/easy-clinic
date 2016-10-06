@@ -47,13 +47,6 @@ var schema = {
       type: 'text'
     }
   },
-  enabled: {
-    type: Boolean,
-    defaultValue: true,
-    label: function() {
-      return TAPi18n.__('schemas.patients.enabled.label');
-    }
-  },
   healthInsurance: {
     type: String,
     trim: true,
@@ -242,6 +235,15 @@ var schema = {
       return TAPi18n.__('schemas.patients.CPF.label');
     }
   },
+  RG: { // #TODO: international documents
+    type: String,
+    trim: true,
+    optional: true,
+    max: 12,
+    label: function() {
+      return TAPi18n.__('schemas.patients.RG.label');
+    }
+  },
   titularCPF: {
     type: String,
     trim: true,
@@ -249,6 +251,22 @@ var schema = {
     max: 11,
     label: function() {
       return TAPi18n.__('schemas.patients.titularCPF.label');
+    }
+  },
+  fathersName: {
+    type: String,
+    trim: true,
+    max: 100,
+    label: function() {
+      return TAPi18n.__('schemas.patients.fathersName.label');
+    }
+  },
+  mothersName: {
+    type: String,
+    trim: true,
+    max: 100,
+    label: function() {
+      return TAPi18n.__('schemas.patients.mothersName.label');
     }
   },
   occupation: {
@@ -360,6 +378,13 @@ var schema = {
     autoform: {
       type: 'textarea',
       rows: 10
+    }
+  },
+  enabled: {
+    type: Boolean,
+    defaultValue: true,
+    label: function() {
+      return TAPi18n.__('schemas.patients.enabled.label');
     }
   }
 };

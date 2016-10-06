@@ -52,8 +52,14 @@ schemas:
       phd: PhD
     CPF:
       label: CPF
+    RG:
+      label: RG
     titularCPF:
       label: Titular CPF
+    fathersName:
+      label: Father's Name
+    mothersName:
+      label: Mother's Name
     occupation:
       label: Occupation
     prevRetorno:
