@@ -32,6 +32,16 @@ Template.patientForm.onRendered(function () {
 		autoclose: true,
 		todayHighlight: true
 	});
+
+	$('textarea[name=obs]')
+		.css('display', 'block')
+		.css('width', '100%')
+		.parent()
+			.css('display', 'block')
+		.find('label')
+			.css('display', 'inline-block')
+			.css('max-width', '100%')
+			.css('margin-bottom', '5px');
 });
 
 Template.patientForm.onDestroyed(function () {
