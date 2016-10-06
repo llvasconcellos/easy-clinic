@@ -4,30 +4,77 @@ patients_newpatient: New Patient
 patients_list: List Patients
 schemas:
   patients:
-    name: Name
-    bed: Bed
-    records: Records
-    createdAt: Register Date
-    dateOfBirth: Date of Birth
-    enabled: Enabled
-    healthInsurance: Health Insurance
-    code: Code
-    gender: Gender
-    maritalStatus: Marital Status
-    skinColor: Skin Color
-    placeOfBirth: Place of Birth
-    literacy: Literacy
-    CPF: CPF
-    titularCPF: Titular CPF
-    occupation: Occupation
-    prevRetorno: Prev. Retorno
-    email: Email
-    phone: Phone
-    mobile: Mobile
-    obs: Observations
-    streetAddress_1: Street Address
-    streetAddress_2: Complemento
-    bairro: Bairro
-    city: City
-    state: State
-    zip: Zip Code
+    name:
+      label: Name
+    bed:
+      label: Bed
+    records:
+      label: Records
+    createdAt:
+      label: Register Date
+    dateOfBirth:
+      label: Date of Birth
+    enabled:
+      label: Enabled
+    healthInsurance:
+      label: Health Insurance
+    code:
+      label: Code
+    gender:
+      label: Gender
+      M: Male
+      F: Female
+    maritalStatus:
+      label: Marital Status
+      single: Single
+      married: Married
+      life_partner: Life Partner
+      separated: Separated
+      divorced: Divorced
+      widowed: Widowed
+    skinColor:
+      label: Skin Color
+      white: White
+      brown: Brown
+      black: Black
+      mixed: Mixed
+      other: Other
+    placeOfBirth:
+      label: Place of Birth
+    literacy:
+      label: Literacy
+      illiterate: Illiterate
+      primary_school: Primary School
+      high_school: High School
+      graduated: Graduated
+      master: Master
+      doctor: Doctor
+      phd: PhD
+    CPF:
+      label: CPF
+    titularCPF:
+      label: Titular CPF
+    occupation:
+      label: Occupation
+    prevRetorno:
+      label: Prev. Retorno
+    email:
+      label: Email
+    phone:
+      label: Phone
+    mobile:
+      label: Mobile
+    obs:
+      label: Observations
+    streetAddress_1:
+      label: Street Address
+    streetAddress_2:
+      label: Complemento
+    bairro:
+      label: Bairro
+    city:
+      label: City
+    state:
+      label: State
+    zip:
+      label: Zip Code

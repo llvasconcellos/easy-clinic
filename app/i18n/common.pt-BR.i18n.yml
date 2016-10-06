@@ -21,3 +21,4 @@ common_save-success: Dados salvos com sucesso.
 common_access-denied: Acesso Negado
 common_access-denied-message: Você não tem permissão para executar esta tarefa.
 common_patients: Pacientes
+common_firstOption: Escolha Um
