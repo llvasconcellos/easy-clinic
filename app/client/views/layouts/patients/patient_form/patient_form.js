@@ -42,6 +42,10 @@ Template.patientForm.onRendered(function () {
 			.css('display', 'inline-block')
 			.css('max-width', '100%')
 			.css('margin-bottom', '5px');
+
+	$('input[type=checkbox]').addClass('i-checks').iCheck({
+		checkboxClass: 'icheckbox_square-green'
+	});
 });
 
 Template.patientForm.onDestroyed(function () {
