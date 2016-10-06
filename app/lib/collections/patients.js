@@ -1,6 +1,11 @@
 Patients = new Mongo.Collection('patients');
 
 var schema = {
+  // photo: {
+  //   autoform: {
+  //     type: 'image'
+  //   }
+  // },
   name: {
     type: String,
     trim: true,

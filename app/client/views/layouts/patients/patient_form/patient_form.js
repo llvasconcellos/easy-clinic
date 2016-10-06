@@ -7,6 +7,12 @@ import '/imports/client/datepicker/datepicker3.css';
 /* PatientForm: Event Handlers */
 /*****************************************************************************/
 Template.patientForm.events({
+	'click #foto': function(event, template) {
+		MeteorCamera.getPicture(/*[options], */function(error, data) {
+			console.log(error);
+			console.log(data);
+		});
+	}
 });
 
 /*****************************************************************************/
