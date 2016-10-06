@@ -22,23 +22,16 @@ Template.patientForm.onCreated(function () {
 });
 
 Template.patientForm.onRendered(function () {
-	$('input[name=createdAt], input[name=dateOfBirth]').datepicker({
+	$('input[name=createdAt], input[name=dateOfBirth]')
+		.wrap('<div class="input-group date"></div>')
+		.after('<span class="input-group-addon"><i class="fa fa-calendar"></i></span>');
+
+	$('.input-group.date').datepicker({
 		format: "dd/mm/yyyy",
-		language: TAPi18n.getLanguage()
+		language: TAPi18n.getLanguage(),
+		autoclose: true,
+		todayHighlight: true
 	});
-
-
-/*
-<div class="input-group date">
-  <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-</div>
-$('#sandbox-container .input-group.date').datepicker({
-    format: "dd/mm/yyyy",
-    language: "pt-BR"
-});*/
-
-
-
 });
 
 Template.patientForm.onDestroyed(function () {
