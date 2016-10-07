@@ -22,3 +22,4 @@ common_access-denied: Acesso Negado
 common_access-denied-message: Você não tem permissão para executar esta tarefa.
 common_patients: Pacientes
 common_firstOption: Escolha Um
+common_imageUploadMaxSize: São permitidas apenas imagens com tamanho menor do que 10MB

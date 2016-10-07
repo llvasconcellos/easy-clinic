@@ -1,0 +1,22 @@
+<template name="picFileUpload">
+  <input value="{{fileId}}" type="hidden" {{this.atts}}>
+   <div>
+    <img class="patient-pic" src="{{imgPath}}"/>
+  </div>
+  {{#with uploadedFile}}
+    <a data-reset-file href="#" style="display:none">Reset</a>
+    <a data-remove-file href="#">Remove</a>
+  {{else}}
+    {{#with currentUpload}}
+      Uploading <b>{{file.name}}</b>:
+      <progress value="{{progress.get}}" max="100"></progress>
+      &nbsp;
+      <span class="progress">{{progress.get}}%</span>
+      {{else}}
+      <label class="btn btn-default btn-file">
+          Browse <input data-files-collection-upload class="form-control af-file-upload-capture" type="file" style="display:none;" />
+      </label>
+      <button class="btn btn-default btn-cam">Tirar Foto</button>
+    {{/with}}
+  {{/with}}
+</template>

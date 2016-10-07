@@ -1,11 +1,16 @@
 Patients = new Mongo.Collection('patients');
 
 var schema = {
-  // photo: {
-  //   autoform: {
-  //     type: 'image'
-  //   }
-  // },
+  picture: {
+    type: String,
+    optional: true,
+    autoform: {
+      afFieldInput: {
+        type: 'profilePicUpload',
+        collection: 'Images'
+      }
+    }
+  },
   name: {
     type: String,
     trim: true,
@@ -34,7 +39,7 @@ var schema = {
   },
   createdAt: {
     type: Date,
-    min: new Date(),
+    //min: new Date(),
     label: function() {
       return TAPi18n.__('schemas.patients.createdAt.label');
     },

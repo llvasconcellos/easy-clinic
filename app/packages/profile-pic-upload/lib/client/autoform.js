@@ -1,0 +1,17 @@
+AutoForm.addInputType("profilePicUpload", {
+  template: "picFileUpload"
+});
+
+AutoForm._globalHooks.onSuccess.push(function (type) {
+  if (type === 'insert') {
+    try {
+      if (this.template) {
+        this.template.$('[data-reset-file]').click();
+      }
+    } catch (e) {}
+  }
+});
+
+SimpleSchema.messages({
+  uploadError: '[value]'
+});

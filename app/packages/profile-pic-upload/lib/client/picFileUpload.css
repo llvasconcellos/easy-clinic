@@ -1,0 +1,16 @@
+.patient-pic {
+	max-width:200px;
+	background: #eee;
+}
+.fileinput .form-control {
+	cursor: pointer;
+}
+.btn-file, .btn-cam {
+	margin-top: 6px;
+	display: inline-block !important;
+}
+.btn-file:hover, .btn-cam:hover {
+	background-color: #1ab394;
+	border-color: #1ab394;
+	color: #fff !important;
+}

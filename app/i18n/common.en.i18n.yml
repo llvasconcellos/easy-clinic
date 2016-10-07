@@ -22,3 +22,4 @@ common_access-denied: Access Denied
 common_access-denied-message: You don't have permission to execute this task.
 common_patients: Patients
 common_firstOption: Select One
+common_imageUploadMaxSize: Please upload image, with size equal or less than 10MB

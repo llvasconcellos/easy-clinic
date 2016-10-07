@@ -56,3 +56,5 @@ gwendall:simple-schema-i18n
 zuuk:stale-session
 mdg:camera
 ostrio:files
+#ostrio:autoform-files
+profile-pic-upload
