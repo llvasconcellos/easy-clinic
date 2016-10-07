@@ -26,7 +26,10 @@ Template.picFileUpload.onCreated(function () {
 });
 
 Template.picFileUpload.onRendered(function () {
-  $('.patient-pic').parent().parent().css('float', 'left');
+  $('.patient-pic').parent().parent()
+      .css('float', 'left')
+      .css('width', '220px')
+      .css('overflow', 'hidden');
 });
 
 Template.picFileUpload.helpers({
@@ -76,42 +79,59 @@ Template.picFileUpload.events({
   },
   'change [data-files-collection-upload]': function (e, template) {
     if (e.currentTarget.files && e.currentTarget.files[0]) {
-      var upload = global[template.collectionName()].insert({
+      uploadImage(global[template.collectionName()].insert({
         file: e.currentTarget.files[0],
         streams: 'dynamic',
         chunkSize: 'dynamic'
-      }, false);
-
-      upload.on('start', function () {
-        AutoForm.getValidationContext().resetValidation();
-        template.currentUpload.set(this);
-        return;
-      });
-
-      upload.on('error', function (error) {
-        AutoForm.getValidationContext().resetValidation();
-        AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
-        $(e.currentTarget).val('');
-        return;
-      });
-
-      upload.on('end', function (error, fileObj) {
-        if (!error) {
-          if (template) {
-            template.fileId.set(fileObj._id);
-          }
-        }
-        template.currentUpload.set(false);
-        return;
-      });
-
-      upload.start();
+      }, false), template);
     }
   },
   'click .btn-cam': function(event, template) {
-    MeteorCamera.getPicture(/*[options],*/ function(error, data) {
-      console.log(error);
-      console.log(data);
+    MeteorCamera.getPicture(/*{
+      width: 200,
+      height: 200,
+      quality: 80
+    }},*/ function(error, data) {
+
+      if(error) {
+        AutoForm.getValidationContext().resetValidation();
+        AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
+        return;
+      }
+
+      uploadImage(global[template.collectionName()].insert({
+        file: data,
+        isBase64: true,
+        fileName: 'cam.jpg'
+      }, false), template);
+
     });
   }
 });
+
+var uploadImage = function(upload, template) {
+  upload.on('start', function () {
+    AutoForm.getValidationContext().resetValidation();
+    template.currentUpload.set(this);
+    return;
+  });
+
+  upload.on('error', function (error) {
+    AutoForm.getValidationContext().resetValidation();
+    AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
+    $(e.currentTarget).val('');
+    return;
+  });
+
+  upload.on('end', function (error, fileObj) {
+    if (!error) {
+      if (template) {
+        template.fileId.set(fileObj._id);
+      }
+    }
+    template.currentUpload.set(false);
+    return;
+  });
+
+  upload.start();
+}
