@@ -58,3 +58,5 @@ mdg:camera
 ostrio:files
 #ostrio:autoform-files
 profile-pic-upload
+codechimp:autoform-masked-input
+# isjs:is -> add if needed (has isMobile() function)

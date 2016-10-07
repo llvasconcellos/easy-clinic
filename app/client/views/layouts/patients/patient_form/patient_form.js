@@ -13,6 +13,9 @@ Template.patientForm.events({
 /* PatientForm: Helpers */
 /*****************************************************************************/
 Template.patientForm.helpers({
+  saveButton: function () {
+    return TAPi18n.__('common_save');
+  },
 });
 
 /*****************************************************************************/
@@ -27,7 +30,8 @@ Template.patientForm.onRendered(function () {
 		.after('<span class="input-group-addon"><i class="fa fa-calendar"></i></span>');
 
 	$('.input-group.date').datepicker({
-		format: "dd/mm/yyyy",
+		//format: "dd/mm/yyyy",
+		format: "mm/dd/yyyy",
 		language: TAPi18n.getLanguage(),
 		autoclose: true,
 		todayHighlight: true

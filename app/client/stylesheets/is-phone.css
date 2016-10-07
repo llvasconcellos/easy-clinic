@@ -1,0 +1,15 @@
+.is-phone #page-wrapper, .is-phone .wrapper-content {
+	padding: 0;
+}
+.is-phone .ibox-title h5 .m-l-sm, .is-phone .html5buttons, .is-phone .dataTables_length {
+	display: none;
+}
+.is-phone .page-heading {
+	margin-left:0;
+}
+.is-phone .ibox-content {
+	padding: 6px;
+}
+.is-phone .table-responsive {
+	padding-top: 20px;
+}

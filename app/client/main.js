@@ -7,4 +7,9 @@ Meteor.startup(function () {
     if(navigator.userAgent.indexOf("armv7l")>-1) {
       $("body").addClass("raspberry-pi");
     }
+
+    // add phone specific css class 
+    if(Meteor.Device.isPhone()) {
+    	$("body").addClass("is-phone");
+    }
 });

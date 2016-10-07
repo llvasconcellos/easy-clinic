@@ -36,7 +36,7 @@
                 </li>
 
                 <li class="{{isActivePath regex='index'}}">
-                    <a href="{{pathFor route='index'}}"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
+                    <a href="{{pathFor route='index'}}" class="hide-on-phone"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
                 </li>
 
                 <li class="{{isActivePath regex='createPatient|graphSparkline|graphChartist'}}">
@@ -47,17 +47,17 @@
                     </a>
                     <ul class="nav nav-second-level collapse {{isActivePath regex='createPatient|graphFlot|graphChartist' className='in'}}">
                         <li class="{{isActivePath regex='createPatient'}}">
-                            <a href="{{pathFor route='createPatient'}}">{{_ 'patients_newpatient'}}</a>
+                            <a href="{{pathFor route='createPatient'}}" class="hide-on-phone">{{_ 'patients_newpatient'}}</a>
                         </li>
                         <li class="{{isActivePath regex='listPatients'}}">
-                            <a href="{{pathFor route='listPatients'}}">{{_ 'patients_list'}}</a>
+                            <a href="{{pathFor route='listPatients'}}" class="hide-on-phone">{{_ 'patients_list'}}</a>
                         </li>
                     </ul>
                 </li>
 
                 {{#if isInRole 'super-admin'}}
                     <li class="{{isActivePath regex='users'}}">
-                        <a href="{{pathFor route='users'}}"><i class="fa fa-users"></i> <span class="nav-label">{{_ 'users_users'}}</span></a>
+                        <a href="{{pathFor route='users'}}" class="hide-on-phone"><i class="fa fa-users"></i> <span class="nav-label">{{_ 'users_users'}}</span></a>
                     </li>
                 {{/if}}
             </ul>

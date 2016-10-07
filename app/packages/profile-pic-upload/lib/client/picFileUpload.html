@@ -4,19 +4,23 @@
     <img class="patient-pic" src="{{imgPath}}"/>
   </div>
   {{#with uploadedFile}}
-    <a data-reset-file href="#" style="display:none">Reset</a>
-    <a data-remove-file href="#">Remove</a>
+    <a data-reset-file href="#" style="display:none">{{_ 'common_reset'}}</a>
+    <a data-remove-file href="#">{{_ 'common_remove'}}</a>
   {{else}}
     {{#with currentUpload}}
-      Uploading <b>{{file.name}}</b>:
+      {_ 'common_uploading'}} <b>{{file.name}}</b>:
       <progress value="{{progress.get}}" max="100"></progress>
       &nbsp;
       <span class="progress">{{progress.get}}%</span>
       {{else}}
       <label class="btn btn-default btn-file">
-          <i class="fa fa-folder-open" aria-hidden="true"></i> Browse <input data-files-collection-upload class="form-control af-file-upload-capture" type="file" style="display:none;" />
+          <i class="fa fa-folder-open" aria-hidden="true"></i>
+          {{_ 'common_browse'}}
+          <input data-files-collection-upload class="form-control af-file-upload-capture" type="file" style="display:none;" />
       </label>
-      <button class="btn btn-default btn-cam"><i class="fa fa-camera" aria-hidden="true"></i> Tirar Foto</button>
+      <button class="btn btn-default btn-cam">
+        <i class="fa fa-camera" aria-hidden="true"></i> {{_ 'common_cam'}}
+      </button>
     {{/with}}
   {{/with}}
 </template>

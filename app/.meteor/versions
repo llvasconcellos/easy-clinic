@@ -24,6 +24,7 @@ caching-html-compiler@1.0.7
 callback-hook@1.0.9
 cfs:http-methods@0.0.32
 check@1.2.3
+codechimp:autoform-masked-input@0.0.1
 coffeescript@1.2.3
 datatables@0.0.1
 ddp@1.2.5
@@ -94,6 +95,7 @@ modules-runtime@0.7.6
 momentjs:moment@2.10.6
 mongo@1.1.12
 mongo-id@1.0.5
+mrt:mask@0.0.1
 msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
 npm-bcrypt@0.9.1

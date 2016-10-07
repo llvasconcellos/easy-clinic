@@ -44,7 +44,9 @@ var schema = {
       return TAPi18n.__('schemas.patients.createdAt.label');
     },
     autoform: {
-      type: 'text'
+      type: 'masked-input',
+      mask: '00/00/0000',
+      placeholder: '__/__/____'
     }
   },
   dateOfBirth: {
@@ -54,7 +56,9 @@ var schema = {
       return TAPi18n.__('schemas.patients.dateOfBirth.label');
     },
     autoform: {
-      type: 'text'
+      type: 'masked-input',
+      mask: '00/00/0000',
+      placeholder: '__/__/____'
     }
   },
   healthInsurance: {
@@ -78,6 +82,7 @@ var schema = {
   gender: {
     type: String,
     allowedValues: ['M', 'F'],
+    optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.gender.label');
     },
@@ -100,6 +105,7 @@ var schema = {
   },
   maritalStatus: {
     type: String,
+    optional: true,
     allowedValues: ['single', 'married','life_partner', 'separated', 'divorced', 'widowed'],
     label: function() {
       return TAPi18n.__('schemas.patients.maritalStatus.label');
@@ -143,6 +149,7 @@ var schema = {
   },
   skinColor: {
     type: String,
+    optional: true,
     allowedValues: ['white', 'brown', 'black', 'mixed', 'other'],
     label: function() {
       return TAPi18n.__('schemas.patients.skinColor.label');
@@ -190,6 +197,7 @@ var schema = {
   },
   literacy: {
     type: String,
+    optional: true,
     allowedValues: ['illiterate', 'primary_school', 'high_school','graduated', 'master', 'doctor', 'phd'],
     label: function() {
       return TAPi18n.__('schemas.patients.literacy.label');
@@ -267,6 +275,7 @@ var schema = {
     type: String,
     trim: true,
     max: 100,
+    optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.fathersName.label');
     }
@@ -275,6 +284,7 @@ var schema = {
     type: String,
     trim: true,
     max: 100,
+    optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.mothersName.label');
     }

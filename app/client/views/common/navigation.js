@@ -14,3 +14,15 @@ Template.navigation.rendered = function(){
 		}
 	});
 };
+
+Template.navigation.events({
+	'click .hide-on-phone': function (event, template) {
+		if(Meteor.Device.isPhone()) {
+			$("body").toggleClass("mini-navbar");
+			$('#side-menu').hide();
+			setTimeout(function () {
+				$('#side-menu').fadeIn(400);
+			}, 200);
+		}
+	}
+});

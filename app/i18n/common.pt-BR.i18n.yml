@@ -24,3 +24,7 @@ common_patients: Pacientes
 common_firstOption: Escolha Um
 common_imageUploadMaxSize: São permitidas apenas imagens com tamanho menor do que 10MB
 common_browse: Abrir
+common_cam: Camera
+common_reset: Reset
+common_remove: Remover
+common_uploading: Enviando
