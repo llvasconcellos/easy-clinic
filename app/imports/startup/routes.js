@@ -19,6 +19,13 @@ Router.route('/users', {
   where: 'client'
 });
 
+Router.route('/patients', {
+  name: 'listPatients',
+  controller: 'patientController',
+  action: 'list',
+  where: 'client'
+});
+
 Router.route('/patients/create', {
   name: 'createPatient',
   controller: 'patientController',
@@ -26,10 +33,10 @@ Router.route('/patients/create', {
   where: 'client'
 });
 
-Router.route('/patients/list', {
-  name: 'listPatients',
+Router.route('/patients/:_id', {
+  name: 'editPatient',
   controller: 'patientController',
-  action: 'list',
+  action: 'edit',
   where: 'client'
 });
 

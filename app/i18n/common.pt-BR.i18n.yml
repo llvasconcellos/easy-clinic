@@ -28,3 +28,4 @@ common_cam: Camera
 common_reset: Reset
 common_remove: Remover
 common_uploading: Enviando
+common_areYouSure: Tem certeza?

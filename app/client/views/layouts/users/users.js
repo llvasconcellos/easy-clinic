@@ -107,7 +107,7 @@ Template.users.helpers({
 			//width: '1%',
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<i class="fa fa-pencil user-id" aria-hidden="true" data-userid="' + cellData + '"></i>';
+				return '<i class="glyphicon glyphicon-edit user-id" aria-hidden="true" data-userid="' + cellData + '"></i>';
 			}
 		}]
 	}

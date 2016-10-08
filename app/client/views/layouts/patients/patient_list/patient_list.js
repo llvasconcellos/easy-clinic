@@ -2,15 +2,15 @@
 /* PatientList: Event Handlers */
 /*****************************************************************************/
 Template.patientList.events({
+	'click .new-user': function(event, template) {
+		Router.go('createPatient');
+	}
 });
 
 /*****************************************************************************/
 /* PatientList: Helpers */
 /*****************************************************************************/
 Template.patientList.helpers({
-	patients: function () {
-		return Meteor.users.find();
-	},
 	reactiveDataFunction: function () {
 		return function () {
 			return Patients.find().fetch();
@@ -58,50 +58,33 @@ Template.patientList.helpers({
 		columns: [{
 			title: '',
 			//width: '1%',
-			data: 'email',
+			data: 'picture',
 			orderable: false,
 			render: function(cellData, renderType, currentRow) {
-				var url = Gravatar.imageUrl(cellData, {
-					size: 28,
-					//default: 'images/default-user-image.png'
-					default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'
-				});
+				var url = '/images/default-user-image.png'; 
+				var image = Images.findOne({'_id': cellData});
+				if(image) {
+					url = image.link();
+				}
 				return '<img class="profile-pic" src="' + url + '">';
 			}
 		},{
 			title: T9n.get('name'),
-			data: 'name',
-			// render: function(cellData, renderType, currentRow) {
-			// 	return currentRow.profile.firstName + ' ' + currentRow.profile.lastName;
-			// }
+			data: 'name'
 		},{
 			title: 'Email',
 			data: 'email',
 			render: function(cellData, renderType, currentRow) {
-				return '<i class="fa fa-envelope"></i>&nbsp;' + cellData;
+				var html = '';
+				if(cellData) {
+					html = '<i class="fa fa-envelope"></i>&nbsp;' + cellData;
+				}
+				return html;
 			}
-		// },{
-		// 	title: T9n.get('enabled'),
-		// 	//width: '1%',
-		// 	orderable: false,
-		// 	data: 'profile.firstName',
-		// 	render: function(cellData, renderType, currentRow) {
-		// 		// var checkbox = '<input type="checkbox" class="js-switch"'; #TODO: editar direto na tabela
-		// 		// checkbox += (currentRow.isUserEnabled) ? ' checked' : '';
-		// 		// checkbox += '/>';
-		// 		// return checkbox;
-		// 		var html = '<span class="label label-';
-		// 		html += (currentRow.isUserEnabled) ? 'primary' : 'danger';
-		// 		html += '">';
-		// 		html += (currentRow.isUserEnabled) ? T9n.get('enabled') : T9n.get('disabled');
-		// 		return html;
-		// 	}
 		},{
-			//title: T9n.get('edit'),
-			//width: '1%',
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<i class="fa fa-pencil user-id" aria-hidden="true" data-userid="' + cellData + '"></i>';
+				return '<a href="' + Router.path('editPatient', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
 			}
 		}]
 	}

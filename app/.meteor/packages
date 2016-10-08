@@ -60,3 +60,4 @@ ostrio:files
 profile-pic-upload
 codechimp:autoform-masked-input
 # isjs:is -> add if needed (has isMobile() function)
+# aldeed:delete-button

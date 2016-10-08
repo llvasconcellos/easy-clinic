@@ -24,6 +24,7 @@ patientController = RouteController.extend({
   // return Posts.findOne({_id: this.params._id});
   
   data: function () {
+    return Patients.findOne({_id: this.params._id});
   },
   
   // You can provide any of the hook options
@@ -54,9 +55,12 @@ patientController = RouteController.extend({
   onStop: function () {
   },
   create: function() {
-    this.render('patientForm', {});
+    this.render('patientForm');
   },
   list: function() {
     this.render('patientList', {});
+  },
+  edit: function() {
+    this.render('patientForm');
   }
 });
