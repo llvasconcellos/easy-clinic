@@ -44,9 +44,17 @@ var schema = {
       return TAPi18n.__('schemas.patients.createdAt.label');
     },
     autoform: {
-      type: 'masked-input',
+      placeholder: '__/__/____',
       mask: '00/00/0000',
-      placeholder: '__/__/____'
+      afFieldInput: {
+        type: "bootstrap-datepicker",
+        // #TODO: make this international
+        datePickerOptions: {
+          //format: "dd/mm/yyyy",
+          language: "pt-BR"
+          //language: TAPi18n.getLanguage()
+        }
+      }
     }
   },
   dateOfBirth: {
@@ -56,9 +64,16 @@ var schema = {
       return TAPi18n.__('schemas.patients.dateOfBirth.label');
     },
     autoform: {
-      type: 'masked-input',
-      mask: '00/00/0000',
-      placeholder: '__/__/____'
+      placeholder: '__/__/____',
+      afFieldInput: {
+        type: "bootstrap-datepicker",
+        // #TODO: make this international
+        datePickerOptions: {
+          //format: "dd/mm/yyyy",
+          language: "pt-BR"
+          //language: TAPi18n.getLanguage()
+        }
+      }
     }
   },
   healthInsurance: {
@@ -246,11 +261,16 @@ var schema = {
   },
   CPF: { // #TODO: international documents
     type: String,
-    trim: true,
     optional: true,
-    max: 11,
     label: function() {
       return TAPi18n.__('schemas.patients.CPF.label');
+    },
+    autoform: {
+      type: 'masked-input',
+      mask: '000.000.000-00',
+      maskOptions: {
+        reverse: true
+      }
     }
   },
   RG: { // #TODO: international documents
@@ -266,9 +286,15 @@ var schema = {
     type: String,
     trim: true,
     optional: true,
-    max: 11,
     label: function() {
       return TAPi18n.__('schemas.patients.titularCPF.label');
+    },
+    autoform: {
+      type: 'masked-input',
+      mask: '000.000.000-00',
+      maskOptions: {
+        reverse: true
+      }
     }
   },
   fathersName: {
@@ -318,23 +344,56 @@ var schema = {
   },
   phone: {
     type: String,
-    trim: true,
     optional: true,
-    max: 30,
     label: function() {
       return TAPi18n.__('schemas.patients.phone.label');
+    },
+    autoform: {
+      type: 'masked-input',
+      mask: '(00) 0000-0000',
+      placeholder: '(___) ___-____',
+      maskOptions: {
+        onKeyPress: function(val, e, field, options) {
+          field.mask(function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+          }, options);
+        }
+      }
     }
   },
   mobile: {
     type: String,
-    trim: true,
     optional: true,
-    max: 30,
     label: function() {
       return TAPi18n.__('schemas.patients.mobile.label');
+    },
+    autoform: {
+      type: 'masked-input',
+      mask: '(00) 0000-0000',
+      placeholder: '(___) ___-____',
+      maskOptions: {
+        onKeyPress: function(val, e, field, options) {
+          field.mask(function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+          }, options);
+        }
+      }
     }
   },
   // #TODO: address fields per country ISSUEID #43
+  zip: {
+    type: String,
+    trim: true,
+    optional: true,
+    max: 20,
+    label: function() {
+      return TAPi18n.__('schemas.patients.zip.label');
+    },
+    autoform: {
+      type: 'masked-input',
+      mask: '00000-000'
+    }
+  },
   streetAddress_1: {
     type: String,
     trim: true,
@@ -378,15 +437,6 @@ var schema = {
     max: 2,
     label: function() {
       return TAPi18n.__('schemas.patients.state.label');
-    }
-  },
-  zip: {
-    type: String,
-    trim: true,
-    optional: true,
-    max: 20,
-    label: function() {
-      return TAPi18n.__('schemas.patients.zip.label');
     }
   },
   obs: {

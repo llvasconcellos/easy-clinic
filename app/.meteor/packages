@@ -19,8 +19,6 @@ ecmascript@0.5.8              # Enable ECMAScript2015+ syntax in app code
 shell-server            # Server-side component of the `meteor shell` command
 
 iron:router
-aldeed:autoform
-aldeed:collection2
 aldeed:template-extension
 less
 twbs:bootstrap
@@ -51,13 +49,22 @@ jparker:gravatar
 # promise
 abpetkov:switchery
 datatables
+zuuk:stale-session
+
+aldeed:autoform
+aldeed:collection2
 gwendall:simple-schema-i18n
 #gwendall:autoform-i18n
-zuuk:stale-session
-mdg:camera
+
 ostrio:files
-#ostrio:autoform-files
 profile-pic-upload
-codechimp:autoform-masked-input
+mdg:camera
+
 # isjs:is -> add if needed (has isMobile() function)
 # aldeed:delete-button
+# momentjs:moment
+#ostrio:autoform-files
+
+codechimp:autoform-masked-input
+#rajit:bootstrap3-datepicker
+aldeed:autoform-bs-datepicker

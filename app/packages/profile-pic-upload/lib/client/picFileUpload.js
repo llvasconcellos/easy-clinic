@@ -94,7 +94,7 @@ Template.picFileUpload.events({
     }},*/ function(error, data) {
 
       if(error) {
-        AutoForm.getValidationContext().resetValidation();
+        //AutoForm.getValidationContext().resetValidation();
         AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
         return;
       }
@@ -111,15 +111,17 @@ Template.picFileUpload.events({
 
 var uploadImage = function(upload, template) {
   upload.on('start', function () {
-    AutoForm.getValidationContext().resetValidation();
+    //AutoForm.getValidationContext().resetValidation();
     template.currentUpload.set(this);
     return;
   });
 
   upload.on('error', function (error) {
-    AutoForm.getValidationContext().resetValidation();
-    AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
-    $(e.currentTarget).val('');
+    console.log(error);
+    toastr['error'](error.message, TAPi18n.__('common_error'));
+    //AutoForm.getValidationContext().resetValidation();
+    //AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
+    //$(e.currentTarget).val('');
     return;
   });
 

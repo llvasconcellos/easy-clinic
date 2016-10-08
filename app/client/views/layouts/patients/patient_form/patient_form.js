@@ -3,6 +3,9 @@ import '/imports/client/datepicker/bootstrap-datepicker.pt-BR.min.js';
 import '/imports/client/datepicker/bootstrap-datepicker.es.min.js';
 import '/imports/client/datepicker/datepicker3.css';
 
+
+Template['datePickerOverride'].replaces('afBootstrapDatepicker');
+
 /*****************************************************************************/
 /* PatientForm: Event Handlers */
 /*****************************************************************************/
@@ -41,7 +44,15 @@ Template.patientForm.onCreated(function () {
 		},
 		onError: function(formType, error) {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
-		}
+		},
+		// docToForm: function(doc) {
+		// 	doc.createdAt = moment(doc.createdAt).format('DD/MM/YYYY');
+		// 	return doc;
+		// },
+		// formToDoc: function(doc) {
+		// 	doc.createdAt = moment(doc.createdAt, "DD-MM-YYYY");
+		// 	return doc;
+		// }
 	});
 });
 
@@ -54,10 +65,14 @@ Template.patientForm.onDestroyed(function () {
 
 
 uxAdjustments = function(){
-	console.log(this);
+	//console.log(this);
+	$('input[name=zip]').parent().before('<div class="hr-line-dashed"></div>');
+	$('textarea[name=obs]').parent().before('<div class="hr-line-dashed"></div>');
+
+
 	var submitParent = $('.patient-form button[type=submit]').parent();
 	submitParent.css('float', 'right');
-	console.log(submitParent);
+	//console.log(submitParent);
 	if(this._id) {
 		var deleteBtn = $.parseHTML('<button class="btn btn-danger delete-btn" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>');
 		$(deleteBtn).prependTo(submitParent);
@@ -90,17 +105,20 @@ uxAdjustments = function(){
 	}
 	
 
-	$('input[name=createdAt], input[name=dateOfBirth]')
-		.wrap('<div class="input-group date"></div>')
-		.after('<span class="input-group-addon"><i class="fa fa-calendar"></i></span>');
+	// $('input[name=createdAt], input[name=dateOfBirth]')
+	// 	.wrap('<div class="input-group date"></div>')
+	// 	.after('<span class="input-group-addon"><i class="fa fa-calendar"></i></span>');
 
-	$('.input-group.date').datepicker({
-		format: "dd/mm/yyyy",
-		//format: "mm/dd/yyyy",
-		language: TAPi18n.getLanguage(),
-		autoclose: true,
-		todayHighlight: true
-	});
+	// $('.input-group.date').datepicker({
+	// 	format: "dd/mm/yyyy",
+	// 	//format: "mm/dd/yyyy",
+	// 	language: TAPi18n.getLanguage(),
+	// 	autoclose: true,
+	// 	todayHighlight: true
+	// });
+
+	// #TODO: make this international
+	$('.input-group.date input').mask('00/00/0000');
 
 	$('textarea[name=obs]')
 		.css('display', 'block')
@@ -115,4 +133,25 @@ uxAdjustments = function(){
 	$('input[type=checkbox]').addClass('i-checks').iCheck({
 		checkboxClass: 'icheckbox_square-green'
 	});
+
+	$('input[name=zip]').blur(function(event){
+		$.ajax({
+			url: "https://viacep.com.br/ws/" + event.target.value + "/json/unicode/",
+		})
+		.done(function( data ) {
+			$('input[name=streetAddress_1]').val(data.logradouro);
+			$('input[name=streetAddress_2]').val(data.complemento);
+			$('input[name=bairro]').val(data.bairro);
+			$('input[name=city]').val(data.localidade);
+			$('input[name=state]').val(data.uf);
+		});
+	});
+
+
+
+
+
+
+
+
 };
