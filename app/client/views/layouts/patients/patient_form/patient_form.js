@@ -71,7 +71,7 @@ uxAdjustments = function(){
 
 
 	var submitParent = $('.patient-form button[type=submit]').parent();
-	submitParent.css('float', 'right');
+	submitParent.addClass('text-right');
 	//console.log(submitParent);
 	if(this._id) {
 		var deleteBtn = $.parseHTML('<button class="btn btn-danger delete-btn" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>');

@@ -10,6 +10,6 @@ Meteor.startup(function () {
 
     // add phone specific css class 
     if(Meteor.Device.isPhone()) {
-    	$("body").addClass("is-phone");
+    	$("body").addClass("is-phone body-small");
     }
 });

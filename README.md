@@ -12,7 +12,7 @@ www.devhouse.com.br
 
 ## Build the App
 ```sh
-$ meteor build ../meteor-build --server http://clinicafacil.devhouse.com.br --mobile-settings mobile-config.json
+$ meteor build ../meteor-build --server https://clinicafacil.devhouse.com.br --mobile-settings mobile-config.json
 ```
 
 ## Create a private key for the app:

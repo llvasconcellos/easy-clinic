@@ -13,3 +13,13 @@
 .is-phone .table-responsive {
 	padding-top: 20px;
 }
+/* #TODO: Remove this */
+.is-phone #page-wrapper > div:nth-child(1) {
+	margin: 0;
+}
+.is-phone .patient-form label {
+	clear: both;
+}
+.is-phone .navbar-default {
+	position: fixed !important;
+}

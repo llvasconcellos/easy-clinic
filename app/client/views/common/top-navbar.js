@@ -1,10 +1,10 @@
 Template.topNavbar.rendered = function(){
     // #TODO: enable fixed navbar but also fixed left menu for phones
     // FIXED TOP NAVBAR OPTION 
-    // if(Meteor.Device.isPhone()) {
-    //     $('body').addClass('fixed-nav');
-    //     $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
-    // }
+    if(Meteor.Device.isPhone()) {
+        $('body').addClass('fixed-nav');
+        $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
+    }
 
 };
 
