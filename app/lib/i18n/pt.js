@@ -7,8 +7,6 @@ T9n.map('pt', {
 	groupNurse: "Enfermeiro(a)",
 	groupReception: "Recepcionista",
 	groupAdmin: "Administração",
-	common_copy: "Copiar",
-	common_print: "Imprimir",
 	name: "Nome",
 	enabled: "Ativo",
 	disabled: "Inativo",

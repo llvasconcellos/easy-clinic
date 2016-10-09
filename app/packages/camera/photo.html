@@ -1,47 +1,64 @@
 <template name="camera">
-  <div class="camera-overlay">
-    {{! used to make the background dark}}
-  </div>
-
-  <div class="camera-popup {{#if permissionDeniedError}}camera-popup-wide{{/if}}">
-    {{#if error}}
-      {{#if permissionDeniedError}}
-        {{> permissionDenied}}
-      {{else}}
-        {{#if browserNotSupportedError}}
-          {{> genericError message="Sorry, this browser is currently not supported for camera functionality."}}
-        {{else}}
-          {{> genericError message="There was an error accessing the camera."}}
-        {{/if}}
-      {{/if}}
-    {{else}}
-      {{#if photo}}
-        <div class="center">
-          <img src="{{photo}}" class="photo-preview" />
-          <div>
-            <button class="button use-photo">Use Photo</button>
-            <button class="button new-photo">Take New Photo</button>
+  <div class="modal inmodal" id="camera-popup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content animated bounceInRight">
+          <div class="modal-header">
+              <button type="button" class="close cancel" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{{_ 'common_close'}}</span></button>
+              <i class="fa fa-camera modal-icon"></i>
+              <h4 class="modal-title">{{_ 'common_cam'}}</h4>
           </div>
-        </div>
-      {{else}}
-        {{> viewfinder}}
-      {{/if}}
-    {{/if}}
+          <div class="modal-body">
+            {{#if error}}
+              {{#if permissionDeniedError}}
+                {{> permissionDenied}}
+              {{else}}
+                {{#if browserNotSupportedError}}
+                  {{> genericError message=cameraNotSupportedError}}
+                {{else}}
+                  {{> genericError message=cameraAccessError}}
+                {{/if}}
+              {{/if}}
+            {{else}}
+              {{#if photo}}
+                <div class="center">
+                  <img src="{{photo}}" class="photo-preview" />
+                </div>
+              {{else}}
+                {{> viewfinder}}
+              {{/if}}
+            {{/if}}
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-white cancel" data-dismiss="modal">
+                <i class="fa fa-ban" aria-hidden="true"></i> {{_ 'common_cancel'}}
+              </button>
+              {{#if photo}}
+                <button class="btn btn-success use-photo"><i class="fa fa-check" aria-hidden="true"></i> {{_ 'common_usePhoto'}}</button>
+                <button class="btn btn-primary new-photo"><i class="fa fa-camera"></i> {{_ 'common_takeNewPhoto'}}</button>
+              {{/if}}
+              {{#unless waitingForPermission}}
+                {{#unless photo}}
+                  <button type="button" class="btn btn-primary shutter">
+                    <i class="fa fa-camera"></i> {{_ 'common_takePhoto'}}
+                  </button>
+                {{/unless}}
+              {{/unless}}
+          </div>
+      </div>
+    </div>
   </div>
 </template>
 
+
+
+
 <template name="viewfinder">
   <div class="viewfinder">
-    <video id="video" class="{{#if waitingForPermission}}hidden{{/if}}">
-      </video>
-    
+    <video id="video" class="{{#if waitingForPermission}}hidden{{/if}}"></video>
     <div>
       {{#if waitingForPermission}}
-        <p>Waiting for camera permissions...</p>
-      {{else}}
-        <button class="button shutter">Take Photo</button>
+        <p class="font-bold text-center">{{_ 'common_cameraWaitForPermission'}}</p>
       {{/if}}
-      <button class="button cancel">Cancel</button>
     </div>
   </div>
 
@@ -50,34 +67,31 @@
 
 <template name="genericError">
   <div class="generic-error">
-    <p>{{message}}</p>
-    <button class="button cancel">Close Popup</button>
+    <p class="text-center">{{message}}</p>
   </div>
 </template>
 
 <template name="permissionDenied">
   <div class="permission-denied-error">
-    <h2>Camera Permissions Denied</h2>
+    <h2 class="text-danger">{{_ 'common_cameraPermissionsDenied'}}</h2>
+    
+    <p>{{_ 'common_cameraPermissionsInstructions'}}</p>
 
-    <p>
-      You have denied this app permission to use your camera.
-      If you would like to allow permissions, follow the directions for your
-      browser below.
-    </p>
+    <div class="list-group permissions-howto">
+        <a class="list-group-item" href="#">
+            <h3 class="list-group-item-heading">Google Chrome</h3>
+            <p class="list-group-item-text">{{_ 'common_cameraPermissionsInstructionsChrome'}}</p>
+        </a>
 
-    <dl class="permissions-howto">
-      <dt>Google Chrome</dt>
-        <dd>Go to Settings > "Show advanced settings..." >
-          "Content settings..." > Media heading > "Manage exceptions...",
-          then find this website in the list and allow video capture.</dd>
-      <dt>Mozilla Firefox</dt>
-        <dd>Reload the page and try again.</dd>
-      <dt>Opera</dt>
-        <dd>Go to Preferences > Websites > Media heading >
-          "Manage exceptions...", then find this website in the list and
-          allow video capture.</dd>
-    </dl>
+        <a class="list-group-item " href="#">
+            <h3 class="list-group-item-heading">Mozilla Firefox</h3>
+            <p class="list-group-item-text">{{_ 'common_cameraPermissionsInstructionsFirefox'}}</p>
+        </a>
 
-    <button class="button cancel">Close Popup</button>
+        <a class="list-group-item" href="#">
+            <h3 class="list-group-item-heading">Opera</h3>
+            <p class="list-group-item-text">{{_ 'common_cameraPermissionsInstructionsOpera'}}</p>
+        </a>
+    </div>
   </div>
 </template>

@@ -22,7 +22,7 @@ window.gambiarra_scope = null;
 /*****************************************************************************/
 Template.patientForm.helpers({
 	saveButton: function () {
-		return TAPi18n.__('common_save');
+		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
 	},
 	isEditForm: function() {
 		return (this._id) ? true : false;
@@ -79,24 +79,21 @@ uxAdjustments = function(){
 		
 		var self = this;
 		$(deleteBtn).click(function(event){
-			var patient = Patients.findOne(self.data._id);
+			var patient = Patients.findOne(self._id);
 			swal({
 				title: TAPi18n.__('common_areYouSure'),
 				text: TAPi18n.__('patients_deleteConfirmation', patient.name),
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#ed5565",
-				confirmButtonText: "Yes, delete it!",
-				closeOnConfirm: false
+				confirmButtonText: TAPi18n.__('common_confirm')
 			}, function(){
-				Patients.remove(self.data._id, function (error, result) {
+				Patients.remove(self._id, function (error, result) {
 					if (error) {
-						console.log(error);
 						toastr['error'](error.message, TAPi18n.__('common_error'));
 					} 
 					else {
-						console.log(result);
-						toastr['success'](result, TAPi18n.__('common_success'));
+						toastr['success'](TAPi18n.__('common_deleteSuccess'), TAPi18n.__('common_success'));
 					}
 				});
 				Router.go('listPatients');

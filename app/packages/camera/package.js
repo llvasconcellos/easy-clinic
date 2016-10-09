@@ -17,7 +17,7 @@ Package.onUse(function(api) {
 
   api.addFiles('photo.html');
   api.addFiles('photo.js');
-  api.addFiles("camera.less", ["web.browser"]);
+  api.addFiles("camera.css", ["web.browser"]);
   api.addFiles('photo-browser.js', ['web.browser']);
   api.addFiles('photo-cordova.js', ['web.cordova']);
 });

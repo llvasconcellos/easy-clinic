@@ -94,8 +94,7 @@ Template.picFileUpload.events({
     }},*/ function(error, data) {
 
       if(error) {
-        //AutoForm.getValidationContext().resetValidation();
-        AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
+        toastr['error'](error.reason, TAPi18n.__('common_error'));
         return;
       }
 

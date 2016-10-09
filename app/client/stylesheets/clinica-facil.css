@@ -1,0 +1,56 @@
+.sweet-alert {
+    border-radius: 4px;
+}
+.sweet-alert button {
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: normal;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 6px 12px;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin: 22px 6px 6px 6px;
+}
+.sweet-alert .sa-icon {
+    width: 60px;
+    height: 60px;
+    margin: 2px auto;
+}
+.sweet-alert .sa-icon .sa-body {
+    height: 28px !important;
+}
+
+.sweet-alert .sa-icon.sa-warning {
+    border-color: #ED5565;
+}
+.sweet-alert .sa-icon.sa-warning .sa-body, .sweet-alert .sa-icon.sa-warning .sa-dot {
+    background-color: #ED5565;
+}
+
+@keyframes pulseWarningIns {
+  0% {
+    background-color: #ED5565;
+  }
+
+  100% {
+    background-color: #ED5565;
+  }
+}
+@keyframes pulseWarning {
+  0% {
+    border-color: #ED5565; }
+  100% {
+    border-color: #ED5565; }
+}
+.sweet-alert h2 {
+    font-size: 22px;
+    margin: 0px 0px 10px 0px;
+}

@@ -27,13 +27,13 @@ Template.users.helpers({
 		dom: '<"html5buttons"B>lTfgitp',
 		buttons: [{
 			extend: 'copy',
-			text: '<i class="fa fa-files-o" aria-hidden="true"></i> ' + T9n.get('common_copy')
+			text: '<i class="fa fa-files-o" aria-hidden="true"></i>'
 		},{
 			extend: 'csv',
-			text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i> CSV'
+			text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i>'
 		},{
 			extend: 'print',
-			text: '<i class="fa fa-print" aria-hidden="true"></i> ' + T9n.get('common_print'),
+			text: '<i class="fa fa-print" aria-hidden="true"></i>',
 			customize: function (win){
 				$(win.document.body).addClass('white-bg');
 				$(win.document.body).css('font-size', '10px');

@@ -107,11 +107,20 @@ var stopStream = function(st) {
 
 
 Template.camera.helpers({
+  cameraAccessError: function() {
+    return TAPi18n.__('common_cameraAccessError');
+  },
+  cameraNotSupportedError: function(){
+    return TAPi18n.__('common_cameraNotSupportedError');
+  },
   photo: function () {
     return photo.get();
   },
   error: function () {
     return error.get();
+  },
+  "waitingForPermission": function () {
+    return waitingForPermission.get();
   },
   permissionDeniedError: permissionDeniedError,
   browserNotSupportedError: browserNotSupportedError
@@ -138,10 +147,7 @@ Template.camera.events({
     if (stream) {
       stopStream(stream);
     }
-  }
-});
-
-Template.viewfinder.events({
+  },
   'click .shutter': function (event, template) {
     var video = template.find("video");
     var canvas = template.find("canvas");
@@ -154,6 +160,9 @@ Template.viewfinder.events({
     stopStream(stream);
   }
 });
+
+// Template.viewfinder.events({
+// });
 
 Template.viewfinder.helpers({
   "waitingForPermission": function () {
@@ -201,11 +210,14 @@ MeteorCamera.getPicture = function (options, callback) {
   
   closeAndCallback = function () {
     var originalArgs = arguments;
+    $('#camera-popup').modal('hide');
     UI.remove(view);
     photo.set(null);
     callback.apply(null, originalArgs);
   };
   
-  view = UI.renderWithData(Template.camera);
-  UI.insert(view, document.body);
+  //view = UI.renderWithData(Template.camera, document.body);
+  view = Blaze.render(Template.camera, document.body);
+  //UI.insert(view, document.body);
+  $('#camera-popup').modal({backdrop: 'static'});
 };

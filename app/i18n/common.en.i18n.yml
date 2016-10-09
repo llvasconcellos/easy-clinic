@@ -24,8 +24,22 @@ common_patients: Patients
 common_firstOption: Select One
 common_imageUploadMaxSize: Please upload image, with size equal or less than 10MB
 common_browse: Browse
-common_cam: Camera
 common_reset: Reset
 common_remove: Remove
 common_uploading: Uploading
 common_areYouSure: Are you sure?
+common_close: Close
+common_cam: Camera
+common_cameraWaitForPermission: Waiting for camera permissions...
+common_takePhoto: Take Photo
+common_usePhoto: Use Photo
+common_takeNewPhoto: Take New Photo
+common_cameraPermissionsDenied: Camera Permissions Denied
+common_cameraPermissionsInstructions: You have denied this app permission to use your camera. If you would like to allow permissions, follow the directions for your browser below.
+common_cameraPermissionsInstructionsChrome: Go to Settings > Show advanced settings > Content settings > Media heading > Manage exceptions, then find this website in the list and allow video capture.
+common_cameraPermissionsInstructionsFirefox: Reload the page and try again.
+common_cameraPermissionsInstructionsOpera: Go to Preferences > Websites > Media heading > Manage exceptions, then find this website in the list and allow video capture.
+common_cameraAccessError: There was an error accessing the camera.
+common_cameraNotSupportedError: Sorry, this browser is currently not supported for camera functionality.
+common_deleteSuccess: Registro removido com sucesso.
+common_confirm: Confirm
