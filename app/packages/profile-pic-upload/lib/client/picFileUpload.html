@@ -8,7 +8,7 @@
     <a data-remove-file href="#">{{_ 'common_remove'}}</a>
   {{else}}
     {{#with currentUpload}}
-      {_ 'common_uploading'}} <b>{{file.name}}</b>:
+      {{_ 'common_uploading'}} <b>{{file.name}}</b>:
       <progress value="{{progress.get}}" max="100"></progress>
       &nbsp;
       <span class="progress">{{progress.get}}%</span>

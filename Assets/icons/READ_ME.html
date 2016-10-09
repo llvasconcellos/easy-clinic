@@ -1,0 +1,609 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Icon Slayer - An app icon maker</TITLE>
+<style type="text/css">
+
+body {
+	font-family: "Arial Black", Gadget, sans-serif;
+	font-size: 12px;
+}
+p {
+	font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+}
+
+.cell-align-tl, table.cell-align-tl td {
+	text-align : left;
+	vertical-align : top;
+}
+table td {
+	text-align : left;
+	vertical-align : top;	
+}
+.text-white {
+	color : #FFFFFF;	
+}
+
+/* grid */
+.isgrid {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+table.isgrid th {
+	color: #FFF;
+	background-color: #9AADC2;
+	white-space: nowrap;
+}
+</style>
+</HEAD>
+
+<BODY>
+<h2>Icon Slayer</h2>
+<p>Version 15 - Oct. 3, 2016 <br>
+	By <a href="http://www.gieson.com">Mike Gieson</a></p>
+<p>For more information about&nbsp;Icon Slayer, visit <a href="http://www.gieson.com">www.gieson.com</a></p>
+<p>&nbsp;</p>
+									<a name="ios"></a>
+									<h2>iPhone-only Apps</h2>
+									<p>The following information was derived from: <a href="http://developer.apple.com/library/ios/#qa/qa1686/_index.html" title="source for ios icon sizes">http://developer.apple.com/library/ios/#qa/qa1686/_index.html</a></p>
+									<table class="isgrid pad-5">
+										<tbody>
+											<tr>
+												<th> Size </th>
+												<th> File Name </th>
+												<th> Used For </th>
+												<th> Required Status </th>
+												<th> Notes </th>
+											</tr>
+											<tr>
+												<td> 29x29 </td>
+												<td> Icon-Small.png </td>
+												<td> Spotlight and Settings </td>
+												<td> Optional but recommended </td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td> 50x50 </td>
+												<td> Icon-Small-50.png </td>
+												<td> Spotlight</td>
+												<td> Recommended if you have a Settings bundle</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td> 57x57 </td>
+												<td> Icon.png </td>
+												<td> App Store and Home screen</td>
+												<td> Required </td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td> 58x58 </td>
+												<td> Icon-Small@2x.png </td>
+												<td> Spotlight and Settings (Retina)</td>
+												<td> Recommended if you have a Settings bundle</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td> 72x72 </td>
+												<td> Icon-72.png </td>
+												<td> Home screen</td>
+												<td> Optional but recommended </td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td> 114x114 </td>
+												<td> Icon@2x.png </td>
+												<td> Home screen (Retina) </td>
+												<td> Optional but recommended </td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td> 512x512 </td>
+												<td> iTunesArtwork </td>
+												<td> Ad Hoc iTunes </td>
+												<td> Optional but recommended </td>
+												<td> File should be in png format, but name it without the .png extension </td>
+											</tr>
+											<tr>
+												<td> 1024x1024 </td>
+												<td> iTunesArtwork@2x</td>
+												<td> Ad Hoc iTunes (Retina) </td>
+												<td> Optional but recommended </td>
+												<td> File should be in png format, but name it without the .png extension </td>
+											</tr>
+										</tbody>
+									</table>
+									<h2>iPad-only Apps</h2>
+									<table class="isgrid pad-5">
+										<tbody>
+											<tr>
+												<th> Image Size </th>
+												<th> File Name </th>
+												<th> Used For </th>
+												<th> Required Status </th>
+												<th> Notes </th>
+											</tr>
+											<tr>
+												<td> 29x29 </td>
+												<td> Icon-Small.png </td>
+												<td> Settings on iPad </td>
+												<td> Recommended if you have a Settings bundle, otherwise optional but recommended </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 58x58 </td>
+												<td> Icon-Small@2x.png </td>
+												<td> Settings on iPad (Retina)</td>
+												<td> Recommended if you have a Settings bundle, otherwise optional but recommended </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 50x50 </td>
+												<td> Icon-Small-50.png </td>
+												<td> Spotlight on iPad </td>
+												<td> Optional but recommended </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 100x100 </td>
+												<td> Icon-Small-50@2x.png </td>
+												<td> Spotlight on iPad  (Retina)</td>
+												<td> Optional but recommended </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 72x72 </td>
+												<td> Icon-72.png </td>
+												<td> App Store and Home screen on iPad </td>
+												<td> Required </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 144x144 </td>
+												<td> Icon-72@2x.png </td>
+												<td> App Store and Home screen on iPad  (Retina)</td>
+												<td> Required </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 512x512 </td>
+												<td> iTunesArtwork </td>
+												<td> Ad Hoc iTunes </td>
+												<td> Optional but recommended </td>
+												<td> File should be in png format, but name it without the .png extension </td>
+											</tr>
+											<tr>
+												<td> 1024x1024 </td>
+												<td> iTunesArtwork@2x</td>
+												<td> Ad Hoc iTunes </td>
+												<td> Optional but recommended </td>
+												<td> File should be in png format, but name it without the .png extension </td>
+											</tr>
+										</tbody>
+									</table>
+									<h2>iOS Universal Apps</h2>
+									<table class="isgrid pad-5">
+										<tbody>
+											<tr>
+												<th> Image Size </th>
+												<th> File Name </th>
+												<th> Used For </th>
+												<th> Required Status </th>
+												<th> Notes </th>
+											</tr>
+											<tr>
+												<td> 29x29 </td>
+												<td> Icon-Small.png </td>
+												<td> Settings and Spotlight</td>
+												<td> Recommended if you have a Settings bundle</td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 50x50 </td>
+												<td> Icon-Small-50.png </td>
+												<td> Spotlight</td>
+												<td> Optional but recommended </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 57x57 </td>
+												<td> Icon.png </td>
+												<td> App Store and the Home screen</td>
+												<td> Required </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 58x58 </td>
+												<td> Icon-Small@2x.png </td>
+												<td> Spotlight and Settings</td>
+												<td> Recommended if you have a Settings bundle</td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 72x72 </td>
+												<td> Icon-72.png </td>
+												<td> App Store and Home screen</td>
+												<td> Required </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 114x114 </td>
+												<td> Icon@2x.png </td>
+												<td> Home screen</td>
+												<td> Optional but recommended </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 512x512 </td>
+												<td> iTunesArtwork </td>
+												<td> Ad Hoc iTunes </td>
+												<td> Optional but recommended </td>
+												<td> File should be in png format, but name it without the .png extension </td>
+											</tr>
+										</tbody>
+									</table>
+									<h2>iOS Web Clip Icons</h2>
+									<p>These are shown on the device home screen when saving a bookmark. This is similar in nature to the &quot;favicon&quot; for websites. The &quot;-precomposed&quot; portion of the filename prevents Apple from automatically adding gloss, rounded corners and drop shadows.</p>
+									<p>Refer to the &quot;<a href="http://developer.apple.com/library/ios/#documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html" title="source for apple webpage icon">Webpage Icon</a>&quot; Apple documentation page for additional details.<br>
+									</p>
+									<table class="isgrid pad-5">
+										<tbody>
+											<tr>
+												<th> Image Size (px) </th>
+												<th> File Name </th>
+												<th> Embed Code</th>
+											</tr>
+											<tr>
+												<td> 57x57 </td>
+												<td> apple-touch-icon-precomposed.png</td>
+												<td> &lt;link rel=&quot;apple-touch-icon&quot; href=&quot;apple-touch-icon-precomposed.png&quot;/&gt;</td>
+											</tr>
+											<tr>
+												<td> 72x72</td>
+												<td> apple-touch-icon-72x72-precomposed.png</td>
+												<td>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;72x72&quot; href=&quot;apple-touch-icon-72x72-precomposed.png&quot; /&gt;</td>
+											</tr>
+											<tr>
+												<td> 114x114</td>
+												<td> apple-touch-icon-114x114-precomposed.png</td>
+												<td>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;114x114&quot; href=&quot;apple-touch-icon-114x114-precomposed.png&quot; /&gt;</td>
+											</tr>
+											<tr>
+												<td> 144x144</td>
+												<td> apple-touch-icon-144x144-precomposed.png</td>
+												<td>&lt;link rel=&quot;apple-touch-icon&quot; sizes=&quot;144x144&quot; href=&quot;apple-touch-icon-144x144-precomposed.png&quot; /&gt;</td>
+											</tr>
+										</tbody>
+									</table>
+									<p><a name="android" id="android"></a></p>
+									<h2>Android Apps</h2>
+									<p>The following information was derived from: <a href="http://developer.android.com/guide/practices/ui_guidelines/icon_design.html" title="source for android ui guidelines">http://developer.android.com/guide/practices/ui_guidelines/icon_design.html</a></p>
+									<table class="isgrid pad-5">
+										<tbody>
+											<tr>
+												<th> Asset Type </th>
+												<th> Prefix</th>
+												<th> Sizes</th>
+											</tr>
+											<tr>
+												<td>Google Market hi-res</td>
+												<td>market_</td>
+												<td>512		xhdpi</td>
+											</tr>
+											<tr>
+												<td> Button Status / Notify</td>
+												<td> btn_stat_notify</td>
+												<td>24		ldpi<br>
+													32		mdpi<br>
+													48		hdpi <br>
+													64		xhdpi</td>
+											</tr>
+											<tr>
+												<td> Launcher icons</td>
+												<td>ic_launcher</td>
+												<td>36 ldpi<br>
+													48 mdpi<br>
+													72 hdpi <br>
+													96 xhdpi</td>
+											</tr>
+											<tr>
+												<td> Menu icons and Action Bar icons</td>
+												<td> ic_menu</td>
+												<td>36 ldpi<br>
+													36 ldpi_v9<br>
+													18 ldpi_v11<br>
+													48 mdpi<br>
+													48 mdpi_v9<br>
+													24 mdpi_v11<br>
+													96 hdpi<br>
+													72 hdpi_v9<br>
+													36 hdpi_v11<br>
+													96 xhdpi<br>
+													96 xhdpi_v9<br>
+													48 xhdpi_v11</td>
+											</tr>
+											<tr>
+												<td> Status bar icons </td>
+												<td> ic_stat_notify </td>
+												<td>19 ldpi<br>
+													12 ldpi_v9<br>
+													18 ldpi_v11<br>
+													25 mdpi<br>
+													16 mdpi_v9<br>
+													24 mdpi_v11<br>
+													48 hdpi<br>
+													24 hdpi_v9<br>
+													36 hdpi_v11<br>
+													50 xhdpi<br>
+													32 xhdpi_v9<br>
+													48 xhdpi_v11</td>
+											</tr>
+											<tr>
+												<td> Tab icons</td>
+												<td> ic_tab</td>
+												<td>24 ldpi<br>
+													24 ldpi_v5<br>
+													32 mdpi<br>
+													32 mdpi_v5<br>
+													48 hdpi<br>
+													48 hdpi_v5</td>
+											</tr>
+											<tr>
+												<td> Dialog icons</td>
+												<td> ic_dialog</td>
+												<td>24 ldpi<br>
+													32 mdpi<br>
+													48 hdpi</td>
+											</tr>
+											<tr>
+												<td>Lists</td>
+												<td>ic_list</td>
+												<td>24 ldpi<br>
+													32 mdpi<br>
+													48 hdpi</td>
+											</tr>
+										</tbody>
+									</table>
+									<p>&nbsp;</p>
+									<p>&nbsp;</p>
+									<a name="uwp" id="uwp"></a>
+									<h2>Universal Windows Platform (UWP)</h2>
+									<p>The following information was derived from:<br>
+										<a href="https://msdn.microsoft.com/en-us/windows/uwp/controls-and-patterns/tiles-and-notifications-app-assets" title="Source for Universal Windows Platform (UWP) guidlines">https://msdn.microsoft.com/en-us/windows/uwp/controls-and-patterns/tiles-and-notifications-app-assets</a> </p>
+									<p>Splash Screen sizes derived from:<br>
+										<a href="https://msdn.microsoft.com/library/windows/apps/br211467" title="source for UWP splash screen sizes">https://msdn.microsoft.com/library/windows/apps/br211467</a></p>
+									<p>Based on the description provided <a href="https://msdn.microsoft.com/en-us/windows/uwp/controls-and-patterns/tiles-and-notifications-creating-tiles">here</a>, the system selects appropriate images based on the following scheme:</p>
+									<pre sourcefile="controls-and-patterns/tiles-and-notifications-creating-tiles.md" sourcestartlinenumber="41" sourceendlinenumber="41">&lt;name&gt;.scale-&lt;scale&gt;.&lt;ext&gt;</pre>
+									<p>Where &lt;name&gt; can be anything you want. According to the guide, they're recommending using a naming convention of &quot;AppNameSmallTile.scale-XXX.png&quot;. I found this to be rather confusing, so I decided to just stick with naming the images according to the attribute definition, which I believe is less confusing.</p>
+									<p>When referencing an image in your code, just use NAME.EXT. The &quot;.scale-XXX&quot; portion of the file name is not included in the code. The system automatically selects the appropriate image/scale as needed. Icon Slayer uses a naming convention that matches the element attribute, I believe this is least confusing.</p>
+									<p>Example:</p>
+									<pre>&lt;uap:VisualElements<br>    Square150x150Logo="Assets\Square150x150Logo.png"<br>    Square44x44Logo="Assets\Square44x44Logo.png"&gt;            </pre>
+									<p>&nbsp;</p>
+									<table class="isgrid pad-5">
+										<tbody>
+											<tr>
+												<th> Size </th>
+												<th> File Name </th>
+												<th> Notes </th>
+											</tr>
+											<tr>
+												<td> 71 </td>
+												<td> Square71x71Logo.scale-100.png </td>
+												<td> Smal Tile </td>
+											</tr>
+											<tr>
+												<td> 89 </td>
+												<td> Square71x71Logo.scale-125.png </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 107 </td>
+												<td> Square71x71Logo.scale-150.png </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 142 </td>
+												<td> Square71x71Logo.scale-200.png </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 284 </td>
+												<td> Square71x71Logo.scale-400.png </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 150 </td>
+												<td> Square150x150Logo.scale-100.png </td>
+												<td> Medium                  				 Tile</td>
+											</tr>
+											<tr>
+												<td> 188 </td>
+												<td> Square150x150Logo.scale-125.png </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td> 225 </td>
+												<td> Square150x150Logo.scale-150.png </td>
+												<td>&nbsp; </td>
+											</tr>
+											<tr>
+												<td>300</td>
+												<td> Square150x150Logo.scale-200.png </td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>600</td>
+												<td> Square150x150Logo.scale-400.png </td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>310</td>
+												<td>Square310x310Logo.scale-100.png</td>
+												<td>Large Tile</td>
+											</tr>
+											<tr>
+												<td>388</td>
+												<td>Square310x310Logo.scale-125.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>465</td>
+												<td> Square310x310Logo.scale-150.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>620</td>
+												<td>Square310x310Logo.scale-200.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>240</td>
+												<td>Square310x310Logo.scale-400.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>310 x 150</td>
+												<td>Square310x150Logo.scale-100.png</td>
+												<td>Wide Tile</td>
+											</tr>
+											<tr>
+												<td>388 x 188</td>
+												<td>Square310x150Logo.scale-125.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>465 x 225</td>
+												<td>Square310x150Logo.scale-150.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>620 x 300</td>
+												<td>Square310x150Logo.scale-200.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>1240 x 600</td>
+												<td>Square310x150Logo.scale-400.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>44</td>
+												<td>Square44x44Logo.scale-100.png</td>
+												<td>App List (icon)</td>
+											</tr>
+											<tr>
+												<td>55</td>
+												<td>Square44x44Logo.scale-125.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>66</td>
+												<td>Square44x44Logo.scale-150.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>88</td>
+												<td>Square44x44Logo.scale-200.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>176</td>
+												<td>Square44x44Logo.scale-400.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>16</td>
+												<td>Square44x44Logo.targetsize-16.png</td>
+												<td>Target Size Icon</td>
+											</tr>
+											<tr>
+												<td>20</td>
+												<td>Square44x44Logo.targetsize-20.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>24</td>
+												<td>Square44x44Logo.targetsize-24.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>30</td>
+												<td>Square44x44Logo.targetsize-30.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>32</td>
+												<td>Square44x44Logo.targetsize-32.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>36</td>
+												<td>Square44x44Logo.targetsize-36.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>40</td>
+												<td>Square44x44Logo.targetsize-40.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>48</td>
+												<td>Square44x44Logo.targetsize-48.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>60</td>
+												<td>Square44x44Logo.targetsize-60.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>64</td>
+												<td>Square44x44Logo.targetsize-64.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>72</td>
+												<td>Square44x44Logo.targetsize-72.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>80</td>
+												<td>Square44x44Logo.targetsize-80.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>96</td>
+												<td>Square44x44Logo.targetsize-96.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>256</td>
+												<td>Square44x44Logo.targetsize-256.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>620 x 300</td>
+												<td>SplashScreen.screen-100.png</td>
+												<td>Splash Screen</td>
+											</tr>
+											<tr>
+												<td>868 x 420</td>
+												<td>SplashScreen.screen-140.png</td>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>1116 x 540</td>
+												<td>SplashScreen.screen-180.png</td>
+												<td>&nbsp;</td>
+											</tr>
+										</tbody>
+									</table>
+</BODY>
+</HTML>
+
+
