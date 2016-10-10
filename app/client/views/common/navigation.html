@@ -39,13 +39,13 @@
                     <a href="{{pathFor route='index'}}" class="hide-on-phone"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
                 </li>
 
-                <li class="{{isActivePath regex='createPatient|graphSparkline|graphChartist'}}">
+                <li class="{{isActivePath regex='createPatient|listPatients'}}">
                     <a href="{{pathFor route='createPatient'}}">
                         <i class="fa fa-male"></i><i class="fa fa-female"></i>
                         <span class="nav-label">{{_ 'common_patients'}}</span>
                         <span class="fa arrow"></span>
                     </a>
-                    <ul class="nav nav-second-level collapse {{isActivePath regex='createPatient|graphFlot|graphChartist' className='in'}}">
+                    <ul class="nav nav-second-level collapse {{isActivePath regex='createPatient|listPatients' className='in'}}">
                         <li class="{{isActivePath regex='createPatient'}}">
                             <a href="{{pathFor route='createPatient'}}" class="hide-on-phone">{{_ 'patients_newpatient'}}</a>
                         </li>
@@ -56,6 +56,12 @@
                 </li>
 
                 {{#if isInRole 'super-admin'}}
+                    <li class="{{isActivePath regex='listSpecialty'}}">
+                        <a href="{{pathFor route='listSpecialty'}}" class="hide-on-phone"><i class="fa fa-stethoscope"></i> <span class="nav-label">{{_ 'specialties_specialties'}}</span></a>
+                    </li>
+                    <li class="{{isActivePath regex='doctors'}}">
+                        <a href="{{pathFor route='doctors'}}" class="hide-on-phone"><i class="fa fa-user-md"></i> <span class="nav-label">{{_ 'users_doctors'}}</span></a>
+                    </li>
                     <li class="{{isActivePath regex='users'}}">
                         <a href="{{pathFor route='users'}}" class="hide-on-phone"><i class="fa fa-users"></i> <span class="nav-label">{{_ 'users_users'}}</span></a>
                     </li>

@@ -7,3 +7,7 @@ Meteor.publish('allUsers', function() {
 Meteor.publish('patients', function () {
   return Patients.find();
 });
+
+Meteor.publish('specialties', function () {
+  return Specialties.find();
+});

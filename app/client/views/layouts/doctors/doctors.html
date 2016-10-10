@@ -1,0 +1,25 @@
+<template name="doctors">
+	{{> pageHeading title='patients_patients'}}
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'patients_patients'}}
+							<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
+							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
+						</button>
+					</div>
+					<div class="ibox-content">
+						{{> ReactiveDatatable tableData=reactiveDataFunction options=optionsObject}}
+					</div>
+					<div id="table-footer" class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

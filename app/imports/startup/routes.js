@@ -2,8 +2,7 @@
 
 Router.configure({
   layoutTemplate: 'mainLayout',
-  //loadingTemplate: 'Loading', #TODO: Loading Template? Do we need one?
-  //loadingTemplate: 'loading',
+  //loadingTemplate: 'Loading', #TODO: Loading Template
   notFoundTemplate: 'notFound'
 });
 
@@ -16,6 +15,41 @@ Router.route('/', {
 Router.route('/users', {
   name: 'users',
   controller: 'userController',
+  where: 'client'
+});
+
+Router.route('/doctors', {
+  name: 'doctors',
+  controller: 'userController',
+  action: 'listDoctors',
+  where: 'client'
+});
+
+Router.route('/doctors/:_id', {
+  name: 'editDoctor',
+  controller: 'userController',
+  action: 'editDoctors',
+  where: 'client'
+});
+
+Router.route('/specialties', {
+  name: 'listSpecialty',
+  controller: 'specialtyController',
+  action: 'list',
+  where: 'client'
+});
+
+Router.route('/specialties/create', {
+  name: 'createSpecialty',
+  controller: 'specialtyController',
+  action: 'create',
+  where: 'client'
+});
+
+Router.route('/specialties/:_id', {
+  name: 'editSpecialty',
+  controller: 'specialtyController',
+  action: 'edit',
   where: 'client'
 });
 
