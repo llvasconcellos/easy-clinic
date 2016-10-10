@@ -6,7 +6,6 @@ specialtyController = RouteController.extend({
   // this.subscribe('item', this.params._id).wait();
   
   subscriptions: function() {
-    this.subscribe('specialties');
   },
   
   // Subscriptions or other things we want to "wait" on. This also
@@ -15,6 +14,7 @@ specialtyController = RouteController.extend({
   // return Meteor.subscribe('post', this.params._id);
   
   waitOn: function () {
+    return Meteor.subscribe('specialties', this.params._id);
   },
   
   // A data function that can be used to automatically set the data context for
