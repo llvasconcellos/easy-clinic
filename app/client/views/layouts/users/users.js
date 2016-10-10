@@ -13,6 +13,21 @@ Template.users.rendered = function(){
 Template.users.destroyed = function(){};
 
 Template.users.helpers({
+	groups: function() {
+		return [{
+			text: T9n.get('groupMD'),
+			value: "medical_doctor"
+		},{
+			text: T9n.get('groupNurse'),
+			value: "nurse"
+		},{
+			text: T9n.get('groupReception'),
+			value: "recepcionist"
+		},{
+			text: T9n.get('groupAdmin'),
+			value: "administration"
+		}]
+	},
 	users: function () {
 		return Meteor.users.find();
 	},
@@ -119,6 +134,7 @@ var userEdit = (function(){
 	var lastName = null;
 	var email = null;
 	var password = null;
+	var group = null;
 	var enabled = null;
 	var save = null;
 
@@ -128,21 +144,52 @@ var userEdit = (function(){
 		lastName = form.find('input[name=lastName]');
 		email = form.find('input[name=email]');
 		password = form.find('input[name=password]');
+		group = form.find('select[name=group]');
 		enabled = form.find('input[name=enabled]');
 		save = form.find('button[type=submit]');
 	};
 
 	var _prepareForm = function(userId) {
-		if($('#formbox').hasClass('col-sm-0')){
-			$('#tablebox').toggleClass('col-sm-12 col-sm-8');
-			$('#formbox').toggleClass('col-sm-0 col-sm-4');
+		if(Meteor.Device.isPhone()) {
+			$('#formbox').css('display', 'none');
+			var formModal = $(`<div class="modal-dialog fullscreen" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-content animated bounceInRight">
+					<div class="modal-header">` + TAPi18n.__('users_edituser') + `
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					</div>
+					<div class="modal-body"></div>
+					<!--div class="modal-footer">
+						<button class="btn" data-dismiss="modal">Close</button>
+					</div-->
+				</div>
+			</div>`);
+
+			$('body').prepend(formModal);
+			$('.fullscreen').modal();
+		 	$('#user-form').detach().appendTo('.fullscreen .modal-body');
+		 	$('body').css('position', 'relative');
+		    $('.fullscreen').on('hidden.bs.modal', function(){
+		    	$('#user-form').detach().appendTo('#formbox');
+		    	$('.fullscreen').remove();
+			});
+			$('.cancel').click(function(){
+				userEdit.hideForm();
+			});
 			_findElements();
+		}
+		else {
+			if($('#formbox').hasClass('col-sm-0')){
+				$('#tablebox').toggleClass('col-sm-12 col-sm-8');
+				$('#formbox').toggleClass('col-sm-0 col-sm-4');
+				_findElements();
+			}
 		}
 		if(userId){
 			password.attr('required', false);
 		}
 		else {
 			password.attr('required', true);
+			form[0].reset();
 		}
 		form.off('submit');
 		form.submit(function(event) {
@@ -154,6 +201,7 @@ var userEdit = (function(){
 				"emails.0.address": email.val(),
 				"profile.firstName": firstName.val(),
 				"profile.lastName": lastName.val(),
+				"group": group.val(),
 				"isUserEnabled": enabled.is(':checked')
 			}, function(error, result){
 				if (error) {
@@ -179,9 +227,14 @@ var userEdit = (function(){
 	};
 
 	var _hideForm = function() {
-		if($('#formbox').hasClass('col-sm-4')){
-			$('#tablebox').toggleClass('col-sm-8 col-sm-12');
-			$('#formbox').toggleClass('col-sm-4 col-sm-0');
+		if(Meteor.Device.isPhone()) {
+			$('.fullscreen').modal('hide');
+		}
+		else {
+			if($('#formbox').hasClass('col-sm-4')){
+				$('#tablebox').toggleClass('col-sm-8 col-sm-12');
+				$('#formbox').toggleClass('col-sm-4 col-sm-0');
+			}
 		}
 	}
 
@@ -194,6 +247,18 @@ var userEdit = (function(){
 				lastName.val(user.profile.lastName);
 				email.val(user.emails[0].address);
 				password.attr('placeholder', TAPi18n.__('users_changepassword'));
+				
+				var userRoles = Roles.getRolesForUser(userId);
+				if($.inArray('medical_doctor', userRoles) >= 0){
+					group.val('medical_doctor');
+				} else if($.inArray('nurse', userRoles) >= 0){
+					group.val('nurse');
+				} else if($.inArray('recepcionist', userRoles) >= 0){
+					group.val('recepcionist');
+				} else if($.inArray('administration', userRoles) >= 0){
+					group.val('administration');
+				}
+
 				if (user.isUserEnabled) {
 					enabled.iCheck('check');
 				}

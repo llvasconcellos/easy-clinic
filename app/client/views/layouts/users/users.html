@@ -44,6 +44,14 @@
 								<input type="password" name="password" placeholder="{{_'users_passwordPlaceholder'}}" class="form-control">
 							</div>
 							<div class="form-group">
+								<label>{{t9n 'group'}}</label>
+								<select name="group" class="form-control">
+									{{#each groups}}
+										<option value="{{value}}">{{text}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<div class="form-group">
 								<label>
 									<input type="checkbox" name="enabled" class="i-checks">
 									{{_ 'users_enabled'}}

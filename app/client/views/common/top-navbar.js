@@ -39,6 +39,10 @@ Template.topNavbar.events({
         }
     },
 
+    'click img[data-lang]': (event)=> { // #TODO: improve language selection
+        TAPi18n.setLanguage($(event.target).data('lang'));
+    },
+
     'click .logout': ()=> {
         Meteor.logout();
     }

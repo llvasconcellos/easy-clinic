@@ -10,9 +10,11 @@ Meteor.methods({
 				if (newPassword) {
 					Accounts.setPassword(userId, newPassword);
 				}
+				Roles.setUserRoles(userId, []);
+				Roles.addUsersToRoles(userId, ['default', data.group, 'super-admin']);
 			}
 			else {
-				 Accounts.createUser({
+				 var userId = Accounts.createUser({
 					email : data['emails.0.address'],
 					password : newPassword,
 					profile  : {
@@ -20,6 +22,8 @@ Meteor.methods({
 						lastName: data['profile.lastName']
 					}
 				});
+				Roles.addUsersToRoles(userId, ['default', data.group, 'super-admin']); // #TODO: remove super-admin
+				Meteor.users.update(userId, {$set: {isUserEnabled: true}});
 			}
 		}
 		else {
