@@ -1,0 +1,45 @@
+medical_doctor: Médico(a)
+nurse: Enfermero(a)
+recepcionist: Recepcionista
+administration: Administración
+
+common_app-name: Clínica Fácil
+common_developed-by: Desarrollado por
+common_500: Error Interno del Servidor
+common_500-generic-message: Una disculpa, pero ocurrió un error en la comunicación con el servidor. No se pudo completar su solicitud.
+common_404: Pagina No Disponible
+common_404-message: Una disculpa, pero la pagina que buscas no fue localizada. Verifique la URL o haga una busqueda por nuestro aplicativo.
+common_search-page: Buscar por la pagina
+common_search: Buscar
+common_dashboard: Panel de Control
+common_logout: Salir
+common_save: Grabar
+common_cancel: Cancelar
+common_success: Éxito
+common_error: Error
+common_save-success: Datos grabados con Éxito.
+common_access-denied: Acceso Denegado
+common_access-denied-message: Usted no tiene permiso para ejecutar esa opción.
+common_patients: Pacientes
+common_firstOption: Escoja uno
+common_imageUploadMaxSize: Solamente son permitidas imagenes con tamaño inferior a 10MB
+common_browse: Abrir
+common_reset: Resetear
+common_remove: Quitar
+common_uploading: Enviando
+common_areYouSure: Estás seguro?
+common_close: Cerrar
+common_cam: Cámara
+common_cameraWaitForPermission: En espera de permisos de la cámara...
+common_takePhoto: Sacar Foto
+common_usePhoto: Usar Foto
+common_takeNewPhoto: Sacar Nueva Foto
+common_cameraPermissionsDenied: Permiso de la cámara denegado
+common_cameraPermissionsInstructions: Usted no concedió permiso para este aplicativo utilizar su cámara. Si le gustaría dar permiso, por favor siga las instrucciones de acuerdo a su navegador.
+common_cameraPermissionsInstructionsChrome: Ir a Configuraciones > Mostrar configuraciones avanzadas > Configuraciones de contenido > Sección Medios > Administrar excepciones, busque esta página Web en la lista y dar permiso a la captura de video.
+common_cameraPermissionsInstructionsFirefox: Actuailce esta página e intente nuevamente.
+common_cameraPermissionsInstructionsOpera: Ir a Configuraciones > Preferencias > Navegador > Sección Medios >Administrar excepciones, busque esta página Web en la lista y dar permiso a la captura de video.
+common_cameraAccessError: Hubo un error al acceder a la cámara.
+common_cameraNotSupportedError: Una disculpa, pero ese navegador no soporta el uso de la cámara.
+common_deleteSuccess: Registro removido con éxito.
+common_confirm: Confirmar

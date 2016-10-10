@@ -1,0 +1,87 @@
+patients_patients: Pacientes
+patients_create-form-title: Actualice Informaciones del Paciente
+patients_newpatient: Nuevo Paciente
+patients_list: Listar Pacientes
+patients_deleteConfirmation: "Estás seguro de que deseas eliminar al paciente %s?"
+schemas:
+  patients:
+    name:
+      label: Nombre
+    bed:
+      label: Cama
+    records:
+      label: Ficha Médica
+    createdAt:
+      label: Fecha de Registro
+    dateOfBirth:
+      label: Fecha de Nacimiento
+    enabled:
+      label: Activo
+    healthInsurance:
+      label: Convenio
+    code:
+      label: Matricula
+    gender:
+      label: Género
+      M: Masculino
+      F: Femenino
+    maritalStatus:
+      label: Estado Civil
+      single: Soltero(a)
+      married: Casado(a)
+      life_partner: Unión Estable
+      separated: Separado(a)
+      divorced: Divorciado(a)
+      widowed: Viudo(a)
+    skinColor:
+      label: Color de Piel
+      white: Blanca
+      brown: Morena
+      black: Negra
+      mixed: Mestizo
+      other: Otro
+    placeOfBirth:
+      label: Lugar de nacimiento
+    literacy:
+      label: Grado de Escolaridad
+      illiterate: Analfabeto
+      primary_school: Primaria
+      high_school: Secundaria
+      graduated: Nivel Superior
+      master: Mestrado
+      doctor: Doctorado
+      phd: PhD
+    CPF:
+      label: Identificación Fiscal (En México RFC)
+    RG:
+      label: Identificación Oficial (En México IFE)
+    titularCPF:
+      label: Nombre Completo
+    fathersName:
+      label: Nombre del Padre
+    mothersName:
+      label: Nombre de la Madre
+    occupation:
+      label: Profesión
+    prevRetorno:
+      label: Prev. Retorno
+    email:
+      label: E-mail
+    phone:
+      label: Teléfono
+    mobile:
+      label: Celular
+    obs:
+      label: Observaciones
+    streetAddress_1:
+      label: Dirección
+    streetAddress_2:
+      label: Complemento
+    bairro:
+      label: Colonia
+    city:
+      label: Ciudad
+    state:
+      label: Estado
+    zip:
+      label: Código Postal
