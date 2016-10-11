@@ -30,5 +30,16 @@ Meteor.methods({
 			throw new Meteor.Error(TAPi18n.__('common_access-denied'), TAPi18n.__('common_access-denied-message'));
 		}
 		return TAPi18n.__('common_save-success');
+	},
+	doctorSpecialtyHours: function (userId, data) {
+		if(!Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
+			throw new Meteor.Error(TAPi18n.__('common_access-denied'), TAPi18n.__('common_access-denied-message'));
+			return;
+		}
+		if (userId) {
+			Meteor.users.update(userId, {$set: data});
+		}
+
+		return TAPi18n.__('common_save-success');
 	}
 });

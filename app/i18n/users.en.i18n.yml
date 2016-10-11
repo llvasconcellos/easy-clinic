@@ -14,4 +14,5 @@ users_enabled: Enabled
 users_disabled: Disabled
 users_changepassword: Change Password
 users_doctors: Medical Doctors
-doctors_create-form-title: Medical Doctors' Management
+doctors_list-title: Medical Doctors' Management
+doctors_form-title: "%s: Specialties and Work Hours."

@@ -69,5 +69,5 @@ codechimp:autoform-masked-input
 #rajit:bootstrap3-datepicker
 aldeed:autoform-bs-datepicker
 fullcalendar:fullcalendar
-comerc:bs-typeahead
-comerc:autoform-typeahead
+#comerc:bs-typeahead
+#comerc:autoform-typeahead

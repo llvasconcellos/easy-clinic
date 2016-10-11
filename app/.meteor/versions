@@ -27,8 +27,6 @@ cfs:http-methods@0.0.32
 check@1.2.3
 codechimp:autoform-masked-input@0.0.1
 coffeescript@1.2.3
-comerc:autoform-typeahead@1.0.6
-comerc:bs-typeahead@1.0.2
 datatables@0.0.1
 ddp@1.2.5
 ddp-client@1.2.9

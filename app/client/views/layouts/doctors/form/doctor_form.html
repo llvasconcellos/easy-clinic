@@ -1,32 +1,42 @@
 <template name="doctorForm">
-	{{> pageHeading title='patients_patients'}}
+	{{> pageHeading title='users_doctors'}}
 
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12" id="tablebox">
 				<div class="ibox ">
 					<div class="ibox-title">
-						<h5>{{_ 'patients_patients'}}
-							<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
+						<h5>{{_ 'users_doctors'}}
+							<small class="m-l-sm">{{formTitle}}</small>
 						</h5>
 						{{!-->iboxTools--}}
-						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
-							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
-						</button>
 					</div>
-					{{#autoForm id="doctorForm" collection="Meteor.users"}}
+					<form id="user-form" role="form">
 					<div class="ibox-content">
-						
-							{{> afQuickField name='specialties'}}
+							<div class="form-group">
+								<label>{{_ 'specialties_specialty'}}</label>
+								<div>
+									<select name="specialties" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" multiple tabindex="4">
+										{{#each specialties}}
+											<option value="{{name}}" {{isSelected name}}>{{name}}</option>
+										{{/each}}
+									</select>
+								</div>
+							</div>
 						
 					</div>
 					<div id="table-footer" class="ibox-footer">
 						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Save</button>
-							<button type="reset" class="btn btn-default">Cancel</button>
+							<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+								<strong><i class="fa fa-floppy-o" aria-hidden="true"></i> {{_ 'common_save'}}</strong>
+							</button>
+							<button class="btn btn-sm btn-white pull-right m-t-n-xs cancel" type="reset">
+								<strong><i class="fa fa-ban" aria-hidden="true"></i> {{_ 'common_cancel'}}</strong>
+							</button>
+							<label></label>
 						</div>
 					</div>
-					{{/autoForm}}
+					</form>
 				</div>
 			</div>
 		</div>
