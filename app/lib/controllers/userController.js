@@ -15,6 +15,7 @@ userController = RouteController.extend({
   // return Meteor.subscribe('post', this.params._id);
 
   waitOn: function () {
+    Meteor.subscribe('specialties');
     return Meteor.subscribe('allUsers');
   },
 
@@ -52,7 +53,14 @@ userController = RouteController.extend({
     this.render('users');
   },
   listDoctors: function () {
-    this.render('doctors');
+    this.render('doctorsList');
+  },
+  editDoctor: function() {
+    this.render('doctorForm', {
+      data: function () {
+        return Meteor.users.findOne({_id: this.params._id});
+      }
+    });
   },
   onAfterAction: function () {
   },

@@ -5,6 +5,7 @@ Template.navigation.rendered = function(){
 		if(Meteor.user()) {
 			var email = Meteor.user().emails[0].address;
 			var url = Gravatar.imageUrl(email, {
+				secure: true,
 				size: 50,
 				//default: Meteor.absoluteUrl() + 'images/default-user-image.png'
 				default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'

@@ -14,3 +14,4 @@ users_enabled: Enabled
 users_disabled: Disabled
 users_changepassword: Change Password
 users_doctors: Medical Doctors
+doctors_create-form-title: Medical Doctors' Management

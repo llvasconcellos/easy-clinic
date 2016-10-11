@@ -1,0 +1,4 @@
+
+describe 'timeline duration', ->
+
+	;

@@ -14,3 +14,4 @@ users_enabled: Ativo
 users_disabled: Inativo
 users_changepassword: Altere a Senha
 users_doctors: Médicos
+doctors_create-form-title: Gerenciamento de Médicos

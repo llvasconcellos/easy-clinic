@@ -27,8 +27,6 @@ Template.specialtyForm.onCreated(function () {
 
 Template.specialtyForm.onRendered(function () {
 	var submitParent = $('.specialty-form button[type=submit]').parent();
-	//submitParent.addClass('text-right');
-	//console.log(submitParent);
 	if(this.data._id) {
 		var deleteBtn = $.parseHTML('<button class="btn btn-danger delete-btn" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>');
 		$(deleteBtn).prependTo(submitParent);

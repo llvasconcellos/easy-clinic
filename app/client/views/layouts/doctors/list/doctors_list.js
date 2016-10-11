@@ -1,19 +1,16 @@
 /*****************************************************************************/
 /* PatientList: Event Handlers */
 /*****************************************************************************/
-Template.doctors.events({
-	'click .new-user': function(event, template) {
-		Router.go('createPatient');
-	}
+Template.doctorsList.events({
 });
 
 /*****************************************************************************/
 /* PatientList: Helpers */
 /*****************************************************************************/
-Template.doctors.helpers({
+Template.doctorsList.helpers({
 	reactiveDataFunction: function () {
 		return function () {
-			return Patients.find().fetch();
+			return Meteor.users.find({'roles':'medical_doctor'}).fetch();
 		};
 	},
 	optionsObject: {
@@ -58,33 +55,51 @@ Template.doctors.helpers({
 		columns: [{
 			title: '',
 			//width: '1%',
-			data: 'picture',
+			data: 'profile.picture',
 			orderable: false,
 			render: function(cellData, renderType, currentRow) {
-				var url = '/images/default-user-image.png'; 
-				var image = Images.findOne({'_id': cellData});
-				if(image) {
-					url = image.link();
-				}
+				var email = currentRow.emails[0].address;
+				var url = Gravatar.imageUrl(email, {
+					size: 28,
+					//default: 'images/default-user-image.png'
+					default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'
+				});
 				return '<img class="profile-pic" src="' + url + '">';
 			}
 		},{
 			title: T9n.get('name'),
-			data: 'name'
+			data: 'profile.firstName',
+			render: function(cellData, renderType, currentRow) {
+				return currentRow.profile.firstName + ' ' + currentRow.profile.lastName;
+			}
 		},{
 			title: 'Email',
-			data: 'email',
+			data: 'emails[0].address',
 			render: function(cellData, renderType, currentRow) {
-				var html = '';
-				if(cellData) {
-					html = '<i class="fa fa-envelope"></i>&nbsp;' + cellData;
-				}
+				return '<i class="fa fa-envelope"></i>&nbsp;' + currentRow.emails[0].address;
+			}
+		},{
+			title: T9n.get('enabled'),
+			//width: '1%',
+			orderable: false,
+			data: 'profile.firstName',
+			render: function(cellData, renderType, currentRow) {
+				// var checkbox = '<input type="checkbox" class="js-switch"'; #TODO: editar direto na tabela
+				// checkbox += (currentRow.isUserEnabled) ? ' checked' : '';
+				// checkbox += '/>';
+				// return checkbox;
+				var html = '<span class="label label-';
+				html += (currentRow.isUserEnabled) ? 'primary' : 'danger';
+				html += '">';
+				html += (currentRow.isUserEnabled) ? T9n.get('enabled') : T9n.get('disabled');
 				return html;
 			}
 		},{
+			//title: T9n.get('edit'),
+			//width: '1%',
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<a href="' + Router.path('editPatient', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
+				return '<a href="' + Router.path('editDoctor', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit doctor-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
 			}
 		}]
 	}
@@ -93,11 +108,11 @@ Template.doctors.helpers({
 /*****************************************************************************/
 /* PatientList: Lifecycle Hooks */
 /*****************************************************************************/
-Template.doctors.onCreated(function () {
+Template.doctorsList.onCreated(function () {
 });
 
-Template.doctors.onRendered(function () {
+Template.doctorsList.onRendered(function () {
 });
 
-Template.doctors.onDestroyed(function () {
+Template.doctorsList.onDestroyed(function () {
 });

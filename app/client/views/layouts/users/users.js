@@ -83,6 +83,7 @@ Template.users.helpers({
 			render: function(cellData, renderType, currentRow) {
 				var email = currentRow.emails[0].address;
 				var url = Gravatar.imageUrl(email, {
+					secure: true,
 					size: 28,
 					//default: 'images/default-user-image.png'
 					default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'

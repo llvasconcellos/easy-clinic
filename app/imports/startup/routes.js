@@ -19,7 +19,7 @@ Router.route('/users', {
 });
 
 Router.route('/doctors', {
-  name: 'doctors',
+  name: 'doctorsList',
   controller: 'userController',
   action: 'listDoctors',
   where: 'client'
@@ -28,7 +28,7 @@ Router.route('/doctors', {
 Router.route('/doctors/:_id', {
   name: 'editDoctor',
   controller: 'userController',
-  action: 'editDoctors',
+  action: 'editDoctor',
   where: 'client'
 });
 
