@@ -10,9 +10,5 @@ users_firstNamePlaceholder: Informe o Primeiro Nome
 users_lastNamePlaceholder: Informe o Sobrenome
 users_emailPlaceholder: Informe o E-mail
 users_passwordPlaceholder: Informe a Senha
-users_enabled: Ativo
-users_disabled: Inativo
 users_changepassword: Altere a Senha
 users_doctors: Médicos
-doctors_list-title: Gerenciamento de Médicos
-doctors_form-title: "%s: Especialidades e Horários."

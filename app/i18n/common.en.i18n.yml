@@ -41,5 +41,7 @@ common_cameraPermissionsInstructionsFirefox: Reload the page and try again.
 common_cameraPermissionsInstructionsOpera: Go to Preferences > Websites > Media heading > Manage exceptions, then find this website in the list and allow video capture.
 common_cameraAccessError: There was an error accessing the camera.
 common_cameraNotSupportedError: Sorry, this browser is currently not supported for camera functionality.
-common_deleteSuccess: Registro removido com sucesso.
+common_deleteSuccess: Record deleted with success.
 common_confirm: Confirm
+common_enabled: Enabled
+common_disabled: Disabled

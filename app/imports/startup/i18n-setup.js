@@ -13,3 +13,5 @@ TAPi18n.setLanguage(UserLanguage).done(function () {
 	// Handle the situation
 	console.log(error_message);
 });
+
+moment.locale(UserLanguage);

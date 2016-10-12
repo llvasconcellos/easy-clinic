@@ -43,3 +43,5 @@ common_cameraAccessError: Houve um error ao acessar a camera.
 common_cameraNotSupportedError: Desculple mas este browser não suporta o uso da camera.
 common_deleteSuccess: Registro removido com sucesso.
 common_confirm: Confirmar
+common_enabled: Ativo
+common_disabled: Inativo

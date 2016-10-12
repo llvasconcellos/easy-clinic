@@ -39,3 +39,7 @@
 	min-height: 100%;
 	border-radius: 0;
 }
+
+.is-phone .work-hours .hours {
+	margin-left: 0px;
+}

@@ -13,7 +13,7 @@ Template.doctorForm.helpers({
 		if($.inArray(specialty, user.specialties) != -1){
 			return 'selected';
 		}
-	}
+	},
 });
 
 Template.doctorForm.rendered = function(){

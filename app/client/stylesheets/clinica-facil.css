@@ -54,3 +54,7 @@
     font-size: 22px;
     margin: 0px 0px 10px 0px;
 }
+.search-choice {
+    color: white !important;
+    background-color: #1ab394 !important;
+}

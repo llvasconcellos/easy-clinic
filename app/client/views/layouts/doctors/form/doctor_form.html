@@ -13,17 +13,43 @@
 					</div>
 					<form id="user-form" role="form">
 					<div class="ibox-content">
-							<div class="form-group">
-								<label>{{_ 'specialties_specialty'}}</label>
-								<div>
-									<select name="specialties" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" multiple tabindex="4">
-										{{#each specialties}}
-											<option value="{{name}}" {{isSelected name}}>{{name}}</option>
-										{{/each}}
-									</select>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">{{_ 'specialties_medical-specialties'}}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label>{{_ 'specialties_specialties'}}</label>
+									<div class="bootstrap-tagsinput">
+										<select name="specialties" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" multiple tabindex="4">
+											{{#each specialties}}
+												<option class="tag" value="{{name}}" {{isSelected name}}>{{name}}</option>
+											{{/each}}
+										</select>
+									</div>
 								</div>
 							</div>
-						
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">{{_ 'doctors_work-hours'}}</h3>
+							</div>
+							<div class="panel-body">
+								<div class="work-hours">
+									{{> workHoursDay day=0}}
+									{{> workHoursDay day=1}}
+									{{> workHoursDay day=2}}
+									{{> workHoursDay day=3}}
+									{{> workHoursDay day=4}}
+									{{> workHoursDay day=5}}
+									{{> workHoursDay day=6}}
+								</div>
+							</div>
+						</div>
+
+
 					</div>
 					<div id="table-footer" class="ibox-footer">
 						<div class="form-group">

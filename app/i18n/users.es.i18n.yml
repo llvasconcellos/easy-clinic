@@ -10,6 +10,4 @@ users_firstNamePlaceholder: Ingrese los Nombres
 users_lastNamePlaceholder: Ingrese los Apellidos
 users_emailPlaceholder: Ingrese el E-mail
 users_passwordPlaceholder: Ingrese la contraseña
-users_enabled: Activo
-users_disabled: Inactivo
 users_changepassword: Cambiar la contraseña

@@ -10,9 +10,5 @@ users_firstNamePlaceholder: Enter First Name
 users_lastNamePlaceholder: Enter Last Name
 users_emailPlaceholder: Enter Email
 users_passwordPlaceholder: Enter Password
-users_enabled: Enabled
-users_disabled: Disabled
 users_changepassword: Change Password
 users_doctors: Medical Doctors
-doctors_list-title: Medical Doctors' Management
-doctors_form-title: "%s: Specialties and Work Hours."
