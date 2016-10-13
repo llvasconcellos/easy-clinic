@@ -1,41 +1,46 @@
-.open-close-desc span {
-	font-weight: bold;
-}
 .input-group.clockpicker {
     width: 110px;
 }
-.work-hours. .form-group {
+.work-hours .form-group {
 	margin: 15px 0;
 	min-height: 36px;
+	overflow: auto;
+	line-height: 34px;
 }
 .work-hours label {
 	width: 100px;
 }
 .work-hours .enabler{
 	display: inline-block;
-	width: 100px;
+	width: 56px;
 }
 .work-hours .hours {
+	height: 34px;
 	display: inline-block;
 	vertical-align: middle;
-	margin-left: 10px;
+	margin-left: 20px;
+	margin-bottom: 10px;
 }
 .work-hours .hours.new-line {
 	display: block;
-	margin-left: 217px;
+	margin-left: 227px;
 }
 .clockpicker-separator {
 	margin: 0 10px;
 	width: 1em;
-	display: inline-block;
 	vertical-align: top;
-	padding-top: 8px;
 }
-.work-hours .hours-left, .work-hours .hours-right {
+.work-hours .hours-left, .work-hours .hours-right, 
+.work-hours .clockpicker-separator, .work-hours label,
+.work-hours .open-close-desc, .work-hours .add-hours,
+.work-hours .enabler {
 	display: inline-block;
+	float: left;
 }
-.work-hours button {
-	vertical-align: middle;
+.open-close-desc span {
+	font-weight: bold;
+}
+.work-hours .add-hours {
 	height: 34px;
 	margin-left: 10px;
 }

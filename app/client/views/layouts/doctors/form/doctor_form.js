@@ -23,8 +23,10 @@ Template.doctorForm.rendered = function(){
 Template.doctorForm.events({
 	'click button[type=submit]': function(event, template) {
 		event.preventDefault();
+		var hours = getHours.call(this, event, template);
 		Meteor.call('doctorSpecialtyHours', this._id, {
 			"specialties": $('select[name=specialties]').val(),
+			"workHours": hours
 		}, function(error, result){
 			if (error) {
 				toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -38,3 +40,21 @@ Template.doctorForm.events({
 		Router.go('doctorsList');
 	}
 });
+
+var getHours = function(template){
+	var workHours = [];
+	var whEl = $('.work-hours');
+	whEl.children().each(function(index, element){
+		workHours[index] = null;
+		var dayEl = $(element);
+		if(dayEl.find('input[type=checkbox]').prop("checked")){
+			workHours[index] = [];
+			dayEl.find('.hours').each(function(i, el){
+				workHours[index][i] = {};
+				workHours[index][i].start = $(el).find('.hours-left input').val();
+				workHours[index][i].end =  $(el).find('.hours-right input').val();
+			});
+		}
+	});
+	return workHours;
+};

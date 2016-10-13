@@ -15,6 +15,15 @@ var Schema = {};
 //     }
 // });
 
+Schema.workHours = new SimpleSchema({
+    start: {
+        type: String
+    },
+    end: {
+        type: String
+    }
+});
+
 Schema.UserProfile = new SimpleSchema({
     firstName: {
         type: String
@@ -136,6 +145,11 @@ Schema.User = new SimpleSchema({
             }
         }
     },
+    workHours: {
+        type: [[Schema.workHours]],
+        optional: true,
+        blackbox: true
+    }
 });
 
 Meteor.users.attachSchema(Schema.User);

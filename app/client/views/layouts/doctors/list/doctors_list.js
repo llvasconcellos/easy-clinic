@@ -10,7 +10,7 @@ Template.doctorsList.events({
 Template.doctorsList.helpers({
 	reactiveDataFunction: function () {
 		return function () {
-			return Meteor.users.find({'roles':'medical_doctor'}).fetch();
+			return Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
 		};
 	},
 	optionsObject: {
