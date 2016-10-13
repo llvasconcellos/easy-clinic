@@ -6,6 +6,7 @@ Meteor.methods({
 	updateUser: function (userId, newPassword, data) {
 		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
 			if (userId){
+				console.log(data);
 				Meteor.users.update(userId, {$set: data});
 				if (newPassword) {
 					Accounts.setPassword(userId, newPassword);

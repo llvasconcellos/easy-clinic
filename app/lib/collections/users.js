@@ -121,6 +121,9 @@ Schema.User = new SimpleSchema({
     'roles.$': {
         type: String
     },
+    isUserEnabled: {
+        type: Boolean,
+    },
     // In order to avoid an 'Exception in setInterval callback' from Meteor
     heartbeat: {
         type: Date,

@@ -106,16 +106,16 @@ Template.users.helpers({
 			title: T9n.get('enabled'),
 			//width: '1%',
 			orderable: false,
-			data: 'profile.firstName',
+			data: 'isUserEnabled',
 			render: function(cellData, renderType, currentRow) {
 				// var checkbox = '<input type="checkbox" class="js-switch"'; #TODO: editar direto na tabela
 				// checkbox += (currentRow.isUserEnabled) ? ' checked' : '';
 				// checkbox += '/>';
 				// return checkbox;
 				var html = '<span class="label label-';
-				html += (currentRow.isUserEnabled) ? 'primary' : 'danger';
+				html += (cellData) ? 'primary' : 'danger';
 				html += '">';
-				html += (currentRow.isUserEnabled) ? T9n.get('enabled') : T9n.get('disabled');
+				html += (cellData) ? T9n.get('enabled') : T9n.get('disabled');
 				return html;
 			}
 		},{
@@ -198,12 +198,19 @@ var userEdit = (function(){
 			if(password.val().trim().length > 0) {
 				newPassword = password.val().trim();
 			}
+
+
+			console.log(enabled);
+			console.log(enabled.prop('checked'));
+
+
+
 			Meteor.call('updateUser', userId, newPassword, {
 				"emails.0.address": email.val(),
 				"profile.firstName": firstName.val(),
 				"profile.lastName": lastName.val(),
-				"group": group.val(),
-				"isUserEnabled": enabled.is(':checked')
+				"profile.group": group.val(),
+				"isUserEnabled": true //enabled.prop('checked')
 			}, function(error, result){
 				if (error) {
 					toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -248,17 +255,19 @@ var userEdit = (function(){
 				lastName.val(user.profile.lastName);
 				email.val(user.emails[0].address);
 				password.attr('placeholder', TAPi18n.__('users_changepassword'));
-				
-				var userRoles = Roles.getRolesForUser(userId);
-				if($.inArray('medical_doctor', userRoles) >= 0){
-					group.val('medical_doctor');
-				} else if($.inArray('nurse', userRoles) >= 0){
-					group.val('nurse');
-				} else if($.inArray('recepcionist', userRoles) >= 0){
-					group.val('recepcionist');
-				} else if($.inArray('administration', userRoles) >= 0){
-					group.val('administration');
-				}
+
+				//#TODO: use profiles.group or Roles
+				//var userRoles = Roles.getRolesForUser(userId);
+				// if($.inArray('medical_doctor', userRoles) >= 0){
+				// 	group.val('medical_doctor');
+				// } else if($.inArray('nurse', userRoles) >= 0){
+				// 	group.val('nurse');
+				// } else if($.inArray('recepcionist', userRoles) >= 0){
+				// 	group.val('recepcionist');
+				// } else if($.inArray('administration', userRoles) >= 0){
+				// 	group.val('administration');
+				// }
+				group.val(user.profile.group);
 
 				if (user.isUserEnabled) {
 					enabled.iCheck('check');
