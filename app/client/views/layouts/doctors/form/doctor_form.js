@@ -51,8 +51,8 @@ var getHours = function(template){
 			workHours[index] = [];
 			dayEl.find('.hours').each(function(i, el){
 				workHours[index][i] = {};
-				workHours[index][i].start = $(el).find('.hours-left input').val();
-				workHours[index][i].end =  $(el).find('.hours-right input').val();
+				workHours[index][i].start = $(el).find('.hours-start input').val();
+				workHours[index][i].end =  $(el).find('.hours-end input').val();
 			});
 		}
 	});

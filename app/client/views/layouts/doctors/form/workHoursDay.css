@@ -30,7 +30,7 @@
 	width: 1em;
 	vertical-align: top;
 }
-.work-hours .hours-left, .work-hours .hours-right, 
+.work-hours .hours-start, .work-hours .hours-end, 
 .work-hours .clockpicker-separator, .work-hours label,
 .work-hours .open-close-desc, .work-hours .add-hours,
 .work-hours .enabler {
@@ -44,3 +44,37 @@
 	height: 34px;
 	margin-left: 10px;
 }
+.work-hours .switchery {
+	background-color: #b9b9b9 !important;
+	height: 14px !important;
+	border-radius: 8px !important;
+	width: 38px !important;
+}
+.switchery:before {
+    height: 20px !important;
+    width: 20px !important;
+    top: -3px !important;
+}
+
+.ios-switch-cb:checked + .switchery {
+    background-color: rgba(0,150,136,0.502) !important;
+    box-shadow: rgba(0,150,136,0.502) 0px 0px 0px 16px inset !important;
+    border-color: rgb(100, 189, 99);
+}
+
+.ios-switch-cb:checked + .switchery:before {
+  background: rgb(5, 130, 118) !important;
+}
+
+/*
+
+	// $('#day-of-week-' + this.data.day + ' .js-switch')
+	// 	.each(function(index, element) {
+	// 		var switchery = new Switchery(element, {
+	// 			size: 'small',
+	// 			color: 'rgba(0,150,136,0.502)',
+	// 			secondaryColor: '#b9b9b9',
+	// 			jackColor: '',
+	// 			jackSecondaryColor: '#ffffff'
+	// 		});
+	// 	});*/

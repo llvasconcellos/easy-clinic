@@ -2,25 +2,28 @@
 	<div id="day-of-week-{{day}}" class="form-group">
 		<label for="open-close">{{dayOfWeek day}}</label>
 		<div class="enabler">
-			<input type="checkbox" class="js-switch" />
+			<label>
+				<input type="checkbox" class="ios-switch-cb" />
+				<span class="switchery"></span>
+			</label>
 		</div>
 		<div class="open-close-desc">
 			<span class="close-desc">{{_ 'common_disabled'}}</span>
 			<span class="open-desc" style="display:none">{{_ 'common_enabled'}}</span>
 		</div>
 		<div class="hours" style="display: none">
-			<div class="hours-left">
+			<div class="hours-start">
 				<div class="input-group clockpicker" data-autoclose="true">
-				    <input type="text" class="form-control" value="08:00">
+				    <input type="text" class="form-control" value="">
 				    <span class="input-group-addon">
 				        <span class="glyphicon glyphicon-time"></span>
 				    </span>
 				</div>
 			</div>
 			<div class="clockpicker-separator">—</div>
-			<div class="hours-right">
+			<div class="hours-end">
 				<div class="input-group clockpicker" data-autoclose="true">
-				    <input type="text" class="form-control" value="12:00">
+				    <input type="text" class="form-control" value="">
 				    <span class="input-group-addon">
 				        <span class="glyphicon glyphicon-time"></span>
 				    </span>

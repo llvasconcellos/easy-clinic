@@ -33,6 +33,9 @@ Schema.UserProfile = new SimpleSchema({
     },
     group: {
         type: String
+    },
+    language: {
+        type: String
     }
     // birthday: {
     //     type: Date,
@@ -123,6 +126,7 @@ Schema.User = new SimpleSchema({
     },
     isUserEnabled: {
         type: Boolean,
+        optional: true
     },
     // In order to avoid an 'Exception in setInterval callback' from Meteor
     heartbeat: {

@@ -4,26 +4,18 @@ Template.workHoursDay.helpers({
 	}
 });
 
-Template.workHoursDay.rendered = function(){
-	$('#day-of-week-' + this.data.day + ' .js-switch')
-		.each(function(index, element) {
-			var switchery = new Switchery(element, {
-				size: 'small',
-				color: 'rgba(0,150,136,0.502)',
-				secondaryColor: '#b9b9b9',
-				jackColor: 'rgb(5, 130, 118)',
-				jackSecondaryColor: '#ffffff'
-			});
-		});
-	$('#day-of-week-' + this.data.day + ' .js-switch').on('change', function(event){
-		$(event.target.parentElement.parentElement).find('.open-close-desc span').toggle('hide');
-		$(event.target.parentElement.parentElement).find('.hours').toggle('hide');
+Template.workHoursDay.onRendered(function(){
+	$('#day-of-week-' + this.data.day + ' .ios-switch-cb').on('change', function(event){
+		$(event.target.parentElement.parentElement.parentElement).find('.open-close-desc span').toggle('hide');
+		$(event.target.parentElement.parentElement.parentElement).find('.hours').toggle('hide');
 	});
 	$('#day-of-week-' + this.data.day + ' .clockpicker').clockpicker();
-};
+
+	loadHours.call(this);
+});
 
 Template.workHoursDay.events({
-	'click .add-hours'(event, templateInstance) {
+	'click .add-hours': (event, templateInstance) => {
 		var hours = $(templateInstance.find('.hours')).clone();
 		hours.addClass('new-line');
 		hours.find('button').removeClass('btn-primary', 'add-hours')
@@ -37,3 +29,27 @@ Template.workHoursDay.events({
 		hours.appendTo(templateInstance.firstNode);
 	}
 });
+
+var loadHours = function(){
+	var templateInstance = this;
+	if(templateInstance.data.hours){
+		$(templateInstance.find('input[type=checkbox]')).trigger('click');
+		templateInstance.find('.hours-start input').value = templateInstance.data.hours[0].start;
+		templateInstance.find('.hours-end input').value = templateInstance.data.hours[0].end;
+		var addBtn = templateInstance.find('.add-hours');
+		templateInstance.data.hours.forEach(function(element, index, array){
+			if(index !== 0){
+				Template.workHoursDay.__eventMaps[0]["click .add-hours"].call({
+					templateInstance: function() {
+						return templateInstance;
+				}},addBtn);
+				var hoursEl = $(templateInstance.firstNode).find('.hours')[index];
+				hours = $(hoursEl);
+				hours.attr('style', '');
+				hours.find('.hours-start input').val(element.start);
+				hours.find('.hours-end input').val(element.end);
+			}
+		});
+	}
+	
+};
