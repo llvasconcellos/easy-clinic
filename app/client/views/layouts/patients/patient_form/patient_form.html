@@ -16,10 +16,10 @@
 					</div>
 					<div class="ibox-content">
 						{{#if isEditForm}}
-							{{> quickForm collection="Patients" doc=this id="insertPatientForm" type="update" buttonContent=saveButton class="form-inline patient-form"}}
+							{{> quickForm collection="Patients" doc=patient id="insertPatientForm" type="update" buttonContent=saveButton class="form-inline patient-form"}}
 							{{runUxAdjustments}}
 						{{else}}
-							{{> quickForm collection="Patients" doc=this id="insertPatientForm" type="insert" buttonContent=saveButton class="form-inline patient-form"}}
+							{{> quickForm collection="Patients" id="insertPatientForm" type="insert" buttonContent=saveButton class="form-inline patient-form"}}
 							{{runUxAdjustments}}
 						{{/if}}
 					</div>

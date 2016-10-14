@@ -1,3 +1,13 @@
+Template.mainLayout.helpers({
+    isReady: function(sub) {
+        if(sub) {
+            return FlowRouter.subsReady(sub);
+        } else {
+            return FlowRouter.subsReady();
+        }
+    }
+});
+
 Template.mainLayout.rendered = function(){
 
     // Minimalize menu when screen is less than 768px

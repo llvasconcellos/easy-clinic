@@ -2,8 +2,8 @@
 /* PatientList: Event Handlers */
 /*****************************************************************************/
 Template.patientList.events({
-	'click .new-user': function(event, template) {
-		Router.go('createPatient');
+	'click .new-user': (event, template) => {
+		FlowRouter.go('createPatient');
 	}
 });
 
@@ -84,7 +84,7 @@ Template.patientList.helpers({
 		},{
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<a href="' + Router.path('editPatient', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
+				return '<a href="' + FlowRouter.path('editPatient', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
 			}
 		}]
 	}
@@ -94,6 +94,10 @@ Template.patientList.helpers({
 /* PatientList: Lifecycle Hooks */
 /*****************************************************************************/
 Template.patientList.onCreated(function () {
+	var self = this;
+	self.autorun(function() {
+		self.subscribe('patients');
+	});
 });
 
 Template.patientList.onRendered(function () {

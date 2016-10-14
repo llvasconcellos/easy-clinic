@@ -1,5 +1,5 @@
 <template name="mainLayout">
-
+{{#if currentUser }}
     <!-- Wrapper-->
     <div id="wrapper">
 
@@ -12,9 +12,12 @@
             <!-- Page wrapper -->
             {{> topNavbar }}
 
-            <!-- Main view  -->
-            {{> yield}}
-
+            {{#if isReady}}
+                <!-- Main view  -->
+                {{>Template.dynamic template=content}}
+            {{else}}
+                {{> loading}}
+            {{/if}}
             <!-- Footer -->
             {{> footer }}
 
@@ -23,5 +26,5 @@
 
     </div>
     <!-- End wrapper-->
-
+{{/if}}
 </template>

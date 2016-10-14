@@ -10,8 +10,8 @@ Template['datePickerOverride'].replaces('afBootstrapDatepicker');
 /* PatientForm: Event Handlers */
 /*****************************************************************************/
 Template.patientForm.events({
-	'click .new-user': function (event, template) {
-		Router.go('createPatient');
+	'click .new-user': (event, template) => {
+		FlowRouter.go('createPatient');
 	}
 });
 
@@ -25,10 +25,14 @@ Template.patientForm.helpers({
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
 	},
 	isEditForm: function() {
-		return (this._id) ? true : false;
+		return (FlowRouter.getParam('_id')) ? true : false;
+	},
+	patient: function() {
+		Template.patientForm.data = Patients.findOne({_id: FlowRouter.getParam('_id')}); 
+		return Template.patientForm.data;
 	},
 	runUxAdjustments: function(){
-		gambiarra_scope = this; //#TODO: arrumar isso urgente!!!!!
+		gambiarra_scope = Template.patientForm.data; //#TODO: arrumar isso urgente!!!!!
 		setTimeout( 'uxAdjustments.call(gambiarra_scope)', 500 );
 	}
 });
@@ -40,7 +44,7 @@ Template.patientForm.onCreated(function () {
 	AutoForm.addHooks('insertPatientForm', {
 		onSuccess: function(formType, result) {
 			toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
-			Router.go('listPatients');
+			FlowRouter.go('listPatients');
 		},
 		onError: function(formType, error) {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -65,14 +69,12 @@ Template.patientForm.onDestroyed(function () {
 
 
 uxAdjustments = function(){
-	//console.log(this);
 	$('input[name=zip]').parent().before('<div class="hr-line-dashed"></div>');
 	$('textarea[name=obs]').parent().before('<div class="hr-line-dashed"></div>');
 
 
 	var submitParent = $('.patient-form button[type=submit]').parent();
 	submitParent.addClass('text-right');
-	//console.log(submitParent);
 	if(this._id) {
 		var deleteBtn = $.parseHTML('<button class="btn btn-danger delete-btn" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>');
 		$(deleteBtn).prependTo(submitParent);
@@ -96,7 +98,7 @@ uxAdjustments = function(){
 						toastr['success'](TAPi18n.__('common_deleteSuccess'), TAPi18n.__('common_success'));
 					}
 				});
-				Router.go('listPatients');
+				FlowRouter.go('listPatients');
 			});
 		});
 	}
@@ -143,12 +145,4 @@ uxAdjustments = function(){
 			$('input[name=state]').val(data.uf);
 		});
 	});
-
-
-
-
-
-
-
-
 };

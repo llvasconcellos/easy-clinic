@@ -3,7 +3,7 @@
 /*****************************************************************************/
 Template.specialtyList.events({
 	'click .new-user': function(event, template) {
-		Router.go('createSpecialty');
+		FlowRouter.go('createSpecialty');
 	}
 });
 
@@ -50,7 +50,7 @@ Template.specialtyList.helpers({
 		},{
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<a href="' + Router.path('editSpecialty', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
+				return '<a href="' + FlowRouter.path('editSpecialty', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
 			}
 		}]
 	}
@@ -60,6 +60,10 @@ Template.specialtyList.helpers({
 /* SpecialtyList: Lifecycle Hooks */
 /*****************************************************************************/
 Template.specialtyList.onCreated(function () {
+	var self = this;
+	self.autorun(function() {
+		self.subscribe('specialties');
+	});
 });
 
 Template.specialtyList.onRendered(function () {

@@ -43,8 +43,4 @@ Template.topNavbar.events({
         TAPi18n.setLanguage($(event.target).data('lang'));
     },
 
-    'click .logout': ()=> {
-        Meteor.logout();
-    }
-
 });

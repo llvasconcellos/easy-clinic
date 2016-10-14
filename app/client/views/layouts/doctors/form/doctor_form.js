@@ -1,3 +1,6 @@
+Template.doctorForm.onCreated(function () {
+});
+
 Template.doctorForm.helpers({
 	saveButton: function () {
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
@@ -7,6 +10,9 @@ Template.doctorForm.helpers({
 	},
 	specialties: function(){
 		return Specialties.find();
+	},
+	doctor: function() {
+		return Meteor.users.findOne({_id: FlowRouter.getParam('_id')}); 
 	},
 	isSelected: function(specialty) {
 		var user = Template.parentData(1);
@@ -21,10 +27,10 @@ Template.doctorForm.rendered = function(){
 };
 
 Template.doctorForm.events({
-	'click button[type=submit]': function(event, template) {
+	'click button[type=submit]': (event, template) => {
 		event.preventDefault();
 		var hours = getHours.call(this, event, template);
-		Meteor.call('doctorSpecialtyHours', this._id, {
+		Meteor.call('doctorSpecialtyHours', FlowRouter.getParam('_id'), {
 			"specialties": $('select[name=specialties]').val(),
 			"workHours": hours
 		}, function(error, result){
@@ -36,8 +42,8 @@ Template.doctorForm.events({
 			}
 		});
 	},
-	'click .cancel': function(event, template) {
-		Router.go('doctorsList');
+	'click .cancel': (event, template) => {
+		FlowRouter.go('doctorsList');
 	}
 });
 

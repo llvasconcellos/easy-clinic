@@ -99,7 +99,7 @@ Template.doctorsList.helpers({
 			//width: '1%',
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<a href="' + Router.path('editDoctor', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit doctor-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
+				return '<a href="' + FlowRouter.path('editDoctor', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit doctor-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
 			}
 		}]
 	}

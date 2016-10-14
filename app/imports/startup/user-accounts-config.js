@@ -16,12 +16,19 @@ AccountsTemplates.configure({
   enforceEmailVerification: true,
   showResendVerificationEmailLink: true,
 
+  // meteor-useraccounts/flow-routing
+  defaultLayoutType: 'blaze',
+  defaultTemplate: 'login',
+  defaultLayout: 'blankLayout',
+  defaultLayoutRegions: {},
+  defaultContentRegion: 'content',
+
   // Redirects
   homeRoutePath: '/',
   redirectTimeout: 4000,
 
   // Hooks
-  // onLogoutHook: function() {},
+  //onLogoutHook: function() {},
   //onSubmitHook: function(error, state) {},
   preSignUpHook: function (password, info) {
     info.profile.language = TAPi18n.getLanguage();
@@ -36,40 +43,51 @@ AccountsTemplates.configure({
   }
 });
 
+// meteor-useraccounts/flow-routing
 AccountsTemplates.configureRoute('signIn', {
   name: 'signIn',
-  template: 'login',
-  layoutTemplate: 'blankLayout'
+  path: '/sign-in',
+  redirect: '/',
 });
 AccountsTemplates.configureRoute('signUp', {
   name: 'signUp',
-  template: 'login',
-  layoutTemplate: 'blankLayout'
+  path: '/sign-up'
 });
 AccountsTemplates.configureRoute('forgotPwd', {
   name: 'forgotPwd',
-  template: 'login',
-  layoutTemplate: 'blankLayout'
+  path: '/forgot-password'
 });
 AccountsTemplates.configureRoute('changePwd', {
   name: 'changePwd',
-  template: 'login',
-  layoutTemplate: 'blankLayout'
+  path: '/change-password'
 });
 AccountsTemplates.configureRoute('resetPwd', {
   name: 'resetPwd',
-  template: 'login',
-  layoutTemplate: 'blankLayout'
+  path: '/reset-password'
 });
 AccountsTemplates.configureRoute('verifyEmail', {
-  template: 'login',
   name: 'verifyEmail',
-  layoutTemplate: 'blankLayout'
+  path: '/verify-email'
 });
+AccountsTemplates.configureRoute('enrollAccount', {
+  name: 'enrollAccount',
+  path: '/enroll-account'
+});
+AccountsTemplates.configureRoute('resendVerificationEmail', {
+  name: 'resendVerificationEmail',
+  path: '/send-again'
+});
+
 
 if (Meteor.isClient) {
   Template['atSelectInputOverride'].replaces('atSelectInput');
   Template['atPwdFormBtnOverride'].replaces('atPwdFormBtn');
+  // Accounts.onLogout(function(){
+  //   FlowRouter.redirect('signIn');
+  // });
+  Accounts.onLogin(function(){
+    Meteor.logoutOtherClients();
+  });
 }
 
 var password = AccountsTemplates.removeField('password');

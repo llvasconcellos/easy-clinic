@@ -20,7 +20,9 @@ Meteor.methods({
 					password : newPassword,
 					profile  : {
 						firstName: data['profile.firstName'],
-						lastName: data['profile.lastName']
+						lastName: data['profile.lastName'],
+						group: data['profile.group'],
+						language: data['profile.language']
 					}
 				});
 				Roles.addUsersToRoles(userId, ['default', data.group, 'super-admin']); // #TODO: remove super-admin

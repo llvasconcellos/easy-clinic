@@ -1,16 +1,12 @@
-Template.users.onCreated(function(){
-	// this.autorun(() => {
-	// 	this.subscribe('allUsers');
-	// });
-});
+Template.users.onCreated(function(){});
 
-Template.users.rendered = function(){
+Template.users.onRendered(function() {
 	$('.i-checks').iCheck({
         checkboxClass: 'icheckbox_square-green'
     });
-};
+});
 
-Template.users.destroyed = function(){};
+Template.users.onDestroyed(function(){});
 
 Template.users.helpers({
 	groups: function() {
@@ -198,19 +194,13 @@ var userEdit = (function(){
 			if(password.val().trim().length > 0) {
 				newPassword = password.val().trim();
 			}
-
-
-			console.log(enabled);
-			console.log(enabled.prop('checked'));
-
-
-
 			Meteor.call('updateUser', userId, newPassword, {
 				"emails.0.address": email.val(),
 				"profile.firstName": firstName.val(),
 				"profile.lastName": lastName.val(),
 				"profile.group": group.val(),
-				"isUserEnabled": true //enabled.prop('checked')
+				"profile.language":TAPi18n.getLanguage(),
+				"isUserEnabled": enabled.prop('checked')
 			}, function(error, result){
 				if (error) {
 					toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -285,14 +275,14 @@ var userEdit = (function(){
 
 
 Template.users.events({
-	'click .user-id': function(event, template) {
+	'click .user-id': (event, template) => {
 		var userId = event.currentTarget.dataset.userid;
 		userEdit.loadForm(userId);
 	},
-	'click .new-user': function(event, template) {
+	'click .new-user': (event, template) => {
 		userEdit.loadForm(null);
 	},
-	'click .cancel': function(event, template) {
+	'click .cancel': (event, template) => {
 		userEdit.hideForm();
 	}
 });

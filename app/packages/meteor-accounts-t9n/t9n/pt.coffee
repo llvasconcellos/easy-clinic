@@ -59,7 +59,6 @@ pt =
   orUse: "Ou use"
   "Incorrect password": "Senha incorreta"
   "Invalid email": "E-mail inválido"
-  "Must be logged in": "É necessário efetuar login"
   "Need to set a username or email": "É necessário configurar um Nome de Usuário ou E-mail"
   "old password format": "Formato de senha antigo"
   "Password may not be empty": "Senha não pode estar em branco"
@@ -123,6 +122,8 @@ pt =
       "Invalid email or username": "Nome de usuário ou e-mail inválido"
       "Internal server error": "Erro interno do servidor"
       "undefined": "Algo não está certo"
+      "Must be logged in": "É necessário efetuar login"
+
 
 
       #---- accounts-oauth
