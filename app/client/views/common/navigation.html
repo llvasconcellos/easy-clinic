@@ -39,6 +39,10 @@
                     <a href="{{pathFor route='index'}}" class="hide-on-phone"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
                 </li>
 
+                <li class="{{isActivePath regex='schedule'}}">
+                    <a href="{{pathFor route='schedule'}}" class="hide-on-phone"><i class="fa fa-calendar" aria-hidden="true"></i> <span class="nav-label">{{_ 'schedule_schedule'}}</span></a>
+                </li>
+
                 <li class="{{isActivePath regex='createPatient|listPatients'}}">
                     <a href="{{pathFor route='createPatient'}}">
                         <i class="fa fa-male"></i><i class="fa fa-female"></i>

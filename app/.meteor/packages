@@ -48,7 +48,7 @@ jparker:gravatar
 # arunoda:fast-render
 # promise
 datatables
-zuuk:stale-session
+# zuuk:stale-session
 
 aldeed:autoform
 aldeed:collection2
@@ -63,14 +63,18 @@ mdg:camera
 # aldeed:delete-button
 #ostrio:autoform-files
 
-momentjs:moment
 codechimp:autoform-masked-input
 #rajit:bootstrap3-datepicker
 aldeed:autoform-bs-datepicker
-fullcalendar:fullcalendar
 #comerc:bs-typeahead
 #comerc:autoform-typeahead
+
 kadira:flow-router
 useraccounts:flow-routing
 kadira:blaze-layout
 arillo:flow-router-helpers
+
+momentjs:moment
+#fullcalendar:fullcalendar
+#fullcalendar:scheduler
+drblue:fullcalendar

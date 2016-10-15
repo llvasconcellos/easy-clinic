@@ -85,9 +85,9 @@ if (Meteor.isClient) {
   // Accounts.onLogout(function(){
   //   FlowRouter.redirect('signIn');
   // });
-  Accounts.onLogin(function(){
-    Meteor.logoutOtherClients();
-  });
+  // Accounts.onLogin(function(){
+  //   Meteor.logoutOtherClients();
+  // });
 }
 
 var password = AccountsTemplates.removeField('password');

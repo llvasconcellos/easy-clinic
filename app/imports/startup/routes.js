@@ -25,58 +25,37 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route('/users', {
-  name: 'users',
-  subscriptions: function(params) {
-    this.register('users', Meteor.subscribe('users'));
-  },
+FlowRouter.route('/privacy', {
+  name: 'privacy',
   action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "users"});
+    BlazeLayout.render("blankLayout", {content: "privacy"});
   }
 });
 
-FlowRouter.route('/doctors', {
-  name: 'doctorsList',
+FlowRouter.route('/terms-of-use', {
+  name: 'terms-of-use',
+  action: function(params, queryParams) {
+    BlazeLayout.render("blankLayout", {content: "terms"});
+  }
+});
+
+FlowRouter.route('/logout', {
+  name: 'logout',
+  action: function(params, queryParams) {
+    Meteor.logout(function(){
+      FlowRouter.redirect(FlowRouter.path('signIn'));
+    });
+  }
+});
+
+FlowRouter.route('/schedule', {
+  name: 'schedule',
   subscriptions: function(params) {
     this.register('doctors', Meteor.subscribe('doctors'));
+    //this.register('patient', Meteor.subscribe('singlePatient', params._id));
   },
   action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "doctorsList"});
-  }
-});
-
-FlowRouter.route('/doctors/:_id', {
-  name: 'editDoctor',
-  subscriptions: function(params) {
-    this.register('specialties', Meteor.subscribe('specialties'));
-    this.register('doctor', Meteor.subscribe('singleDoctor', params._id));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "doctorForm"});
-  }
-});
-
-FlowRouter.route('/specialties', {
-  name: 'listSpecialty',
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "specialtyList"});
-  }
-});
-
-FlowRouter.route('/specialties/create', {
-  name: 'createSpecialty',
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "specialtyForm"});
-  }
-});
-
-FlowRouter.route('/specialties/:_id', {
-  name: 'editSpecialty',
-  subscriptions: function(params) {
-    this.register('specialty', Meteor.subscribe('singleSpecialty', params._id));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "specialtyForm"});
+    BlazeLayout.render("mainLayout", {content: "schedule"});
   }
 });
 
@@ -105,26 +84,58 @@ FlowRouter.route('/patients/:_id', {
   }
 });
 
-FlowRouter.route('/privacy', {
-  name: 'privacy',
+FlowRouter.route('/specialties', {
+  name: 'listSpecialty',
   action: function(params, queryParams) {
-    BlazeLayout.render("blankLayout", {content: "privacy"});
+    BlazeLayout.render("mainLayout", {content: "specialtyList"});
   }
 });
 
-FlowRouter.route('/terms-of-use', {
-  name: 'terms-of-use',
+FlowRouter.route('/specialties/create', {
+  name: 'createSpecialty',
   action: function(params, queryParams) {
-    BlazeLayout.render("blankLayout", {content: "terms"});
+    BlazeLayout.render("mainLayout", {content: "specialtyForm"});
   }
 });
 
-FlowRouter.route('/logout', {
-  name: 'logout',
+FlowRouter.route('/specialties/:_id', {
+  name: 'editSpecialty',
+  subscriptions: function(params) {
+    this.register('specialty', Meteor.subscribe('singleSpecialty', params._id));
+  },
   action: function(params, queryParams) {
-    Meteor.logout(function(){
-      FlowRouter.redirect(FlowRouter.path('signIn'));
-    });
+    BlazeLayout.render("mainLayout", {content: "specialtyForm"});
+  }
+});
+
+FlowRouter.route('/doctors', {
+  name: 'doctorsList',
+  subscriptions: function(params) {
+    this.register('doctors', Meteor.subscribe('doctors'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "doctorsList"});
+  }
+});
+
+FlowRouter.route('/doctors/:_id', {
+  name: 'editDoctor',
+  subscriptions: function(params) {
+    this.register('specialties', Meteor.subscribe('specialties'));
+    this.register('doctor', Meteor.subscribe('singleDoctor', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "doctorForm"});
+  }
+});
+
+FlowRouter.route('/users', {
+  name: 'users',
+  subscriptions: function(params) {
+    this.register('users', Meteor.subscribe('users'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "users"});
   }
 });
 
