@@ -1,3 +1,5 @@
 doctors_list-title: Gerenciamento de Médicos
 doctors_form-title: "%s: Especialidades e Horários."
 doctors_work-hours: Horários de Atendimento
+doctors_work-hours-validation-error: Por favor, preencha os intervalos de tempo e tente novamente.
+doctors_work-hours-validation-start-end-diff-error: A hora fim não pode ser anterior a hora de início.

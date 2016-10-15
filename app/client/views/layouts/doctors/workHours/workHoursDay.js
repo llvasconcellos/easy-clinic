@@ -32,7 +32,7 @@ Template.workHoursDay.events({
 
 var loadHours = function(){
 	var templateInstance = this;
-	if(templateInstance.data.hours){
+	if(templateInstance.data.hours && (templateInstance.data.hours.length > 0)){
 		$(templateInstance.find('input[type=checkbox]')).trigger('click');
 		templateInstance.find('.hours-start input').value = templateInstance.data.hours[0].start;
 		templateInstance.find('.hours-end input').value = templateInstance.data.hours[0].end;

@@ -1,5 +1,4 @@
-Template.doctorForm.onCreated(function () {
-});
+Template.doctorForm.onCreated(function () {});
 
 Template.doctorForm.helpers({
 	saveButton: function () {
@@ -29,18 +28,22 @@ Template.doctorForm.rendered = function(){
 Template.doctorForm.events({
 	'click button[type=submit]': (event, template) => {
 		event.preventDefault();
-		var hours = getHours.call(this, event, template);
-		Meteor.call('doctorSpecialtyHours', FlowRouter.getParam('_id'), {
-			"specialties": $('select[name=specialties]').val(),
-			"workHours": hours
-		}, function(error, result){
-			if (error) {
-				toastr['error'](error.message, TAPi18n.__('common_error'));
-			}
-			if (result) {
-				toastr['success'](result, TAPi18n.__('common_success'));
-			}
-		});
+		try{
+			var hours = getHours.call(this, event, template);
+			Meteor.call('doctorSpecialtyHours', FlowRouter.getParam('_id'), {
+				"specialties": $('select[name=specialties]').val(),
+				"workHours": hours
+			}, function(error, result){
+				if (error) {
+					throw error;
+				}
+				if (result) {
+					toastr['success'](result, TAPi18n.__('common_success'));
+				}
+			});
+		} catch (error) {
+			toastr['error'](error.message, TAPi18n.__('common_error'));
+		}
 	},
 	'click .cancel': (event, template) => {
 		FlowRouter.go('doctorsList');
@@ -56,11 +59,55 @@ var getHours = function(template){
 		if(dayEl.find('input[type=checkbox]').prop("checked")){
 			workHours[index] = [];
 			dayEl.find('.hours').each(function(i, el){
+
+				var startEl = $(el).find('.hours-start input');
+				var start = startEl.val();
+				var endEl = $(el).find('.hours-end input');
+				var end = endEl.val();
+				
+				validateInterval(startEl, start, endEl, end);
+
 				workHours[index][i] = {};
-				workHours[index][i].start = $(el).find('.hours-start input').val();
-				workHours[index][i].end =  $(el).find('.hours-end input').val();
+				workHours[index][i].start = start;
+				workHours[index][i].end =  end;
 			});
 		}
 	});
 	return workHours;
+};
+
+var validateInterval = function(startEl, start, endEl, end){
+	clearError(startEl, endEl);
+
+	if(!start){
+		markError(startEl);
+	}
+	if(!end){
+		markError(endEl);
+	}
+	if(!start || !end){
+		throw new Meteor.Error('ValidationError', TAPi18n.__('doctors_work-hours-validation-error'));
+	}
+
+	var mStart = moment(start, 'HH:mm:ss');
+	var mEnd = moment(end, 'HH:mm:ss');
+
+	if(mEnd.diff(mStart) < 0) {
+		markError(startEl, endEl);
+		throw new Meteor.Error('ValidationError', TAPi18n.__('doctors_work-hours-validation-start-end-diff-error'));
+	}
+};
+
+var clearError = function(){
+	var args = Array.prototype.slice.call(arguments);
+	args.forEach(function(el, index){
+		$(el).parent().removeClass('has-error');
+	});
+};
+
+var markError = function(){
+	var args = Array.prototype.slice.call(arguments);
+	args.forEach(function(el, index){
+		$(el).parent().addClass('has-error');
+	});
 };
