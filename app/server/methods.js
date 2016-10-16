@@ -42,7 +42,16 @@ Meteor.methods({
 		if (userId) {
 			Meteor.users.update(userId, {$set: data});
 		}
-
 		return TAPi18n.__('common_save-success');
+	},
+	saveScheduleEvent: function (event, eventId) {
+		if(!eventId){
+			var scheduleEvent = Schedule.insert(event);
+			return scheduleEvent;
+		}
+		else {
+			Schedule.update(eventId, {$set: event});
+			return TAPi18n.__('common_save-success');
+		}
 	}
 });

@@ -10,4 +10,47 @@
             </div>
         </div>
     </div>
+    <div class="modal inmodal" id="scheduleEventForm" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                    	<span aria-hidden="true">&times;</span>
+                    	<span class="sr-only">Close</span>
+                    </button>
+                    <div class="scheduleTitle"></div>
+                </div>
+                <div class="modal-body">
+					<form id="insertPatientForm" class="schedule-form" novalidate="novalidate">
+						<div class="row selectAddPacient">
+							<div class="col-md-2">
+								<button type="button" class="addPatient btn">
+									<i class="fa fa-user-plus" aria-hidden="true"></i>
+								</button>
+							</div>
+							<div class="col-md-10">
+								<label for="patients">Pacientes</label>
+								<div class="select-wrapper"> 
+									<select name="patients" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="4">
+										<option class="tag" value="">{{_ 'common_firstOption'}}</option>
+										{{#each patients}}
+											<option class="tag" value="{{_id}}">{{name}}</option>
+										{{/each}}
+									</select>
+								</div>
+							</div>
+						</div>
+					</form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">
+						<strong><i class="fa fa-ban" aria-hidden="true"></i> {{_ 'common_cancel'}}</strong>
+                    </button>
+                    <button type="button" class="btn btn-primary save">
+                    	<strong><i class="fa fa-floppy-o" aria-hidden="true"></i> {{_ 'common_save'}}</strong>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

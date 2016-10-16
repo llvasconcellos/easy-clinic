@@ -31,3 +31,7 @@ Meteor.publish('specialties', function () {
 Meteor.publish('singleSpecialty', function (id) {
   return Specialties.find({_id: id});
 });
+
+Meteor.publish('schedule', function () {
+  return Schedule.find();
+});

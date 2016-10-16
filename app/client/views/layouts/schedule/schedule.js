@@ -5,11 +5,16 @@ var randomMC = require('/imports/client/randomColor.js');
 
 Template.schedule.events({});
 
-Template.schedule.helpers({});
+Template.schedule.helpers({
+    patients: function(){
+        return Patients.find();
+    },
+});
 
 Template.schedule.onCreated(function () {});
 
 Template.schedule.onRendered(function () {
+    $('.chosen-select').chosen({width: "100%"});
 
     // #TODO reactive change locale and set timezones
     // $('#locale-selector').on('change', function() {
@@ -18,12 +23,6 @@ Template.schedule.onRendered(function () {
     //     }
     // });
 
-
-    // Initialize i-check plugin
-    // $('.i-checks').iCheck({
-    //     checkboxClass: 'icheckbox_square-green',
-    //     radioClass: 'iradio_square-green',
-    // });
 
     // Initialize the external events
     // $('#external-events div.external-event').each(function() {
@@ -62,9 +61,6 @@ Template.schedule.onRendered(function () {
                     });
                 }
             });
-            console.log('===================');
-            console.log(workHours);
-            console.log('===================');
         }
         calResources.push({
             id: doctor._id,
@@ -78,10 +74,7 @@ Template.schedule.onRendered(function () {
         });
     });
 
-
-
-
-
+    var events = Schedule.find().fetch();
 
     // Initialize the calendar
     var date = new Date();
@@ -89,72 +82,122 @@ Template.schedule.onRendered(function () {
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    $('#calendar').fullCalendar({
+    var calendar = $('#calendar').fullCalendar({
+        defaultView: 'timelineDay',
         header: {
             left: 'today prev,next',
             center: 'title',
-            right: 'timelineDay,timelineThreeDays,agendaWeek,agendaDay,month'
+            right: 'timelineDay,timelineThreeDays,listDay,listWeek,agendaDay,agendaWeek,month'
         },
         views: {
+            timelineDay: {
+                buttonText: 'Linha do Tempo Dia'
+            },
             timelineThreeDays: {
                 type: 'timeline',
-                duration: { days: 3 }
+                buttonText: 'Linha do Tempo 3 Dias',
+                duration: { 
+                    days: 3 
+                }
+            },
+            listDay: { 
+                buttonText: 'Lista Dia'
+            },
+            listWeek: { 
+                buttonText: 'Lista Semana'
+            },
+            agendaDay: { 
+                buttonText: 'Agenda Dia'
+            },
+            agendaWeek: { 
+                buttonText: 'Agenda Semana'
+            },
+            month: { 
+                buttonText: 'Mês'
             }
         },
-        minTime: '00:00:00',
-        maxTime: '24:00:00',
+
+        selectable: true,
+        selectHelper: true,
+        selectOverlap: false,
+        select: function(start, end, jsEvent, view, resource){
+            try{
+                Meteor.call('saveScheduleEvent', {
+                    resourceId: resource.id,
+                    start: start.format(),
+                    end: end.format(),
+                    title: "[A confirmar]",
+                    constraint: 'available_hours'
+                }, function(error, result){
+                    if (error) {
+                        throw error;
+                    }
+                    if (result) {
+                        $('#scheduleEventForm .scheduleTitle').html(start.format('LLLL'));
+                        $('#scheduleEventForm').modal();
+                        $('#scheduleEventForm .save').click(function(event){
+                            var patient = $('#scheduleEventForm select[name=patients]').val();
+                            patient = Patients.findOne({_id: patient});
+                            Meteor.call('saveScheduleEvent', {
+                                patient: patient._id,
+                                title: patient.name
+                            },
+                            result,
+                            function(error, result){
+                                if (error) {
+                                    throw error;
+                                }
+                                if (result) {
+                                    calendar.fullCalendar('renderEvent', {
+                                        title: patient.name,
+                                        start: start,
+                                        end: end,
+                                        resourceId: resource.id,
+                                        //description: ""
+                                    }, true);
+                                    calendar.fullCalendar('unselect');
+                                    $('#scheduleEventForm').modal('hide');
+                                    toastr['success'](result, TAPi18n.__('common_success'));
+                                }
+                            });
+                        });
+                    }
+                });
+            } catch (error) {
+                toastr['error'](error.message, TAPi18n.__('common_error'));
+            }
+        },
+        eventRender: function(event, element, timelineView) {
+            if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {
+                element.find('.fc-title').html('<i class="fa fa-clock-o" aria-hidden="true"></i>');
+            }
+            element.qtip({
+                style: { classes: 'qtip-bootstrap agenda-tooltip' },
+                //content: event.description
+                content: event.title
+            });
+        },
+        minTime: '06:00:00',
+        maxTime: '23:00:00',
         locale: TAPi18n.getLanguage(),
-        now: '2016-09-07',
-        defaultView: 'timelineDay',
+        //eventLimit: true, // allow "more" link when too many events
+        //now: '2016-09-07',
+        //defaultDate: '2016-09-12',
         aspectRatio: 1.8,
+        navLinks: true, // can click day/week names to navigate views
         //scrollTime: '00:00', // undo default 6am scrollTime
         editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
-        drop: function() {
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
-            }
-        },
+        // droppable: true, // this allows things to be dropped onto the calendar
+        // drop: function() {
+        //     // is the "remove after drop" checkbox checked?
+        //     if ($('#drop-remove').is(':checked')) {
+        //         // if so, remove the element from the "Draggable Events" list
+        //         $(this).remove();
+        //     }
+        // },
         resourceLabelText: TAPi18n.__('users_doctors'),
         resources: calResources,
-        events: [{
-            "id": "1",
-            "resourceId": "a",
-            "start": "2016-09-07T10:00:00",
-            "end": "2016-09-07T15:00:00",
-            "title": "event 1",
-            constraint: 'available_hours'
-        },{
-            "id": "2",
-            "resourceId": "c",
-            "start": "2016-09-07T11:00:00",
-            "end": "2016-09-07T22:00:00",
-            "title": "event 2",
-            constraint: 'available_hours'
-        },{
-            "id": "3",
-            "resourceId": "d",
-            "start": "2016-09-06",
-            "end": "2016-09-08",
-            "title": "event 3",
-            constraint: 'available_hours'
-        },{
-            "id": "4",
-            "resourceId": "e",
-            "start": "2016-09-07T13:00:00",
-            "end": "2016-09-07T18:00:00",
-            "title": "event 4",
-            constraint: 'available_hours'
-        },{
-            "id": "5",
-            "resourceId": "f",
-            "start": "2016-09-07T00:30:00",
-            "end": "2016-09-07T02:30:00",
-            "title": "event 5",
-            constraint: 'available_hours'
-        }],
+        events: events,
     });
 });
 

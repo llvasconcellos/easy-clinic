@@ -1,0 +1,49 @@
+.fc-license-message {
+    display: none;
+}
+.fc-view-container {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 3px 0 0;
+}
+.agenda-tooltip {
+   /*padding: 13px 17px;*/
+    color: #2e2e2e;
+    background: #fff;
+    border-left: 2px #3591d7 solid;
+    border-radius: 3px;
+    box-shadow: 0 0 8px -1px rgba(0,0,0,0.1);
+    cursor: default;
+}
+#scheduleEventForm .modal-header {
+    padding: 15px;
+    font-weight: bold;
+}
+#scheduleEventForm .modal-body {
+    background-color: white;
+}
+#scheduleEventForm  .selectAddPacient {
+    height: 64px;
+    background: #f8fafb;
+   /* position: relative;
+    font-size: 10px;*/
+}
+#scheduleEventForm .selectAddPacient .addPatient {
+    width: 64px;
+    height: 64px;
+    padding: 12px 0;
+    font-size: 2.2em;
+}
+#scheduleEventForm .selectAddPacient label {
+    /*position: absolute;
+    z-index: 10;*/
+}
+#scheduleEventForm .selectAddPacient .select-wrapper {
+    /*padding-left: 64px;*/
+}
