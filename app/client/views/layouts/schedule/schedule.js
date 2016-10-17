@@ -1,8 +1,5 @@
 var randomMC = require('/imports/client/randomColor.js');
 
-//console.log(randomMC.getColor());
-//var colorUsingShade = randomMC.getColor({ shades: ['200', '300'], text:'Some Random Text' });
-
 Template.schedule.events({});
 
 Template.schedule.helpers({
@@ -72,7 +69,7 @@ Template.schedule.onRendered(function () {
         calResources.push({
             id: doctor._id,
             title: doctor.profile.firstName + ' ' + doctor.profile.lastName,
-            eventColor: randomMC.getColor(),
+            eventColor: doctor.color ? doctor.color : randomMC.getColor(),
             //eventBackgroundColor    Like eventColor but only for the background color
             // eventBorderColor    Like eventColor but only for the border color
             // eventTextColor  Like eventColor but only for the text color

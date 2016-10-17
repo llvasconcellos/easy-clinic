@@ -1,0 +1,17 @@
+#doctor-form .color-options {
+	width: 20px;
+    height: 20px;
+    width: 62px;
+    height: 26px;
+    line-height: 26px;
+    padding: 2px;
+    color: white;
+}
+#doctor-form .colors-select .chosen-container .chosen-results li.active-result {
+    cursor: pointer;
+    display: inline-block;
+}
+#doctor-form .colors-select .chosen-single {
+	font-weight: bold;
+	color: white;
+}

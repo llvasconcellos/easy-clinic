@@ -152,6 +152,10 @@ Schema.User = new SimpleSchema({
             }
         }
     },
+    color: {
+        type: String,
+        optional: true
+    },
     workHours: {
         type: [[Schema.workHours]],
         optional: true,

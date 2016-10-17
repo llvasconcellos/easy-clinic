@@ -30,6 +30,19 @@
 												</select>
 											</div>
 										</div>
+										<div class="form-group">
+											<label>{{_ 'specialties_color'}}</label>
+											<div class="colors-select">
+												<select name="color" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="4">
+													<option class="tag" value="">{{_ 'common_firstOption'}}</option>
+													{{#each colors}}
+														<option value="{{this}}" {{isColorSelected this}}>
+															<div class="color-options" style="background-color: {{this}}">{{this}}</div>
+														</option>
+													{{/each}}
+												</select>
+											</div>
+										</div>
 									</div>
 								</div>
 

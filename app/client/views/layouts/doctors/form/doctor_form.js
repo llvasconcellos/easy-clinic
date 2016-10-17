@@ -1,5 +1,6 @@
 Template.doctorForm.onCreated(function () {});
 
+var palette = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B'];
 Template.doctorForm.helpers({
 	saveButton: function () {
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
@@ -10,8 +11,17 @@ Template.doctorForm.helpers({
 	specialties: function(){
 		return Specialties.find();
 	},
+	colors: function() {
+		return palette;
+	},
 	doctor: function() {
 		return Meteor.users.findOne({_id: FlowRouter.getParam('_id')}); 
+	},
+	isColorSelected: function(color) {
+		var user = Template.parentData(1);
+		if($.inArray(color, palette) != -1){
+			return 'selected';
+		}
 	},
 	isSelected: function(specialty) {
 		var user = Template.parentData(1);
@@ -22,7 +32,13 @@ Template.doctorForm.helpers({
 });
 
 Template.doctorForm.rendered = function(){
+	$('.colors-select .chosen-select').on('chosen:ready', function(event, params) {
+		$('.colors-select .chosen-single').css('background', params.chosen.selected_item[0].firstChild.innerHTML);
+	});
 	$('.chosen-select').chosen({width: "100%"});
+	$('.colors-select .chosen-select').on('change', function(event, params) {
+		$('.colors-select .chosen-single').css('background', params.selected);
+	});
 };
 
 Template.doctorForm.events({
@@ -32,6 +48,7 @@ Template.doctorForm.events({
 			var hours = getHours.call(this, event, template);
 			Meteor.call('doctorSpecialtyHours', FlowRouter.getParam('_id'), {
 				"specialties": $('select[name=specialties]').val(),
+				"color": $('select[name=color]').val(),
 				"workHours": hours
 			}, function(error, result){
 				if (error) {
