@@ -12,6 +12,9 @@
     border-style: solid solid none;
     border-width: 3px 0 0;
 }
+.fc-nonbusiness {
+    cursor: not-allowed;
+}
 .agenda-tooltip {
    /*padding: 13px 17px;*/
     color: #2e2e2e;

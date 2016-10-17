@@ -53,5 +53,9 @@ Meteor.methods({
 			Schedule.update(eventId, {$set: event});
 			return TAPi18n.__('common_save-success');
 		}
+	},
+	deleteScheduleEvent: function(event) {
+		Schedule.remove(event);
+		return TAPi18n.__('common_save-success');
 	}
 });

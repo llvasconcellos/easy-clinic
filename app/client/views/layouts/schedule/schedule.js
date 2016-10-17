@@ -60,6 +60,13 @@ Template.schedule.onRendered(function () {
                         });
                     });
                 }
+                else {
+                    workHours.push({
+                        start: '00:00',
+                        end: '00:00',
+                        dow: [dayIndex]
+                    });
+                }
             });
         }
         calResources.push({
@@ -116,11 +123,37 @@ Template.schedule.onRendered(function () {
                 buttonText: 'Mês'
             }
         },
-
         selectable: true,
         selectHelper: true,
         selectOverlap: false,
+        selectAllow: function(selectInfo) {
+            var doctor = doctors.find(function(index){
+                return index._id === selectInfo.resourceId;
+            });
+            if(doctor) {
+                var weekday = selectInfo.start.day();
+                if(doctor.workHours[weekday] === null){
+                    return false;
+                }
+                else {
+                    var allowed = false;
+                    doctor.workHours[weekday].forEach(function(element, index, array){
+                        var docStart = moment(element.start, 'HH:mm');
+                        var docEnd  = moment(element.end, 'HH:mm');
+                        var calStart = moment(selectInfo.start.format('HH:mm'), 'HH:mm');
+                        var calEnd = moment(selectInfo.end.format('HH:mm'), 'HH:mm');
+                        if(calStart.isBetween(docStart, docEnd) || (calStart.diff(docStart) === 0)){
+                            allowed = true;
+                        }
+                    });
+                    if(!allowed) {
+                        return false;
+                    }
+                }
+            }
+        },
         select: function(start, end, jsEvent, view, resource){
+            var scheduleEvent = null;
             try{
                 Meteor.call('saveScheduleEvent', {
                     resourceId: resource.id,
@@ -133,8 +166,11 @@ Template.schedule.onRendered(function () {
                         throw error;
                     }
                     if (result) {
+                        scheduleEvent = result;
                         $('#scheduleEventForm .scheduleTitle').html(start.format('LLLL'));
                         $('#scheduleEventForm').modal();
+                        $('#scheduleEventForm .save').off('click');
+                        $('#scheduleEventForm .cancel').off('click');
                         $('#scheduleEventForm .save').click(function(event){
                             var patient = $('#scheduleEventForm select[name=patients]').val();
                             patient = Patients.findOne({_id: patient});
@@ -161,11 +197,70 @@ Template.schedule.onRendered(function () {
                                 }
                             });
                         });
+                        $('#scheduleEventForm .cancel').click(function(event){
+                            Meteor.call('deleteScheduleEvent', scheduleEvent,
+                            function(error, result){
+                                if (error) {
+                                    throw error;
+                                }
+                                if (result) {
+                                    toastr['success']('Evento Cancelado', TAPi18n.__('common_success'));
+                                }
+                            });
+                        });
                     }
                 });
             } catch (error) {
                 toastr['error'](error.message, TAPi18n.__('common_error'));
             }
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+            $('#scheduleEventForm .scheduleTitle').html(calEvent.start.format('LLLL'));
+            $('#scheduleEventForm').modal();
+            $('#scheduleEventForm select[name=patients]').val(calEvent.patient);
+            $('.chosen-select').trigger('chosen:updated');
+            $('#scheduleEventForm .save').off('click');
+            $('#scheduleEventForm .cancel').off('click');
+            $('#scheduleEventForm .save').click(function(event){
+                var patient = $('#scheduleEventForm select[name=patients]').val();
+                patient = Patients.findOne({_id: patient});
+                Meteor.call('saveScheduleEvent', {
+                    patient: patient._id,
+                    title: patient.name
+                },
+                calEvent.id,
+                function(error, result){
+                    if (error) {
+                        throw error;
+                    }
+                    if (result) {
+                        calendar.fullCalendar('renderEvent', {
+                            title: patient.name,
+                            start: start,
+                            end: end,
+                            resourceId: resource.id,
+                            //description: ""
+                        }, true);
+                        calendar.fullCalendar('unselect');
+                        $('#scheduleEventForm').modal('hide');
+                        toastr['success'](result, TAPi18n.__('common_success'));
+                    }
+                });
+            });
+            $('#scheduleEventForm .cancel').click(function(event){
+                Meteor.call('deleteScheduleEvent', calEvent.id,
+                function(error, result){
+                    if (error) {
+                        throw error;
+                    }
+                    if (result) {
+                        $('#calendar').fullCalendar('removeEvents', function(event){
+                            return (event._id === calEvent._id);
+                        });
+                        toastr['success']('Evento Cancelado', TAPi18n.__('common_success'));
+                    }
+                });
+            });
         },
         eventRender: function(event, element, timelineView) {
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {
@@ -187,7 +282,7 @@ Template.schedule.onRendered(function () {
         navLinks: true, // can click day/week names to navigate views
         //scrollTime: '00:00', // undo default 6am scrollTime
         editable: true,
-        // droppable: true, // this allows things to be dropped onto the calendar
+        droppable: true, // this allows things to be dropped onto the calendar
         // drop: function() {
         //     // is the "remove after drop" checkbox checked?
         //     if ($('#drop-remove').is(':checked')) {
