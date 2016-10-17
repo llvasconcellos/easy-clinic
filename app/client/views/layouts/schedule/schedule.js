@@ -88,6 +88,7 @@ Template.schedule.onRendered(function () {
 
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
+        slotDuration: '00:20:00',
         header: {
             //left: 'today prev,next',
             left: 'prev,next',
