@@ -130,6 +130,36 @@ FlowRouter.route('/doctors/:_id', {
   }
 });
 
+FlowRouter.route('/receituario', {
+  name: 'listReceituario',
+  subscriptions: function(params) {
+    this.register('receituario', Meteor.subscribe('receituario', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "receituarioList"});
+  }
+});
+
+FlowRouter.route('/receituario/create', {
+  name: 'createReceituario',
+  // subscriptions: function(params) {
+  //   this.register('receituario', Meteor.subscribe('receituario', params._id));
+  // },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "receituarioForm"});
+  }
+});
+
+FlowRouter.route('/receituario/:_id', {
+  name: 'editReceituario',
+  // subscriptions: function(params) {
+  //   this.register('receituario', Meteor.subscribe('receituario', params._id));
+  // },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "receituarioForm"});
+  }
+});
+
 FlowRouter.route('/users', {
   name: 'users',
   subscriptions: function(params) {

@@ -35,3 +35,15 @@ Meteor.publish('singleSpecialty', function (id) {
 Meteor.publish('schedule', function () {
   return Schedule.find();
 });
+
+Meteor.publish('settings', function () {
+  return Settings.find();
+});
+
+Meteor.publish('receituario', function () {
+  return Receituario.find();
+});
+
+Meteor.publish('singleReceituario', function (id) {
+  return Receituario.find({_id: id});
+});

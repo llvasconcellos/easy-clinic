@@ -8,3 +8,8 @@
 .form-inline .form-group {
     margin-right: 10px;
 }
+
+#insertPatientForm > div:nth-child(30), textarea[name=obs] {
+	display: block !important;
+	width: 100% !important;
+}

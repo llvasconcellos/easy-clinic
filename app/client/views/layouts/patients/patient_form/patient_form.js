@@ -32,8 +32,8 @@ Template.patientForm.helpers({
 		return Template.patientForm.data;
 	},
 	runUxAdjustments: function(){
-		gambiarra_scope = Template.patientForm.data; //#TODO: arrumar isso urgente!!!!!
-		setTimeout( 'uxAdjustments.call(gambiarra_scope)', 500 );
+		//gambiarra_scope = Template.patientForm.data; //#TODO: arrumar isso urgente!!!!!
+		//setTimeout( 'uxAdjustments.call()', 5000 );
 	}
 });
 
@@ -75,7 +75,7 @@ uxAdjustments = function(){
 
 	var submitParent = $('.patient-form button[type=submit]').parent();
 	submitParent.addClass('text-right');
-	if(this._id) {
+	if(FlowRouter.getParam('_id')) {
 		var deleteBtn = $.parseHTML('<button class="btn btn-danger delete-btn" type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>');
 		$(deleteBtn).prependTo(submitParent);
 		

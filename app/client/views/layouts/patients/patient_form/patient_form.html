@@ -1,29 +1,42 @@
 <template name="patientForm">
 	{{> pageHeading title='patients_patients'}}
 
+	<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
+		<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
+	</button>
+
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
-			<div class="col-sm-12" id="tablebox">
-				<div class="ibox ">
-					<div class="ibox-title">
-						<h5>{{_ 'patients_patients'}}
-							<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
-						</h5>
-						{{!-->iboxTools--}}
-						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
-							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
-						</button>
+			<div class="col-sm-12">
+				<div class="tabs-container">
+					<ul class="nav nav-tabs">
+						<li class="active"><a data-toggle="tab" href="#tab-1">
+							<h4>{{_ 'patients_data'}}
+								<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
+							</h4>
+						</a></li>
+						<li class=""><a data-toggle="tab" href="#tab-2">
+							<h4>{{_ 'patients_records'}}</h4>
+						</a></li>
+					</ul>
+					<div class="tab-content">
+						<div id="tab-1" class="tab-pane active">
+							<div class="panel-body">
+								{{#if isEditForm}}
+									{{> quickForm collection="Patients" doc=patient id="insertPatientForm" type="update" buttonContent=saveButton class="form-inline patient-form"}}
+									{{runUxAdjustments}}
+								{{else}}
+									{{> quickForm collection="Patients" id="insertPatientForm" type="insert" buttonContent=saveButton class="form-inline patient-form"}}
+									{{runUxAdjustments}}
+								{{/if}}
+							</div>
+						</div>
+						<div id="tab-2" class="tab-pane">
+							<div class="panel-body">
+								
+							</div>
+						</div>
 					</div>
-					<div class="ibox-content">
-						{{#if isEditForm}}
-							{{> quickForm collection="Patients" doc=patient id="insertPatientForm" type="update" buttonContent=saveButton class="form-inline patient-form"}}
-							{{runUxAdjustments}}
-						{{else}}
-							{{> quickForm collection="Patients" id="insertPatientForm" type="insert" buttonContent=saveButton class="form-inline patient-form"}}
-							{{runUxAdjustments}}
-						{{/if}}
-					</div>
-					<div id="table-footer" class="ibox-footer"></div>
 				</div>
 			</div>
 		</div>
