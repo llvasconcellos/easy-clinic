@@ -89,7 +89,8 @@ Template.schedule.onRendered(function () {
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
         header: {
-            left: 'today prev,next',
+            //left: 'today prev,next',
+            left: 'prev,next',
             center: 'title',
             right: 'timelineDay,timelineThreeDays,listDay,listWeek,agendaDay,agendaWeek,month'
         },
@@ -118,6 +119,9 @@ Template.schedule.onRendered(function () {
             },
             month: { 
                 buttonText: 'Mês'
+            },
+            today: {
+                buttonText: 'Hoje'
             }
         },
         selectable: true,
@@ -274,7 +278,7 @@ Template.schedule.onRendered(function () {
         },
         minTime: '06:00:00',
         maxTime: '23:00:00',
-        locale: TAPi18n.getLanguage(),
+        locale: TAPi18n.getLanguage().toLowerCase(),
         //eventLimit: true, // allow "more" link when too many events
         //now: '2016-09-07',
         //defaultDate: '2016-09-12',
