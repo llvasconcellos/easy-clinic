@@ -225,17 +225,20 @@ Template.schedule.onRendered(function () {
                     patient: patient._id,
                     title: patient.name
                 },
-                calEvent.id,
+                calEvent._id,
                 function(error, result){
                     if (error) {
                         throw error;
                     }
                     if (result) {
+                        $('#calendar').fullCalendar('removeEvents', function(event){
+                            return (event._id === calEvent._id);
+                        });
                         calendar.fullCalendar('renderEvent', {
                             title: patient.name,
-                            start: start,
-                            end: end,
-                            resourceId: resource.id,
+                            start: calEvent.start,
+                            end: calEvent.end,
+                            resourceId: calEvent.resourceId,
                             //description: ""
                         }, true);
                         calendar.fullCalendar('unselect');

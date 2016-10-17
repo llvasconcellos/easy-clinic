@@ -6,7 +6,6 @@ Meteor.methods({
 	updateUser: function (userId, newPassword, data) {
 		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
 			if (userId){
-				console.log(data);
 				Meteor.users.update(userId, {$set: data});
 				if (newPassword) {
 					Accounts.setPassword(userId, newPassword);
@@ -50,7 +49,10 @@ Meteor.methods({
 			return scheduleEvent;
 		}
 		else {
-			Schedule.update(eventId, {$set: event});
+			Schedule.update(eventId, {$set: {
+				title: event.title,
+				patient: event.patient
+			}});
 			return TAPi18n.__('common_save-success');
 		}
 	},
