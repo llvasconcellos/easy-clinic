@@ -32,6 +32,7 @@ Template.prescriptionForm.onCreated(function () {
 });
 
 Template.prescriptionForm.onRendered(function () {
+
 	var data = this.data;
 	$(document).ready(function(){
 		var saveButton = $('.prescription-form button[type=submit]');
@@ -76,39 +77,89 @@ Template.prescriptionForm.onRendered(function () {
 			});
 		}
 
-		$('textarea[name=prescription]').textcomplete([{
-			medicamentos: [],
-			match: /\b(\w{2,})$/,
-			search: function search(term, callback) {
-				callback($.map(this.medicamentos, function (medicamento) {
-					return medicamento.toUpperCase().indexOf(term.toUpperCase()) >= 0 ? medicamento : null;
-				}));
-			},
-			index: 1,
-			replace: function replace(medicamento) {
-				return medicamento.toUpperCase() + ' ';
-			}
-		}, { 
-			campos: [
-				'NOME_DO_PACIENTE', 
-				'CPF_PACIENTE', 
-				'RG_PACIENTE', 
-				'DATA_DA_CONSULTA', 
-				'HORARIO_DA_CONSULTA', 
-				'NOME_PROFISSIONAL',
-				'ENDERECO_PACIENTE'
-			],
-			match: /\B#(\w*)$/,
-			search: function search(term, callback) {
-				callback($.map(this.campos, function (campo) {
-					return campo.indexOf(term) === 0 ? campo : null;
-				}));
-			},
-			index: 1,
-			replace: function replace(campo) {
-				return '#' + campo;
-			}
-		}]);
+
+		// $('textarea[name=prescription]').textcomplete([{
+		// 	medicamentos: [],
+		// 	match: /\b(\w{2,})$/,
+		// 	search: function search(term, callback) {
+		// 		console.log('aaaaa');
+		// 		callback($.map(this.medicamentos, function (medicamento) {
+		// 			return medicamento.toUpperCase().indexOf(term.toUpperCase()) >= 0 ? medicamento : null;
+		// 		}));
+		// 	},
+		// 	index: 1,
+		// 	replace: function replace(medicamento) {
+		// 		return medicamento.toUpperCase() + ' ';
+		// 	}
+		// }, { 
+		// 	campos: [
+		// 		'NOME_DO_PACIENTE', 
+		// 		'CPF_PACIENTE', 
+		// 		'RG_PACIENTE', 
+		// 		'DATA_DA_CONSULTA', 
+		// 		'HORARIO_DA_CONSULTA', 
+		// 		'NOME_PROFISSIONAL',
+		// 		'ENDERECO_PACIENTE'
+		// 	],
+		// 	match: /\B#(\w*)$/,
+		// 	search: function search(term, callback) {
+		// 		console.log('aquiiiii');
+		// 		callback($.map(this.campos, function (campo) {
+		// 			return campo.indexOf(term) === 0 ? campo : null;
+		// 		}));
+		// 	},
+		// 	index: 1,
+		// 	replace: function replace(campo) {
+		// 		return '#' + campo;
+		// 	}
+		// }]);
+
+
+		//$('textarea[name=prescription]').summernote({});
+
+		$("textarea[name=prescription]").summernote({
+			height: 200,
+			placeholder: TAPi18n.__('prescriptions_help'),
+			hint: [{
+					words: ['amoxicilina', 'atenolol'],
+					match: /\b(\w{2,})$/,
+					search: function search(keyword, callback) {
+						console.log('aaaaa');
+						callback($.map(this.words, function (item) {
+							return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
+						}));
+					},
+					index: 1,
+					replace: function replace(medicamento) {
+						return medicamento.toUpperCase() + ' ';
+					}
+			},{
+				words: [
+					'NOME_DO_PACIENTE', 
+					'CPF_PACIENTE', 
+					'RG_PACIENTE', 
+					'DATA_DA_CONSULTA', 
+					'HORARIO_DA_CONSULTA', 
+					'NOME_PROFISSIONAL',
+					'ENDERECO_PACIENTE'
+				],
+				match: /\B#(\w*)$/,
+				search: function (keyword, callback) {
+					callback($.grep(this.words, function (item) {
+						return item.indexOf(keyword) === 0;
+					}));
+				},
+				template: function (item) {
+					return item;
+					//var content = emojiUrls[item];
+					//return '<img src="' + content + '" width="20" /> :' + item + ':';
+				},
+				content: function (item) {
+					return '#' + item;
+				}
+			}]
+		});
+
 	});
 
 });

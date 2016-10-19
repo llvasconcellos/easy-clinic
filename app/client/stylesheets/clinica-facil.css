@@ -70,3 +70,7 @@
 #table-footer .btn {
     margin-right: 10px;
 }
+
+table.dataTable a.btn {
+    padding: 3px;
+}
