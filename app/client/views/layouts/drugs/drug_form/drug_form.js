@@ -1,10 +1,10 @@
-Template.specialtyForm.events({
+Template.drugForm.events({
 	'click .new-record': function (event, template) {
-		FlowRouter.go('specialtyCreate');
+		FlowRouter.go('drugCreate');
 	}
 });
 
-Template.specialtyForm.helpers({
+Template.drugForm.helpers({
 	saveButton: function () {
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
 	},
@@ -12,17 +12,17 @@ Template.specialtyForm.helpers({
 		return (FlowRouter.getParam('_id')) ? true : false;
 	},
 	record: function() {
-		var record = Specialties.findOne({_id: FlowRouter.getParam('_id')});
-		Template.instance().data.specialty = record;
+		var record = Drugs.findOne({_id: FlowRouter.getParam('_id')});
+		Template.instance().data.drug = record;
 		return record;
 	},
 });
 
-Template.specialtyForm.onCreated(function () {
-	AutoForm.addHooks('specialtyForm', {
+Template.drugForm.onCreated(function () {
+	AutoForm.addHooks('drugForm', {
 		onSuccess: function(formType, result) {
 			toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
-			FlowRouter.go('specialtyList');
+			FlowRouter.go('drugList');
 		},
 		onError: function(formType, error) {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -30,7 +30,7 @@ Template.specialtyForm.onCreated(function () {
 	});
 });
 
-Template.specialtyForm.onRendered(function () {
+Template.drugForm.onRendered(function () {
 
 	var data = this.data;
 
@@ -43,13 +43,13 @@ Template.specialtyForm.onRendered(function () {
 			$(deleteBtn).click(function(event){
 				swal({
 					title: TAPi18n.__('common_areYouSure'),
-					text: TAPi18n.__('common_deleteConfirmation', data.specialty.name),
+					text: TAPi18n.__('common_deleteConfirmation', data.drug.name),
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#ed5565",
 					confirmButtonText: TAPi18n.__('common_confirm')
 				}, function(){
-					Specialties.remove(data.specialty._id, function (error, result) {
+					Specialties.remove(data.drug._id, function (error, result) {
 						if (error) {
 							toastr['error'](error.message, TAPi18n.__('common_error'));
 						} 
@@ -57,11 +57,15 @@ Template.specialtyForm.onRendered(function () {
 							toastr['success'](TAPi18n.__('common_deleteSuccess'), TAPi18n.__('common_success'));
 						}
 					});
-					FlowRouter.go('specialtyList');
+					FlowRouter.go('drugList');
 				});
 			});
 		}
+
+		$("textarea[name=html]").summernote({
+			height: 300
+		});
 	});
 });
 
-Template.specialtyForm.onDestroyed(function () {});
+Template.drugForm.onDestroyed(function () {});

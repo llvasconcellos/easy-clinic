@@ -23,12 +23,7 @@ Template.specialtyList.helpers({
 	}
 });
 
-Template.specialtyList.onCreated(function () {
-	var self = this;
-	self.autorun(function() {
-		self.subscribe('specialties');
-	});
-});
+Template.specialtyList.onCreated(function () {});
 
 Template.specialtyList.onRendered(function () {
 	var table = this.data.dataTable;

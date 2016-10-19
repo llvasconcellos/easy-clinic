@@ -47,3 +47,11 @@ Meteor.publish('prescriptions', function () {
 Meteor.publish('singlePrescription', function (id) {
   return Prescriptions.find({_id: id});
 });
+
+Meteor.publish('drugs', function () {
+  return Drugs.find();
+});
+
+Meteor.publish('singleDrug', function (id) {
+  return Drugs.find({_id: id});
+});

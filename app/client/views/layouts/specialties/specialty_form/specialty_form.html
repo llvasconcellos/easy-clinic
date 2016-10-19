@@ -16,7 +16,7 @@
 					</div>
 					<div class="ibox-content">
 						{{#if isEditForm}}
-							{{> quickForm collection="Specialties" doc=specialty id="specialtyForm" type="update" buttonContent=saveButton class="form-inline specialty-form"}}
+							{{> quickForm collection="Specialties" doc=record id="specialtyForm" type="update" buttonContent=saveButton class="form-inline specialty-form"}}
 						{{else}}
 							{{> quickForm collection="Specialties" id="specialtyForm" type="insert" buttonContent=saveButton class="form-inline specialty-form"}}
 						{{/if}}

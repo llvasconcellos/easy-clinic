@@ -1,0 +1,25 @@
+<template name="drugList">
+ 	{{> pageHeading title='drugs_drugs'}}
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'drugs_drugs'}}
+							<small class="m-l-sm">{{_ 'drugs_manage'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
+							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'drugs_new'}}</strong>
+						</button>
+					</div>
+					<div class="ibox-content">
+						{{> ReactiveDatatable id="drugs-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
+					</div>
+					<div id="table-footer" class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -28,7 +28,6 @@ Template.prescriptionForm.onCreated(function () {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
 		}
 	});
-
 });
 
 Template.prescriptionForm.onRendered(function () {
@@ -77,54 +76,19 @@ Template.prescriptionForm.onRendered(function () {
 			});
 		}
 
+		var drugs = Drugs.find({}, {fields: {'name':1, _id: 0}}).fetch();
 
-		// $('textarea[name=prescription]').textcomplete([{
-		// 	medicamentos: [],
-		// 	match: /\b(\w{2,})$/,
-		// 	search: function search(term, callback) {
-		// 		console.log('aaaaa');
-		// 		callback($.map(this.medicamentos, function (medicamento) {
-		// 			return medicamento.toUpperCase().indexOf(term.toUpperCase()) >= 0 ? medicamento : null;
-		// 		}));
-		// 	},
-		// 	index: 1,
-		// 	replace: function replace(medicamento) {
-		// 		return medicamento.toUpperCase() + ' ';
-		// 	}
-		// }, { 
-		// 	campos: [
-		// 		'NOME_DO_PACIENTE', 
-		// 		'CPF_PACIENTE', 
-		// 		'RG_PACIENTE', 
-		// 		'DATA_DA_CONSULTA', 
-		// 		'HORARIO_DA_CONSULTA', 
-		// 		'NOME_PROFISSIONAL',
-		// 		'ENDERECO_PACIENTE'
-		// 	],
-		// 	match: /\B#(\w*)$/,
-		// 	search: function search(term, callback) {
-		// 		console.log('aquiiiii');
-		// 		callback($.map(this.campos, function (campo) {
-		// 			return campo.indexOf(term) === 0 ? campo : null;
-		// 		}));
-		// 	},
-		// 	index: 1,
-		// 	replace: function replace(campo) {
-		// 		return '#' + campo;
-		// 	}
-		// }]);
-
-
-		//$('textarea[name=prescription]').summernote({});
+		var drugsArray = $.map(drugs, function(value, index) {
+			return [value.name];
+		});
 
 		$("textarea[name=prescription]").summernote({
-			height: 200,
+			height: 300,
 			placeholder: TAPi18n.__('prescriptions_help'),
 			hint: [{
-					words: ['amoxicilina', 'atenolol'],
+					words: drugsArray,
 					match: /\b(\w{2,})$/,
 					search: function search(keyword, callback) {
-						console.log('aaaaa');
 						callback($.map(this.words, function (item) {
 							return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
 						}));

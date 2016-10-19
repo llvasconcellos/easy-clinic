@@ -66,6 +66,9 @@
                     <li class="{{isActivePath regex='prescriptionList'}}">
                         <a href="{{pathFor route='prescriptionList'}}" class="hide-on-phone"><i class="fa fa-file-text" aria-hidden="true"></i> <span class="nav-label">{{_ 'prescriptions_prescriptions'}}</span></a>
                     </li>
+                    <li class="{{isActivePath regex='drugList'}}">
+                        <a href="{{pathFor route='drugList'}}" class="hide-on-phone"><img style="width: 16px; margin-right: 4px;" src="/images/drugs.png" /> <span class="nav-label">{{_ 'drugs_drugs'}}</span></a>
+                    </li>
                     <li class="{{isActivePath regex='doctorList'}}">
                         <a href="{{pathFor route='doctorList'}}" class="hide-on-phone"><i class="fa fa-user-md"></i> <span class="nav-label">{{_ 'users_doctors'}}</span></a>
                     </li>

@@ -90,6 +90,9 @@ FlowRouter.route('/patients/:_id', {
 
 FlowRouter.route('/specialties', {
   name: 'specialtyList',
+  subscriptions: function(params) {
+    this.register('specialties', Meteor.subscribe('specialties', params._id));
+  },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "specialtyList"});
   }
@@ -145,6 +148,9 @@ FlowRouter.route('/prescriptions', {
 
 FlowRouter.route('/prescriptions/create', {
   name: 'prescriptionCreate',
+  subscriptions: function(params) {
+    this.register('drugs', Meteor.subscribe('drugs'));
+  },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "prescriptionForm"});
   }
@@ -153,10 +159,38 @@ FlowRouter.route('/prescriptions/create', {
 FlowRouter.route('/prescriptions/:_id', {
   name: 'prescriptionEdit',
   subscriptions: function(params) {
+    this.register('drugs', Meteor.subscribe('drugs'));
     this.register('prescription', Meteor.subscribe('singlePrescription', params._id));
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "prescriptionForm"});
+  }
+});
+
+FlowRouter.route('/drugs', {
+  name: 'drugList',
+  subscriptions: function(params) {
+    this.register('drugs', Meteor.subscribe('drugs', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "drugList"});
+  }
+});
+
+FlowRouter.route('/drugs/create', {
+  name: 'drugCreate',
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "drugForm"});
+  }
+});
+
+FlowRouter.route('/drugs/:_id', {
+  name: 'drugEdit',
+  subscriptions: function(params) {
+    this.register('drugs', Meteor.subscribe('singleDrug', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "drugForm"});
   }
 });
 
