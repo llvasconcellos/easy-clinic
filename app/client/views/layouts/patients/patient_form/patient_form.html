@@ -1,7 +1,7 @@
 <template name="patientForm">
 	{{> pageHeading title='patients_patients'}}
 
-	<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
+	<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
 		<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
 	</button>
 
@@ -24,10 +24,8 @@
 							<div class="panel-body">
 								{{#if isEditForm}}
 									{{> quickForm collection="Patients" doc=patient id="insertPatientForm" type="update" buttonContent=saveButton class="form-inline patient-form"}}
-									{{runUxAdjustments}}
 								{{else}}
 									{{> quickForm collection="Patients" id="insertPatientForm" type="insert" buttonContent=saveButton class="form-inline patient-form"}}
-									{{runUxAdjustments}}
 								{{/if}}
 							</div>
 						</div>

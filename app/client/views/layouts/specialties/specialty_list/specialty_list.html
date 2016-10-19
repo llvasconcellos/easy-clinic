@@ -10,12 +10,12 @@
 							<small class="m-l-sm">{{_ 'specialties_create-form-title'}}</small>
 						</h5>
 						{{!-->iboxTools--}}
-						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
 							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'specialties_new'}}</strong>
 						</button>
 					</div>
 					<div class="ibox-content">
-						{{> ReactiveDatatable tableData=reactiveDataFunction options=optionsObject}}
+						{{> ReactiveDatatable id="specialties-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
 					</div>
 					<div id="table-footer" class="ibox-footer"></div>
 				</div>

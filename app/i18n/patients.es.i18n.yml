@@ -2,7 +2,6 @@ patients_patients: Pacientes
 patients_create-form-title: Actualice Informaciones del Paciente
 patients_newpatient: Nuevo Paciente
 patients_list: Listar Pacientes
-patients_deleteConfirmation: "Estás seguro de que deseas eliminar al paciente %s?"
 schemas:
   patients:
     name:

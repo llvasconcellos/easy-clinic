@@ -1,1 +1,11 @@
 schedule_schedule: Schedule
+schedule_today: Today
+schedule_timelineDay: Timeline Day
+schedule_timelineThreeDays: Timeline 3 Days
+schedule_listDay: List Day
+schedule_listWeek: List Week
+schedule_agendaDay: Schedule Day
+schedule_agendaWeek: Schedule Week
+schedule_month: Month
+schedule_to-confirm: [To Confirm]
+schedule_event-canceled: Event Canceled

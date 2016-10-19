@@ -1,4 +1,4 @@
-<template name="doctorsList">
+<template name="doctorList">
 	{{> pageHeading title='users_doctors'}}
 
 	<div class="wrapper wrapper-content  animated fadeInRight">
@@ -12,7 +12,7 @@
 						{{!-->iboxTools--}}
 					</div>
 					<div class="ibox-content">
-						{{> ReactiveDatatable tableData=reactiveDataFunction options=optionsObject}}
+						{{> ReactiveDatatable id="doctors-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
 					</div>
 					<div id="table-footer" class="ibox-footer"></div>
 				</div>

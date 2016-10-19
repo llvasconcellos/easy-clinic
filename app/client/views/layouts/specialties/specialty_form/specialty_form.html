@@ -10,20 +10,17 @@
 							<small class="m-l-sm">{{_ 'specialties_create-form-title'}}</small>
 						</h5>
 						{{!-->iboxTools--}}
-						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-user">
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
 							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'specialties_new'}}</strong>
 						</button>
 					</div>
 					<div class="ibox-content">
 						{{#if isEditForm}}
-							{{> quickForm collection="Specialties" doc=specialty id="insertPatientForm" type="update" buttonContent=saveButton class="form-inline specialty-form"}}
-							{{runUxAdjustments}}
+							{{> quickForm collection="Specialties" doc=specialty id="specialtyForm" type="update" buttonContent=saveButton class="form-inline specialty-form"}}
 						{{else}}
-							{{> quickForm collection="Specialties" id="insertPatientForm" type="insert" buttonContent=saveButton class="form-inline specialty-form"}}
-							{{runUxAdjustments}}
+							{{> quickForm collection="Specialties" id="specialtyForm" type="insert" buttonContent=saveButton class="form-inline specialty-form"}}
 						{{/if}}
 					</div>
-					<div id="table-footer" class="ibox-footer"></div>
 				</div>
 			</div>
 		</div>

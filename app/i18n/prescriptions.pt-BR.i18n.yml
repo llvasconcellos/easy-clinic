@@ -1,0 +1,5 @@
+prescriptions_prescriptions: Prescrições
+prescriptions_prescription: Prescrição
+prescriptions_manage: Gerencie modelos de receituário
+prescriptions_new: Nova Prescrição
+prescriptions_help: "Você pode agilizar a criação da prescrição utilizando os seguintes atalhos: <b>digite #</b> para selecionar as informações sobre o paciente e digite o início do nome medicamento e selecione-o em uma lista."

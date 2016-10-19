@@ -1,0 +1,5 @@
+prescriptions_prescriptions: Prescriptions
+prescriptions_prescription: Prescription
+prescriptions_manage: Manage Prescription Models
+prescriptions_new: New Prescription
+prescriptions_help: "You can speed up editing prescriptions using the following shortcuts: <b>type #</b> to select patient info and type the first letters of a drug and select it on the list."

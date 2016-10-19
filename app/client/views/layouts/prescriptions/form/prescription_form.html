@@ -1,0 +1,30 @@
+<template name="prescriptionForm">
+  {{> pageHeading title='prescriptions_prescriptions'}}
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'prescriptions_prescriptions'}}
+							<small class="m-l-sm">{{_ 'prescriptions_manage'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
+							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'prescriptions_new'}}</strong>
+						</button>
+					</div>
+					<div class="ibox-content">
+						{{#if isEditForm}}
+							{{> quickForm collection="Prescriptions" doc=prescription id="prescriptionForm" type="update" buttonContent=saveButton class="prescription-form"}}
+						{{else}}
+							{{> quickForm collection="Prescriptions" id="prescriptionForm" type="insert" buttonContent=saveButton class="prescription-form"}}
+						{{/if}}
+						{{_ 'prescriptions_help'}}
+					</div>
+					<div id="table-footer" class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

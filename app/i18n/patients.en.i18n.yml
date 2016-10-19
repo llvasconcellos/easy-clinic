@@ -4,7 +4,6 @@ patients_patients: Patients
 patients_create-form-title: Edit Patient Information
 patients_newpatient: New Patient
 patients_list: List Patients
-patients_deleteConfirmation: "Do you really want to delete this patient %s?"
 schemas:
   patients:
     name:

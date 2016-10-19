@@ -59,3 +59,14 @@
     background-color: #1ab394 !important;
     font-weight: bold;
 }
+.dataTable > tbody > tr:hover {
+    background-color: #E0F2F1;
+    cursor: pointer;
+}
+.btn {
+    font-weight: bold;
+}
+
+#table-footer .btn {
+    margin-right: 10px;
+}

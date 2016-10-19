@@ -1,1 +1,11 @@
 schedule_schedule: Agenda
+schedule_today: Hoje
+schedule_timelineDay: Linha do Tempo Dia
+schedule_timelineThreeDays: Linha do Tempo 3 Dias
+schedule_listDay: Lista Dia
+schedule_listWeek: Lista Semana
+schedule_agendaDay: Agenda Dia
+schedule_agendaWeek: Agenda Semana
+schedule_month: Mês
+schedule_to-confirm: [A confirmar]
+schedule_event-canceled: Evento Cancelado

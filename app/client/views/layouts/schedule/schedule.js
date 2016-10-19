@@ -20,28 +20,6 @@ Template.schedule.onRendered(function () {
     //     }
     // });
 
-
-    // Initialize the external events
-    // $('#external-events div.external-event').each(function() {
-
-    //     // store data so the calendar knows to render an event upon drop
-    //     $(this).data('event', {
-    //         title: $.trim($(this).text()), // use the element's text as the event title
-    //         stick: true // maintain when user navigates (see docs on the renderEvent method)
-    //     });
-
-    //     // make the event draggable using jQuery UI
-    //     $(this).draggable({
-    //         zIndex: 1111999,
-    //         revert: true,      // will cause the event to go back to its
-    //         revertDuration: 0  //  original position after the drag
-    //     });
-
-    // });
-
-
-
-
     var doctors = Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
     calResources = [];
     doctors.forEach(function(doctor, doctorIndex){
@@ -80,51 +58,60 @@ Template.schedule.onRendered(function () {
 
     var events = Schedule.find().fetch();
 
-    // Initialize the calendar
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
         slotDuration: '00:20:00',
+        minTime: '06:00:00',
+        maxTime: '23:00:00',
+        locale: TAPi18n.getLanguage().toLowerCase(),
+        aspectRatio: 1.8,
+        navLinks: true,
+        //scrollTime: '00:00', // undo default 6am scrollTime
+        editable: true,
+        resourceLabelText: TAPi18n.__('users_doctors'),
         header: {
-            //left: 'today prev,next',
-            left: 'prev,next',
+            left: 'today prev,next',
             center: 'title',
             right: 'timelineDay,timelineThreeDays,listDay,listWeek,agendaDay,agendaWeek,month'
         },
+        buttonText: {
+            today: TAPi18n.__('schedule_today')
+        },
         views: {
             timelineDay: {
-                buttonText: 'Linha do Tempo Dia'
+                buttonText: TAPi18n.__('schedule_timelineDay')
             },
             timelineThreeDays: {
                 type: 'timeline',
-                buttonText: 'Linha do Tempo 3 Dias',
+                buttonText: TAPi18n.__('schedule_timelineThreeDays'),
                 duration: { 
                     days: 3 
                 }
             },
             listDay: { 
-                buttonText: 'Lista Dia'
+                buttonText: TAPi18n.__('schedule_listDay')
             },
             listWeek: { 
-                buttonText: 'Lista Semana'
+                buttonText: TAPi18n.__('schedule_listWeek')
             },
             agendaDay: { 
-                buttonText: 'Agenda Dia'
+                buttonText: TAPi18n.__('schedule_agendaDay')
             },
             agendaWeek: { 
-                buttonText: 'Agenda Semana'
+                buttonText: TAPi18n.__('schedule_agendaWeek')
             },
             month: { 
-                buttonText: 'Mês'
-            },
-            today: {
-                buttonText: 'Hoje'
+                buttonText: TAPi18n.__('schedule_month')
             }
         },
+        droppable: true, // this allows things to be dropped onto the calendar
+        // drop: function() {
+        //     // is the "remove after drop" checkbox checked?
+        //     if ($('#drop-remove').is(':checked')) {
+        //         // if so, remove the element from the "Draggable Events" list
+        //         $(this).remove();
+        //     }
+        // },
         selectable: true,
         selectHelper: true,
         selectOverlap: false,
@@ -161,7 +148,7 @@ Template.schedule.onRendered(function () {
                     resourceId: resource.id,
                     start: start.format(),
                     end: end.format(),
-                    title: "[A confirmar]",
+                    title: TAPi18n.__('schedule_to-confirm'),
                     constraint: 'available_hours'
                 }, function(error, result){
                     if (error) {
@@ -206,7 +193,7 @@ Template.schedule.onRendered(function () {
                                     throw error;
                                 }
                                 if (result) {
-                                    toastr['success']('Evento Cancelado', TAPi18n.__('common_success'));
+                                    toastr['warning'](TAPi18n.__('schedule_event-canceled'), TAPi18n.__('common_success'));
                                 }
                             });
                         });
@@ -262,7 +249,7 @@ Template.schedule.onRendered(function () {
                         $('#calendar').fullCalendar('removeEvents', function(event){
                             return (event._id === calEvent._id);
                         });
-                        toastr['success']('Evento Cancelado', TAPi18n.__('common_success'));
+                        toastr['warning'](TAPi18n.__('schedule_event-canceled'), TAPi18n.__('common_success'));
                     }
                 });
             });
@@ -277,25 +264,10 @@ Template.schedule.onRendered(function () {
                 content: event.title
             });
         },
-        minTime: '06:00:00',
-        maxTime: '23:00:00',
-        locale: TAPi18n.getLanguage().toLowerCase(),
-        //eventLimit: true, // allow "more" link when too many events
-        //now: '2016-09-07',
-        //defaultDate: '2016-09-12',
-        aspectRatio: 1.8,
-        navLinks: true, // can click day/week names to navigate views
-        //scrollTime: '00:00', // undo default 6am scrollTime
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
-        // drop: function() {
-        //     // is the "remove after drop" checkbox checked?
-        //     if ($('#drop-remove').is(':checked')) {
-        //         // if so, remove the element from the "Draggable Events" list
-        //         $(this).remove();
-        //     }
-        // },
-        resourceLabelText: TAPi18n.__('users_doctors'),
+        resourceRender: function(resourceObj, labelTds, bodyTds) {
+            // console.log(arguments);
+            // labelTds.css('background', 'blue');
+        },
         resources: calResources,
         events: events,
     });

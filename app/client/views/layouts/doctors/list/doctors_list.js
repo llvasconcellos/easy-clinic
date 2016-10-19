@@ -1,57 +1,12 @@
-/*****************************************************************************/
-/* PatientList: Event Handlers */
-/*****************************************************************************/
-Template.doctorsList.events({
-});
+Template.doctorList.events({});
 
-/*****************************************************************************/
-/* PatientList: Helpers */
-/*****************************************************************************/
-Template.doctorsList.helpers({
+Template.doctorList.helpers({
 	reactiveDataFunction: function () {
 		return function () {
 			return Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
 		};
 	},
 	optionsObject: {
-		//info: false,
-		tableClasses: 'table table-striped table-bordered table-hover',
-		dom: '<"html5buttons"B>lTfgitp',
-		buttons: [{
-			extend: 'copy',
-			text: '<i class="fa fa-files-o" aria-hidden="true"></i>'
-		},{
-			extend: 'csv',
-			text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i>'
-		},{
-			extend: 'print',
-			text: '<i class="fa fa-print" aria-hidden="true"></i>',
-			customize: function (win){
-				$(win.document.body).addClass('white-bg');
-				$(win.document.body).css('font-size', '10px');
-				$(win.document.body).find('table')
-					.addClass('compact')
-					.css('font-size', 'inherit');
-			}
-		}],
-		// fnDrawCallback: function(settings, json) { #TODO: editar direto na tabela
-		// 	$('.js-switch').each(function(index, element) {
-		// 		if(!$(element).data('switchery')) {
-		// 			var switchery = new Switchery(element, {
-		// 				size: 'small',
-		// 				color: '#2C8F7B',
-		// 				secondaryColor: '#ED5565'
-		// 			});
-		// 		}
-		// 	});
-		// },
-		infoCallback: function(settings, start, end, max, total, pre) {
-			var str = settings.oLanguage.sInfo
-				.replace('_START_', start)
-				.replace('_END_', end)
-				.replace('_TOTAL_', total);
-			$('#table-footer').html(str);
-		},
 		columns: [{
 			title: '',
 			//width: '1%',
@@ -99,20 +54,22 @@ Template.doctorsList.helpers({
 			//width: '1%',
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
-				return '<a href="' + FlowRouter.path('editDoctor', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit doctor-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
+				return '<a class="btn btn-info" href="' + FlowRouter.path('doctorEdit', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit doctor-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
 			}
 		}]
 	}
 });
 
-/*****************************************************************************/
-/* PatientList: Lifecycle Hooks */
-/*****************************************************************************/
-Template.doctorsList.onCreated(function () {
+Template.doctorList.onCreated(function () {});
+
+Template.doctorList.onRendered(function () {
+	var table = this.data.dataTable;
+	$(document).ready(function(){
+		$('#doctors-table tbody').on( 'click', 'tr', function () {
+			var rowData = table.row(this).data();
+			FlowRouter.go('doctorEdit', {_id: rowData._id})
+		});
+	});
 });
 
-Template.doctorsList.onRendered(function () {
-});
-
-Template.doctorsList.onDestroyed(function () {
-});
+Template.doctorList.onDestroyed(function () {});

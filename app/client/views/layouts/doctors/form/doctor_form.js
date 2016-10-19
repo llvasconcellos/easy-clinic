@@ -63,7 +63,7 @@ Template.doctorForm.events({
 		}
 	},
 	'click .cancel': (event, template) => {
-		FlowRouter.go('doctorsList');
+		FlowRouter.go('doctorList');
 	}
 });
 

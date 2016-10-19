@@ -40,10 +40,10 @@ Meteor.publish('settings', function () {
   return Settings.find();
 });
 
-Meteor.publish('receituario', function () {
-  return Receituario.find();
+Meteor.publish('prescriptions', function () {
+  return Prescriptions.find();
 });
 
-Meteor.publish('singleReceituario', function (id) {
-  return Receituario.find({_id: id});
+Meteor.publish('singlePrescription', function (id) {
+  return Prescriptions.find({_id: id});
 });

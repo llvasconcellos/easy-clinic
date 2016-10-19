@@ -45,3 +45,4 @@ common_deleteSuccess: Record deleted with success.
 common_confirm: Confirm
 common_enabled: Enabled
 common_disabled: Disabled
+common_deleteConfirmation: "Do you really want to delete this record %s?"

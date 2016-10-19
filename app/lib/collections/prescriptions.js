@@ -1,14 +1,14 @@
-Receituario = new Mongo.Collection('receituario');
+Prescriptions = new Mongo.Collection('prescriptions');
 
 var schema = {
   name: {
     type: String,
     trim: true
   },
-  receituario: {
+  prescription: {
     type: String,
     label: function() {
-      return 'Receituario';
+      return TAPi18n.__('prescriptions_prescription');
     },
     autoform: {
       type: 'textarea',
@@ -17,10 +17,10 @@ var schema = {
   },
 };
 
-Receituario.attachSchema(new SimpleSchema(schema));
+Prescriptions.attachSchema(new SimpleSchema(schema));
 
 if (Meteor.isServer) {
-  Receituario.allow({
+  Prescriptions.allow({
     insert: function (userId, doc) {
       return true;
     },

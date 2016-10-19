@@ -45,3 +45,4 @@ common_deleteSuccess: Registro removido com sucesso.
 common_confirm: Confirmar
 common_enabled: Ativo
 common_disabled: Inativo
+common_deleteConfirmation: "Tem certeza que deseja remover o registro %s?"
