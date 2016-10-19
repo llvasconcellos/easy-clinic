@@ -1,3 +1,278 @@
 <template name="dashboard">
-	<h1>Painel de Controle</h1>
+    {{> pageHeading title='common_dashboard' }}
+
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInRight">
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <!--div class="text-center float-e-margins p-md">
+                        <span>Turn on/off color/background or orientation version: </span>
+                        <a href="#" class="btn btn-xs btn-primary" id="lightVersion">Light version</a>
+                        <a href="#" class="btn btn-xs btn-primary" id="darkVersion">Dark version</a>
+                        <a href="#" class="btn btn-xs btn-primary" id="leftVersion">Left version</a>
+                    </div-->
+
+					<div class="ibox ">
+						<div class="ibox-title">
+							<h5>{{_ 'schedule_schedule'}}
+								<small class="m-l-sm">{{_ 'schedule_timeline'}}</small>
+							</h5>
+							{{!-->iboxTools--}}
+							<!--button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
+								<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'specialties_new'}}</strong>
+							</button-->
+						</div>
+	                    <div class="ibox-content" id="ibox-content">
+
+	                        <div id="vertical-timeline" class="vertical-container dark-timeline center-orientation">
+	                            <div class="vertical-timeline-block">
+	                                <div class="vertical-timeline-icon navy-bg">
+	                                    <i class="fa fa-briefcase"></i>
+	                                </div>
+
+	                                <div class="vertical-timeline-content">
+	                                    <h2>Consulta</h2>
+	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+	                                    <a href="#" class="btn btn-sm btn-primary"> Inicie o Atendimento</a>
+	                                    <span class="vertical-date">
+	                                        Hoje <br/>
+	                                        <small>20 out</small>
+	                                    </span>
+	                                </div>
+	                            </div>
+
+	                            <div class="vertical-timeline-block">
+	                                <div class="vertical-timeline-icon blue-bg">
+	                                    <i class="fa fa-file-text"></i>
+	                                </div>
+
+	                                <div class="vertical-timeline-content">
+	                                    <h2>Reunião</h2>
+	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
+	                                    <a href="#" class="btn btn-sm btn-success"> Saiba Mais </a>
+	                                    <span class="vertical-date">
+	                                        Hoje <br/>
+	                                        <small>20 out</small>
+	                                    </span>
+	                                </div>
+	                            </div>
+
+	                            <div class="vertical-timeline-block">
+	                                <div class="vertical-timeline-icon lazur-bg">
+	                                    <i class="fa fa-coffee"></i>
+	                                </div>
+
+	                                <div class="vertical-timeline-content">
+	                                    <h2>Consulta</h2>
+	                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since. </p>
+	                                    <a href="#" class="btn btn-sm btn-info">Inicie o Atendimento</a>
+	                                    <span class="vertical-date"> Hoje <br/><small>20 out</small></span>
+	                                </div>
+	                            </div>
+
+	                            <div class="vertical-timeline-block">
+	                                <div class="vertical-timeline-icon yellow-bg">
+	                                    <i class="fa fa-phone"></i>
+	                                </div>
+
+	                                <div class="vertical-timeline-content">
+	                                    <h2>Consulta</h2>
+	                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p>
+	                                    <span class="vertical-date">Hoje <br/><small>20 out</small></span>
+	                                </div>
+	                            </div>
+
+	                            <div class="vertical-timeline-block">
+	                                <div class="vertical-timeline-icon lazur-bg">
+	                                    <i class="fa fa-user-md"></i>
+	                                </div>
+
+	                                <div class="vertical-timeline-content">
+	                                    <h2>Consulta</h2>
+	                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.. </p>
+	                                    <span class="vertical-date">Hoje <br/><small>20 out</small></span>
+	                                </div>
+	                            </div>
+
+	                            <div class="vertical-timeline-block">
+	                                <div class="vertical-timeline-icon navy-bg">
+	                                    <i class="fa fa-comments"></i>
+	                                </div>
+
+	                                <div class="vertical-timeline-content">
+	                                    <h2>Consulta</h2>
+	                                    <p>WLorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.. </p>
+	                                    <span class="vertical-date">Hoje <br/><small>20 out</small></span>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                    </div>
+	                    <div id="table-footer" class="ibox-footer"></div>
+	                </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+            	<div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Lista de Tarefas</h5>
+                        {{>iboxTools}}
+                    </div>
+                    <div class="ibox-content">
+                        <ul class="todo-list m-t small-list">
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox1" checked>
+                                    <label for="checkbox1" class="todo-completed">
+                                        Ligar para fornecedor
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox2" >
+                                    <label for="checkbox2">
+                                        Comprar materiais
+                                    </label>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox3" checked>
+                                    <label for="checkbox3" class="todo-completed">
+                                        Dormir
+                                        <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 mins</small>
+                                    </label>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox4" checked>
+                                    <label for="checkbox4" class="todo-completed">
+                                        Comer
+                                    </label>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox5" >
+                                    <label for="checkbox5">
+                                        Ligar para fornecedor
+                                    </label>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox6" >
+                                    <label for="checkbox6">
+                                        Ligar para fornecedor
+                                    </label>
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox7" >
+                                    <label for="checkbox7">
+                                        Comer Comer Comer
+                                    </label>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Mensagens</h5>
+                        {{>iboxTools}}
+                    </div>
+                    <div class="ibox-content ibox-heading">
+                        <h3><i class="fa fa-envelope-o"></i> Novas Mensagens</h3>
+                        <small><i class="fa fa-tim"></i> Você tem 22 novas mensagens e 16 aguardando nos rascunhos.
+                        </small>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="feed-activity-list">
+
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right text-navy">1m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.
+                                    </div>
+                                    <small class="text-muted">Hoje 14:23 - 20/10/2016</small>
+                                </div>
+                            </div>
+
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right">2m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.</div>
+                                    <small class="text-muted">Hoje 14:23 - 20/10/2016</small>
+                                </div>
+                            </div>
+
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right">5m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.</div>
+                                    <small class="text-muted">Ontem 20:48 - 19/10/2016</small>
+                                </div>
+                            </div>
+
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right">5m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.</div>
+                                    <small class="text-muted">Ontem 20:48 - 19/10/2016</small>
+                                </div>
+                            </div>
+
+
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right">5m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.</div>
+                                    <small class="text-muted">Ontem 20:48 - 19/10/2016</small>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right">5m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.</div>
+                                    <small class="text-muted">Ontem 20:48 - 19/10/2016</small>
+                                </div>
+                            </div>
+                            <div class="feed-element">
+                                <div>
+                                    <small class="pull-right">5m atrás</small>
+                                    <strong>João da Silva</strong>
+
+                                    <div>Mussum Ipsum, cacilds vidis litro abertis. Paisis, filhis, espiritis santis. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum. Copo furadis é disculpa de bebadis, arcu quam euismod magna. Manduma pindureta quium dia nois paga.</div>
+                                    <small class="text-muted">Ontem 20:48 - 19/10/2016</small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
