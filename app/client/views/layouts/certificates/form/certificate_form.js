@@ -1,10 +1,10 @@
-Template.prescriptionForm.events({
+Template.certificateForm.events({
 	'click .new-record': function (event, template) {
-		FlowRouter.go('prescriptionCreate');
+		FlowRouter.go('certificateCreate');
 	}
 });
 
-Template.prescriptionForm.helpers({
+Template.certificateForm.helpers({
 	saveButton: function () {
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
 	},
@@ -12,17 +12,17 @@ Template.prescriptionForm.helpers({
 		return (FlowRouter.getParam('_id')) ? true : false;
 	},
 	record: function() {
-		var prescription = Prescriptions.findOne({_id: FlowRouter.getParam('_id')});
-		Template.instance().data.prescription = prescription;
-		return prescription;
+		var certificate = Certificates.findOne({_id: FlowRouter.getParam('_id')});
+		Template.instance().data.certificate = certificate;
+		return certificate;
 	}
 });
 
-Template.prescriptionForm.onCreated(function () {
-	AutoForm.addHooks('prescriptionForm', {
+Template.certificateForm.onCreated(function () {
+	AutoForm.addHooks('certificateForm', {
 		onSuccess: function(formType, result) {
 			toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
-			FlowRouter.go('prescriptionList');
+			FlowRouter.go('certificateList');
 		},
 		onError: function(formType, error) {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -30,16 +30,16 @@ Template.prescriptionForm.onCreated(function () {
 	});
 });
 
-Template.prescriptionForm.onRendered(function () {
+Template.certificateForm.onRendered(function () {
 
 	var data = this.data;
 	$(document).ready(function(){
-		var saveButton = $('.prescription-form button[type=submit]');
+		var saveButton = $('.certificate-form button[type=submit]');
 		var submitParent = saveButton.parent();
 		submitParent.addClass('text-right');
 		submitParent.detach().appendTo('#table-footer');
 		saveButton.click(function(){
-			$('.prescription-form').submit();
+			$('.certificate-form').submit();
 		});
 
 		var cancelBtn = $.parseHTML(`<button type="button" class="btn btn-white cancel" data-dismiss="modal">
@@ -48,7 +48,7 @@ Template.prescriptionForm.onRendered(function () {
 		$(cancelBtn).prependTo(submitParent);
 
 		$(cancelBtn).click(function(){
-			FlowRouter.go('prescriptionList');
+			FlowRouter.go('certificateList');
 		});
 
 		if(data.prescription) {
@@ -57,13 +57,13 @@ Template.prescriptionForm.onRendered(function () {
 			$(deleteBtn).click(function(event){
 				swal({
 					title: TAPi18n.__('common_areYouSure'),
-					text: TAPi18n.__('patients_deleteConfirmation', data.prescription.name),
+					text: TAPi18n.__('patients_deleteConfirmation', data.certificate.name),
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#ed5565",
 					confirmButtonText: TAPi18n.__('common_confirm')
 				}, function(){
-					Receituario.remove(data.prescription._id, function (error, result) {
+					Receituario.remove(data.certificate._id, function (error, result) {
 						if (error) {
 							toastr['error'](error.message, TAPi18n.__('common_error'));
 						} 
@@ -71,20 +71,20 @@ Template.prescriptionForm.onRendered(function () {
 							toastr['success'](TAPi18n.__('common_deleteSuccess'), TAPi18n.__('common_success'));
 						}
 					});
-					FlowRouter.go('prescriptionList');
+					FlowRouter.go('certificateList');
 				});
 			});
 		}
 
-		var drugs = Drugs.find({}, {fields: {'name':1, _id: 0}}).fetch();
+		var diseases = ICD10.find({}, {fields: {'icd':1, _id: 0}}).fetch();
 
-		var drugsArray = $.map(drugs, function(value, index) {
-			return [value.name];
+		var diseasesArray = $.map(diseases, function(value, index) {
+			return [value.icd];
 		});
 
-		$("textarea[name=prescription]").summernote({
+		$("textarea[name=certificate]").summernote({
 			height: 300,
-			placeholder: TAPi18n.__('prescriptions_help'),
+			placeholder: TAPi18n.__('certificates_help'),
 			toolbar: [
 				['history', ['undo', 'redo']],
 				['style', ['style', 'bold', 'italic', 'underline', 'clear']],
@@ -96,7 +96,7 @@ Template.prescriptionForm.onRendered(function () {
 				['misc', ['fullscreen']]
 			],
 			hint: [{
-					words: drugsArray,
+					words: diseasesArray,
 					match: /\b(\w{2,})$/,
 					search: function search(keyword, callback) {
 						callback($.map(this.words, function (item) {
@@ -138,4 +138,4 @@ Template.prescriptionForm.onRendered(function () {
 
 });
 
-Template.prescriptionForm.onDestroyed(function () {});
+Template.certificateForm.onDestroyed(function () {});

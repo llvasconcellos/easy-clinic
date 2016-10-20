@@ -1,0 +1,5 @@
+certificates_certificates: Medical Certificates
+certificates_certificate: Medical Certificate
+certificates_manage: Manage Medical Certificate Models
+certificates_new: New Certificate
+certificates_help: "You can speed up editing certificates using the following shortcuts: <b>type #</b> to select patient info and type the first letters of a ICD-10 disease and select it on the list."

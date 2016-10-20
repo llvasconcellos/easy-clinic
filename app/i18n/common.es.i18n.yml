@@ -46,3 +46,5 @@ common_confirm: Confirmar
 common_enabled: Activo
 common_disabled: Inactivo
 common_deleteConfirmation: "Estás seguro de que deseas eliminar al registro %s?"
+common_icd: ICD-10
+common_manage_icd: International Statistical Classification of Diseases and Related Health Problems

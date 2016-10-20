@@ -26,7 +26,9 @@ Package.onUse(function(api) {
     'jquery-datatables.js',
     'jquery-datatables.css',
     'template.html',
-    'template.js'
+    'template.js',
+    'jquery.highlight.js',
+    'dataTables.searchHighlight.min.js',
   ], 'client');
 });
 

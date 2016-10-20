@@ -46,3 +46,8 @@ common_confirm: Confirm
 common_enabled: Enabled
 common_disabled: Disabled
 common_deleteConfirmation: "Do you really want to delete this record %s?"
+common_icd: ICD-10
+common_manage_icd: International Statistical Classification of Diseases and Related Health Problems
+common_copy: Copy table contents to clipboard
+common_csv: Export table data to csv (excel)
+common_print: Print table contents

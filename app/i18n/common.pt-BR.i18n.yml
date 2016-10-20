@@ -46,3 +46,8 @@ common_confirm: Confirmar
 common_enabled: Ativo
 common_disabled: Inativo
 common_deleteConfirmation: "Tem certeza que deseja remover o registro %s?"
+common_icd: CID-10
+common_manage_icd: Classificação Estatística Internacional de Doenças e Problemas Relacionados com a Saúde
+common_copy: Copiar conteúdo da tablea para área de transferência
+common_csv: Exportar para o excel (csv)
+common_print: Imprimir tabela

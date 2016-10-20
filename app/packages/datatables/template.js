@@ -7,17 +7,18 @@ Template.ReactiveDatatable.rendered = function() {
 
 
     var defaultOptions = {
+        searchHighlight: true,
         tableClasses: 'table table-striped table-bordered table-hover',
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [{
             extend: 'copy',
-            text: '<i class="fa fa-files-o" aria-hidden="true"></i>'
+            text: '<i class="fa fa-files-o datatable-btn-copy" aria-hidden="true"></i>'
         },{
             extend: 'csv',
-            text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i>'
+            text: '<i class="fa fa-file-excel-o datatable-btn-csv" aria-hidden="true"></i>'
         },{
             extend: 'print',
-            text: '<i class="fa fa-print" aria-hidden="true"></i>',
+            text: '<i class="fa fa-print datatable-btn-print" aria-hidden="true"></i>',
             customize: function (win){
                 $(win.document.body).addClass('white-bg');
                 $(win.document.body).css('font-size', '10px');
@@ -69,6 +70,12 @@ Template.ReactiveDatatable.rendered = function() {
     });
 
     Template.parentData().dataTable = dt;
+
+    $(table).on( 'draw.dt', function () {
+         $('.datatable-btn-copy').parent().parent().attr('title', TAPi18n.__('common_copy'));
+        $('.datatable-btn-csv').parent().parent().attr('title', TAPi18n.__('common_csv'));
+        $('.datatable-btn-print').parent().parent().attr('title', TAPi18n.__('common_print'));
+    } );
 
     this.autorun(function() {
         reactiveDataTable.update(data.tableData());

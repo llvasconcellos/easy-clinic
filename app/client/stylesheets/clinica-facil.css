@@ -77,3 +77,6 @@ table.dataTable a.btn {
 #side-menu .fa{
     color: #36C1FF;
 }
+.highlight {
+    background: yellow;
+}

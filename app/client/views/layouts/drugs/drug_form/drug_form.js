@@ -63,7 +63,17 @@ Template.drugForm.onRendered(function () {
 		}
 
 		$("textarea[name=html]").summernote({
-			height: 300
+			height: 300,
+			toolbar: [
+				['history', ['undo', 'redo']],
+				['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+				['font', ['strikethrough', 'superscript', 'subscript']],
+				['fontsize', ['fontsize']],
+				['para', ['ul', 'ol', 'paragraph']],
+				['height', ['height']],
+				['insert', ['hr', 'table']],
+				['misc', ['fullscreen']]
+			]
 		});
 	});
 });

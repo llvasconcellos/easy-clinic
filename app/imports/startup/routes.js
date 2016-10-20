@@ -139,7 +139,7 @@ FlowRouter.route('/doctors/:_id', {
 FlowRouter.route('/prescriptions', {
   name: 'prescriptionList',
   subscriptions: function(params) {
-    this.register('prescriptions', Meteor.subscribe('prescriptions', params._id));
+    this.register('prescriptions', Meteor.subscribe('prescriptions'));
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "prescriptionList"});
@@ -167,10 +167,51 @@ FlowRouter.route('/prescriptions/:_id', {
   }
 });
 
+FlowRouter.route('/certificates', {
+  name: 'certificateList',
+  subscriptions: function(params) {
+    this.register('certificates', Meteor.subscribe('certificates'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "certificateList"});
+  }
+});
+
+FlowRouter.route('/certificates/create', {
+  name: 'certificateCreate',
+  subscriptions: function(params) {
+    this.register('icd10', Meteor.subscribe('icd10'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "certificateForm"});
+  }
+});
+
+FlowRouter.route('/certificates/:_id', {
+  name: 'certificateEdit',
+  subscriptions: function(params) {
+    this.register('icd10', Meteor.subscribe('icd10'));
+    this.register('certificate', Meteor.subscribe('singleCertificate', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "certificateForm"});
+  }
+});
+
+FlowRouter.route('/icd10', {
+  name: 'icd10List',
+  subscriptions: function(params) {
+    this.register('icd10', Meteor.subscribe('icd10'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "icd10List"});
+  }
+});
+
 FlowRouter.route('/drugs', {
   name: 'drugList',
   subscriptions: function(params) {
-    this.register('drugs', Meteor.subscribe('drugs', params._id));
+    this.register('drugs', Meteor.subscribe('drugs'));
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "drugList"});

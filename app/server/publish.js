@@ -48,10 +48,22 @@ Meteor.publish('singlePrescription', function (id) {
   return Prescriptions.find({_id: id});
 });
 
+Meteor.publish('certificates', function () {
+  return Certificates.find();
+});
+
+Meteor.publish('singleCertificate', function (id) {
+  return Certificates.find({_id: id});
+});
+
 Meteor.publish('drugs', function () {
   return Drugs.find();
 });
 
 Meteor.publish('singleDrug', function (id) {
   return Drugs.find({_id: id});
+});
+
+Meteor.publish('icd10', function () {
+  return ICD10.find();
 });

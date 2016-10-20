@@ -15,6 +15,9 @@ Template.drugList.helpers({
 			title: T9n.get('name'),
 			data: 'name'
 		},{
+			title: '',
+			data: 'search'
+		},{
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
 				return '<a class="btn btn-info" href="' + FlowRouter.path('drugEdit', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit patient-id" aria-hidden="true" data-userid="' + cellData + '"></i></a>';
