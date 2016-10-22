@@ -1,0 +1,190 @@
+<template name="import">
+	<b style="color:red">{{> pageHeading title='Em Desenvolvimento. Não use!'}}</b>
+
+	<div class="row  border-bottom white-bg dashboard-header">
+		<div class="col-sm-12">
+			<h2>Formato esperado:</h2>
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>name</th>
+							<th>bed</th>
+							<th>records</th>
+							<th>createdAt</th>
+							<th>dateOfBirth</th>
+							<th>healthInsurance</th>
+							<th>code</th>
+							<th>gender</th>
+							<th>maritalStatus</th>
+							<th>skinColor</th>
+							<th>placeOfBirth</th>
+							<th>literacy</th>
+							<th>CPF</th>
+							<th>RG</th>
+							<th>titularCPF</th>
+							<th>fathersName</th>
+							<th>mothersName</th>
+							<th>occupation</th>
+							<th>recommendedBy</th>
+							<th>prevRetorno</th>
+							<th>email</th>
+							<th>phone</th>
+							<th>mobile</th>
+							<th>zip</th>
+							<th>streetAddress_1</th>
+							<th>streetAddress_2</th>
+							<th>bairro</th>
+							<th>city</th>
+							<th>state</th>
+							<th>obs</th>
+							<th>picture</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>John Doe</td>
+							<td>2434234</td>
+							<td>2344321</td>
+							<td>2016-06-18 08:56:08.024</td>
+							<td>2016-06-18 08:56:08.024</td>
+							<td>Unimed</td>
+							<td>PC4323</td>
+							<td>M</td>
+							<td>Casado</td>
+							<td>Branca</td>
+							<td>Florianópolis</td>
+							<td>Doutorado</td>
+							<td>12345678910</td>
+							<td>2/R 245232</td>
+							<td>12345678910</td>
+							<td>John Lenon</td>
+							<td>Yoko Ono</td>
+							<td>Programador</td>
+							<td>Patch Adams</td>
+							<td>2016-06-18 08:56:08.024</td>
+							<td>email@website.com</td>
+							<td>+55 (48) 3344-7845</td>
+							<td>+55 (48) 9987-7845</td>
+							<td>88000-000</td>
+							<td>Rua Sem Nome, sn</td>
+							<td>apto. 60</td>
+							<td>Centro</td>
+							<td>Florianópolis</td>
+							<td>SC</td>
+							<td>Primeira consulta</td>
+							<td>data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAWgBaAAD/4gxYSUNDX1BST0ZJTEUAAQEAAAxITGlubwIQAAB...</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'users_doctors'}}
+							<small class="m-l-sm">{{_ 'doctors_list-title'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+					</div>
+					<div class="ibox-content">
+						<h4 class="page-header">Importar CSV</h4>
+						{{#if checkState 'idle'}}
+							<input type="file" name="uploadCSV" accept=".csv"/>
+							<!-- 	<div class="fileinput fileinput-new input-group" data-provides="fileinput">
+								<div class="form-control" data-trigger="fileinput">
+									<i class="glyphicon glyphicon-file fileinput-exists"></i>
+									<span class="fileinput-filename"></span>
+								</div>
+								<span class="input-group-addon btn btn-default btn-file">
+									<span class="fileinput-new">Select file</span>
+									<span class="fileinput-exists">Change</span>
+									<input type="file" name="uploadCSV"/>
+								</span>
+								<a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+							</div>  -->
+						{{/if}}
+						{{#if checkState 'uploading'}}
+							<p><i class="fa fa-spin fa-refresh"></i> Processando arquivo...</p>
+							{{> loading }}
+						{{/if}}
+						{{#if checkState 'uploaded'}}
+							<div class="import-buttons">
+								<button type="button" class="btn btn-danger cancel-import">
+									<i class="fa fa-trash" aria-hidden="true"></i> Cancelar Importação
+								</button>
+								<button class="btn btn-warning test-import" type="button">
+									<i class="fa fa-warning"></i> Testar Importação
+								</button>
+								{{#if checkSecondState 'ready'}}
+									<button class="btn btn-primary run-import" type="button">
+										<i class="fa fa-database"></i> Importar
+									</button>
+								{{/if}}
+							</div>
+							{{#if checkSecondState 'withErrors'}}
+								<div class="find-replace">
+									<div class="form-inline">
+										<div class="form-group">
+											<label for="find">Encontrar:</label>
+											<input type="text" name="find" />
+										</div>
+										<div class="form-group">
+											<label for="replace">Substituir por:</label>
+											<input type="text" name="replace" />
+										</div>
+										<div class="form-group">
+											<label for="field">Campo:</label>
+											<select name="field">
+												<option value="name">name</option>
+												<option value="bed">bed</option>
+												<option value="records">records</option>
+												<option value="createdAt">createdAt</option>
+												<option value="dateOfBirth">dateOfBirth</option>
+												<option value="healthInsurance">healthInsurance</option>
+												<option value="code">code</option>
+												<option value="gender">gender</option>
+												<option value="maritalStatus">maritalStatus</option>
+												<option value="skinColor">skinColor</option>
+												<option value="placeOfBirth">placeOfBirth</option>
+												<option value="literacy">literacy</option>
+												<option value="CPF">CPF</option>
+												<option value="RG">RG</option>
+												<option value="titularCPF">titularCPF</option>
+												<option value="fathersName">fathersName</option>
+												<option value="mothersName">mothersName</option>
+												<option value="occupation">occupation</option>
+												<option value="recommendedBy">recommendedBy</option>
+												<option value="prevRetorno">prevRetorno</option>
+												<option value="email">email</option>
+												<option value="phone">phone</option>
+												<option value="mobile">mobile</option>
+												<option value="zip">zip</option>
+												<option value="streetAddress_1">streetAddress_1</option>
+												<option value="streetAddress_2">streetAddress_2</option>
+												<option value="bairro">bairro</option>
+												<option value="city">city</option>
+												<option value="state">state</option>
+												<option value="obs">obs</option>
+												<option value="picture">picture</option>
+											</select>
+										</div>
+										<button type="button" class="btn btn-default replace">Substituir</button>
+									</div>
+								</div>
+							{{/if}}
+							{{> ReactiveDatatable id="import-patients-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
+						{{/if}}
+					</div>
+					<div id="table-footer" class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

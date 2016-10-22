@@ -64,6 +64,8 @@ schemas:
       label: Mother's Name
     occupation:
       label: Occupation
+    recommendedBy:
+      label: Recommended By
     prevRetorno:
       label: Prev. Retorno
     email:

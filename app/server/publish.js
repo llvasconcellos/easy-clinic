@@ -24,6 +24,10 @@ Meteor.publish('singlePatient', function (id) {
   return Patients.find({_id: id});
 });
 
+Meteor.publish('importPatients', function () {
+  return ImportPatients.find();
+});
+
 Meteor.publish('specialties', function () {
   return Specialties.find();
 });

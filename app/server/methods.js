@@ -1,7 +1,3 @@
-/*****************************************************************************/
-/*  Server Methods */
-/*****************************************************************************/
-
 Meteor.methods({
 	updateUser: function (userId, newPassword, data) {
 		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
@@ -58,6 +54,30 @@ Meteor.methods({
 	},
 	deleteScheduleEvent: function(event) {
 		Schedule.remove(event);
+		return TAPi18n.__('common_save-success');
+	},
+	testPatientImport: function(data) {
+		check(data, Array);
+
+		var errors = [];
+		for ( let i = 0; i < data.length; i++ ) {
+			let item   = data[ i ];
+			try {
+				ImportPatients.insert(item);
+			}
+			catch(e){
+				errors[i] = {details: e.sanitizedError.details, message: e.message};
+			}
+		}
+		ImportPatients.remove({});
+		return errors;
+	},
+	patientImport: function(data) {
+		check(data, Array);
+		for ( let i = 0; i < data.length; i++ ) {
+			let item   = data[ i ];
+			Patients.insert(item);
+		}
 		return TAPi18n.__('common_save-success');
 	}
 });

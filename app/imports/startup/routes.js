@@ -245,6 +245,16 @@ FlowRouter.route('/users', {
   }
 });
 
+FlowRouter.route('/import', {
+  name: 'import',
+  subscriptions: function(params) {
+    this.register('importPatients', Meteor.subscribe('importPatients'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "import"});
+  }
+});
+
 FlowRouter.notFound = {
   action() {
     BlazeLayout.render('blankLayout', {content: 'notFound'});

@@ -1,0 +1,41 @@
+.import-buttons {
+	margin-bottom: 10px;
+}
+#import-patients-table tr.error {
+	background-color: #F9BBBB;
+}
+.find-replace{
+	margin: 40px 0;
+}
+.find-replace label {
+    display: block;
+}
+.replace {
+	margin-top:14px;
+}
+td.withError {
+	border: solid 2px red !important;
+	width: 10em;
+    height: 6em;
+    position: relative;
+}
+td.withError::before,
+td.withError::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+td.withError::before {
+    border-right-color: #ccc;
+    border-top-color: #ccc;
+}
+
+td.withError::after {
+    border-width: 10px;
+    border-right-color: red;
+    border-top-color: red;
+}

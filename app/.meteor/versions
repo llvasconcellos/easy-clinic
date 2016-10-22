@@ -45,6 +45,7 @@ fastclick@1.0.12
 fortawesome:fontawesome@4.5.0
 geojson-utils@1.0.9
 gwendall:simple-schema-i18n@0.2.3
+harrison:papa-parse@1.1.1
 hot-code-push@1.0.4
 html-tools@1.0.11
 htmljs@1.0.11

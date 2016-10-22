@@ -1,6 +1,4 @@
-Patients = new Mongo.Collection('patients');
-
-var schema = {
+patientSchema = {
   picture: {
     type: String,
     optional: true,
@@ -277,7 +275,7 @@ var schema = {
     type: String,
     trim: true,
     optional: true,
-    max: 12,
+    max: 20,
     label: function() {
       return TAPi18n.__('schemas.patients.RG.label');
     }
@@ -322,6 +320,15 @@ var schema = {
     max: 100,
     label: function() {
       return TAPi18n.__('schemas.patients.occupation.label');
+    }
+  },
+  recommendedBy: {
+    type: String,
+    trim: true,
+    optional: true,
+    max: 100,
+    label: function() {
+      return TAPi18n.__('schemas.patients.recommendedBy.label');
     }
   },
   prevRetorno: {
@@ -450,43 +457,11 @@ var schema = {
       rows: 10
     }
   },
-  enabled: {
-    type: Boolean,
-    defaultValue: true,
-    label: function() {
-      return TAPi18n.__('schemas.patients.enabled.label');
-    }
-  }
-};
-
-Patients.attachSchema(new SimpleSchema(schema));
-
-if (Meteor.isServer) {
-  Patients.allow({
-    insert: function (userId, doc) {
-      return true;
-    },
-
-    update: function (userId, doc, fieldNames, modifier) {
-      return true;
-    },
-
-    remove: function (userId, doc) {
-      return true;
-    }
-  });
-
-  // Patients.deny({
-  //   insert: function (userId, doc) {
-  //     return true;
-  //   },
-
-  //   update: function (userId, doc, fieldNames, modifier) {
-  //     return true;
-  //   },
-
-  //   remove: function (userId, doc) {
-  //     return true;
+  // enabled: {
+  //   type: Boolean,
+  //   defaultValue: true,
+  //   label: function() {
+  //     return TAPi18n.__('schemas.patients.enabled.label');
   //   }
-  // });
-}
+  // }
+};

@@ -264,6 +264,10 @@ Template.schedule.onRendered(function () {
                 content: event.title
             });
         },
+        //resourceOrder: '-type1,type2',
+        resourceText: function(resource){
+            return 'Leo';
+        },
         resourceRender: function(resourceObj, labelTds, bodyTds) {
             // console.log(arguments);
             // labelTds.css('background', 'blue');
