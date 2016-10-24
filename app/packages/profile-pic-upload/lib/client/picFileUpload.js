@@ -97,7 +97,7 @@ Template.picFileUpload.events({
         toastr['error'](error.reason, TAPi18n.__('common_error'));
         return;
       }
-
+      
       uploadImage(global[template.collectionName()].insert({
         file: data,
         isBase64: true,
@@ -116,7 +116,7 @@ var uploadImage = function(upload, template) {
   });
 
   upload.on('error', function (error) {
-    console.log(error);
+    //console.log(error);
     toastr['error'](error.message, TAPi18n.__('common_error'));
     //AutoForm.getValidationContext().resetValidation();
     //AutoForm.getValidationContext().addInvalidKeys([{name: Template.instance().inputName, type: "uploadError", value: error.reason}]);
@@ -135,4 +135,4 @@ var uploadImage = function(upload, template) {
   });
 
   upload.start();
-}
+};

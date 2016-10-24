@@ -1,3 +1,17 @@
+const saveImage = function(data) {
+	console.log('aquii');
+	Images.write(new Buffer(data, 'base64'), {
+		fileName: 'cam.jpg',
+		type: 'image/jpg'
+	}, function (error, fileRef) {
+		if (error) {
+			throw error;
+		} else {
+			return fileRef._id;
+		}
+	});
+};
+
 Meteor.methods({
 	updateUser: function (userId, newPassword, data) {
 		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
@@ -58,7 +72,6 @@ Meteor.methods({
 	},
 	testPatientImport: function(data) {
 		check(data, Array);
-
 		var errors = [];
 		for ( let i = 0; i < data.length; i++ ) {
 			let item   = data[ i ];
@@ -66,7 +79,12 @@ Meteor.methods({
 				ImportPatients.insert(item);
 			}
 			catch(e){
-				errors[i] = {details: e.sanitizedError.details, message: e.message};
+				if(e.sanitizedError) {
+					errors[i] = {details: e.sanitizedError.details, message: e.message};
+				}
+				else {
+					throw error;
+				}
 			}
 		}
 		ImportPatients.remove({});
@@ -76,7 +94,32 @@ Meteor.methods({
 		check(data, Array);
 		for ( let i = 0; i < data.length; i++ ) {
 			let item   = data[ i ];
-			Patients.insert(item);
+			try{
+				if(item['picture']) {
+					var picture = item['picture'];
+					if(item['picture'].indexOf('mime64:/') != -1) {
+						picture = picture.replace('mime64:/', '');
+					}
+					item['picture'] = null;
+					var patient = Patients.insert(item);
+					var fileRef = Images.write(new Buffer(picture, 'base64'), {
+						fileName: 'cam.jpg',
+						type: 'image/jpg'
+					}, function(error, fileRef){
+						if(fileRef) {
+							Patients.update(patient, {$set:{
+								picture: fileRef._id
+							}});
+						}
+					});
+				}
+				else {
+					Patients.insert(item);
+				}
+			}
+			catch(e) {
+				console.log(e.message);
+			}
 		}
 		return TAPi18n.__('common_save-success');
 	}

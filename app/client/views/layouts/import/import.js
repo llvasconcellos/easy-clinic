@@ -1,6 +1,4 @@
-Template.import.onRendered(() => {
-	
-});
+Template.import.onRendered(() => {});
 
 Template.import.onCreated( () => {
 	var defaultValue = 'idle';
@@ -9,6 +7,11 @@ Template.import.onCreated( () => {
 	}
 	Template.instance().state = new ReactiveVar(defaultValue);
 	Template.instance().secondState = new ReactiveVar('idle');
+});
+
+Template.import.onDestroyed(() => {
+	Session.set('patientsBuffer', undefined);
+	delete Session.keys.patientsBuffer;
 });
 
 Template.import.helpers({
@@ -199,21 +202,22 @@ var convertSpecialChars = function(str){
 var normalize = function(object) {
 	for (var key in object) {
 		if (object.hasOwnProperty(key)) {
-			object[key] = object[key].trim();
+			if(object[key]){
+				object[key] = object[key].trim();
+			}
 			if(object[key] == '') {
 				object[key] = null;
 			}
 		}
 	}
-	if((object['createdAt'] != null) || (object['obs'] != undefined) 
-		|| (object['createdAt'] != '')){
+	if(!object['createdAt']) {
 		object['createdAt'] = new Date();
 	}
-	if((object['obs'] != undefined) && (object['obs'] != '')){
-		try{
+	if(object['obs']) {
+		try {
 			object['obs'] = convertSpecialChars(convertToPlain(object['obs']));
 		}
-		catch(e){
+		catch(e) {
 			toastr['error'](e.message, TAPi18n.__('common_error'));
 		}
 	}
@@ -257,14 +261,18 @@ var execute = function(event, template, method) {
 	var serverMethod = 'patientImport';
 	var errorMessage = 'Occorreu um erro ao processar os dados.';
 	var successMessage = 'Importação executada com sucesso.';
+	var finishedState = 'idle';
+	var finishedSecondState = 'idle';
 	if(method == 'test'){
 		state = 'testing';
 		iconClass = 'fa-warning';
 		serverMethod = 'testPatientImport';
 		errorMessage = 'Existem erros para serem corrigidos.';
 		successMessage = 'Nenhum erro encontrado. Pronto para Importar!';
+		finishedState = 'uploaded';
+		finishedSecondState = 'ready';
 	}
-	template.secondState.set(state);
+	//template.secondState.set(state);
 	var btnIcon = $(event.target).find('.' + iconClass);
 	btnIcon.removeClass(iconClass).addClass('fa-spin fa-refresh');
 
@@ -273,18 +281,13 @@ var execute = function(event, template, method) {
 			if ( error ) {
 				toastr['error'](error.message, TAPi18n.__('common_error'));
 			} else {
-				if(response.length > 0) {
-					if(check(response, Array)){
-						template.secondState.set('withErrors');
-						toastr['error'](TAPi18n.__(errorMessage), TAPi18n.__('common_error'));
-						markErrors(response);
-					}
-					else {
-						template.secondState.set('idle');
-						toastr['success'](TAPi18n.__(successMessage), TAPi18n.__('common_success'));
-					}
+				if(Array.isArray(response) && response.length > 0){
+					template.secondState.set('withErrors');
+					toastr['error'](TAPi18n.__(errorMessage), TAPi18n.__('common_error'));
+					markErrors(response);
 				}
 				else {
+					template.state.set('uploaded');
 					template.secondState.set('ready');
 					toastr['success'](TAPi18n.__(successMessage), TAPi18n.__('common_success'));
 				}
@@ -311,8 +314,8 @@ Template.import.events({
 		var patientsBuffer = Session.get('patientsBuffer');
 
 		patientsBuffer.forEach(function(patient, index, patients){
-			if(patient[field] === find) {
-				patient[field] = replace;
+			if(patient[field]){
+				patient[field] = patient[field].replace(find, replace);
 			}
 		});
 		Session.set('patientsBuffer', patientsBuffer);
@@ -344,15 +347,6 @@ Template.import.events({
 
 				Session.set('patientsBuffer', results.data);
 				template.state.set('uploaded');
-
-				// Meteor.call( 'parseUpload', results.data, ( error, response ) => {
-				// if ( error ) {
-				// toastr['error'](error.message, TAPi18n.__('common_error'));
-				// } else {
-				// toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
-				// }
-				// 
-				// });
 			}
 		});
 	}
