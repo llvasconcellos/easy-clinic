@@ -1,17 +1,3 @@
-const saveImage = function(data) {
-	console.log('aquii');
-	Images.write(new Buffer(data, 'base64'), {
-		fileName: 'cam.jpg',
-		type: 'image/jpg'
-	}, function (error, fileRef) {
-		if (error) {
-			throw error;
-		} else {
-			return fileRef._id;
-		}
-	});
-};
-
 Meteor.methods({
 	updateUser: function (userId, newPassword, data) {
 		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
@@ -102,16 +88,7 @@ Meteor.methods({
 					}
 					item['picture'] = null;
 					var patient = Patients.insert(item);
-					var fileRef = Images.write(new Buffer(picture, 'base64'), {
-						fileName: 'cam.jpg',
-						type: 'image/jpg'
-					}, function(error, fileRef){
-						if(fileRef) {
-							Patients.update(patient, {$set:{
-								picture: fileRef._id
-							}});
-						}
-					});
+					Patients.addPicture(picture, patient);
 				}
 				else {
 					Patients.insert(item);

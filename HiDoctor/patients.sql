@@ -1,5 +1,4 @@
 select 
---	'"' || replace("Paci_me_Foto", 'mime64://9j/', 'data:image/jpeg;base64,/9j/') || '"' as "picture",
 	"Paci_me_Foto" as "picture",
 	"Paci_tx_NomePaciente" as "name",
 	"Paci_tx_Leito" as "bed",
@@ -19,7 +18,7 @@ select
 	"Paci_tx_ProfissaoPaciente" as "occupation",
 	"Paci_tx_IndicadoPorPaciente" as "recommendedBy",
 	"Paci_dt_Retorno" as "prevRetorno",
-	"Paci_tx_EMail" as "email",
+	(CASE WHEN (trim("Paci_tx_EMail") IS NULL OR trim("Paci_tx_EMail") = '') THEN trim("Paci_tx_EMailMed") ELSE trim("Paci_tx_EMail") END) as "email",
 	"Paci_tx_TelefonesPaciente" as "phone",
 	"Paci_tx_CEPPaciente" as "zip",
 	"Paci_tx_LogradouroPaciente" as "streetAddress_1",

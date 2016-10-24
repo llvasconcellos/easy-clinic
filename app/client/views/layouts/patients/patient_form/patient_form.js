@@ -19,8 +19,9 @@ Template.patientForm.helpers({
 		return (FlowRouter.getParam('_id')) ? true : false;
 	},
 	patient: function() {
-		Template.patientForm.data = Patients.findOne({_id: FlowRouter.getParam('_id')}); 
-		return Template.patientForm.data;
+		var record = Patients.findOne({_id: FlowRouter.getParam('_id')});
+		Template.instance().data.patient = record;
+		return record;
 	}
 });
 
@@ -45,6 +46,7 @@ Template.patientForm.onCreated(function () {
 });
 
 Template.patientForm.onRendered(function () {
+	var self = this;
 	$(document).ready(function(){
 		$('input[name=zip]').parent().before('<div class="hr-line-dashed"></div>');
 		$('textarea[name=obs]').parent().before('<div class="hr-line-dashed"></div>');
@@ -67,19 +69,18 @@ Template.patientForm.onRendered(function () {
 										</button>`);
 
 			$(deleteBtn).prependTo(submitParent);
-			
-			var self = this;
+
 			$(deleteBtn).click(function(event) {
-				var patient = Patients.findOne(self._id);
+				var patient = Patients.findOne(self.data.patient._id);
 				swal({
 					title: TAPi18n.__('common_areYouSure'),
-					text: TAPi18n.__('common_deleteConfirmation', patient.name),
+					text: TAPi18n.__('common_deleteConfirmation', self.data.patient.name),
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#ed5565",
 					confirmButtonText: TAPi18n.__('common_confirm')
 				}, function(){
-					Patients.remove(self._id, function (error, result) {
+					Patients.remove(self.data.patient._id, function (error, result) {
 						if (error) {
 							toastr['error'](error.message, TAPi18n.__('common_error'));
 						} 

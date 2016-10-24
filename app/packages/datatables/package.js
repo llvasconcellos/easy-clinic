@@ -29,6 +29,7 @@ Package.onUse(function(api) {
     'template.js',
     'jquery.highlight.js',
     'dataTables.searchHighlight.min.js',
+    'accent-neutralize.js',
   ], 'client');
 });
 
