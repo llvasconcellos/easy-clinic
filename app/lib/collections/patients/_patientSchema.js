@@ -359,13 +359,13 @@ patientSchema = {
       type: 'masked-input',
       mask: '(00) 0000-0000',
       placeholder: '(___) ___-____',
-      maskOptions: {
-        onKeyPress: function(val, e, field, options) {
-          field.mask(function (val) {
-            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-          }, options);
-        }
-      }
+      // maskOptions: {
+      //   onKeyPress: function(val, e, field, options) {
+      //     field.mask(function (val) {
+      //       return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+      //     }, options);
+      //   }
+      // }
     }
   },
   mobile: {
@@ -378,13 +378,13 @@ patientSchema = {
       type: 'masked-input',
       mask: '(00) 0000-0000',
       placeholder: '(___) ___-____',
-      maskOptions: {
-        onKeyPress: function(val, e, field, options) {
-          field.mask(function (val) {
-            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-          }, options);
-        }
-      }
+      // maskOptions: {
+      //   onKeyPress: function(val, e, field, options) {
+      //     field.mask(function (val) {
+      //       return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+      //     }, options);
+      //   }
+      // }
     }
   },
   // #TODO: address fields per country ISSUEID #43
