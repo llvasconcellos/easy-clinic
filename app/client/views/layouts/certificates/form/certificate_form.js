@@ -138,4 +138,6 @@ Template.certificateForm.onRendered(function () {
 
 });
 
-Template.certificateForm.onDestroyed(function () {});
+Template.certificateForm.onDestroyed(function () {
+	$("textarea[name=certificate]").summernote('destroy');
+});

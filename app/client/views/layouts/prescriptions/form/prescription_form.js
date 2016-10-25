@@ -138,4 +138,6 @@ Template.prescriptionForm.onRendered(function () {
 
 });
 
-Template.prescriptionForm.onDestroyed(function () {});
+Template.prescriptionForm.onDestroyed(function () {
+	$("textarea[name=prescription]").summernote('destroy');
+});
