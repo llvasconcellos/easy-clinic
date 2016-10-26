@@ -51,3 +51,4 @@ common_manage_icd: Classificação Estatística Internacional de Doenças e Prob
 common_copy: Copiar conteúdo da tablea para área de transferência
 common_csv: Exportar para o excel (csv)
 common_print: Imprimir tabela
+common_notAllowed: Permissão Negada

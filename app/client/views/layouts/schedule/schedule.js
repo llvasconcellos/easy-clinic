@@ -56,7 +56,47 @@ Template.schedule.onRendered(function () {
         });
     });
 
-    var events = Schedule.find().fetch();
+    var showEventModal = function(scheduleEvent){
+        event = Schedule.findOne({_id: scheduleEvent});
+        $('#scheduleEventForm .scheduleTitle').html(moment(event.start).format('LLLL'));
+        $('#scheduleEventForm').modal();
+        if(event.patient){
+            $('#scheduleEventForm select[name=patients]').val(event.patient);
+        } else {
+            $('#scheduleEventForm select[name=patients]').val('');
+        }
+        $('.chosen-select').trigger('chosen:updated');
+        $('#scheduleEventForm .save').off('click');
+        $('#scheduleEventForm .delete-btn').off('click');
+        $('#scheduleEventForm .save').click(function(event){
+            var patient = $('#scheduleEventForm select[name=patients]').val();
+            patient = Patients.findOne({_id: patient});
+            if(patient){
+                Schedule.update(scheduleEvent, {$set: {
+                    patient: patient._id,
+                    title: patient.name
+                }}, function(error, result){
+                    if (error) {
+                        toastr['error'](error.message, TAPi18n.__('common_error'));
+                    }
+                    if (result) {
+                        $('#scheduleEventForm').modal('hide');
+                        toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
+                    }
+                });
+            }
+        });
+        $('#scheduleEventForm .delete-btn').click(function(event){
+            Schedule.remove(scheduleEvent, function(error, result){
+                if (error) {
+                    toastr['error'](error.message, TAPi18n.__('common_error'));
+                }
+                if (result) {
+                    toastr['warning'](TAPi18n.__('schedule_event-canceled'), TAPi18n.__('common_success'));
+                }
+            });
+        });
+    };
 
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
@@ -123,8 +163,7 @@ Template.schedule.onRendered(function () {
                 var weekday = selectInfo.start.day();
                 if(doctor.workHours[weekday] === null){
                     return false;
-                }
-                else {
+                } else {
                     var allowed = false;
                     doctor.workHours[weekday].forEach(function(element, index, array){
                         var docStart = moment(element.start, 'HH:mm');
@@ -142,136 +181,28 @@ Template.schedule.onRendered(function () {
             }
         },
         select: function(start, end, jsEvent, view, resource){
-            var calEvent = null;
-            var scheduleEvent = null;
-            try{
-                Meteor.call('saveScheduleEvent', {
-                    resourceId: resource.id,
-                    start: start.format(),
-                    end: end.format(),
-                    title: TAPi18n.__('schedule_to-confirm'),
-                    constraint: 'available_hours'
-                }, function(error, result){
-                    if (error) {
-                        throw error;
+            Schedule.insert({
+                resourceId: resource.id,
+                start: start.format(),
+                end: end.format(),
+                title: TAPi18n.__('schedule_to-confirm'),
+                constraint: 'available_hours'
+            }, function(error, result){
+                calendar.fullCalendar('unselect');
+                if (error) {
+                    if(error.error == 403){
+                        toastr['error'](TAPi18n.__('schedule_notAllowedError'), TAPi18n.__('common_notAllowed'));
+                    } else {
+                        toastr['error'](error.message, TAPi18n.__('common_error'));
                     }
-                    if (result) {
-                        calEvent = calendar.fullCalendar('renderEvent', {
-                            title: TAPi18n.__('schedule_to-confirm'),
-                            start: start.format(),
-                            end: end.format(),
-                            resourceId: resource.id,
-                            //description: ""
-                        }, true);
-
-                        scheduleEvent = result;
-                        $('#scheduleEventForm .scheduleTitle').html(start.format('LLLL'));
-                        $('#scheduleEventForm').modal();
-                        $('#scheduleEventForm .save').off('click');
-                        $('#scheduleEventForm .delete-btn').off('click');
-                        $('#scheduleEventForm .save').click(function(event){
-                            var patient = $('#scheduleEventForm select[name=patients]').val();
-                            patient = Patients.findOne({_id: patient});
-                            if(patient){
-                                Meteor.call('saveScheduleEvent', {
-                                    patient: patient._id,
-                                    title: patient.name
-                                },
-                                result,
-                                function(error, result){
-                                    if (error) {
-                                        throw error;
-                                    }
-                                    if (result) {
-                                         $('#calendar').fullCalendar('removeEvents', function(event){
-                                            return (event._id === calEvent[0]._id);
-                                        });
-                                        calendar.fullCalendar('renderEvent', {
-                                            title: patient.name,
-                                            start: start,
-                                            end: end,
-                                            resourceId: resource.id,
-                                            //description: ""
-                                        }, true);
-                                        calendar.fullCalendar('unselect');
-                                        $('#scheduleEventForm').modal('hide');
-                                        toastr['success'](result, TAPi18n.__('common_success'));
-                                    }
-                                });
-                            }
-                        });
-                        $('#scheduleEventForm .delete-btn').click(function(event){
-                            Meteor.call('deleteScheduleEvent', scheduleEvent,
-                            function(error, result){
-                                if (error) {
-                                    throw error;
-                                }
-                                if (result) {
-                                    $('#calendar').fullCalendar('removeEvents', function(event){
-                                        return (event._id === calEvent[0]._id);
-                                    });
-                                    toastr['warning'](TAPi18n.__('schedule_event-canceled'), TAPi18n.__('common_success'));
-                                }
-                            });
-                        });
-                    }
-                });
-            } catch (error) {
-                toastr['error'](error.message, TAPi18n.__('common_error'));
-            }
-        },
-        eventClick: function(calEvent, jsEvent, view) {
-            $('#scheduleEventForm .scheduleTitle').html(calEvent.start.format('LLLL'));
-            $('#scheduleEventForm').modal();
-            $('#scheduleEventForm select[name=patients]').val(calEvent.patient);
-            $('.chosen-select').trigger('chosen:updated');
-            $('#scheduleEventForm .save').off('click');
-            $('#scheduleEventForm .delete-btn').off('click');
-            $('#scheduleEventForm .save').click(function(event){
-                var patient = $('#scheduleEventForm select[name=patients]').val();
-                patient = Patients.findOne({_id: patient});
-                if(patient){
-                    Meteor.call('saveScheduleEvent', {
-                        patient: patient._id,
-                        title: patient.name
-                    },
-                    calEvent._id,
-                    function(error, result){
-                        if (error) {
-                            throw error;
-                        }
-                        if (result) {
-                            $('#calendar').fullCalendar('removeEvents', function(event){
-                                return (event._id === calEvent._id);
-                            });
-                            calendar.fullCalendar('renderEvent', {
-                                title: patient.name,
-                                start: calEvent.start,
-                                end: calEvent.end,
-                                resourceId: calEvent.resourceId,
-                                //description: ""
-                            }, true);
-                            calendar.fullCalendar('unselect');
-                            $('#scheduleEventForm').modal('hide');
-                            toastr['success'](result, TAPi18n.__('common_success'));
-                        }
-                    });
+                }
+                if (result) {
+                    showEventModal(result);
                 }
             });
-            $('#scheduleEventForm .delete-btn').click(function(event){
-                Meteor.call('deleteScheduleEvent', calEvent._id,
-                function(error, result){
-                    if (error) {
-                        throw error;
-                    }
-                    if (result) {
-                        $('#calendar').fullCalendar('removeEvents', function(event){
-                            return (event._id === calEvent._id);
-                        });
-                        toastr['warning'](TAPi18n.__('schedule_event-canceled'), TAPi18n.__('common_success'));
-                    }
-                });
-            });
+        },
+        eventClick: function(calEvent, jsEvent, view) {
+            showEventModal(calEvent._id);
         },
         eventRender: function(event, element, timelineView) {
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {
@@ -308,7 +239,19 @@ Template.schedule.onRendered(function () {
             // labelTds.css('background', 'blue');
         },
         resources: calResources,
-        events: events,
+        //events: getEvents,
+    });
+
+    this.autorun(function() {
+        if($('#calendar').fullCalendar('getEventSources').length == 0) {
+            $('#calendar').fullCalendar('addEventSource', function (start, end, timezone, callback) {
+                var events = Schedule.find().fetch();
+                if(callback){
+                    callback(events);
+                }
+            });
+        }
+        $('#calendar').fullCalendar('refetchEvents');
     });
 });
 

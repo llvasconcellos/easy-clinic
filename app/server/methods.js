@@ -39,23 +39,6 @@ Meteor.methods({
 		}
 		return TAPi18n.__('common_save-success');
 	},
-	saveScheduleEvent: function (event, eventId) {
-		if(!eventId){
-			var scheduleEvent = Schedule.insert(event);
-			return scheduleEvent;
-		}
-		else {
-			Schedule.update(eventId, {$set: {
-				title: event.title,
-				patient: event.patient
-			}});
-			return TAPi18n.__('common_save-success');
-		}
-	},
-	deleteScheduleEvent: function(event) {
-		Schedule.remove(event);
-		return TAPi18n.__('common_save-success');
-	},
 	testPatientImport: function(data) {
 		check(data, Array);
 		var errors = [];

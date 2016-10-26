@@ -8,5 +8,6 @@ schedule_agendaDay: Agenda Dia
 schedule_agendaWeek: Agenda Semana
 schedule_month: Mês
 schedule_to-confirm: [A confirmar]
-schedule_event-canceled: Evento Cancelado
+schedule_event-canceled: Consulta Cancelada
 schedule_timeline: Sua linha do tempo
+schedule_notAllowedError: Desculpe, este horário acabou de ser reservado por outra pessoa.

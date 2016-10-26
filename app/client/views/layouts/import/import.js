@@ -287,8 +287,8 @@ var execute = function(event, template, method) {
 					markErrors(response);
 				}
 				else {
-					template.state.set('uploaded');
-					template.secondState.set('ready');
+					template.state.set(finishedState);
+					template.secondState.set(finishedSecondState);
 					toastr['success'](TAPi18n.__(successMessage), TAPi18n.__('common_success'));
 				}
 			}

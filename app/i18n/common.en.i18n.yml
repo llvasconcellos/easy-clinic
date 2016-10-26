@@ -51,3 +51,4 @@ common_manage_icd: International Statistical Classification of Diseases and Rela
 common_copy: Copy table contents to clipboard
 common_csv: Export table data to csv (excel)
 common_print: Print table contents
+common_notAllowed: Not Allowed

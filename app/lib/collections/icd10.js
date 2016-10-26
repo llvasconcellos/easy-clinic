@@ -8,6 +8,8 @@ var schema = {
 };
 
 if (Meteor.isClient) {
+  //var icd10Observer = new PersistentMinimongo2(ICD10, 'icd10');
+  
   schema.icd.label = function() {
     return TAPi18n.__('common_icd');
   };

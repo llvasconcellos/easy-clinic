@@ -1,10 +1,375 @@
 /*
- * metismenu - v2.0.2
+ * metismenu - v2.5.2
  * A jQuery menu plugin
- * https://github.com/onokumus/metisMenu
+ * https://github.com/onokumus/metisMenu#readme
  *
- * Made by Osman Nuri Okumus
+ * Made by Osman Nuri Okumuş <onokumus@gmail.com> (https://github.com/onokumus)
  * Under MIT License
  */
 
-!function(a){"use strict";function b(){var a=document.createElement("mm"),b={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var c in b)if(void 0!==a.style[c])return{end:b[c]};return!1}function c(b){return this.each(function(){var c=a(this),d=c.data("mm"),f=a.extend({},e.DEFAULTS,c.data(),"object"==typeof b&&b);d||c.data("mm",d=new e(this,f)),"string"==typeof b&&d[b]()})}a.fn.emulateTransitionEnd=function(b){var c=!1,e=this;a(this).one("mmTransitionEnd",function(){c=!0});var f=function(){c||a(e).trigger(d.end)};return setTimeout(f,b),this};var d=b();d&&(a.event.special.mmTransitionEnd={bindType:d.end,delegateType:d.end,handle:function(b){return a(b.target).is(this)?b.handleObj.handler.apply(this,arguments):void 0}});var e=function(b,c){this.$element=a(b),this.options=a.extend({},e.DEFAULTS,c),this.transitioning=null,this.init()};e.TRANSITION_DURATION=350,e.DEFAULTS={toggle:!0,doubleTapToGo:!1,activeClass:"active"},e.prototype.init=function(){var b=this,c=this.options.activeClass;this.$element.find("li."+c).has("ul").children("ul").addClass("collapse in"),this.$element.find("li").not("."+c).has("ul").children("ul").addClass("collapse"),this.options.doubleTapToGo&&this.$element.find("li."+c).has("ul").children("a").addClass("doubleTapToGo"),this.$element.find("li").has("ul").children("a").on("click.metisMenu",function(d){var e=a(this),f=e.parent("li"),g=f.children("ul");return d.preventDefault(),f.hasClass(c)?b.hide(g):b.show(g),b.options.doubleTapToGo&&b.doubleTapToGo(e)&&"#"!==e.attr("href")&&""!==e.attr("href")?(d.stopPropagation(),void(document.location=e.attr("href"))):void 0})},e.prototype.doubleTapToGo=function(a){var b=this.$element;return a.hasClass("doubleTapToGo")?(a.removeClass("doubleTapToGo"),!0):a.parent().children("ul").length?(b.find(".doubleTapToGo").removeClass("doubleTapToGo"),a.addClass("doubleTapToGo"),!1):void 0},e.prototype.show=function(b){var c=this.options.activeClass,f=a(b),g=f.parent("li");if(!this.transitioning&&!f.hasClass("in")){g.addClass(c),this.options.toggle&&this.hide(g.siblings().children("ul.in")),f.removeClass("collapse").addClass("collapsing").height(0),this.transitioning=1;var h=function(){f.removeClass("collapsing").addClass("collapse in").height(""),this.transitioning=0};return d?void f.one("mmTransitionEnd",a.proxy(h,this)).emulateTransitionEnd(e.TRANSITION_DURATION).height(f[0].scrollHeight):h.call(this)}},e.prototype.hide=function(b){var c=this.options.activeClass,f=a(b);if(!this.transitioning&&f.hasClass("in")){f.parent("li").removeClass(c),f.height(f.height())[0].offsetHeight,f.addClass("collapsing").removeClass("collapse").removeClass("in"),this.transitioning=1;var g=function(){this.transitioning=0,f.removeClass("collapsing").addClass("collapse")};return d?void f.height(0).one("mmTransitionEnd",a.proxy(g,this)).emulateTransitionEnd(e.TRANSITION_DURATION):g.call(this)}};var f=a.fn.metisMenu;a.fn.metisMenu=c,a.fn.metisMenu.Constructor=e,a.fn.metisMenu.noConflict=function(){return a.fn.metisMenu=f,this}}(jQuery);
+(function (global, factory) {
+  // if (typeof define === "function" && define.amd) {
+  //   define(['jquery'], factory);
+  // } else if (typeof exports !== "undefined") {
+  //   factory(require('jquery'));
+  // } else {
+    var mod = {
+      exports: {}
+    };
+    factory(global.jquery);
+    global.metisMenu = mod.exports;
+  // }
+})(this, function (_jquery) {
+  'use strict';
+
+  var _jquery2 = _interopRequireDefault(_jquery);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
+
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+  };
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  var _createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
+  var MetisMenu = function ($) {
+
+    var NAME = 'metisMenu';
+    var DATA_KEY = 'metisMenu';
+    var EVENT_KEY = '.' + DATA_KEY;
+    var DATA_API_KEY = '.data-api';
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var TRANSITION_DURATION = 350;
+
+    var Default = {
+      toggle: true,
+      doubleTapToGo: false,
+      preventDefault: true,
+      activeClass: 'active',
+      collapseClass: 'collapse',
+      collapseInClass: 'in',
+      collapsingClass: 'collapsing'
+    };
+
+    var Event = {
+      SHOW: 'show' + EVENT_KEY,
+      SHOWN: 'shown' + EVENT_KEY,
+      HIDE: 'hide' + EVENT_KEY,
+      HIDDEN: 'hidden' + EVENT_KEY,
+      CLICK_DATA_API: 'click' + EVENT_KEY + DATA_API_KEY
+    };
+
+    var transition = false;
+
+    var TransitionEndEvent = {
+      WebkitTransition: 'webkitTransitionEnd',
+      MozTransition: 'transitionend',
+      OTransition: 'oTransitionEnd otransitionend',
+      transition: 'transitionend'
+    };
+
+    function getSpecialTransitionEndEvent() {
+      return {
+        bindType: transition.end,
+        delegateType: transition.end,
+        handle: function handle(event) {
+          if ($(event.target).is(this)) {
+            return event.handleObj.handler.apply(this, arguments);
+          }
+        }
+      };
+    }
+
+    function transitionEndTest() {
+      if (window.QUnit) {
+        return false;
+      }
+
+      var el = document.createElement('mm');
+
+      for (var name in TransitionEndEvent) {
+        if (el.style[name] !== undefined) {
+          return {
+            end: TransitionEndEvent[name]
+          };
+        }
+      }
+
+      return false;
+    }
+
+    function transitionEndEmulator(duration) {
+      var _this2 = this;
+
+      var called = false;
+
+      $(this).one(Util.TRANSITION_END, function () {
+        called = true;
+      });
+
+      setTimeout(function () {
+        if (!called) {
+          Util.triggerTransitionEnd(_this2);
+        }
+      }, duration);
+    }
+
+    function setTransitionEndSupport() {
+      transition = transitionEndTest();
+
+      if (Util.supportsTransitionEnd()) {
+        $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
+      }
+    }
+
+    var Util = {
+      TRANSITION_END: 'mmTransitionEnd',
+
+      triggerTransitionEnd: function triggerTransitionEnd(element) {
+        $(element).trigger(transition.end);
+      },
+      supportsTransitionEnd: function supportsTransitionEnd() {
+        return Boolean(transition);
+      }
+    };
+
+    setTransitionEndSupport();
+
+    var MetisMenu = function () {
+      function MetisMenu(element, config) {
+        _classCallCheck(this, MetisMenu);
+
+        this._element = element;
+        this._config = this._getConfig(config);
+        this._transitioning = null;
+
+        this.init();
+      }
+
+      _createClass(MetisMenu, [{
+        key: 'init',
+        value: function init() {
+          var self = this;
+          $(this._element).find('li.' + this._config.activeClass).has('ul').children('ul').attr('aria-expanded', true).addClass(this._config.collapseClass + ' ' + this._config.collapseInClass);
+
+          $(this._element).find('li').not('.' + this._config.activeClass).has('ul').children('ul').attr('aria-expanded', false).addClass(this._config.collapseClass);
+
+          //add the 'doubleTapToGo' class to active items if needed
+          if (this._config.doubleTapToGo) {
+            $(this._element).find('li.' + this._config.activeClass).has('ul').children('a').addClass('doubleTapToGo');
+          }
+          $(this._element).find('li').has('ul').children('a').on(Event.CLICK_DATA_API, function (e) {
+            var _this = $(this);
+            var _parent = _this.parent('li');
+            var _list = _parent.children('ul');
+            if (self._config.preventDefault) {
+              e.preventDefault();
+            }
+            if (_this.attr('aria-disabled') === 'true') {
+              return;
+            }
+            if (_parent.hasClass(self._config.activeClass) && !self._config.doubleTapToGo) {
+              _this.attr('aria-expanded', false);
+              self._hide(_list);
+            } else {
+              self._show(_list);
+              _this.attr('aria-expanded', true);
+            }
+
+            if (self._config.onTransitionStart) {
+              self._config.onTransitionStart(e);
+            }
+
+            //Do we need to enable the double tap
+            if (self._config.doubleTapToGo) {
+              //if we hit a second time on the link and the href is valid, navigate to that url
+              if (self._doubleTapToGo(_this) && _this.attr('href') !== '#' && _this.attr('href') !== '') {
+                e.stopPropagation();
+                document.location = _this.attr('href');
+                return;
+              }
+            }
+          });
+        }
+      }, {
+        key: '_show',
+        value: function _show(element) {
+          if (this._transitioning || $(element).hasClass(this._config.collapsingClass)) {
+            return;
+          }
+          var _this = this;
+          var _el = $(element);
+
+          var startEvent = $.Event(Event.SHOW);
+          _el.trigger(startEvent);
+
+          if (startEvent.isDefaultPrevented()) {
+            return;
+          }
+
+          _el.parent('li').addClass(this._config.activeClass);
+
+          if (this._config.toggle) {
+            this._hide(_el.parent('li').siblings().children('ul.' + this._config.collapseInClass).attr('aria-expanded', false));
+          }
+
+          _el.removeClass(this._config.collapseClass).addClass(this._config.collapsingClass).height(0);
+
+          this.setTransitioning(true);
+
+          var complete = function complete() {
+
+            _el.removeClass(_this._config.collapsingClass).addClass(_this._config.collapseClass + ' ' + _this._config.collapseInClass).height('').attr('aria-expanded', true);
+
+            _this.setTransitioning(false);
+
+            _el.trigger(Event.SHOWN);
+          };
+
+          if (!Util.supportsTransitionEnd()) {
+            complete();
+            return;
+          }
+
+          _el.height(_el[0].scrollHeight).one(Util.TRANSITION_END, complete);
+
+          transitionEndEmulator(TRANSITION_DURATION);
+        }
+      }, {
+        key: '_hide',
+        value: function _hide(element) {
+
+          if (this._transitioning || !$(element).hasClass(this._config.collapseInClass)) {
+            return;
+          }
+          var _this = this;
+          var _el = $(element);
+
+          var startEvent = $.Event(Event.HIDE);
+          _el.trigger(startEvent);
+
+          if (startEvent.isDefaultPrevented()) {
+            return;
+          }
+
+          _el.parent('li').removeClass(this._config.activeClass);
+          _el.height(_el.height())[0].offsetHeight;
+
+          _el.addClass(this._config.collapsingClass).removeClass(this._config.collapseClass).removeClass(this._config.collapseInClass);
+
+          this.setTransitioning(true);
+
+          var complete = function complete() {
+            if (_this._transitioning && _this._config.onTransitionEnd) {
+              _this._config.onTransitionEnd();
+            }
+
+            _this.setTransitioning(false);
+            _el.trigger(Event.HIDDEN);
+
+            _el.removeClass(_this._config.collapsingClass).addClass(_this._config.collapseClass).attr('aria-expanded', false);
+          };
+
+          if (!Util.supportsTransitionEnd()) {
+            complete();
+            return;
+          }
+
+          _el.height() == 0 || _el.css('display') == 'none' ? complete() : _el.height(0).one(Util.TRANSITION_END, complete);
+
+          transitionEndEmulator(TRANSITION_DURATION);
+        }
+      }, {
+        key: '_doubleTapToGo',
+        value: function _doubleTapToGo(element) {
+          if (element.hasClass('doubleTapToGo')) {
+            element.removeClass('doubleTapToGo');
+            return true;
+          }
+          if (element.parent().children('ul').length) {
+            $(this._element).find('.doubleTapToGo').removeClass('doubleTapToGo');
+
+            element.addClass('doubleTapToGo');
+            return false;
+          }
+        }
+      }, {
+        key: 'setTransitioning',
+        value: function setTransitioning(isTransitioning) {
+          this._transitioning = isTransitioning;
+        }
+      }, {
+        key: '_getConfig',
+        value: function _getConfig(config) {
+          config = $.extend({}, Default, config);
+          return config;
+        }
+      }], [{
+        key: '_jQueryInterface',
+        value: function _jQueryInterface(config) {
+          return this.each(function () {
+            var $this = $(this);
+            var data = $this.data(DATA_KEY);
+            var _config = $.extend({}, Default, $this.data(), (typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object' && config);
+
+            if (!data) {
+              data = new MetisMenu(this, _config);
+              $this.data(DATA_KEY, data);
+            }
+
+            if (typeof config === 'string') {
+              if (data[config] === undefined) {
+                throw new Error('No method named "' + config + '"');
+              }
+              data[config]();
+            }
+          });
+        }
+      }]);
+
+      return MetisMenu;
+    }();
+
+    /**
+     * ------------------------------------------------------------------------
+     * jQuery
+     * ------------------------------------------------------------------------
+     */
+
+    $.fn[NAME] = MetisMenu._jQueryInterface;
+    $.fn[NAME].Constructor = MetisMenu;
+    $.fn[NAME].noConflict = function () {
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return MetisMenu._jQueryInterface;
+    };
+    return MetisMenu;
+  }(jQuery);
+});

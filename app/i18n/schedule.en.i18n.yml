@@ -8,5 +8,6 @@ schedule_agendaDay: Schedule Day
 schedule_agendaWeek: Schedule Week
 schedule_month: Month
 schedule_to-confirm: [To Confirm]
-schedule_event-canceled: Event Canceled
+schedule_event-canceled: Appointment Canceled
 schedule_timeline: Your Timeline
+schedule_notAllowedError: Sorry, this timeslot has been reserved by somebody else just now.

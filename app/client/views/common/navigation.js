@@ -1,6 +1,9 @@
 Template.navigation.rendered = function(){
 	// Initialize metisMenu
-	$('#side-menu').metisMenu();
+	Meteor.defer(function(){
+		$('#side-menu').metisMenu();
+	});
+	
 	this.autorun(function(c) {
 		if(Meteor.user()) {
 			var email = Meteor.user().emails[0].address;
