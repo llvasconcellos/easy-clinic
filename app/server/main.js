@@ -7,4 +7,5 @@ process.env.ROOT_URL = "https://clinicafacil.devhouse.com.br";
 
 Meteor.startup(function () {
 	//SimpleSchema.i18n("/i18n");
+	//require('/imports/startup/app-cache-config.js');
 });
