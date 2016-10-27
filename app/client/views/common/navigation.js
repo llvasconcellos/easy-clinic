@@ -1,7 +1,10 @@
 Template.navigation.rendered = function(){
 	// Initialize metisMenu
-	Meteor.defer(function(){
-		$('#side-menu').metisMenu();
+	$(document).ready(function() {
+		Meteor.setTimeout(function(){
+			//#TODO: see why the settings menu does not work and ditch this timeout hack
+			$('#side-menu').metisMenu();
+		}, 1000);
 	});
 	
 	this.autorun(function(c) {

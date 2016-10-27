@@ -25,7 +25,7 @@ scheduleSchema = {
 Schedule.attachSchema(new SimpleSchema(scheduleSchema));
 
 if (Meteor.isClient) {
-  var scheduleObserver = new PersistentMinimongo2(Schedule, 'schedule');
+  //var scheduleObserver = new PersistentMinimongo2(Schedule, 'schedule');
 }
 
 if (Meteor.isServer) {

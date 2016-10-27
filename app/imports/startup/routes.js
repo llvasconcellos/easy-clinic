@@ -200,9 +200,6 @@ FlowRouter.route('/certificates/:_id', {
 
 FlowRouter.route('/icd10', {
   name: 'icd10List',
-  subscriptions: function(params) {
-    this.register('icd10', Meteor.subscribe('icd10'));
-  },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "icd10List"});
   }
@@ -210,9 +207,6 @@ FlowRouter.route('/icd10', {
 
 FlowRouter.route('/drugs', {
   name: 'drugList',
-  subscriptions: function(params) {
-    this.register('drugs', Meteor.subscribe('drugs'));
-  },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "drugList"});
   }

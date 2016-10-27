@@ -7,7 +7,7 @@ Template.drugList.events({
 Template.drugList.helpers({
 	reactiveDataFunction: function () {
 		return function () {
-			return Drugs.find().fetch();
+			return localDrugs.find().fetch();
 		};
 	},
 	optionsObject: {

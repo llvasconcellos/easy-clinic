@@ -76,7 +76,7 @@ Template.prescriptionForm.onRendered(function () {
 			});
 		}
 
-		var drugs = Drugs.find({}, {fields: {'name':1, _id: 0}}).fetch();
+		var drugs = localDrugs.find({}, {fields: {'name':1, _id: 0}}).fetch();
 
 		var drugsArray = $.map(drugs, function(value, index) {
 			return [value.name];

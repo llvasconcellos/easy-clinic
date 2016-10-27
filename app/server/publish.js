@@ -1,3 +1,7 @@
+Meteor.publish(null, function (){
+  return Meteor.roles.find({})
+})
+
 Meteor.publish('users', function() {
 	if(Roles.userIsInRole(this.userId, 'super-admin')) {
 		return Meteor.users.find({});

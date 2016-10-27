@@ -231,13 +231,13 @@ Template.schedule.onRendered(function () {
             });
         },
         //resourceOrder: '-type1,type2',
-        resourceText: function(resource){
-            return 'Leo';
-        },
-        resourceRender: function(resourceObj, labelTds, bodyTds) {
-            // console.log(arguments);
-            // labelTds.css('background', 'blue');
-        },
+        // resourceText: function(resource){
+        //     return 'Leo';
+        // },
+        // resourceRender: function(resourceObj, labelTds, bodyTds) {
+        //     // console.log(arguments);
+        //     // labelTds.css('background', 'blue');
+        // },
         resources: calResources,
         //events: getEvents,
     });

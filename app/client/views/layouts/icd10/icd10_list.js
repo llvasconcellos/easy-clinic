@@ -3,7 +3,7 @@ Template.icd10List.events({});
 Template.icd10List.helpers({
 	reactiveDataFunction: function () {
 		return function () {
-			return ICD10.find().fetch();
+			return localICD10.find().fetch();
 		};
 	},
 	optionsObject: {

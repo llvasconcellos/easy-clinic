@@ -12,4 +12,18 @@ Meteor.startup(function () {
     if(Meteor.Device.isPhone()) {
     	$("body").addClass("is-phone body-small");
     }
+
+    // Client Persistent Collections
+	localICD10 = new Ground.Collection('localICD10');
+	localICD10.observeSource(ICD10.find());
+	Meteor.subscribe('icd10');
+
+	localDrugs = new Ground.Collection('localDrugs');
+	localDrugs.observeSource(Drugs.find());
+	Meteor.subscribe('drugs');
+
+	Meteor.setTimeout(() => {
+	// Stop observing - keeping all documents as is
+	localICD10.stopObserver();
+	}, 60000);
 });

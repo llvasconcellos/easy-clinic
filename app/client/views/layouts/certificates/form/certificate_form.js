@@ -76,7 +76,7 @@ Template.certificateForm.onRendered(function () {
 			});
 		}
 
-		var diseases = ICD10.find({}, {fields: {'icd':1, _id: 0}}).fetch();
+		var diseases = localICD10.find({}, {fields: {'icd':1, _id: 0}}).fetch();
 
 		var diseasesArray = $.map(diseases, function(value, index) {
 			return [value.icd];
