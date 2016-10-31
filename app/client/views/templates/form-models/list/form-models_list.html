@@ -1,0 +1,25 @@
+<template name="formModelsList">
+ 	{{> pageHeading title='form-models_form-models'}}
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'form-models_form-models'}}
+							<small class="m-l-sm">{{_ 'form-models_manage'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
+							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'form-models_new'}}</strong>
+						</button>
+					</div>
+					<div class="ibox-content">
+						{{> ReactiveDatatable id="form-models-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
+					</div>
+					<div id="table-footer" class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

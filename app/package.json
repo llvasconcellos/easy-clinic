@@ -1,0 +1,26 @@
+{
+  "name": "clinica-facil",
+  "version": "1.0.0",
+  "description": "Clinica Fácil",
+  "main": "client/main.js",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "font-awesome": "^4.7.0",
+    "meteor-node-stubs": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test",
+    "postinstall": "cp -R node_modules/font-awesome/fonts ./public/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/llvasconcellos/clinica-facil.git"
+  },
+  "keywords": [
+    "meteor"
+  ],
+  "author": "Leonardo Lima de Vasconcellos",
+  "license": "UNLICENSED",
+  "homepage": "https://bitbucket.org/llvasconcellos/clinica-facil#readme"
+}

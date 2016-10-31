@@ -8,6 +8,7 @@ T9n.map('en', {
 	groupReception: "Receptionist",
 	groupAdmin: "Administration",
 	name: "Name",
+	description: "Description",
 	enabled: "Enabled",
 	disabled: "Disabled",
 	edit: "Edit",

@@ -1,4 +1,5 @@
 var getUserLanguage = function () {
+//$.TAPi18next.detectLanguage()
   var language = window.navigator.language.substr(0, 2);
   if (language == 'en') return language;
   else return window.navigator.language;

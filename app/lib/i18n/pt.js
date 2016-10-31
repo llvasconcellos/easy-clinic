@@ -8,6 +8,7 @@ T9n.map('pt', {
 	groupReception: "Recepcionista",
 	groupAdmin: "Administração",
 	name: "Nome",
+	description: "Descrição",
 	enabled: "Ativo",
 	disabled: "Inativo",
 	edit: "Editar",

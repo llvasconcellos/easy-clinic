@@ -159,7 +159,6 @@ FlowRouter.route('/prescriptions/create', {
 FlowRouter.route('/prescriptions/:_id', {
   name: 'prescriptionEdit',
   subscriptions: function(params) {
-    this.register('drugs', Meteor.subscribe('drugs'));
     this.register('prescription', Meteor.subscribe('singlePrescription', params._id));
   },
   action: function(params, queryParams) {
@@ -190,7 +189,6 @@ FlowRouter.route('/certificates/create', {
 FlowRouter.route('/certificates/:_id', {
   name: 'certificateEdit',
   subscriptions: function(params) {
-    this.register('icd10', Meteor.subscribe('icd10'));
     this.register('certificate', Meteor.subscribe('singleCertificate', params._id));
   },
   action: function(params, queryParams) {
@@ -246,6 +244,33 @@ FlowRouter.route('/import', {
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "import"});
+  }
+});
+
+FlowRouter.route('/form-models', {
+  name: 'formModelsList',
+  subscriptions: function(params) {
+    this.register('formModels', Meteor.subscribe('formModels'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "formModelsList"});
+  }
+});
+
+FlowRouter.route('/form-models/create', {
+  name: 'formModelCreate',
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "formModelsForm"});
+  }
+});
+
+FlowRouter.route('/form-models/:_id', {
+  name: 'formModelEdit',
+  subscriptions: function(params) {
+    this.register('formModel', Meteor.subscribe('singleFormModel', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "formModelsForm"});
   }
 });
 

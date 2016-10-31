@@ -75,3 +75,11 @@ Meteor.publish('singleDrug', function (id) {
 Meteor.publish('icd10', function () {
   return ICD10.find();
 });
+
+Meteor.publish('formModels', function () {
+  return FormModels.find();
+});
+
+Meteor.publish('singleFormModel', function (id) {
+  return FormModels.find({_id: id});
+});

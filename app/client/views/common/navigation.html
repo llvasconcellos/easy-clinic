@@ -61,7 +61,7 @@
                 </li>
 
                 {{#if isInRole 'super-admin'}}
-	                <li class="{{isActivePath regex='prescriptionList|certificateList|icd10List|drugList|doctorList|users|import'}}">
+	                <li class="{{isActivePath regex='prescriptionList|certificateList|icd10List|drugList|doctorList|users|import|recordsList'}}">
 	                    <a href="{{isActivePath regex='prescriptionList'}}">
 	                        <i class="fa fa-cogs" aria-hidden="true"></i>
 	                        <span class="nav-label">{{_ 'settings_settings'}}</span>
@@ -92,6 +92,9 @@
 		                    <li class="{{isActivePath regex='import'}}">
 		                        <a href="{{pathFor route='import'}}" class="hide-on-phone"><i class="fa fa-database" aria-hidden="true"></i> <span class="nav-label">{{_ 'import_data-import'}}</span></a>
 		                    </li>
+                            <li class="{{isActivePath regex='formModelsList'}}">
+                                <a href="{{pathFor route='formModelsList'}}" class="hide-on-phone"><i class="fa fa-id-card" aria-hidden="true"></i> <span class="nav-label">{{_ 'form-models_form-models'}}</span></a>
+                            </li>
 	                    </ul>
 	                </li>
                 {{/if}}

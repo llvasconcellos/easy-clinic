@@ -1,4 +1,4 @@
-T9n.map('pt', {
+T9n.map('es', {
 	appName: 'Clínica Fácil',
 	firstName: 'Nombres',
 	lastName: 'Apellidos',
@@ -8,6 +8,7 @@ T9n.map('pt', {
 	groupReception: "Recepcionista",
 	groupAdmin: "Administración",
 	name: "Nombre",
+	description: "Descripción",
 	enabled: "Activo",
 	disabled: "Inactivo",
 	edit: "Editar",

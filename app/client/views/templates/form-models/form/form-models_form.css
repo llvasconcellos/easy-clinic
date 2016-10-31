@@ -1,0 +1,14 @@
+#record-builder .access-wrap,
+#record-builder .className-wrap,
+#record-builder .toggle-wrap,
+#record-builder .description-wrap,
+#record-builder .placeholder-wrap,
+#record-builder .view-data {
+	display: none !important;
+}
+
+#record-builder .btn-primary {
+	background-color: #1ab394 !important;
+	border-color: #1ab394 !important;
+}
+
