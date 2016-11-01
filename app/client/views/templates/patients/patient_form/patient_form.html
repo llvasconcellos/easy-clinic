@@ -1,14 +1,13 @@
 <template name="patientForm">
 	{{> pageHeading title='patients_patients'}}
 
-	<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
-		<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
-	</button>
-
-	<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="wrapper wrapper-content fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="tabs-container">
+					<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
+						<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
+					</button>
 					<ul class="nav nav-tabs">
 						<li class="active"><a data-toggle="tab" href="#tab-1">
 							<h4>{{_ 'patients_data'}}
@@ -31,7 +30,7 @@
 						</div>
 						<div id="tab-2" class="tab-pane">
 							<div class="panel-body">
-								
+								{{> patientRecord }}
 							</div>
 						</div>
 					</div>
