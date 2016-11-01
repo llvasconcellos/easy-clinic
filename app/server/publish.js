@@ -48,22 +48,6 @@ Meteor.publish('settings', function () {
   return Settings.find();
 });
 
-Meteor.publish('prescriptions', function () {
-  return Prescriptions.find();
-});
-
-Meteor.publish('singlePrescription', function (id) {
-  return Prescriptions.find({_id: id});
-});
-
-Meteor.publish('certificates', function () {
-  return Certificates.find();
-});
-
-Meteor.publish('singleCertificate', function (id) {
-  return Certificates.find({_id: id});
-});
-
 Meteor.publish('drugs', function () {
   return Drugs.find();
 });
@@ -74,6 +58,14 @@ Meteor.publish('singleDrug', function (id) {
 
 Meteor.publish('icd10', function () {
   return ICD10.find();
+});
+
+Meteor.publish('documentModels', function () {
+  return DocumentModels.find();
+});
+
+Meteor.publish('singleDocumentModel', function (id) {
+  return DocumentModels.find({_id: id});
 });
 
 Meteor.publish('formModels', function () {

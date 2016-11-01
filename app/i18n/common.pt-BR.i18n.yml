@@ -52,3 +52,6 @@ common_copy: Copiar conteúdo da tablea para área de transferência
 common_csv: Exportar para o excel (csv)
 common_print: Imprimir tabela
 common_notAllowed: Permissão Negada
+common_medical-certificate: Atestado Médico
+common_prescription: Prescrição
+common_exam-request: Pedido de Exame

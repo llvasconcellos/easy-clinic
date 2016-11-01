@@ -52,3 +52,6 @@ common_copy: Copy table contents to clipboard
 common_csv: Export table data to csv (excel)
 common_print: Print table contents
 common_notAllowed: Not Allowed
+common_medical-certificate: Medical Certificate
+common_prescription: Prescription
+common_exam-request: Exam Request

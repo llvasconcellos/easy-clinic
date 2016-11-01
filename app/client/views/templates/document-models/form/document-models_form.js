@@ -1,10 +1,10 @@
-Template.prescriptionForm.events({
+Template.documentModelForm.events({
 	'click .new-record': function (event, template) {
-		FlowRouter.go('prescriptionCreate');
+		FlowRouter.go('documentModelCreate');
 	}
 });
 
-Template.prescriptionForm.helpers({
+Template.documentModelForm.helpers({
 	saveButton: function () {
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
 	},
@@ -12,17 +12,17 @@ Template.prescriptionForm.helpers({
 		return (FlowRouter.getParam('_id')) ? true : false;
 	},
 	record: function() {
-		var prescription = Prescriptions.findOne({_id: FlowRouter.getParam('_id')});
-		Template.instance().data.prescription = prescription;
-		return prescription;
+		var docModel = DocumentModels.findOne({_id: FlowRouter.getParam('_id')});
+		Template.instance().data.document_model = docModel;
+		return docModel;
 	}
 });
 
-Template.prescriptionForm.onCreated(function () {
-	AutoForm.addHooks('prescriptionForm', {
+Template.documentModelForm.onCreated(function () {
+	AutoForm.addHooks('documentModelForm', {
 		onSuccess: function(formType, result) {
 			toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
-			FlowRouter.go('prescriptionList');
+			FlowRouter.go('documentModelList');
 		},
 		onError: function(formType, error) {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -30,16 +30,16 @@ Template.prescriptionForm.onCreated(function () {
 	});
 });
 
-Template.prescriptionForm.onRendered(function () {
+Template.documentModelForm.onRendered(function () {
 
 	var data = this.data;
 	$(document).ready(function(){
-		var saveButton = $('.prescription-form button[type=submit]');
+		var saveButton = $('.document-model-form button[type=submit]');
 		var submitParent = saveButton.parent();
 		submitParent.addClass('text-right');
 		submitParent.detach().appendTo('#table-footer');
 		saveButton.click(function(){
-			$('.prescription-form').submit();
+			$('.document-model-form').submit();
 		});
 
 		var cancelBtn = $.parseHTML(`<button type="button" class="btn btn-white cancel" data-dismiss="modal">
@@ -48,7 +48,11 @@ Template.prescriptionForm.onRendered(function () {
 		$(cancelBtn).prependTo(submitParent);
 
 		$(cancelBtn).click(function(){
-			FlowRouter.go('prescriptionList');
+			FlowRouter.go('documentModelList');
+		});
+
+		$("select[name=type]").chosenIcon({
+			disable_search_threshold: 10
 		});
 
 		if(data.prescription) {
@@ -57,13 +61,13 @@ Template.prescriptionForm.onRendered(function () {
 			$(deleteBtn).click(function(event){
 				swal({
 					title: TAPi18n.__('common_areYouSure'),
-					text: TAPi18n.__('patients_deleteConfirmation', data.prescription.name),
+					text: TAPi18n.__('patients_deleteConfirmation', data.document_model.name),
 					type: "warning",
 					showCancelButton: true,
 					confirmButtonColor: "#ed5565",
 					confirmButtonText: TAPi18n.__('common_confirm')
 				}, function(){
-					Receituario.remove(data.prescription._id, function (error, result) {
+					Receituario.remove(data.document_model._id, function (error, result) {
 						if (error) {
 							toastr['error'](error.message, TAPi18n.__('common_error'));
 						} 
@@ -71,7 +75,7 @@ Template.prescriptionForm.onRendered(function () {
 							toastr['success'](TAPi18n.__('common_deleteSuccess'), TAPi18n.__('common_success'));
 						}
 					});
-					FlowRouter.go('prescriptionList');
+					FlowRouter.go('documentModelList');
 				});
 			});
 		}
@@ -82,9 +86,15 @@ Template.prescriptionForm.onRendered(function () {
 			return [value.name];
 		});
 
-		$("textarea[name=prescription]").summernote({
+		var diseases = localICD10.find({}, {fields: {'icd':1, _id: 0}}).fetch();
+
+		var diseasesArray = $.map(diseases, function(value, index) {
+			return [value.icd];
+		});
+
+		$("textarea[name=model]").summernote({
 			height: 300,
-			placeholder: TAPi18n.__('prescriptions_help'),
+			placeholder: TAPi18n.__('document-models_model-placeholder'),
 			toolbar: [
 				['history', ['undo', 'redo']],
 				['style', ['style', 'bold', 'italic', 'underline', 'clear']],
@@ -96,17 +106,30 @@ Template.prescriptionForm.onRendered(function () {
 				['misc', ['fullscreen']]
 			],
 			hint: [{
-					words: drugsArray,
-					match: /\b(\w{2,})$/,
-					search: function search(keyword, callback) {
-						callback($.map(this.words, function (item) {
-							return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
-						}));
-					},
-					index: 1,
-					replace: function replace(medicamento) {
-						return medicamento.toUpperCase() + ' ';
-					}
+				words: drugsArray,
+				//match: /\b(\w{2,})$/,
+				match: /\B\$(\w*)$/,
+				search: function search(keyword, callback) {
+					callback($.map(this.words, function (item) {
+						return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
+					}));
+				},
+				index: 1,
+				replace: function replace(medicamento) {
+					return medicamento.toUpperCase() + ' ';
+				}
+			},{
+				words: diseasesArray,
+				match: /\B@(\w*)$/,
+				search: function search(keyword, callback) {
+					callback($.map(this.words, function (item) {
+						return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
+					}));
+				},
+				index: 1,
+				replace: function replace(medicamento) {
+					return medicamento.toUpperCase() + ' ';
+				}
 			},{
 				words: [
 					'NOME_DO_PACIENTE', 
@@ -138,6 +161,6 @@ Template.prescriptionForm.onRendered(function () {
 
 });
 
-Template.prescriptionForm.onDestroyed(function () {
-	$("textarea[name=prescription]").summernote('destroy');
+Template.documentModelForm.onDestroyed(function () {
+	$("textarea[name=model]").summernote('destroy');
 });

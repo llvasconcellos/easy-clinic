@@ -1,0 +1,10 @@
+document-models_document-models: Document Models
+document-models_document-model: Document Model
+document-models_type: Type
+document-models_manage: Manage Document Models
+document-models_new: New Document Model
+document-models_model-placeholder: Create models to speed up filling documents during appointments. See instructions bellow.
+document-models_help: "You can speed up editing certificates using the following shortcuts:"
+document-models_help-patient-info: "<b class=\"label label-primary\">type #</b> to select patient info."
+document-models_help-icd10: "<b class=\"label label-success\">type @</b> followed by some letters of a ICD-10 disease and select it on the list."
+document-models_help-drug: "<b class=\"label label-danger\">type $</b> followed by some letters of a drug and select it on the list."

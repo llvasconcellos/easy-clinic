@@ -1,21 +1,21 @@
-<template name="prescriptionList">
- 	{{> pageHeading title='prescriptions_prescriptions'}}
+<template name="documentModelList">
+ 	{{> pageHeading title='document-models_document-models'}}
 
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12" id="tablebox">
 				<div class="ibox ">
 					<div class="ibox-title">
-						<h5>{{_ 'prescriptions_prescriptions'}}
-							<small class="m-l-sm">{{_ 'prescriptions_manage'}}</small>
+						<h5>{{_ 'document-models_document-models'}}
+							<small class="m-l-sm">{{_ 'document-models_manage'}}</small>
 						</h5>
 						{{!-->iboxTools--}}
 						<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
-							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'prescriptions_new'}}</strong>
+							<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'document-models_new'}}</strong>
 						</button>
 					</div>
 					<div class="ibox-content">
-						{{> ReactiveDatatable id="prescriptions-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
+						{{> ReactiveDatatable id="document-model-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
 					</div>
 					<div id="table-footer" class="ibox-footer"></div>
 				</div>

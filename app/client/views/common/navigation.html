@@ -61,21 +61,15 @@
                 </li>
 
                 {{#if isInRole 'super-admin'}}
-	                <li class="{{isActivePath regex='prescriptionList|certificateList|icd10List|drugList|doctorList|users|import|recordsList'}}">
+	                <li class="{{isActivePath regex='documentModelList|icd10List|drugList|doctorList|users|import|recordsList'}}">
 	                    <a href="{{isActivePath regex='prescriptionList'}}">
 	                        <i class="fa fa-cogs" aria-hidden="true"></i>
 	                        <span class="nav-label">{{_ 'settings_settings'}}</span>
 	                        <span class="fa arrow"></span>
 	                    </a>
-	                    <ul class="nav nav-second-level collapse {{isActivePath regex='prescriptionList|certificateList|icd10List|drugList|doctorList|users|import' className='in'}}">
+	                    <ul class="nav nav-second-level collapse {{isActivePath regex='documentModelList|icd10List|drugList|doctorList|users|import' className='in'}}">
 	                       <li class="{{isActivePath regex='specialtyList'}}">
 		                        <a href="{{pathFor route='specialtyList'}}" class="hide-on-phone"><i class="fa fa-stethoscope"></i> <span class="nav-label">{{_ 'specialties_specialties'}}</span></a>
-		                    </li>
-		                    <li class="{{isActivePath regex='prescriptionList'}}">
-		                        <a href="{{pathFor route='prescriptionList'}}" class="hide-on-phone"><i class="fa fa-file-text" aria-hidden="true"></i> <span class="nav-label">{{_ 'prescriptions_prescriptions'}}</span></a>
-		                    </li>
-		                    <li class="{{isActivePath regex='certificateList'}}">
-		                        <a href="{{pathFor route='certificateList'}}" class="hide-on-phone"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="nav-label">{{_ 'certificates_certificates'}}</span></a>
 		                    </li>
 		                    <li class="{{isActivePath regex='icd10List'}}">
 		                        <a href="{{pathFor route='icd10List'}}" class="hide-on-phone"><i class="fa fa-bug" aria-hidden="true"></i> <span class="nav-label">{{_ 'common_icd'}}</span></a>
@@ -83,6 +77,12 @@
 		                    <li class="{{isActivePath regex='drugList'}}">
 		                        <a href="{{pathFor route='drugList'}}" class="hide-on-phone"><img style="width: 16px; margin-right: 4px;" src="/images/drugs.png" /> <span class="nav-label">{{_ 'drugs_drugs'}}</span></a>
 		                    </li>
+                            <li class="{{isActivePath regex='documentModelList'}}">
+                                <a href="{{pathFor route='documentModelList'}}" class="hide-on-phone"><i class="fa fa-file-text" aria-hidden="true"></i> <span class="nav-label">{{_ 'document-models_document-models'}}</span></a>
+                            </li>
+                            <li class="{{isActivePath regex='formModelsList'}}">
+                                <a href="{{pathFor route='formModelsList'}}" class="hide-on-phone"><i class="fa fa-id-card" aria-hidden="true"></i> <span class="nav-label">{{_ 'form-models_form-models'}}</span></a>
+                            </li>
 		                    <li class="{{isActivePath regex='doctorList'}}">
 		                        <a href="{{pathFor route='doctorList'}}" class="hide-on-phone"><i class="fa fa-user-md"></i> <span class="nav-label">{{_ 'users_doctors'}}</span></a>
 		                    </li>
@@ -92,9 +92,6 @@
 		                    <li class="{{isActivePath regex='import'}}">
 		                        <a href="{{pathFor route='import'}}" class="hide-on-phone"><i class="fa fa-database" aria-hidden="true"></i> <span class="nav-label">{{_ 'import_data-import'}}</span></a>
 		                    </li>
-                            <li class="{{isActivePath regex='formModelsList'}}">
-                                <a href="{{pathFor route='formModelsList'}}" class="hide-on-phone"><i class="fa fa-id-card" aria-hidden="true"></i> <span class="nav-label">{{_ 'form-models_form-models'}}</span></a>
-                            </li>
 	                    </ul>
 	                </li>
                 {{/if}}

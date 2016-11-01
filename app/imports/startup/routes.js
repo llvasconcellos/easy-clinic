@@ -136,66 +136,6 @@ FlowRouter.route('/doctors/:_id', {
   }
 });
 
-FlowRouter.route('/prescriptions', {
-  name: 'prescriptionList',
-  subscriptions: function(params) {
-    this.register('prescriptions', Meteor.subscribe('prescriptions'));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "prescriptionList"});
-  }
-});
-
-FlowRouter.route('/prescriptions/create', {
-  name: 'prescriptionCreate',
-  subscriptions: function(params) {
-    this.register('drugs', Meteor.subscribe('drugs'));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "prescriptionForm"});
-  }
-});
-
-FlowRouter.route('/prescriptions/:_id', {
-  name: 'prescriptionEdit',
-  subscriptions: function(params) {
-    this.register('prescription', Meteor.subscribe('singlePrescription', params._id));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "prescriptionForm"});
-  }
-});
-
-FlowRouter.route('/certificates', {
-  name: 'certificateList',
-  subscriptions: function(params) {
-    this.register('certificates', Meteor.subscribe('certificates'));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "certificateList"});
-  }
-});
-
-FlowRouter.route('/certificates/create', {
-  name: 'certificateCreate',
-  subscriptions: function(params) {
-    this.register('icd10', Meteor.subscribe('icd10'));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "certificateForm"});
-  }
-});
-
-FlowRouter.route('/certificates/:_id', {
-  name: 'certificateEdit',
-  subscriptions: function(params) {
-    this.register('certificate', Meteor.subscribe('singleCertificate', params._id));
-  },
-  action: function(params, queryParams) {
-    BlazeLayout.render("mainLayout", {content: "certificateForm"});
-  }
-});
-
 FlowRouter.route('/icd10', {
   name: 'icd10List',
   action: function(params, queryParams) {
@@ -244,6 +184,33 @@ FlowRouter.route('/import', {
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "import"});
+  }
+});
+
+FlowRouter.route('/document-models', {
+  name: 'documentModelList',
+  subscriptions: function(params) {
+    this.register('document-models', Meteor.subscribe('documentModels'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "documentModelList"});
+  }
+});
+
+FlowRouter.route('/document-models/create', {
+  name: 'documentModelCreate',
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "documentModelForm"});
+  }
+});
+
+FlowRouter.route('/document-models/:_id', {
+  name: 'documentModelEdit',
+  subscriptions: function(params) {
+    this.register('document-model', Meteor.subscribe('singleDocumentModel', params._id));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "documentModelForm"});
   }
 });
 
