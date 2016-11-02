@@ -115,8 +115,8 @@ Template.documentModelForm.onRendered(function () {
 					}));
 				},
 				index: 1,
-				replace: function replace(medicamento) {
-					return medicamento.toUpperCase() + ' ';
+				replace: function replace(item) {
+					return item.toUpperCase() + ' ';
 				}
 			},{
 				words: diseasesArray,
@@ -126,24 +126,28 @@ Template.documentModelForm.onRendered(function () {
 						return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
 					}));
 				},
-				index: 1,
-				replace: function replace(medicamento) {
-					return medicamento.toUpperCase() + ' ';
+				index: 2,
+				replace: function replace(item) {
+					return item.toUpperCase() + ' ';
 				}
 			},{
 				words: [
 					'NOME_DO_PACIENTE', 
 					'CPF_PACIENTE', 
-					'RG_PACIENTE', 
+					'RG_PACIENTE',
+					'ENDERECO_PACIENTE',
 					'DATA_DA_CONSULTA', 
 					'HORARIO_DA_CONSULTA', 
 					'NOME_PROFISSIONAL',
-					'ENDERECO_PACIENTE'
+					'CRM_PROFISSIONAL',
+					'ENDERECO_PROFISSIONAL',
+					'ASSINATURA_PROFISSIONAL'
 				],
 				match: /\B#(\w*)$/,
 				search: function (keyword, callback) {
 					callback($.grep(this.words, function (item) {
-						return item.indexOf(keyword) === 0;
+						//return item.indexOf(keyword) === 0;
+						return item.toUpperCase().indexOf(keyword.toUpperCase()) >= 0 ? item : null;
 					}));
 				},
 				template: function (item) {
@@ -153,6 +157,9 @@ Template.documentModelForm.onRendered(function () {
 				},
 				content: function (item) {
 					return '#' + item;
+				},
+				replace: function replace(item) {
+					return item.toUpperCase() + ' ';
 				}
 			}]
 		});

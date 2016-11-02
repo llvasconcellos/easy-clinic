@@ -1,4 +1,5 @@
 T9n.map('es', {
+	type: 'Tipo',
 	appName: 'Clínica Fácil',
 	firstName: 'Nombres',
 	lastName: 'Apellidos',

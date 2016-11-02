@@ -15,6 +15,28 @@ Template.documentModelList.helpers({
 			title: T9n.get('name'),
 			data: 'name'
 		},{
+			title: T9n.get('type'),
+			data: 'type',
+			render: function(cellData, renderType, currentRow) {
+				var className = '';
+				var type = '';
+				switch(cellData){
+					case 'prescription':
+						className = 'info';
+						type = TAPi18n.__('common_prescription');
+					break;
+					case 'medical_certificate':
+						className = 'warning';
+						type = TAPi18n.__('common_medical-certificate');
+					break;
+					case 'exam_request':
+						className = 'danger';
+						type = TAPi18n.__('common_exam-request');
+					break;
+				}
+				return '<span class="label label-' + className + '">' + type + '</span>';
+			}
+		},{
 			data: '_id',
 			render: function(cellData, renderType, currentRow) {
 				return '<a class="btn btn-info" href="' + FlowRouter.path('documentModelEdit', {_id: cellData}) + '"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a>';
