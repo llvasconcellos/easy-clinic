@@ -7,9 +7,13 @@ var schema = {
   },
   description: {
     type: String,
-    trim: true
+    trim: true,
+    autoform: {
+      type: 'textarea',
+      rows: 5
+    }
   },
-  formModel: {
+  model: {
     type: [Object],
     blackbox: true
   },

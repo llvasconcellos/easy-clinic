@@ -4,6 +4,13 @@ patients_patients: Pacientes
 patients_create-form-title: Edite Informações do Paciente
 patients_newpatient: Novo Paciente
 patients_list: Listar Pacientes
+patients_add-to-records: Adicionar ao Prontuário do Paciente
+patients_add-form: Adicionar Formulário
+patients_add-prescription: Adicionar Prescrição
+patients_add-certificate: Adicionar Atestado Médico
+patients_add-exam-request: Adicionar Pedido de Exame
+patient_document: Documento
+patient_records-validation-error: Verifique o Formulário por erros.
 schemas:
   patients:
     name:

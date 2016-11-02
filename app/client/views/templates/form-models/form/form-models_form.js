@@ -50,7 +50,7 @@ Template.formModelsForm.onRendered(function () {
 		if(formId){
 			$('#form-model-form input[name=name]').val(self.data.name);
 			$('#form-model-form textarea[name=description]').val(self.data.description);
-			options.formData = JSON.stringify(self.data.formModel);
+			options.formData = JSON.stringify(self.data.model);
 		}
 
 		var formBuilder = $('#record-builder').formBuilder(options).data('formBuilder');
@@ -111,7 +111,7 @@ Template.formModelsForm.onRendered(function () {
 			var data = {
 				name: $('#form-model-form input[name=name]').val(),
 				description: $('#form-model-form textarea[name=description]').val(),
-				formModel: formBuilder.actions.getData(),
+				model: formBuilder.actions.getData(),
 			};
 			if(formId){
 				FormModels.update(formId, {

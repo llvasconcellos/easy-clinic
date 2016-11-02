@@ -4,6 +4,13 @@ patients_patients: Patients
 patients_create-form-title: Edit Patient Information
 patients_newpatient: New Patient
 patients_list: List Patients
+patients_add-to-records: Add to Patient Record
+patients_add-form: Add Form
+patients_add-prescription: Add Prescription
+patients_add-certificate: Add Medical Certificate
+patients_add-exam-request: Add Exam Request
+patient_document: Document
+patient_records-validation-error: Please check the form for errors.
 schemas:
   patients:
     name:

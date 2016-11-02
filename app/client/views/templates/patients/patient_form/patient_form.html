@@ -14,9 +14,11 @@
 								<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
 							</h4>
 						</a></li>
-						<li class=""><a data-toggle="tab" href="#tab-2">
-							<h4>{{_ 'patients_records'}}</h4>
-						</a></li>
+						{{#with patient}}
+							<li class=""><a data-toggle="tab" href="#tab-2">
+								<h4>{{_ 'patients_records'}}</h4>
+							</a></li>
+						{{/with}}
 					</ul>
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane active">
@@ -28,11 +30,13 @@
 								{{/if}}
 							</div>
 						</div>
-						<div id="tab-2" class="tab-pane">
-							<div class="panel-body">
-								{{> patientRecord }}
+						{{#with patient}}
+							<div id="tab-2" class="tab-pane">
+								<div class="panel-body">
+									{{> patientRecord }}
+								</div>
 							</div>
-						</div>
+						{{/with}}
 					</div>
 				</div>
 			</div>

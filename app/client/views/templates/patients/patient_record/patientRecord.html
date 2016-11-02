@@ -1,19 +1,20 @@
 <template name="patientRecord">
+
 	<div class="btn-group dropup floating-action-button">
-		<button class="btn btn-primary btn-circle btn-lg btn-raised dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tooltip="Add to Patient Record">
+		<button class="btn btn-primary btn-circle btn-lg btn-raised dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-tooltip="{{_ 'patients_add-to-records'}}">
 			<i class="fa fa-plus"></i>
 		</button>
 		<ul class="dropdown-menu" data-dropdown-in="bounceInUp" data-dropdown-out="bounceOutDown">
-			<button class="btn btn-success btn-circle btn-lg btn-raised" type="button" data-tooltip="Add Form">
+			<button id="patient-add-form-btn" class="btn btn-success btn-circle btn-lg btn-raised" type="button" data-tooltip="{{_ 'patients_add-form'}}">
 				<i class="fa fa-id-card"></i>
 			</button>
-			<button class="btn btn-info btn-circle btn-lg btn-raised" type="button" data-tooltip="Add Prescription">
+			<button id="patient-add-prescription-btn" class="btn btn-info btn-circle btn-lg btn-raised" type="button" data-tooltip="{{_ 'patients_add-prescription'}}">
 				<i class="fa fa fa-file-text"></i>
 			</button>
-			<button class="btn btn-warning btn-circle btn-lg btn-raised" type="button" data-tooltip="Add Medical Certificate">
+			<button id="patient-add-certificate-btn" class="btn btn-warning btn-circle btn-lg btn-raised" type="button" data-tooltip="{{_ 'patients_add-certificate'}}">
 				<i class="fa fa-file-text-o"></i>
 			</button>
-			<button class="btn btn-danger btn-circle btn-lg btn-raised" type="button" data-tooltip="Add Exam Request">
+			<button id="patient-add-exam-btn" class="btn btn-danger btn-circle btn-lg btn-raised" type="button" data-tooltip="{{_ 'patients_add-exam-request'}}">
 				<i class="fa fa-eye" aria-hidden="true"></i>
 			</button>
 		</ul>
@@ -141,6 +142,109 @@
 	</div>
 
 
+	<!--  MODAL WINDOW  -->
+	<div class="modal inmodal" id="addToRecords" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content animated bounceInRight">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<div class="modalTitle">
+							<h3>{{_ 'patients_add-to-records'}}</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<!-- FORMS -->
+					<div class="form-group" id="form-models-form-group">
+						<label for="form-models">{{_ 'form-models_form-model'}}</label>
+						<div class="select-wrapper"> 
+							<select name="form-models" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="4" data-type="form">
+								<option class="tag" value="">{{_ 'common_firstOption'}}</option>
+								{{#each formModels}}
+									<option class="tag" value="{{_id}}">{{name}}</option>
+								{{/each}}
+							</select>
+						</div>
+					</div>
 
+					<!-- PRESCRIPTIONS -->
+					<div class="form-group" id="prescriptions-form-group">
+						<label for="document-models-prescriptions">{{_ 'document-models_document-model'}}</label>
+						<div class="select-wrapper"> 
+							<select name="document-models-prescriptions" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="5" data-type="prescription">
+								<option class="tag" value="">{{_ 'common_firstOption'}}</option>
+								{{#each prescriptions}}
+									<option class="tag" value="{{_id}}">{{name}}</option>
+								{{/each}}
+							</select>
+						</div>
+					</div>
 
+					<!-- CERTIFICATES -->
+					<div class="form-group" id="certificates-form-group">
+						<label for="document-models-certificates">{{_ 'document-models_document-model'}}</label>
+						<div class="select-wrapper"> 
+							<select name="document-models-certificates" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="6" data-type="medical_certificate">
+								<option class="tag" value="">{{_ 'common_firstOption'}}</option>
+								{{#each certificates}}
+									<option class="tag" value="{{_id}}">{{name}}</option>
+								{{/each}}
+							</select>
+						</div>
+					</div>
+
+					<!-- EXAMS -->
+					<div class="form-group" id="exams-form-group">
+						<label for="document-models-exams">{{_ 'document-models_document-model'}}</label>
+						<div class="select-wrapper"> 
+							<select name="document-models-exams" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="4" data-type="exam_request">
+								<option class="tag" value="">{{_ 'common_firstOption'}}</option>
+								{{#each exams}}
+									<option class="tag" value="{{_id}}">{{name}}</option>
+								{{/each}}
+							</select>
+						</div>
+					</div>
+					<form id="patient-record-form" role="form">
+
+						<!-- DATE -->
+						<div class="form-group" id="date">
+							<label for="date">{{_ 'common_date'}}</label>
+							<div class="input-group date" id="datetimepicker1">
+								<input name="date" type="text" class="form-control" />
+								<span class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</span>
+							</div>
+						</div>
+
+						<!-- FORM RENDER -->
+						<div id="form-render"></div>
+
+						<!-- TEXT EDITOR -->
+						<div class="form-group" id="document-wrapper" data-required="true">
+							<label for="document" class="control-label">{{_ 'patient_document'}}</label>
+							<textarea rows="20" name="document" id="document" required="" data-schema-key="description" class="form-control"></textarea>
+						</div>
+
+					</form>
+				</div>
+
+				<!-- MODAL BUTTONS -->
+				<div class="modal-footer">
+					<button class="btn btn-danger delete-btn" type="button" data-dismiss="modal">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="btn btn-white cancel" data-dismiss="modal">
+						<i class="fa fa-ban" aria-hidden="true"></i> {{_ 'common_cancel'}}
+					</button>
+					<button type="button" class="btn btn-primary save">
+						<i class="fa fa-floppy-o" aria-hidden="true"></i> {{_ 'common_save'}}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

@@ -5,6 +5,14 @@ var schema = {
     type: String,
     trim: true
   },
+  description: {
+    type: String,
+    trim: true,
+    autoform: {
+      type: 'textarea',
+      rows: 5
+    }
+  },
   type: {
     type: String,
     allowedValues: ['prescription', 'medical_certificate', 'exam_request'],

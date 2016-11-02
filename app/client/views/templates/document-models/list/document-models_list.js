@@ -15,6 +15,9 @@ Template.documentModelList.helpers({
 			title: T9n.get('name'),
 			data: 'name'
 		},{
+			title: T9n.get('description'),
+			data: 'description'
+		},{
 			title: T9n.get('type'),
 			data: 'type',
 			render: function(cellData, renderType, currentRow) {

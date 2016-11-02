@@ -15,7 +15,6 @@ Template.formModelsList.helpers({
 			title: T9n.get('name'),
 			data: 'name'
 		},{
-			//title: T9n.get('name'),
 			title: T9n.get('description'),
 			data: 'description'
 		},{
