@@ -36,6 +36,41 @@ Template.patientRecord.helpers({
     exams: function(){
         return DocumentModels.find({type: 'exam_request'});
     },
+    entries: function() {
+		var recordsCollection = PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: 1}}).fetch();
+
+		var compareDates = function(item, index, array){
+			return moment(this.date).isSame(item.date);
+		};
+
+		var records = [];
+		recordsCollection.forEach(function(item, index, array){
+			var arr = records.find(compareDates, item);
+			
+			if(!arr){
+				records.push({
+					_id: item._id,
+					date: item.date,
+					patientId: item.patientId,
+					records: [item.record]
+				});
+			} else {
+				arr.records.push(item.record);
+			}
+		});
+
+		Template.instance().data.records = records;
+		return records;
+	},
+	formatedDate: function(){
+		return moment(this.date).format('DD/MM/YYYY');
+	},
+	shortDate: function(){
+		return moment(this.date).format('DD/MM/YYYY');
+	},
+	fullDate: function(){
+		return moment(this.date).format('LL');
+	}
 });
 
 Template.patientRecord.onRendered(function () {
@@ -288,7 +323,7 @@ Template.patientRecord.onRendered(function () {
 
 $(document).ready(function($){
 	var timelines = $('.cd-horizontal-timeline'),
-		eventsMinDistance = 60;
+		eventsMinDistance = 90;
 
 	(timelines.length > 0) && initTimeline(timelines);
 
@@ -419,7 +454,10 @@ $(document).ready(function($){
 		for (i = 0; i < timelineComponents['timelineDates'].length; i++) { 
 		    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
 		    	distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
+
+		   	// #TODO: fix the proportional distance between dates. It gets huge when dates to apart from each other
 		    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
+		    //timelineComponents['timelineEvents'].eq(i).css('left', (min*2*(i+1))+'px');
 		}
 	}
 

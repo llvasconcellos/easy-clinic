@@ -82,5 +82,47 @@ Meteor.methods({
 			}
 		}
 		return TAPi18n.__('common_save-success');
+	},
+	doMapReduce: function(patientId){
+		var map = function () {
+			emit(this.date, this);
+		};
+
+		var reduce = function (key, value) {
+			var records = [];
+			for(var i = 0; i < value.length; i++ ){
+				records.push(value[i].record);
+			}
+			return {
+				date: value.date, 
+				patientId: value.patientId, 
+				records: records
+			};
+		};
+
+		var rawPatientRecords = PatientRecords.rawCollection();
+
+		var syncMapReduce = Meteor.wrapAsync(rawPatientRecords.mapReduce, rawPatientRecords);
+
+		var CollectionName = syncMapReduce(map, reduce, {
+			out : {inline: 1},
+		 	sort : {date : 1}
+		});
+
+		// db.getCollection('patient-records').mapReduce(function(){
+		// 	emit(this.date, this);
+		// }, function(key, value){
+		// 	var records = [];
+		// 	for(var i = 0; i < value.length; i++ ){
+		// 		records.push(value[i].record);
+		// 	}
+		// 	return {date: value.date, patientId: value.patientId, records: records};
+		// }, {
+		// 	out : {inline: 1} ,
+		// 	//query : {type : 2} , 
+		// 	sort : {date : 1}
+		// });
+
+		return CollectionName;
 	}
 });

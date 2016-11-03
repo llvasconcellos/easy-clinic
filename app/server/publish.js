@@ -28,6 +28,10 @@ Meteor.publish('singlePatient', function (id) {
   return Patients.find({_id: id});
 });
 
+Meteor.publish('patientRecords', function (id) {
+  return PatientRecords.find({patientId: id});
+});
+
 Meteor.publish('importPatients', function () {
   return ImportPatients.find();
 });
