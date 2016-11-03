@@ -5,6 +5,9 @@
   -moz-transition: opacity 0.2s;
   transition: opacity 0.2s;
 }
+.events-content .panel-body {
+  background-color: white !important;
+}
 .cd-horizontal-timeline ol, ul {
 	list-style: none;
 }
@@ -39,7 +42,7 @@
   height: 100%;
   width: 20px;
 }
-/*.cd-horizontal-timeline .events-wrapper::before {
+.cd-horizontal-timeline .events-wrapper::before {
   left: 0;
   background-image: -webkit-linear-gradient( left , #f8f8f8, rgba(248, 248, 248, 0));
   background-image: linear-gradient(to right, #f8f8f8, rgba(248, 248, 248, 0));
@@ -48,7 +51,7 @@
   right: 0;
   background-image: -webkit-linear-gradient( right , #f8f8f8, rgba(248, 248, 248, 0));
   background-image: linear-gradient(to left, #f8f8f8, rgba(248, 248, 248, 0));
-}*/
+}
 .cd-horizontal-timeline .events {
   /* this is the grey line/timeline */
   position: absolute;

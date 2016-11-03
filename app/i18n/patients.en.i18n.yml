@@ -11,6 +11,7 @@ patients_add-certificate: Add Medical Certificate
 patients_add-exam-request: Add Exam Request
 patient_document: Document
 patient_records-validation-error: Please check the form for errors.
+patient_records-item: Item
 schemas:
   patients:
     name:

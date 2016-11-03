@@ -29,24 +29,46 @@
 					{{#if $first}}
 						<li class="selected" data-date="{{shortDate}}">
 							<em>{{fullDate}}</em>
-							<p>	
+							<div class="panel-group" id="accordion{{dateIdentifier}}">
 								{{#each record in records}}
-									{{#each record}}
-										<p><b>{{name}}</b>: {{{value}}}</p>
-									{{/each}}
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion{{dateIdentifier}}" href="#collapse_{{dateIdentifier}}_{{@index}}" aria-expanded="true" class="">{{_ 'patient_records-item'}} #{{addOne @index}}</a>
+											</h5>
+										</div>
+										<div id="collapse_{{dateIdentifier}}_{{@index}}" class="panel-collapse collapse in" aria-expanded="true">
+											<div class="panel-body">
+												{{#each record}}
+													<p><b>{{name}}</b>: {{{value}}}</p>
+												{{/each}}
+											</div>
+										</div>
+									</div>
 								{{/each}}
-							</p>
+							</div>
 						</li>
 					{{else}}
 						<li data-date="{{shortDate}}">
 							<em>{{fullDate}}</em>
-							<p>	
+							<div class="panel-group" id="accordion{{dateIdentifier}}">
 								{{#each record in records}}
-									{{#each record}}
-										<p><b>{{name}}</b>: {{{value}}}</p>
-									{{/each}}
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion{{dateIdentifier}}" href="#collapse_{{dateIdentifier}}_{{@index}}" aria-expanded="true" class="">{{_ 'patient_records-item'}} #{{addOne @index}}</a>
+											</h5>
+										</div>
+										<div id="collapse_{{dateIdentifier}}_{{@index}}" class="panel-collapse collapse in" aria-expanded="true">
+											<div class="panel-body">
+												{{#each record}}
+													<p><b>{{name}}</b>: {{{value}}}</p>
+												{{/each}}
+											</div>
+										</div>
+									</div>
 								{{/each}}
-							</p>
+							</div>
 						</li>
 					{{/if}}
 				{{/each}}

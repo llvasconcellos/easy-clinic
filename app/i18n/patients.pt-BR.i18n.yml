@@ -11,6 +11,7 @@ patients_add-certificate: Adicionar Atestado Médico
 patients_add-exam-request: Adicionar Pedido de Exame
 patient_document: Documento
 patient_records-validation-error: Verifique o Formulário por erros.
+patient_records-item: Item
 schemas:
   patients:
     name:

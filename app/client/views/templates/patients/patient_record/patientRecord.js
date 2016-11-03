@@ -37,7 +37,7 @@ Template.patientRecord.helpers({
         return DocumentModels.find({type: 'exam_request'});
     },
     entries: function() {
-		var recordsCollection = PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: 1}}).fetch();
+		var recordsCollection = PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: -1}}).fetch();
 
 		var compareDates = function(item, index, array){
 			return moment(this.date).isSame(item.date);
@@ -70,6 +70,12 @@ Template.patientRecord.helpers({
 	},
 	fullDate: function(){
 		return moment(this.date).format('LL');
+	},
+	dateIdentifier: function(){
+		return moment(this.date).format('DDMMYYYY');
+	},
+	addOne: function(add){
+		return add + 1;
 	}
 });
 
