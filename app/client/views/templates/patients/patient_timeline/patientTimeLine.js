@@ -9,27 +9,41 @@ Template.patientTimeLine.inheritsHelpersFrom('patientRecord');
 
 Template.patientTimeLine.onCreated(function(){
 	this.autorun(function() {
+		console.log('patientTimeLine');
 		PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: -1}}).fetch();
 		setTimeout(function(){
 			runTimeline();
-		}, 500);
+		}, 250);
     });
 });
 
 Template.patientTimeLine.onRendered(function () {
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-
 		//console.log(e.target); // newly activated tab
 		//console.log(e.relatedTarget); // previous active tab
 		runTimeline();
+	});
+	$(document).ready(function(){
 		
 	});
+	setTimeout(function(){
+		$('.print-document').click(function(event){
+			var id = $(this).data('id');
+			var content = $('#' + id).html();
+			$('iframe[name=summernotePrintFrame]').contents().find('body').html(content);
+			setTimeout(function () {
+				window.frames.summernotePrintFrame.window.focus();
+				window.frames.summernotePrintFrame.window.print();
+			}, 250);
+		});
+	}, 250);
+
 });
 
 
-var runTimeline = window.runTimeline = function(){
+var runTimeline = function(){
 	// Remove all event listeners so we can run the timeline code again without problems
-	$('.cd-horizontal-timeline *').not('.panel-group').off();
+	//$('.cd-horizontal-timeline *').not('.panel-group').not('.print-document').off();
 
 	var timelines = $('.cd-horizontal-timeline'),
 	eventsMinDistance = 90;
@@ -192,13 +206,8 @@ var runTimeline = window.runTimeline = function(){
 
 		// TOTAL WIDTH SET AFTER MODIFIED setDatePosition FUNCTION
 		totalWidth = (timelineComponents['timelineDates'].length * 100) + 100;
-		console.log(totalWidth);
 		wrapperWidth = $('.timeline').width();
 		if(totalWidth < wrapperWidth) totalWidth = wrapperWidth;
-		console.log(wrapperWidth);
-
-
-
 
 		timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
 		updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);

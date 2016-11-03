@@ -1,3 +1,7 @@
+.print-document {
+  margin:5px;
+}
+
 .cd-horizontal-timeline {
   opacity: 0;
   margin: 2em auto;
@@ -283,10 +287,11 @@
   display: block;
   font-style: italic;
   margin: 10px auto;
+  color: #01579B;
 }
-.cd-horizontal-timeline .events-content em::before {
+/*.cd-horizontal-timeline .events-content em::before {
   content: '- ';
-}
+}*/
 /*.cd-horizontal-timeline .events-content p {
   font-size: 1.4rem;
   color: #959595;

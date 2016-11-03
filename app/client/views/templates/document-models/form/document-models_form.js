@@ -95,6 +95,7 @@ Template.documentModelForm.onRendered(function () {
 		$("textarea[name=model]").summernote({
 			height: 300,
 			placeholder: TAPi18n.__('document-models_model-placeholder'),
+			lang: TAPi18n.getLanguage(),
 			toolbar: [
 				['history', ['undo', 'redo']],
 				['style', ['style', 'bold', 'italic', 'underline', 'clear']],
@@ -103,7 +104,7 @@ Template.documentModelForm.onRendered(function () {
 				['para', ['ul', 'ol', 'paragraph']],
 				['height', ['height']],
 				['insert', ['hr', 'table']],
-				['misc', ['fullscreen']]
+				['misc', ['fullscreen', 'print']]
 			],
 			hint: [{
 				words: drugsArray,

@@ -21,7 +21,15 @@ var openModal = function(type){
 	$('#addToRecords').modal();
 };
 
-
+// Template.patientRecord.onCreated(function(){
+// 	this.autorun(function() {
+// 		console.log('patientTimeLine');
+// 		PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: -1}}).fetch();
+// 		setTimeout(function(){
+// 			runTimeline();
+// 		}, 250);
+//     });
+// });
 
 Template.patientRecord.helpers({
     formModels: function(){
@@ -76,6 +84,11 @@ Template.patientRecord.helpers({
 	},
 	addOne: function(add){
 		return add + 1;
+	},
+	checkName: function(name){
+		if(name && (name.toLowerCase() != 'document')){
+			return '<b>' + name + ':</b>';
+		}
 	}
 });
 
@@ -194,6 +207,7 @@ Template.patientRecord.onRendered(function () {
 		$("textarea[name=document]").summernote({
 			height: 300,
 			placeholder: TAPi18n.__('document-models_model-placeholder'),
+			lang: TAPi18n.getLanguage(),
 			toolbar: [
 				['history', ['undo', 'redo']],
 				['style', ['style', 'bold', 'italic', 'underline', 'clear']],
@@ -202,7 +216,7 @@ Template.patientRecord.onRendered(function () {
 				['para', ['ul', 'ol', 'paragraph']],
 				['height', ['height']],
 				['insert', ['hr', 'table']],
-				['misc', ['fullscreen']]
+				['misc', ['fullscreen', 'print']]
 			],
 			hint: [{
 				words: drugsArray,
@@ -274,6 +288,12 @@ Template.patientRecord.onRendered(function () {
 			try{
 				validateForm();
 				var formData = $(this).serializeArray();
+
+				formData.forEach(function(element, index, array){
+					var labelEl = $('#patient-record-form').find('[name='+ element.name +']').parent().find('label:first');
+					var labelText = labelEl.clone().children().remove().end().text().trim();
+					element.label = labelText;
+				});
 
 				var date = formData.shift().value;
 

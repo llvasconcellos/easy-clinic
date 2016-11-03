@@ -28,19 +28,22 @@
 				{{#each $mapped entries}}
 					{{#if $first}}
 						<li class="selected" data-date="{{shortDate}}">
-							<em>{{fullDate}}</em>
+							<em><i class="fa fa-calendar"></i> {{fullDate}}</em>
 							<div class="panel-group" id="accordion{{dateIdentifier}}">
 								{{#each record in records}}
 									<div class="panel panel-default">
+										<button type="button" data-id="{{dateIdentifier}}_{{@index}}" class="pull-right print-document">
+											<i class="fa fa-print"></i>
+										</button>
 										<div class="panel-heading">
 											<h5 class="panel-title">
 											<a data-toggle="collapse" data-parent="#accordion{{dateIdentifier}}" href="#collapse_{{dateIdentifier}}_{{@index}}" aria-expanded="true" class="">{{_ 'patient_records-item'}} #{{addOne @index}}</a>
 											</h5>
 										</div>
 										<div id="collapse_{{dateIdentifier}}_{{@index}}" class="panel-collapse collapse in" aria-expanded="true">
-											<div class="panel-body">
+											<div class="panel-body" id="{{dateIdentifier}}_{{@index}}">
 												{{#each record}}
-													<p><b>{{name}}</b>: {{{value}}}</p>
+													<p>{{{checkName label}}} {{{value}}}</p>
 												{{/each}}
 											</div>
 										</div>
@@ -50,19 +53,22 @@
 						</li>
 					{{else}}
 						<li data-date="{{shortDate}}">
-							<em>{{fullDate}}</em>
+							<em><i class="fa fa-calendar"></i> {{fullDate}}</em>
 							<div class="panel-group" id="accordion{{dateIdentifier}}">
 								{{#each record in records}}
 									<div class="panel panel-default">
+										<button type="button" data-id="{{dateIdentifier}}_{{@index}}" class="pull-right print-document">
+											<i class="fa fa-print"></i>
+										</button>
 										<div class="panel-heading">
 											<h5 class="panel-title">
 											<a data-toggle="collapse" data-parent="#accordion{{dateIdentifier}}" href="#collapse_{{dateIdentifier}}_{{@index}}" aria-expanded="true" class="">{{_ 'patient_records-item'}} #{{addOne @index}}</a>
 											</h5>
 										</div>
 										<div id="collapse_{{dateIdentifier}}_{{@index}}" class="panel-collapse collapse in" aria-expanded="true">
-											<div class="panel-body">
+											<div class="panel-body" id="{{dateIdentifier}}_{{@index}}">
 												{{#each record}}
-													<p><b>{{name}}</b>: {{{value}}}</p>
+													<p>{{{checkName label}}} {{{value}}}</p>
 												{{/each}}
 											</div>
 										</div>
