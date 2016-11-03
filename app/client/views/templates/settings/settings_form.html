@@ -1,0 +1,26 @@
+<template name="settingsForm">
+  {{> pageHeading title='settings_settings'}}
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'settings_settings'}}
+							<small class="m-l-sm">{{_ 'settings_manage'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+					</div>
+					<div class="ibox-content">
+						{{#if isEditForm}}
+							{{> quickForm collection="Settings" doc=record id="settingsForm" type="update" buttonContent=saveButton class="settings-form"}}
+						{{else}}
+							{{> quickForm collection="Settings" id="settingsForm" type="insert" buttonContent=saveButton class="settings-form"}}
+						{{/if}}
+					</div>
+					<div class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

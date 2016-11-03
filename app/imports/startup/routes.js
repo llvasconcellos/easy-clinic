@@ -91,6 +91,16 @@ FlowRouter.route('/patients/:_id', {
   }
 });
 
+FlowRouter.route('/settings', {
+  name: 'settingsForm',
+  subscriptions: function(params) {
+    this.register('settings', Meteor.subscribe('settings'));
+  },
+  action: function(params, queryParams) {
+    BlazeLayout.render("mainLayout", {content: "settingsForm"});
+  }
+});
+
 FlowRouter.route('/specialties', {
   name: 'specialtyList',
   subscriptions: function(params) {

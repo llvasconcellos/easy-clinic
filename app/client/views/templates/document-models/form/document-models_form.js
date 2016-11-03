@@ -141,8 +141,8 @@ Template.documentModelForm.onRendered(function () {
 					'HORARIO_DA_CONSULTA', 
 					'NOME_PROFISSIONAL',
 					'CRM_PROFISSIONAL',
-					'ENDERECO_PROFISSIONAL',
-					'ASSINATURA_PROFISSIONAL'
+					'ASSINATURA_PROFISSIONAL',
+					'ENDERECO_CLINICA'
 				],
 				match: /\B#(\w*)$/,
 				search: function (keyword, callback) {

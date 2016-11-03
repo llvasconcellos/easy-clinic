@@ -42,8 +42,11 @@ Template.patientTimeLine.onRendered(function () {
 
 
 var runTimeline = function(){
+	// #TODO: find better way to do this. This hack can endup removing wanted listeners
 	// Remove all event listeners so we can run the timeline code again without problems
-	//$('.cd-horizontal-timeline *').not('.panel-group').not('.print-document').off();
+	$('.cd-horizontal-timeline *').not('.panel-group').not('.print-document').off('click');
+	$('.cd-horizontal-timeline *').not('.panel-group').not('.print-document').off('swipeleft');
+	$('.cd-horizontal-timeline *').not('.panel-group').not('.print-document').off('swiperight');
 
 	var timelines = $('.cd-horizontal-timeline'),
 	eventsMinDistance = 90;
