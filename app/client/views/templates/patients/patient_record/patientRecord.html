@@ -20,60 +20,7 @@
 		</ul>
 	</div>
 	{{#with entries}}
-		<div class="cd-horizontal-timeline">
-			<div class="timeline">
-				<div class="events-wrapper">
-					<div class="events">
-						<ol>
-							{{#each $mapped entries}}
-								{{#if $first}}
-									<li><a class="selected" href="#0" data-date="{{shortDate}}">{{shortDate}}</a></li>
-								{{else}}
-									<li><a href="#0" data-date="{{shortDate}}">{{shortDate}}</a></li>
-								{{/if}}
-							{{/each}}
-						</ol>
-
-						<span class="filling-line" aria-hidden="true"></span>
-					</div> <!-- .events -->
-				</div> <!-- .events-wrapper -->
-					
-				<ul class="cd-timeline-navigation">
-					<li><a href="#0" class="prev inactive">Prev</a></li>
-					<li><a href="#0" class="next">Next</a></li>
-				</ul> <!-- .cd-timeline-navigation -->
-			</div> <!-- .timeline -->
-
-			<div class="events-content">
-				<ol>
-					{{#each $mapped entries}}
-						{{#if $first}}
-							<li class="selected" data-date="{{shortDate}}">
-								<em>{{fullDate}}</em>
-								<p>	
-									{{#each record in records}}
-										{{#each record}}
-											<p><b>{{name}}</b>: {{{value}}}</p>
-										{{/each}}
-									{{/each}}
-								</p>
-							</li>
-						{{else}}
-							<li data-date="{{shortDate}}">
-								<em>{{fullDate}}</em>
-								<p>	
-									{{#each record in records}}
-										{{#each record}}
-											<p><b>{{name}}</b>: {{{value}}}</p>
-										{{/each}}
-									{{/each}}
-								</p>
-							</li>
-						{{/if}}
-					{{/each}}
-				</ol>
-			</div> <!-- .events-content -->
-		</div>
+		{{> patientTimeLine}}
 	{{/with}}
 
 	<!--  MODAL WINDOW  -->
