@@ -96,6 +96,11 @@ Template.schedule.onRendered(function () {
                 }
             });
         });
+
+        $('#scheduleEventForm .addPatient').click(function(event){
+            $('#scheduleEventForm').modal('hide');
+            FlowRouter.go('patientCreate');
+        });
     };
 
     var calendar = $('#calendar').fullCalendar({

@@ -11,3 +11,6 @@ schedule_to-confirm: [A confirmar]
 schedule_event-canceled: Consulta Cancelada
 schedule_timeline: Sua linha do tempo
 schedule_notAllowedError: Desculpe, este horário acabou de ser reservado por outra pessoa.
+schedule_appointment: Consulta
+schedule_hours-ago: horas atrás
+schedule_hours-from-now: horas restantes

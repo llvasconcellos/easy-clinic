@@ -34,6 +34,7 @@ Template.doctorForm.helpers({
 
 Template.doctorForm.rendered = function(){
 	if(this.data.doctor.profile.CRM){
+		$('textarea[name=signature]').val(this.data.doctor.profile.signature);
 		$('input[name=CRM]').val(this.data.doctor.profile.CRM);
 	}
 	$('.colors-select .chosen-select').on('chosen:ready', function(event, params) {
@@ -51,6 +52,7 @@ Template.doctorForm.events({
 		try{
 			var hours = getHours.call(this, event, template);
 			Meteor.call('doctorSpecialtyHours', FlowRouter.getParam('_id'), {
+				"profile.signature": $('textarea[name=signature]').val(),
 				"profile.CRM": $('input[name=CRM]').val(),
 				"specialties": $('select[name=specialties]').val(),
 				"color": $('select[name=color]').val(),

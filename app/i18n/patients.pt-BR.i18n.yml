@@ -1,6 +1,7 @@
 patients_data: Dados do Paciente
 patients_records: Prontuário do Paciente
 patients_patients: Pacientes
+patients_patient: Paciente
 patients_create-form-title: Edite Informações do Paciente
 patients_newpatient: Novo Paciente
 patients_list: Listar Pacientes
@@ -12,6 +13,8 @@ patients_add-exam-request: Adicionar Pedido de Exame
 patient_document: Documento
 patient_records-validation-error: Verifique o Formulário por erros.
 patient_records-item: Item
+patients_start-appointment: Iniciar Consulta
+patients_finish-appointment: Terminar Consulta
 schemas:
   patients:
     name:

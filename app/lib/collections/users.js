@@ -40,6 +40,10 @@ Schema.UserProfile = new SimpleSchema({
     CRM: {
         type: String,
         optional: true
+    },
+    signature: {
+        type: String,
+        optional: true
     }
     // birthday: {
     //     type: Date,

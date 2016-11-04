@@ -1,6 +1,7 @@
 patients_data: Patient Data
 patients_records: Patient Records
 patients_patients: Patients
+patients_patient: Patient
 patients_create-form-title: Edit Patient Information
 patients_newpatient: New Patient
 patients_list: List Patients
@@ -12,6 +13,8 @@ patients_add-exam-request: Add Exam Request
 patient_document: Document
 patient_records-validation-error: Please check the form for errors.
 patient_records-item: Item
+patients_start-appointment: Start Appointment
+patients_finish-appointment: Finish Appointment
 schemas:
   patients:
     name:

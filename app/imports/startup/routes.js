@@ -20,6 +20,9 @@ FlowRouter.triggers.enter(
 
 FlowRouter.route('/', {
   name: 'index',
+  subscriptions: function(params) {
+    this.register('schedule', Meteor.subscribe('schedule'));
+  },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "dashboard"});
   }

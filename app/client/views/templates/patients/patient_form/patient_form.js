@@ -8,6 +8,19 @@ Template['datePickerOverride'].replaces('afBootstrapDatepicker');
 Template.patientForm.events({
 	'click .new-record': (event, template) => {
 		FlowRouter.go('patientCreate');
+	},
+	'click .start-appointment': (event, template) => {
+		var btn = $(event.currentTarget);
+		btn.toggleClass('btn-success btn-danger');
+		btn.find('i').toggleClass('fa-play fa-stop');
+		var text = btn.find('strong').text();
+		var html = btn.find('strong').html();
+		if(text.trim() == TAPi18n.__('patients_start-appointment')){
+			html = html.replace(TAPi18n.__('patients_start-appointment'), TAPi18n.__('patients_finish-appointment'));
+		} else {
+			html = html.replace(TAPi18n.__('patients_finish-appointment'), TAPi18n.__('patients_start-appointment'));
+		}
+		btn.find('strong').html(html);
 	}
 });
 

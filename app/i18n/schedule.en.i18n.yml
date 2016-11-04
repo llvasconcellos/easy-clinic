@@ -11,3 +11,6 @@ schedule_to-confirm: [To Confirm]
 schedule_event-canceled: Appointment Canceled
 schedule_timeline: Your Timeline
 schedule_notAllowedError: Sorry, this timeslot has been reserved by somebody else just now.
+schedule_appointment: Appointment
+schedule_hours-ago: hours ago
+schedule_hours-from-now: hours from now

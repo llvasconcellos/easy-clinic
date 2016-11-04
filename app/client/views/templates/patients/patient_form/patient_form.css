@@ -13,3 +13,6 @@
 	display: block !important;
 	width: 100% !important;
 }
+.tabs-container .btn {
+	margin-left: 6px;
+}
