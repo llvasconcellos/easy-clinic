@@ -9,7 +9,6 @@ Template.patientTimeLine.inheritsHelpersFrom('patientRecord');
 
 Template.patientTimeLine.onCreated(function(){
 	this.autorun(function() {
-		console.log('patientTimeLine');
 		PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: -1}}).fetch();
 		setTimeout(function(){
 			runTimeline();

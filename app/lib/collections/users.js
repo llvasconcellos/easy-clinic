@@ -36,6 +36,10 @@ Schema.UserProfile = new SimpleSchema({
     },
     language: {
         type: String
+    },
+    CRM: {
+        type: String,
+        optional: true
     }
     // birthday: {
     //     type: Date,

@@ -80,3 +80,6 @@ table.dataTable a.btn {
 .highlight {
     background: yellow;
 }
+.note-popover.popover {
+    z-index: 99999;
+}

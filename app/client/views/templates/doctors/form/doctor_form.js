@@ -15,7 +15,8 @@ Template.doctorForm.helpers({
 		return palette;
 	},
 	doctor: function() {
-		return Meteor.users.findOne({_id: FlowRouter.getParam('_id')}); 
+		Template.instance().data.doctor = Meteor.users.findOne({_id: FlowRouter.getParam('_id')}); 
+		return Template.instance().data.doctor;
 	},
 	isColorSelected: function(color) {
 		var user = Template.parentData(1);
@@ -32,6 +33,9 @@ Template.doctorForm.helpers({
 });
 
 Template.doctorForm.rendered = function(){
+	if(this.data.doctor.profile.CRM){
+		$('input[name=CRM]').val(this.data.doctor.profile.CRM);
+	}
 	$('.colors-select .chosen-select').on('chosen:ready', function(event, params) {
 		$('.colors-select .chosen-single').css('background', params.chosen.selected_item[0].firstChild.innerHTML);
 	});
@@ -47,6 +51,7 @@ Template.doctorForm.events({
 		try{
 			var hours = getHours.call(this, event, template);
 			Meteor.call('doctorSpecialtyHours', FlowRouter.getParam('_id'), {
+				"profile.CRM": $('input[name=CRM]').val(),
 				"specialties": $('select[name=specialties]').val(),
 				"color": $('select[name=color]').val(),
 				"workHours": hours

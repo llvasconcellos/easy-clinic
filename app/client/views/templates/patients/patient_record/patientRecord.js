@@ -21,15 +21,12 @@ var openModal = function(type){
 	$('#addToRecords').modal();
 };
 
-// Template.patientRecord.onCreated(function(){
-// 	this.autorun(function() {
-// 		console.log('patientTimeLine');
-// 		PatientRecords.find({patientId: FlowRouter.getParam('_id')}, {sort: {date: -1}}).fetch();
-// 		setTimeout(function(){
-// 			runTimeline();
-// 		}, 250);
-//     });
-// });
+Template.patientRecord.onCreated(function(){
+	var templateInstance = this;
+	this.autorun(function() {
+		templateInstance.data.settings = Settings.findOne();
+    });
+});
 
 Template.patientRecord.helpers({
     formModels: function(){
@@ -92,7 +89,60 @@ Template.patientRecord.helpers({
 	}
 });
 
+
+var hashTagReplace = function(data, text){
+
+	var keyReplace = [{
+		key: '#NOME_DO_PACIENTE',
+		replace: data.name || ""
+	},{
+		key: '#CPF_PACIENTE', 
+		replace: data.CPF || ""
+	},{
+		key: '#RG_PACIENTE', 
+		replace: data.RG || ""
+	},{
+		key: '#ENDERECO_PACIENTE', 
+		replace: function(){
+			var bairro = data.bairro || "";
+			var city = data.city || "";
+			var streetAddress_1 = data.streetAddress_1 || "";
+			var streetAddress_2 = data.streetAddress_2 || "";
+			var zip = data.zip || "";
+
+			return `${streetAddress_1} ${streetAddress_2 ? (' - ' + streetAddress_2) : '' } <br/>${bairro} - ${city} - ${zip}`;
+		}
+	},{
+		key: '#DATA_DA_CONSULTA', 
+		replace: moment().format('DD/MM/YYYY')
+	},{
+		key: '#HORARIO_DA_CONSULTA', 
+		replace: moment().format('HH:mm')
+	},{
+		key: '#NOME_PROFISSIONAL', 
+		replace: Meteor.user().profile.firstName + ' ' + Meteor.user().profile.lastName
+	},{
+		key: '#CRM_PROFISSIONAL', 
+		replace: Meteor.user().profile.CRM || ""
+	},{
+		key: '#ASSINATURA_PROFISSIONAL', 
+		replace: Meteor.user().profile.signature || ""
+	},{
+		key: '#ENDERECO_CLINICA', 
+		replace: data.settings.address || ""
+	}];
+	
+	var modifiedText = text;
+	keyReplace.forEach(function(item, index, array){
+		modifiedText = modifiedText.replace(item.key, item.replace);
+	});
+	return modifiedText;
+};
+
+
+
 Template.patientRecord.onRendered(function () {
+	var data = this.data;
 	$(document).ready(function(){
 		$('input[name=date]').mask('00/00/0000');
 		$('input[name=date]').val(moment().format('DD/MM/YYYY'));
@@ -114,7 +164,8 @@ Template.patientRecord.onRendered(function () {
 			} else {
 				if(selected.selected){
 					model = DocumentModels.findOne({_id: selected.selected});
-					$('#document').summernote('code', model.model);
+					$('#document').summernote('code', hashTagReplace(data, model.model));
+
 					$('#document-wrapper').show();
 				} else {
 					$('#document').summernote('code', '');
@@ -253,8 +304,8 @@ Template.patientRecord.onRendered(function () {
 					'HORARIO_DA_CONSULTA', 
 					'NOME_PROFISSIONAL',
 					'CRM_PROFISSIONAL',
-					'ENDERECO_PROFISSIONAL',
-					'ASSINATURA_PROFISSIONAL'
+					'ASSINATURA_PROFISSIONAL',
+					'ENDERECO_CLINICA'
 				],
 				match: /\B#(\w*)$/,
 				search: function (keyword, callback) {
