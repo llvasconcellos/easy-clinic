@@ -68,7 +68,7 @@ Template.schedule.onRendered(function () {
          $("#content-switcher").carousel(0);
     })
 
-    var setModalButtons = function(){
+    var setModalButtons = function(scheduleEvent){
         $('#scheduleEventForm .save').off('click');
         $('#scheduleEventForm .delete-btn').off('click');
         $('#scheduleEventForm .save').click(function(event){
@@ -116,7 +116,7 @@ Template.schedule.onRendered(function () {
         }
         $('.patients-chosen-select').trigger('chosen:updated');
         
-        setModalButtons();
+        setModalButtons(scheduleEvent);
     };
 
     var calendar = $('#calendar').fullCalendar({
