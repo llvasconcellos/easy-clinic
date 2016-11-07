@@ -15,6 +15,7 @@ patient_records-validation-error: Please check the form for errors.
 patient_records-item: Item
 patients_start-appointment: Start Appointment
 patients_finish-appointment: Finish Appointment
+patients_full-patient-register: Full Register
 schemas:
   patients:
     name:

@@ -68,16 +68,7 @@ Template.schedule.onRendered(function () {
          $("#content-switcher").carousel(0);
     })
 
-    var showEventModal = function(scheduleEvent){
-        event = Schedule.findOne({_id: scheduleEvent});
-        $('#scheduleEventForm .scheduleTitle').html(moment(event.start).format('LLLL'));
-        $('#scheduleEventForm').modal();
-        if(event.patient){
-            $('#scheduleEventForm select[name=patients]').val(event.patient);
-        } else {
-            $('#scheduleEventForm select[name=patients]').val('');
-        }
-        $('.patients-chosen-select').trigger('chosen:updated');
+    var setModalButtons = function(){
         $('#scheduleEventForm .save').off('click');
         $('#scheduleEventForm .delete-btn').off('click');
         $('#scheduleEventForm .save').click(function(event){
@@ -108,11 +99,24 @@ Template.schedule.onRendered(function () {
                 }
             });
         });
+        $('#scheduleEventForm .full-patient-register').click(function(event){
+            $('#scheduleEventForm').modal('hide');
+            FlowRouter.go('patientCreate');
+        });
+    };
 
-        // $('#scheduleEventForm .addPatient').click(function(event){
-        //     $('#scheduleEventForm').modal('hide');
-        //     FlowRouter.go('patientCreate');
-        // });
+    var showEventModal = function(scheduleEvent){
+        event = Schedule.findOne({_id: scheduleEvent});
+        $('#scheduleEventForm .scheduleTitle').html(moment(event.start).format('LLLL'));
+        $('#scheduleEventForm').modal();
+        if(event.patient){
+            $('#scheduleEventForm select[name=patients]').val(event.patient);
+        } else {
+            $('#scheduleEventForm select[name=patients]').val('');
+        }
+        $('.patients-chosen-select').trigger('chosen:updated');
+        
+        setModalButtons();
     };
 
     var calendar = $('#calendar').fullCalendar({

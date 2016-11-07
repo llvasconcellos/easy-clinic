@@ -15,6 +15,7 @@ patient_records-validation-error: Verifique o Formulário por erros.
 patient_records-item: Item
 patients_start-appointment: Iniciar Consulta
 patients_finish-appointment: Terminar Consulta
+patients_full-patient-register: Cadastro Completo
 schemas:
   patients:
     name:

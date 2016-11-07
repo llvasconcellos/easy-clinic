@@ -47,3 +47,9 @@
 #scheduleEventForm .item.active {
     margin-top: 9px;
 }
+
+#scheduleEventForm .carousel-inner > .item {
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    -o-transition: -o-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
+}
