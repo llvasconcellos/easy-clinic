@@ -23,29 +23,32 @@
 							</button-->
 						</div>
 	                    <div class="ibox-content inspinia-timeline" id="schedule-timeline">
-                            {{#each schedule}}
-                                <div class="timeline-item">
-                                    <div class="row">
-                                        <div class="col-xs-3 date">
-                                            <i class="fa fa-clock-o"></i>
-                                            {{getTime start}}
-                                            <br/>
-                                            <small class="text-navy">{{getHoursFromNow start}}</small>
-                                        </div>
-                                        <div class="col-xs-7 content no-top-border">
-                                            <p class="m-b-xs"><strong>{{_ 'schedule_appointment'}}</strong></p>
-                                            <p>{{_ 'patients_patient'}}: <b>{{title}}</b></p>
-                                            {{#if patient}}
-                                                <a href="{{pathFor route='patientEdit' _id=patient}}" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}
-                                                </a>
-                                            {{/if}}
+                            {{#if schedule.length}}
+                                {{#each schedule}}
+                                    <div class="timeline-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 date">
+                                                <i class="fa fa-clock-o"></i>
+                                                {{getTime start}}
+                                                <br/>
+                                                <small class="text-navy">{{getHoursFromNow start}}</small>
+                                            </div>
+                                            <div class="col-xs-7 content no-top-border">
+                                                <p class="m-b-xs"><strong>{{_ 'schedule_appointment'}}</strong></p>
+                                                <p>{{_ 'patients_patient'}}: <b>{{title}}</b></p>
+                                                {{#if patient}}
+                                                    <a href="{{pathFor route='patientEdit' _id=patient}}" class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}
+                                                    </a>
+                                                {{/if}}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {{/each}}
+                                {{/each}}
+                            {{else}}
+                                {{_ 'schedule_no-appointment-today'}}
+                            {{/if}}
 	                    </div>
-	                    <div id="table-footer" class="ibox-footer"></div>
 	                </div>
                 </div>
             </div>

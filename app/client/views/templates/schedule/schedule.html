@@ -21,26 +21,44 @@
                     <div class="scheduleTitle"></div>
                 </div>
                 <div class="modal-body">
-					<form id="insertPatientForm" class="schedule-form" novalidate="novalidate">
-						<div class="row selectAddPacient">
-							<div class="col-md-2">
-								<button type="button" class="addPatient btn">
-									<i class="fa fa-user-plus" aria-hidden="true"></i>
-								</button>
-							</div>
-							<div class="col-md-10">
-								<label for="patients">{{_ 'patients_patients'}}</label>
-								<div class="select-wrapper"> 
-									<select name="patients" data-placeholder="{{_ 'common_firstOption'}}" class="chosen-select" tabindex="4">
-										<option class="tag" value="">{{_ 'common_firstOption'}}</option>
-										{{#each patients}}
-											<option class="tag" value="{{_id}}">{{name}}</option>
-										{{/each}}
-									</select>
-								</div>
-							</div>
-						</div>
-					</form>
+                    <div id="content-switcher" class="carousel slide" data-ride="carousel" data-interval="false">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+
+                            <div class="item active">
+                                <form id="schedule-form" class="schedule-form" novalidate="novalidate">
+                                    <div class="row selectAddPacient">
+                                        <div class="col-md-2">
+                                            <a class="btn btn-default addPatient" href="#content-switcher" role="button" data-slide="next">
+                                                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <label for="patients">{{_ 'patients_patients'}}</label>
+                                            <div class="select-wrapper"> 
+                                                <select name="patients" data-placeholder="{{_ 'common_firstOption'}}" class="patients-chosen-select" tabindex="4">
+                                                    <option class="tag" value="">{{_ 'common_firstOption'}}</option>
+                                                    {{#each patients}}
+                                                        <option class="tag" value="{{_id}}">{{name}}</option>
+                                                    {{/each}}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="item">
+                                {{#autoForm collection="Patients" id="quickPatientForm" type="insert"}}
+                                    {{> afQuickField name='name'}}
+                                    {{> afQuickField name='gender'}}
+                                    {{> afQuickField name='dateOfBirth'}}
+                                    {{> afQuickField name='mobile'}}
+                                    {{> afQuickField name='email'}}
+                                {{/autoForm}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-danger delete-btn" type="button" data-dismiss="modal">

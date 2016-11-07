@@ -11,7 +11,15 @@ Template.schedule.helpers({
 Template.schedule.onCreated(function () {});
 
 Template.schedule.onRendered(function () {
-    $('.chosen-select').chosen({width: "100%"});
+    $('.patients-chosen-select').chosen({width: "100%"});
+
+    // Hack to make slider container overflow visible so chosen displays correctly
+    $(".patients-chosen-select").on("chosen:showing_dropdown", function () { 
+        $(".carousel-inner").css("overflow", "visible");
+    });
+    $(".patients-chosen-select").on("chosen:hiding_dropdown", function () {
+        $(".carousel-inner").css("overflow", "");
+    });
 
     // #TODO reactive change locale and set timezones
     // $('#locale-selector').on('change', function() {
@@ -56,6 +64,10 @@ Template.schedule.onRendered(function () {
         });
     });
 
+    $('#scheduleEventForm').on('hidden.bs.modal', function (e) {
+         $("#content-switcher").carousel(0);
+    })
+
     var showEventModal = function(scheduleEvent){
         event = Schedule.findOne({_id: scheduleEvent});
         $('#scheduleEventForm .scheduleTitle').html(moment(event.start).format('LLLL'));
@@ -65,7 +77,7 @@ Template.schedule.onRendered(function () {
         } else {
             $('#scheduleEventForm select[name=patients]').val('');
         }
-        $('.chosen-select').trigger('chosen:updated');
+        $('.patients-chosen-select').trigger('chosen:updated');
         $('#scheduleEventForm .save').off('click');
         $('#scheduleEventForm .delete-btn').off('click');
         $('#scheduleEventForm .save').click(function(event){
@@ -97,10 +109,10 @@ Template.schedule.onRendered(function () {
             });
         });
 
-        $('#scheduleEventForm .addPatient').click(function(event){
-            $('#scheduleEventForm').modal('hide');
-            FlowRouter.go('patientCreate');
-        });
+        // $('#scheduleEventForm .addPatient').click(function(event){
+        //     $('#scheduleEventForm').modal('hide');
+        //     FlowRouter.go('patientCreate');
+        // });
     };
 
     var calendar = $('#calendar').fullCalendar({

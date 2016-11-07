@@ -32,10 +32,10 @@
     background-color: white;
 }
 #scheduleEventForm  .selectAddPacient {
-    height: 64px;
+    height: 84px;
     background: #f8fafb;
-   /* position: relative;
-    font-size: 10px;*/
+    padding: 10px 10px 10px 10px;
+    margin: 0;
 }
 #scheduleEventForm .selectAddPacient .addPatient {
     width: 64px;
@@ -43,10 +43,7 @@
     padding: 12px 0;
     font-size: 2.2em;
 }
-#scheduleEventForm .selectAddPacient label {
-    /*position: absolute;
-    z-index: 10;*/
-}
-#scheduleEventForm .selectAddPacient .select-wrapper {
-    /*padding-left: 64px;*/
+
+#scheduleEventForm .item.active {
+    margin-top: 9px;
 }

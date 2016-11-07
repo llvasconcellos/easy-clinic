@@ -14,3 +14,4 @@ schedule_notAllowedError: Sorry, this timeslot has been reserved by somebody els
 schedule_appointment: Appointment
 schedule_hours-ago: hours ago
 schedule_hours-from-now: hours from now
+schedule_no-appointment-today: No appointments for today.

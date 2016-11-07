@@ -14,3 +14,4 @@ schedule_notAllowedError: Desculpe, este horário acabou de ser reservado por ou
 schedule_appointment: Consulta
 schedule_hours-ago: horas atrás
 schedule_hours-from-now: horas restantes
+schedule_no-appointment-today: Nenhum compromisso hoje.

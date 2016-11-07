@@ -345,8 +345,12 @@ patientSchema = {
     trim: true,
     optional: true,
     max: 255,
+    regEx: SimpleSchema.RegEx.Email,
     label: function() {
       return TAPi18n.__('schemas.patients.email.label');
+    },
+    autoform: {
+      type: 'email',
     }
   },
   phone: {
