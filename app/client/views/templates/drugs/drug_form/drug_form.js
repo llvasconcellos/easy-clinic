@@ -64,6 +64,9 @@ Template.drugForm.onRendered(function () {
 
 		$("textarea[name=html]").summernote({
 			height: 300,
+			lang: TAPi18n.getLanguage(),
+			fontSizes: ['4', '6', '8', '9', '10', '11', '12', '14', '16', '18', '20', '24', '36'],
+			lineHeights: ['0.4', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
 			toolbar: [
 				['history', ['undo', 'redo']],
 				['style', ['style', 'bold', 'italic', 'underline', 'clear']],

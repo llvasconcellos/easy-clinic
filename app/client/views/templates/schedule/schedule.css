@@ -53,3 +53,7 @@
     -o-transition: -o-transform .3s ease-in-out;
     transition: transform .3s ease-in-out;
 }
+
+.fc-row.fc-week.fc-widget-content {
+    cursor: pointer;
+}

@@ -8,7 +8,25 @@ Template.schedule.helpers({
     },
 });
 
-Template.schedule.onCreated(function () {});
+Template.schedule.onCreated(function () {
+    var patient = null;
+    AutoForm.addHooks('quickPatientForm', {
+        formToDoc: function(doc, schema){
+            doc.createdAt = new Date();
+            patient = doc;
+            return doc;
+        },
+        onSuccess: function(formType, result) {
+            toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
+            $("#content-switcher").carousel(0);
+            $('#scheduleEventForm select[name=patients]').val(result);
+            $('.patients-chosen-select').trigger('chosen:updated');
+        },
+        onError: function(formType, error) {
+            toastr['error'](error.message, TAPi18n.__('common_error'));
+        }
+    });
+});
 
 Template.schedule.onRendered(function () {
     $('.patients-chosen-select').chosen({width: "100%"});
@@ -64,14 +82,35 @@ Template.schedule.onRendered(function () {
         });
     });
 
-    $('#scheduleEventForm').on('hidden.bs.modal', function (e) {
+    $('#scheduleEventForm').on('hidden.bs.modal', function (event) {
          $("#content-switcher").carousel(0);
-    })
+    });
 
-    var setModalButtons = function(scheduleEvent){
+    $('#content-switcher').on('slide.bs.carousel', function (event) {
+        if(event.direction == "left"){
+            setPatientFormModalButtons();
+        } else {
+            setAppointmentFormModalButtons();
+        }
+    });
+
+    var setPatientFormModalButtons = function(){
+        setTimeout(function(){
+            $('#quickPatientForm input:first').filter(':visible').focus();
+        }, 500);
+        $('#scheduleEventForm .delete-btn').hide();
         $('#scheduleEventForm .save').off('click');
+        $('#scheduleEventForm .save').click(function(event){
+            $('#quickPatientForm').submit();
+        });
+    };
+
+    var setAppointmentFormModalButtons = function(){
+        $('#scheduleEventForm .save').off('click');
+        $('#scheduleEventForm .delete-btn').show();
         $('#scheduleEventForm .delete-btn').off('click');
         $('#scheduleEventForm .save').click(function(event){
+            var scheduleEvent = $('#scheduleEventForm input[name=eventId]').val();
             var patient = $('#scheduleEventForm select[name=patients]').val();
             patient = Patients.findOne({_id: patient});
             if(patient){
@@ -90,6 +129,7 @@ Template.schedule.onRendered(function () {
             }
         });
         $('#scheduleEventForm .delete-btn').click(function(event){
+            var scheduleEvent = $('#scheduleEventForm input[name=eventId]').val();
             Schedule.remove(scheduleEvent, function(error, result){
                 if (error) {
                     toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -109,6 +149,7 @@ Template.schedule.onRendered(function () {
         event = Schedule.findOne({_id: scheduleEvent});
         $('#scheduleEventForm .scheduleTitle').html(moment(event.start).format('LLLL'));
         $('#scheduleEventForm').modal();
+        $('#scheduleEventForm input[name=eventId]').val(scheduleEvent);
         if(event.patient){
             $('#scheduleEventForm select[name=patients]').val(event.patient);
         } else {
@@ -116,7 +157,7 @@ Template.schedule.onRendered(function () {
         }
         $('.patients-chosen-select').trigger('chosen:updated');
         
-        setModalButtons(scheduleEvent);
+        setAppointmentFormModalButtons();
     };
 
     var calendar = $('#calendar').fullCalendar({
@@ -133,7 +174,7 @@ Template.schedule.onRendered(function () {
         header: {
             left: 'today prev,next',
             center: 'title',
-            right: 'timelineDay,timelineThreeDays,listDay,listWeek,agendaDay,agendaWeek,month'
+            right: 'timelineDay,agendaDay,listWeek,agendaWeek,month' //timelineThreeDays, listDay
         },
         buttonText: {
             today: TAPi18n.__('schedule_today')
@@ -163,6 +204,12 @@ Template.schedule.onRendered(function () {
             },
             month: { 
                 buttonText: TAPi18n.__('schedule_month')
+            }
+        },
+        dayClick: function(date, jsEvent, view, resourceObj) {
+            if (view.name == "month") {
+                $('#calendar').fullCalendar('changeView', 'timelineDay');
+                $('#calendar').fullCalendar('gotoDate', date); 
             }
         },
         //droppable: true, // this allows things to be dropped onto the calendar
@@ -202,25 +249,27 @@ Template.schedule.onRendered(function () {
             }
         },
         select: function(start, end, jsEvent, view, resource){
-            Schedule.insert({
-                resourceId: resource.id,
-                start: start.format(),
-                end: end.format(),
-                title: TAPi18n.__('schedule_to-confirm'),
-                constraint: 'available_hours'
-            }, function(error, result){
-                calendar.fullCalendar('unselect');
-                if (error) {
-                    if(error.error == 403){
-                        toastr['error'](TAPi18n.__('schedule_notAllowedError'), TAPi18n.__('common_notAllowed'));
-                    } else {
-                        toastr['error'](error.message, TAPi18n.__('common_error'));
+            if(resource){
+                Schedule.insert({
+                    resourceId: resource.id,
+                    start: start.format(),
+                    end: end.format(),
+                    title: TAPi18n.__('schedule_to-confirm'),
+                    constraint: 'available_hours'
+                }, function(error, result){
+                    calendar.fullCalendar('unselect');
+                    if (error) {
+                        if(error.error == 403){
+                            toastr['error'](TAPi18n.__('schedule_notAllowedError'), TAPi18n.__('common_notAllowed'));
+                        } else {
+                            toastr['error'](error.message, TAPi18n.__('common_error'));
+                        }
                     }
-                }
-                if (result) {
-                    showEventModal(result);
-                }
-            });
+                    if (result) {
+                        showEventModal(result);
+                    }
+                });
+            }
         },
         eventClick: function(calEvent, jsEvent, view) {
             showEventModal(calEvent._id);
