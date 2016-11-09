@@ -9,13 +9,11 @@ Template.schedule.helpers({
 });
 
 Template.schedule.onCreated(function () {
-    var patient = null;
+    var templateInstance = this;
+    this.autorun(function() {
+        templateInstance.data.settings = Settings.findOne();
+    });
     AutoForm.addHooks('quickPatientForm', {
-        formToDoc: function(doc, schema){
-            doc.createdAt = new Date();
-            patient = doc;
-            return doc;
-        },
         onSuccess: function(formType, result) {
             toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
             $("#content-switcher").carousel(0);
@@ -168,11 +166,14 @@ Template.schedule.onRendered(function () {
         setAppointmentFormModalButtons();
     };
 
+    console.log(this.data.settings.workHoursStart);
+    console.log(this.data.settings.workHoursEnd);
+
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
         slotDuration: '00:20:00',
-        minTime: '06:00:00',
-        maxTime: '23:00:00',
+        minTime: this.data.settings.workHoursStart + ':00',
+        maxTime: this.data.settings.workHoursEnd + ':00',
         locale: TAPi18n.getLanguage().toLowerCase(),
         aspectRatio: 1.8,
         navLinks: true,

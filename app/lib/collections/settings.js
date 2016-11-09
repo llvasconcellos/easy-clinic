@@ -1,6 +1,20 @@
 Settings = new Mongo.Collection('settings');
 
 var schema = {
+  workHoursStart: {
+    type: String,
+    max: 5,
+    label: function() {
+      return TAPi18n.__('settings_clinic-workhours-start');
+    },
+  },
+  workHoursEnd: {
+    type: String,
+    max: 5,
+    label: function() {
+      return TAPi18n.__('settings_clinic-workhours-end');
+    },
+  },
   address: {
     type: String,
     label: function() {

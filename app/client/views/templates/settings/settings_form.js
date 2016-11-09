@@ -35,6 +35,20 @@ Template.settingsForm.onRendered(function () {
 		// 	$('.settings-form').submit();
 		// });
 
+		var transformToClockPicker = function(jqueryElement){
+			var parent = jqueryElement.parent();
+			jqueryElement.addClass('form-control');
+			var inputGroup = $.parseHTML('<div class="input-group clockpicker" data-autoclose="true"></div>');
+			parent.find('label').after(inputGroup);
+			jqueryElement.detach().appendTo(inputGroup);
+			$(inputGroup).append(`<span class="input-group-addon">
+										<span class="glyphicon glyphicon-time"></span>
+									</span>`);
+		}
+		transformToClockPicker($('input[name=workHoursStart]'));
+		transformToClockPicker($('input[name=workHoursEnd]'));
+		$('.clockpicker').clockpicker();
+		
 		$("textarea[name=address]").summernote({
 			height: 150,
 			lang: TAPi18n.getLanguage(),

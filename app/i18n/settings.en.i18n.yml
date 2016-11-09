@@ -1,4 +1,6 @@
 settings_settings: Settings
 settings_general: General
 settings_manage: Manage Application Settings
-settings_clinic-address: Clinic Address
+settings_clinic-address: Clinic's Address
+settings_clinic-workhours-start: Clinic's Work Hours Start
+settings_clinic-workhours-end: Clinic's Work Hours End

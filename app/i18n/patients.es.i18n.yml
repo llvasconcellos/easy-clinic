@@ -64,8 +64,8 @@ schemas:
       label: Profesión
     recommendedBy:
       label: Recomendado por
-    prevRetorno:
-      label: Prev. Retorno
+    returnDate:
+      label: Fecha Retorno
     email:
       label: E-mail
     phone:

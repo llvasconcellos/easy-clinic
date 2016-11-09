@@ -78,8 +78,8 @@ schemas:
       label: Occupation
     recommendedBy:
       label: Recommended By
-    prevRetorno:
-      label: Prev. Retorno
+    returnDate:
+      label: Return Date
     email:
       label: Email
     phone:

@@ -57,6 +57,7 @@ FlowRouter.route('/schedule', {
     this.register('doctors', Meteor.subscribe('doctors'));
     this.register('patients', Meteor.subscribe('patients'));
     this.register('schedule', Meteor.subscribe('schedule'));
+    this.register('settings', Meteor.subscribe('settings'));
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "schedule"});

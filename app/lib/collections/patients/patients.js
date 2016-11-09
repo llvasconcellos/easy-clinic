@@ -1,5 +1,9 @@
 Patients = new Mongo.Collection('patients');
 
+Patients.before.insert(function (userId, doc) {
+  doc.createdAt = Date.now();
+});
+
 Patients.attachSchema(new SimpleSchema(patientSchema));
 
 Patients.addPicture = function(picture, patientId) {

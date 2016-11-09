@@ -6,6 +6,9 @@ patientSchema = {
       afFieldInput: {
         type: 'profilePicUpload',
         collection: 'Images'
+      },
+      afFormGroup: {
+        'data-id': 'picture-form-group'
       }
     }
   },
@@ -17,15 +20,15 @@ patientSchema = {
       return TAPi18n.__('schemas.patients.name.label');
     }
   },
-  bed: {
-    type: String,
-    trim: true,
-    optional: true,
-    max: 30,
-    label: function() {
-      return TAPi18n.__('schemas.patients.bed.label');
-    }
-  },
+  // bed: {
+  //   type: String,
+  //   trim: true,
+  //   optional: true,
+  //   max: 30,
+  //   label: function() {
+  //     return TAPi18n.__('schemas.patients.bed.label');
+  //   }
+  // },
   records: {
     type: String,
     trim: true,
@@ -35,29 +38,8 @@ patientSchema = {
       return TAPi18n.__('schemas.patients.records.label');
     }
   },
-  createdAt: {
-    type: Date,
-    //min: new Date(),
-    label: function() {
-      return TAPi18n.__('schemas.patients.createdAt.label');
-    },
-    autoform: {
-      placeholder: '__/__/____',
-      mask: '00/00/0000',
-      afFieldInput: {
-        type: "bootstrap-datepicker",
-        // #TODO: make this international
-        datePickerOptions: {
-          //format: "dd/mm/yyyy",
-          language: "pt-BR"
-          //language: TAPi18n.getLanguage()
-        }
-      }
-    }
-  },
   dateOfBirth: {
     type: Date,
-    optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.dateOfBirth.label');
     },
@@ -74,28 +56,27 @@ patientSchema = {
       }
     }
   },
-  healthInsurance: {
-    type: String,
-    trim: true,
-    optional: true,
-    max: 100,
-    label: function() {
-      return TAPi18n.__('schemas.patients.healthInsurance.label');
-    }
-  },
-  code: {
-    type: String,
-    trim: true,
-    optional: true,
-    max: 50,
-    label: function() {
-      return TAPi18n.__('schemas.patients.code.label');
-    }
-  },
+  // healthInsurance: {
+  //   type: String,
+  //   trim: true,
+  //   optional: true,
+  //   max: 100,
+  //   label: function() {
+  //     return TAPi18n.__('schemas.patients.healthInsurance.label');
+  //   }
+  // },
+  // code: {
+  //   type: String,
+  //   trim: true,
+  //   optional: true,
+  //   max: 50,
+  //   label: function() {
+  //     return TAPi18n.__('schemas.patients.code.label');
+  //   }
+  // },
   gender: {
     type: String,
     allowedValues: ['M', 'F'],
-    optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.gender.label');
     },
@@ -331,13 +312,23 @@ patientSchema = {
       return TAPi18n.__('schemas.patients.recommendedBy.label');
     }
   },
-  prevRetorno: {
-    type: String,
-    trim: true,
+  returnDate: {
+    type: Date,
     optional: true,
-    max: 50,
     label: function() {
-      return TAPi18n.__('schemas.patients.prevRetorno.label');
+      return TAPi18n.__('schemas.patients.returnDate.label');
+    },
+    autoform: {
+      placeholder: '__/__/____',
+      afFieldInput: {
+        type: "bootstrap-datepicker",
+        // #TODO: make this international
+        datePickerOptions: {
+          //format: "dd/mm/yyyy",
+          language: "pt-BR"
+          //language: TAPi18n.getLanguage()
+        }
+      }
     }
   },
   email: {
@@ -374,7 +365,6 @@ patientSchema = {
   },
   mobile: {
     type: String,
-    optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.mobile.label');
     },
@@ -459,6 +449,17 @@ patientSchema = {
     autoform: {
       type: 'textarea',
       rows: 10
+    }
+  },
+  createdAt: {
+    type: Date,
+    autoform: {
+      afFieldInput: {
+        type: "hidden",
+      },
+      afFormGroup: {
+        label: false
+      }
     }
   },
   // enabled: {

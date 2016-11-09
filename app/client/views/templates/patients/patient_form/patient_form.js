@@ -29,7 +29,8 @@ Template.patientForm.helpers({
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));
 	},
 	isEditForm: function() {
-		return (FlowRouter.getParam('_id')) ? true : false;
+		Template.instance().data.isEditForm = (FlowRouter.getParam('_id')) ? true : false;
+		return Template.instance().data.isEditForm;
 	},
 	patient: function() {
 		var record = Patients.findOne({_id: FlowRouter.getParam('_id')});
@@ -46,21 +47,19 @@ Template.patientForm.onCreated(function () {
 		},
 		onError: function(formType, error) {
 			toastr['error'](error.message, TAPi18n.__('common_error'));
-		},
-		// docToForm: function(doc) {
-		// 	doc.createdAt = moment(doc.createdAt).format('DD/MM/YYYY');
-		// 	return doc;
-		// },
-		// formToDoc: function(doc) {
-		// 	doc.createdAt = moment(doc.createdAt, "DD-MM-YYYY");
-		// 	return doc;
-		// }
+		}
 	});
 });
 
 Template.patientForm.onRendered(function () {
 	var self = this;
 	$(document).ready(function(){
+		if(self.data.isEditForm) {
+			$('input[data-id=picture-form-group]').parent()
+				.append(`<div class="createdAt">
+					${TAPi18n.__('schemas.patients.createdAt.label')}: ${moment(self.data.patient.createdAt).format('DD/MM/YYYY')}
+				</div>`);
+		}
 		$('input[name=zip]').parent().before('<div class="hr-line-dashed"></div>');
 		$('textarea[name=obs]').parent().before('<div class="hr-line-dashed"></div>');
 
@@ -105,11 +104,6 @@ Template.patientForm.onRendered(function () {
 				});
 			});
 		}
-		
-
-		// $('input[name=createdAt], input[name=dateOfBirth]')
-		// 	.wrap('<div class="input-group date"></div>')
-		// 	.after('<span class="input-group-addon"><i class="fa fa-calendar"></i></span>');
 
 		// $('.input-group.date').datepicker({
 		// 	format: "dd/mm/yyyy",

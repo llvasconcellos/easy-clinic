@@ -46,10 +46,10 @@ Template.import.helpers({
 			name: 'name',
 			title: 'name',
 			data: 'name'
-		},{
-			name: 'bed',
-			title: 'bed',
-			data: 'bed'
+		// },{
+		// 	name: 'bed',
+		// 	title: 'bed',
+		// 	data: 'bed'
 		},{
 			name: 'records',
 			title: 'records',
@@ -62,14 +62,14 @@ Template.import.helpers({
 			name: 'dateOfBirth',
 			title: 'dateOfBirth',
 			data: 'dateOfBirth'
-		},{
-			name: 'healthInsurance',
-			title: 'healthInsurance',
-			data: 'healthInsurance'
-		},{
-			name: 'code',
-			title: 'code',
-			data: 'code'
+		// },{
+		// 	name: 'healthInsurance',
+		// 	title: 'healthInsurance',
+		// 	data: 'healthInsurance'
+		// },{
+		// 	name: 'code',
+		// 	title: 'code',
+		// 	data: 'code'
 		},{
 			name: 'gender',
 			title: 'gender',
@@ -115,9 +115,9 @@ Template.import.helpers({
 			title: 'recommendedBy',
 			data: 'recommendedBy'
 		},{
-			name: 'prevRetorno',
-			title: 'prevRetorno',
-			data: 'prevRetorno'
+			name: 'returnDate',
+			title: 'returnDate',
+			data: 'returnDate'
 		},{
 			name: 'email',
 			title: 'email',
