@@ -29,6 +29,14 @@ Template.schedule.onCreated(function () {
 });
 
 Template.schedule.onRendered(function () {
+    $('#new-appointment').click(function(event){
+        Blaze.render(Template.scheduleDayHours, document.getElementById('day-hours'));
+
+        // var MyTable = new Tabular.Table(options);
+        // var data = {table: MyTable};
+        // Blaze.renderWithData(Template.tabular, data, document.getElementById('root'));
+    });
+
     $('.patients-chosen-select').chosen({width: "100%"});
 
     // Hack to make slider container overflow visible so chosen displays correctly
@@ -135,7 +143,7 @@ Template.schedule.onRendered(function () {
                     toastr['error'](error.message, TAPi18n.__('common_error'));
                 }
                 if (result) {
-                    toastr['warning'](TAPi18n.__('schedule_event-canceled'), TAPi18n.__('common_success'));
+                    toastr['warning'](TAPi18n.__('schedule_appointment-canceled'), TAPi18n.__('common_success'));
                 }
             });
         });
@@ -181,7 +189,14 @@ Template.schedule.onRendered(function () {
         },
         views: {
             timelineDay: {
-                buttonText: TAPi18n.__('schedule_timelineDay')
+                buttonText: TAPi18n.__('schedule_timelineDay'),
+                slotLabelFormat: [
+                    //'MMMM YYYY', // top level of text
+                    'HH:mm'        // lower level of text
+                ],
+                slotLabelInterval: {
+                    minutes: 20
+                }
             },
             timelineThreeDays: {
                 type: 'timeline',

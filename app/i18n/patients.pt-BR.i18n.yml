@@ -35,7 +35,7 @@ schemas:
     code:
       label: Matrícula
     gender:
-      label: Genero
+      label: Gênero
       M: Masculino
       F: Feminino
     maritalStatus:

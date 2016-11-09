@@ -43,17 +43,21 @@
     padding: 12px 0;
     font-size: 2.2em;
 }
-
 #scheduleEventForm .item.active {
     margin-top: 9px;
 }
-
 #scheduleEventForm .carousel-inner > .item {
     -webkit-transition: -webkit-transform .3s ease-in-out;
     -o-transition: -o-transform .3s ease-in-out;
     transition: transform .3s ease-in-out;
 }
-
 .fc-row.fc-week.fc-widget-content {
     cursor: pointer;
+}
+#new-appointment {
+    margin-bottom: 10px;
+}
+.fc-state-active {
+    background-color: #1c84c6 !important;
+    border-color: #1c84c6 !important;
 }
