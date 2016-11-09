@@ -27,6 +27,7 @@ Template.schedule.onCreated(function () {
 });
 
 Template.schedule.onRendered(function () {
+    var self = this;
     $('#new-appointment').click(function(event){
         Blaze.render(Template.scheduleDayHours, document.getElementById('day-hours'));
 
@@ -53,7 +54,7 @@ Template.schedule.onRendered(function () {
     // });
 
     var doctors = Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
-    calResources = [];
+    this.calResources = [];
     doctors.forEach(function(doctor, doctorIndex){
         if(doctor.workHours){
             var workHours = [];
@@ -76,9 +77,12 @@ Template.schedule.onRendered(function () {
                 }
             });
         }
-        calResources.push({
+        self.calResources.push({
             id: doctor._id,
             title: doctor.profile.firstName + ' ' + doctor.profile.lastName,
+            picture: doctor.profile.picture,
+            email: doctor.emails[0].address,
+            color: doctor.color ? doctor.color : randomMC.getColor(),
             eventColor: doctor.color ? doctor.color : randomMC.getColor(),
             //eventBackgroundColor    Like eventColor but only for the background color
             // eventBorderColor    Like eventColor but only for the border color
@@ -87,6 +91,8 @@ Template.schedule.onRendered(function () {
             businessHours: workHours
         });
     });
+
+    this.events = Schedule.find().fetch();
 
     $('#scheduleEventForm').on('hidden.bs.modal', function (event) {
          $("#content-switcher").carousel(0);
@@ -166,8 +172,15 @@ Template.schedule.onRendered(function () {
         setAppointmentFormModalButtons();
     };
 
-    console.log(this.data.settings.workHoursStart);
-    console.log(this.data.settings.workHoursEnd);
+    this.eventCount = function(resourceId){
+        var count = 0;
+        Template.instance().events.forEach(function(item, index, arr){
+            if(item.resourceId == resourceId){
+                count++;
+            }
+        });
+        return count;
+    };
 
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
@@ -318,20 +331,41 @@ Template.schedule.onRendered(function () {
         },
         //resourceOrder: '-type1,type2',
         // resourceText: function(resource){
-        //     return 'Leo';
+        //     return '';
         // },
-        // resourceRender: function(resourceObj, labelTds, bodyTds) {
-        //     // console.log(arguments);
-        //     // labelTds.css('background', 'blue');
-        // },
-        resources: calResources,
+        resourceRender: function(resource, labelTds, bodyTds, view) {
+            var html = '';
+            var pictureUrl = 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png';
+            if(resource.picture){
+                var image = Images.findOne({'_id': resource.picture});
+                if(image) {
+                    pictureUrl = image.link();
+                }
+            } else {
+                pictureUrl = Gravatar.imageUrl(resource.email, {
+                    secure: true,
+                    size: 28,
+                    default: pictureUrl
+                });
+            }
+            html += '<img class="profile-pic cal-resource-pic" style="border-color:' + resource.color + '" src="' + pictureUrl + '">';
+            html += '<div class="cal-resource-count" style="background-color:' + resource.color + '">';
+            html += Template.instance().eventCount(resource.id) + '</div>';
+            html += '&nbsp;';
+            html += '<span class="cal-resource-title">' + resource.title + '</span>';
+
+
+            labelTds.find('.fc-cell-text').html(html);
+        },
+        resources: this.calResources,
         //events: getEvents,
     });
 
     this.autorun(function() {
+        var self = this;
         if($('#calendar').fullCalendar('getEventSources').length == 0) {
             $('#calendar').fullCalendar('addEventSource', function (start, end, timezone, callback) {
-                var events = Schedule.find().fetch();
+                var events = self.templateInstance().events = Schedule.find().fetch();
                 if(callback){
                     callback(events);
                 }

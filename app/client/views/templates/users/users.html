@@ -28,6 +28,10 @@
 					<div class="ibox-content">
 						<form id="user-form" role="form">
 							<div class="form-group">
+								<label for="R4DzcFc6DZ8RqLEAn" class="control-label">Picture</label>
+								{{> picFileUpload atts=imagesCollection}}
+							</div>
+							<div class="form-group">
 								<label>{{_'users_firstName'}}</label>
 								<input type="input" name="firstName" placeholder="{{_'users_firstNamePlaceholder'}}" class="form-control" required>
 							</div>

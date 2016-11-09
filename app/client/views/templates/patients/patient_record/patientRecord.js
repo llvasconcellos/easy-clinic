@@ -269,7 +269,7 @@ Template.patientRecord.onRendered(function () {
 				['para', ['ul', 'ol', 'paragraph']],
 				['height', ['height']],
 				['insert', ['hr', 'table']],
-				['misc', ['fullscreen', 'print']]
+				['misc', ['fullscreen', 'codeview', 'print']]
 			],
 			hint: [{
 				words: drugsArray,

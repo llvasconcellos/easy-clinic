@@ -13,12 +13,20 @@ Template.doctorList.helpers({
 			data: 'profile.picture',
 			orderable: false,
 			render: function(cellData, renderType, currentRow) {
-				var email = currentRow.emails[0].address;
-				var url = Gravatar.imageUrl(email, {
-					size: 28,
-					//default: 'images/default-user-image.png'
-					default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'
-				});
+				var url = 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png';
+				if(cellData){
+					var image = Images.findOne({'_id': cellData});
+					if(image) {
+						url = image.link();
+					}
+				} else {
+					var email = currentRow.emails[0].address;
+					url = Gravatar.imageUrl(email, {
+						secure: true,
+						size: 28,
+						default: url
+					});
+				}
 				return '<img class="profile-pic" src="' + url + '">';
 			}
 		},{

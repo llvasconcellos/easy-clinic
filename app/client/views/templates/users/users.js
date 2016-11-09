@@ -17,6 +17,9 @@ Template.users.onRendered(function() {
 Template.users.onDestroyed(function(){});
 
 Template.users.helpers({
+	imagesCollection: function() {
+		return {collection: 'Images'};
+	},
 	groups: function() {
 		return [{
 			text: T9n.get('groupMD'),
@@ -47,13 +50,20 @@ Template.users.helpers({
 			data: 'profile.picture',
 			orderable: false,
 			render: function(cellData, renderType, currentRow) {
-				var email = currentRow.emails[0].address;
-				var url = Gravatar.imageUrl(email, {
-					secure: true,
-					size: 28,
-					//default: 'images/default-user-image.png'
-					default: 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png'
-				});
+				var url = 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png';
+				if(cellData){
+					var image = Images.findOne({'_id': cellData});
+					if(image) {
+						url = image.link();
+					}
+				} else {
+					var email = currentRow.emails[0].address;
+					url = Gravatar.imageUrl(email, {
+						secure: true,
+						size: 28,
+						default: url
+					});
+				}
 				return '<img class="profile-pic" src="' + url + '">';
 			}
 		},{
@@ -97,6 +107,7 @@ Template.users.helpers({
 
 var userEdit = (function(){
 	var form = null;
+	var picture = null;
 	var firstName = null;
 	var lastName = null;
 	var email = null;
@@ -107,6 +118,7 @@ var userEdit = (function(){
 
 	var _findElements = function() {
 		form = $('form#user-form');
+		picture = form.find('input[collection=Images]');
 		firstName = form.find('input[name=firstName]');
 		lastName = form.find('input[name=lastName]');
 		email = form.find('input[name=email]');
@@ -166,6 +178,7 @@ var userEdit = (function(){
 			}
 			Meteor.call('updateUser', userId, newPassword, {
 				"emails.0.address": email.val(),
+				"profile.picture": picture.val(),
 				"profile.firstName": firstName.val(),
 				"profile.lastName": lastName.val(),
 				"profile.group": group.val(),
@@ -186,6 +199,12 @@ var userEdit = (function(){
 	};
 
 	var _clearForm = function() {
+		Template.forEachCurrentlyRenderedInstance(function(template, index, templateArr){
+			if(template.fileId){
+				template.fileId.set(false);
+			}
+		});
+		picture.val(''),
 		firstName.val('');
 		lastName.val('');
 		email.val('');
@@ -235,6 +254,11 @@ var userEdit = (function(){
 				else {
 					enabled.iCheck('uncheck');
 				}
+				Template.forEachCurrentlyRenderedInstance(function(template, index, templateArr){
+					if(template.fileId){
+						template.fileId.set(user.profile.picture);
+					}
+				});
 			}
 		},
 		hideForm: function() {

@@ -75,7 +75,7 @@ Template.drugForm.onRendered(function () {
 				['para', ['ul', 'ol', 'paragraph']],
 				['height', ['height']],
 				['insert', ['hr', 'table']],
-				['misc', ['fullscreen']]
+				['misc', ['fullscreen', 'codeview', 'print']]
 			]
 		});
 	});

@@ -26,25 +26,47 @@ Schema.workHours = new SimpleSchema({
 
 Schema.UserProfile = new SimpleSchema({
     firstName: {
-        type: String
+        type: String,
+        label: function() {
+          return TAPi18n.__('users_firstName');
+        }
     },
     lastName: {
-        type: String
+        type: String,
+        label: function() {
+          return TAPi18n.__('users_lastName');
+        }
     },
     group: {
-        type: String
+        type: String,
+        label: function() {
+          return TAPi18n.__('users_lastName');
+        }
     },
     language: {
-        type: String
+        type: String,
+        label: function() {
+          return TAPi18n.__('users_lastName');
+        }
     },
     CRM: {
         type: String,
-        optional: true
+        optional: true,
     },
     signature: {
         type: String,
         optional: true
-    }
+    },
+    picture: {
+        type: String,
+        optional: true,
+        autoform: {
+            afFieldInput: {
+                type: 'profilePicUpload',
+                collection: 'Images'
+            },
+        }
+    },
     // birthday: {
     //     type: Date,
     //     optional: true

@@ -17,10 +17,21 @@ Template.patientList.helpers({
 			data: 'picture',
 			orderable: false,
 			render: function(cellData, renderType, currentRow) {
-				var url = '/images/default-user-image.png'; 
-				var image = Images.findOne({'_id': cellData});
-				if(image) {
-					url = image.link();
+				//var url = Meteor.absoluteUrl() + 'images/default-user-image.png';
+				var url = 'https://s-media-cache-ak0.pinimg.com/originals/28/c7/ad/28c7adffc9af705dcd8a8b77b1a9c0e8.jpg';
+				if(cellData){
+					var image = Images.findOne({'_id': cellData});
+					if(image) {
+						url = image.link();
+					}
+				} else {
+					if(currentRow.email){
+						url = Gravatar.imageUrl(currentRow.email, {
+							secure: true,
+							size: 28,
+							default: url
+						});
+					}
 				}
 				return '<img class="profile-pic" src="' + url + '">';
 			}
