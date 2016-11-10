@@ -44,6 +44,26 @@ Template.doctorForm.rendered = function(){
 	$('.colors-select .chosen-select').on('change', function(event, params) {
 		$('.colors-select .chosen-single').css('background', params.selected);
 	});
+
+	$("textarea[name=signature]").summernote({
+		height: 150,
+		lang: TAPi18n.getLanguage(),
+		print: {
+			stylesheetUrl: Meteor.absoluteUrl() + 'css/summernote-print.css'
+		},
+		fontSizes: ['4', '6', '8', '9', '10', '11', '12', '14', '16', '18', '20', '24', '36'],
+		lineHeights: ['0.4', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
+		toolbar: [
+			['history', ['undo', 'redo']],
+			['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+			['font', ['strikethrough', 'superscript', 'subscript']],
+			['fontsize', ['fontsize']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['insert', ['hr', 'table']],
+			['misc', ['fullscreen', 'codeview', 'print']]
+		]
+	});
 };
 
 Template.doctorForm.events({
