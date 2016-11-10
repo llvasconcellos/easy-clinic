@@ -18,3 +18,4 @@ schedule_no-appointment-today: No appointments for today.
 schedule_new-appointment: Schedule Appointment
 schedule_no-doctor-workhours-error: Please inform MD's work hours before scheduling appointments.
 schedule_no-specialties: No Specialties
+schedule_patient-arrived: Patient Has Arrieved?

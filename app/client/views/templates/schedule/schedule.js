@@ -55,10 +55,14 @@ Template.schedule.onRendered(function () {
     //     }
     // });
 
-    
+    $('#patient-arrived').bootstrapToggle({
+        width: 70,
+        height: 34
+    });
 
     $('#scheduleEventForm').on('hidden.bs.modal', function (event) {
          $("#content-switcher").carousel(0);
+         $('#patient-form-group').removeClass('has-error');
     });
 
     $('#content-switcher').on('slide.bs.carousel', function (event) {
@@ -85,13 +89,16 @@ Template.schedule.onRendered(function () {
         $('#scheduleEventForm .delete-btn').show();
         $('#scheduleEventForm .delete-btn').off('click');
         $('#scheduleEventForm .save').click(function(event){
+            $('#patient-form-group').removeClass('has-error');
             var scheduleEvent = $('#scheduleEventForm input[name=eventId]').val();
             var patient = $('#scheduleEventForm select[name=patients]').val();
+            var patientArrived = $('#patient-arrived').prop('checked');
             patient = Patients.findOne({_id: patient});
             if(patient){
                 Schedule.update(scheduleEvent, {$set: {
                     patient: patient._id,
-                    title: patient.name
+                    title: patient.name,
+                    patient_arrived: patientArrived
                 }}, function(error, result){
                     if (error) {
                         toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -101,6 +108,8 @@ Template.schedule.onRendered(function () {
                         toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
                     }
                 });
+            } else {
+                $('#patient-form-group').addClass('has-error');
             }
         });
         $('#scheduleEventForm .delete-btn').click(function(event){
@@ -131,7 +140,9 @@ Template.schedule.onRendered(function () {
             $('#scheduleEventForm select[name=patients]').val('');
         }
         $('.patients-chosen-select').trigger('chosen:updated');
-        
+
+        $('#patient-arrived').bootstrapToggle(event.patient_arrived ? 'on' : 'off');
+
         setAppointmentFormModalButtons();
     };
 
@@ -263,7 +274,8 @@ Template.schedule.onRendered(function () {
                     start: start.format(),
                     end: end.format(),
                     title: 'to-confirm',
-                    constraint: 'available_hours'
+                    constraint: 'available_hours',
+                    patient_arrived: false
                 }, function(error, result){
                     calendar.fullCalendar('unselect');
                     if (error) {
@@ -290,6 +302,8 @@ Template.schedule.onRendered(function () {
                 tooltip = TAPi18n.__('schedule_to-confirm');
                 element.find('.fc-content').css('background', '#E44F4F');
                 icon = '<i class="fa fa-hourglass-o" aria-hidden="true"></i>';
+            } else if(event.patient_arrived) {
+                icon = '<i class="fa fa-calendar-check-o" aria-hidden="true"></i>';
             }
 
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {

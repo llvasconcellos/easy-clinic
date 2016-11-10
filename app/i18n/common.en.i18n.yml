@@ -57,3 +57,6 @@ common_prescription: Prescription
 common_exam-request: Exam Request
 common_date: Date
 common_back: Back
+common_yes: Yes
+common_no: No
+common_field-required: This field is required

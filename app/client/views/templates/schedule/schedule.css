@@ -108,3 +108,20 @@
 .fc-body .fc-resource-area .fc-cell-content {
     padding-left: 8px;
 }
+.patient-arrived-group {
+    margin-top: 10px;
+    text-align: right;
+}
+#patient-form-group.has-error label {
+    color: red;
+}
+#patient-form-group.has-error .select-wrapper {
+    border: solid 1px red;
+}
+#patient-form-group .help-block {
+    display: none;
+}
+
+#patient-form-group.has-error .help-block {
+    display: block;
+}

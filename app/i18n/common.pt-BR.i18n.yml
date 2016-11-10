@@ -57,3 +57,6 @@ common_prescription: Prescrição
 common_exam-request: Pedido de Exame
 common_date: Data
 common_back: Voltar
+common_yes: Sim
+common_no: Não
+common_field-required: Este campo é obrigatório

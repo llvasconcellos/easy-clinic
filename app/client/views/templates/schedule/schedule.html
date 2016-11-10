@@ -42,15 +42,24 @@
                                             </a>
                                         </div>
                                         <div class="col-md-10">
-                                            <label for="patients">{{_ 'patients_patients'}}</label>
-                                            <div class="select-wrapper"> 
-                                                <select name="patients" data-placeholder="{{_ 'common_firstOption'}}" class="patients-chosen-select" tabindex="4">
-                                                    <option class="tag" value="">{{_ 'common_firstOption'}}</option>
-                                                    {{#each patients}}
-                                                        <option class="tag" value="{{_id}}">{{name}}</option>
-                                                    {{/each}}
-                                                </select>
+                                            <div id="patient-form-group" class="form-group" data-required="true">
+                                                <label for="patients">{{_ 'patients_patients'}}</label>
+                                                <div class="select-wrapper"> 
+                                                    <select name="patients" data-placeholder="{{_ 'common_firstOption'}}" class="patients-chosen-select" tabindex="4">
+                                                        <option class="tag" value="">{{_ 'common_firstOption'}}</option>
+                                                        {{#each patients}}
+                                                            <option class="tag" value="{{_id}}">{{name}}</option>
+                                                        {{/each}}
+                                                    </select>
+                                                </div>
+                                                <span class="help-block">{{_ 'common_field-required'}}</span>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="patient-arrived-group">
+                                        <div class="form-group" data-required="true">
+                                            <label for="c7RmbjqRTrYS5gXGA" class="control-label">{{_ 'schedule_patient-arrived'}}</label>
+                                            <input id="patient-arrived" type="checkbox" data-toggle="toggle" data-on="{{_ 'common_yes'}}" data-off="{{_ 'common_no'}}"> 
                                         </div>
                                     </div>
                                 </form>
