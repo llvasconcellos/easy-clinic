@@ -52,7 +52,7 @@
           contents: '<i class="fa fa-print"/> ' + lang.print.print,
           tooltip: lang.print.print,
           click: function () {
-            self.$printframe.contents().find('body').html(context.invoke('code'));
+            self.$printframe.contents().find('body').addClass('summernote-print').html(context.invoke('code'));
             setTimeout(function () {
               window.frames.summernotePrintFrame.window.focus();
               window.frames.summernotePrintFrame.window.print();

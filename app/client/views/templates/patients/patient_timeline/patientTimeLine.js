@@ -29,7 +29,7 @@ Template.patientTimeLine.onRendered(function () {
 		$('.print-document').click(function(event){
 			var id = $(this).data('id');
 			var content = $('#' + id).html();
-			$('iframe[name=summernotePrintFrame]').contents().find('body').html(content);
+			$('iframe[name=summernotePrintFrame]').contents().find('body').addClass('summernote-print').html(content);
 			setTimeout(function () {
 				window.frames.summernotePrintFrame.window.focus();
 				window.frames.summernotePrintFrame.window.print();

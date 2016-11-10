@@ -110,7 +110,7 @@ var hashTagReplace = function(data, text){
 			var streetAddress_2 = data.streetAddress_2 || "";
 			var zip = data.zip || "";
 
-			return `${streetAddress_1} ${streetAddress_2 ? (' - ' + streetAddress_2) : '' } <br/>${bairro} - ${city} - ${zip}`;
+			return `${streetAddress_1} ${streetAddress_2 ? (' - ' + streetAddress_2) : '' }</p><p>${bairro} - ${city} - ${zip}`;
 		}
 	},{
 		key: '#DATA_DA_CONSULTA', 
@@ -259,6 +259,9 @@ Template.patientRecord.onRendered(function () {
 			height: 300,
 			placeholder: TAPi18n.__('document-models_model-placeholder'),
 			lang: TAPi18n.getLanguage(),
+			print: {
+				stylesheetUrl: Meteor.absoluteUrl() + 'css/summernote-print.css'
+			},
 			fontSizes: ['4', '6', '8', '9', '10', '11', '12', '14', '16', '18', '20', '24', '36'],
 			lineHeights: ['0.4', '0.6', '0.8', '1.0', '1.2', '1.4', '1.5', '1.6', '1.8', '2.0', '3.0'],
 			toolbar: [
