@@ -63,10 +63,17 @@
 }
 .cal-resource-pic {
     border: solid 3px #31dd81;
+    float: left;
 }
-.cal-resource-title {
+.fc-cell-text {
+    line-height: 16px;
+    height: 35px;
+    padding: 2px;
+    margin-left: 42px;
     font-weight: bold;
-    margin-left: 10px;
+}
+.fc-cell-text small {
+    font-weight: normal;
 }
 .cal-resource-count {
     border: solid 2px white;
@@ -85,4 +92,19 @@
     vertical-align: middle;
     line-height: 15px;
     display: inline-block;
+}
+.fc-timelineDay-view .fc-event .fc-content {
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 2px;
+    font-size: 16px;
+}
+.fc-timelineDay-view .fc-timeline-event {
+    border-radius: 2px;
+    border-bottom: solid 4px gray;
+}
+.fc-body .fc-resource-area .fc-cell-content {
+    padding-left: 8px;
 }

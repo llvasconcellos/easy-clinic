@@ -10,9 +10,11 @@ Template.schedule.helpers({
 
 Template.schedule.onCreated(function () {
     var templateInstance = this;
-    this.autorun(function() {
+    //this.autorun(function() {
+        templateInstance.events = Schedule.find().fetch();
         templateInstance.data.settings = Settings.findOne();
-    });
+        templateInstance.doctors = Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
+    //});
     AutoForm.addHooks('quickPatientForm', {
         onSuccess: function(formType, result) {
             toastr['success'](TAPi18n.__('common_save-success'), TAPi18n.__('common_success'));
@@ -27,7 +29,7 @@ Template.schedule.onCreated(function () {
 });
 
 Template.schedule.onRendered(function () {
-    var self = this;
+    var templateInstance = this;
     $('#new-appointment').click(function(event){
         Blaze.render(Template.scheduleDayHours, document.getElementById('day-hours'));
 
@@ -53,46 +55,7 @@ Template.schedule.onRendered(function () {
     //     }
     // });
 
-    var doctors = Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
-    this.calResources = [];
-    doctors.forEach(function(doctor, doctorIndex){
-        if(doctor.workHours){
-            var workHours = [];
-            doctor.workHours.forEach(function(day, dayIndex){
-                if(day){
-                    day.forEach(function(interval, index){
-                        workHours.push({
-                            start: interval.start,
-                            end: interval.end,
-                            dow: [dayIndex]
-                        });
-                    });
-                }
-                else {
-                    workHours.push({
-                        start: '00:00',
-                        end: '00:00',
-                        dow: [dayIndex]
-                    });
-                }
-            });
-        }
-        self.calResources.push({
-            id: doctor._id,
-            title: doctor.profile.firstName + ' ' + doctor.profile.lastName,
-            picture: doctor.profile.picture,
-            email: doctor.emails[0].address,
-            color: doctor.color ? doctor.color : randomMC.getColor(),
-            eventColor: doctor.color ? doctor.color : randomMC.getColor(),
-            //eventBackgroundColor    Like eventColor but only for the background color
-            // eventBorderColor    Like eventColor but only for the border color
-            // eventTextColor  Like eventColor but only for the text color
-            // eventClassName  className(s) that will apply to events
-            businessHours: workHours
-        });
-    });
-
-    this.events = Schedule.find().fetch();
+    
 
     $('#scheduleEventForm').on('hidden.bs.modal', function (event) {
          $("#content-switcher").carousel(0);
@@ -174,7 +137,7 @@ Template.schedule.onRendered(function () {
 
     this.eventCount = function(resourceId){
         var count = 0;
-        Template.instance().events.forEach(function(item, index, arr){
+        templateInstance.events.forEach(function(item, index, arr){
             if(item.resourceId == resourceId){
                 count++;
             }
@@ -253,27 +216,31 @@ Template.schedule.onRendered(function () {
         selectHelper: true,
         selectOverlap: false,
         selectAllow: function(selectInfo) {
-            var doctor = doctors.find(function(index){
+            var doctor = templateInstance.doctors.find(function(index){
                 return index._id === selectInfo.resourceId;
             });
             if(doctor) {
                 var weekday = selectInfo.start.day();
-                if(doctor.workHours[weekday] === null){
-                    return false;
-                } else {
-                    var allowed = false;
-                    doctor.workHours[weekday].forEach(function(element, index, array){
-                        var docStart = moment(element.start, 'HH:mm');
-                        var docEnd  = moment(element.end, 'HH:mm');
-                        var calStart = moment(selectInfo.start.format('HH:mm'), 'HH:mm');
-                        var calEnd = moment(selectInfo.end.format('HH:mm'), 'HH:mm');
-                        if(calStart.isBetween(docStart, docEnd) || (calStart.diff(docStart) === 0)){
-                            allowed = true;
-                        }
-                    });
-                    if(!allowed) {
+                if(doctor.workHours){
+                    if(doctor.workHours[weekday] === null){
                         return false;
+                    } else {
+                        var allowed = false;
+                        doctor.workHours[weekday].forEach(function(element, index, array){
+                            var docStart = moment(element.start, 'HH:mm');
+                            var docEnd  = moment(element.end, 'HH:mm');
+                            var calStart = moment(selectInfo.start.format('HH:mm'), 'HH:mm');
+                            var calEnd = moment(selectInfo.end.format('HH:mm'), 'HH:mm');
+                            if(calStart.isBetween(docStart, docEnd) || (calStart.diff(docStart) === 0)){
+                                allowed = true;
+                            }
+                        });
+                        if(!allowed) {
+                            return false;
+                        }
                     }
+                } else {
+                    toastr['error'](TAPi18n.__('schedule_no-doctor-workhours-error'), TAPi18n.__('common_notAllowed'));
                 }
             }
         },
@@ -283,7 +250,7 @@ Template.schedule.onRendered(function () {
                     resourceId: resource.id,
                     start: start.format(),
                     end: end.format(),
-                    title: TAPi18n.__('schedule_to-confirm'),
+                    title: 'to-confirm',
                     constraint: 'available_hours'
                 }, function(error, result){
                     calendar.fullCalendar('unselect');
@@ -304,8 +271,21 @@ Template.schedule.onRendered(function () {
             showEventModal(calEvent._id);
         },
         eventRender: function(event, element, timelineView) {
+            var icon = '<i class="fa fa-clock-o" aria-hidden="true"></i>';
+            var tooltip = event.title;
+
+            if(event.title == 'to-confirm'){
+                tooltip = TAPi18n.__('schedule_to-confirm');
+                element.find('.fc-content').css('background', '#E44F4F');
+                icon = '<i class="fa fa-hourglass" aria-hidden="true"></i>';
+            }
+
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {
-                element.find('.fc-title').html('<i class="fa fa-clock-o" aria-hidden="true"></i>');
+                element.find('.fc-title').html(icon);
+            } else {
+                if(event.title == 'to-confirm'){
+                    element.find('.fc-title').html(TAPi18n.__('schedule_to-confirm'));
+                }
             }
             element.qtip({
                 position: {
@@ -325,15 +305,12 @@ Template.schedule.onRendered(function () {
                 style: { 
                     classes: 'qtip-bootstrap agenda-tooltip'
                 },
-                //content: event.description
-                content: event.title
+                content: tooltip
             });
         },
         //resourceOrder: '-type1,type2',
-        // resourceText: function(resource){
-        //     return '';
-        // },
         resourceRender: function(resource, labelTds, bodyTds, view) {
+            labelTds.find('.fc-cell-text').css('display', 'block');
             var html = '';
             var pictureUrl = 'https://cdn4.iconfinder.com/data/icons/medical-14/512/9-128.png';
             if(resource.picture){
@@ -348,17 +325,68 @@ Template.schedule.onRendered(function () {
                     default: pictureUrl
                 });
             }
-            html += '<img class="profile-pic cal-resource-pic" style="border-color:' + resource.color + '" src="' + pictureUrl + '">';
-            html += '<div class="cal-resource-count" style="background-color:' + resource.color + '">';
-            html += Template.instance().eventCount(resource.id) + '</div>';
-            html += '&nbsp;';
-            html += '<span class="cal-resource-title">' + resource.title + '</span>';
+            var imgHtml = '<img class="profile-pic cal-resource-pic" style="border-color:' + resource.color + '" src="' + pictureUrl + '">';
+            labelTds.find('.fc-cell-content').prepend(imgHtml); 
 
 
+            html += resource.title + '<br /><small>';
+            if(resource.specialties){
+                html += resource.specialties.join(', ');
+            } else {
+                html += TAPi18n.__('schedule_no-specialties')
+            }
+            html += '</small>';
             labelTds.find('.fc-cell-text').html(html);
+
+            // html += '<div class="cal-resource-count" style="background-color:' + resource.color + '">';
+            // html += templateInstance.eventCount(resource.id) + '</div>';
+            //html += '&nbsp;';
+            //html += '</div>';
         },
-        resources: this.calResources,
+        // resources: this.calResources,
         //events: getEvents,
+        resources: function(callback) {
+            var calResources = [];
+            templateInstance.doctors.forEach(function(doctor, doctorIndex){
+                if(doctor.workHours){
+                    var workHours = [];
+                    doctor.workHours.forEach(function(day, dayIndex){
+                        if(day){
+                            day.forEach(function(interval, index){
+                                workHours.push({
+                                    start: interval.start,
+                                    end: interval.end,
+                                    dow: [dayIndex]
+                                });
+                            });
+                        }
+                        else {
+                            workHours.push({
+                                start: '00:00',
+                                end: '00:00',
+                                dow: [dayIndex]
+                            });
+                        }
+                    });
+                }
+                var color = doctor.color ? doctor.color : randomMC.getColor();
+                calResources.push({
+                    id: doctor._id,
+                    title: doctor.profile.firstName + ' ' + doctor.profile.lastName,
+                    picture: doctor.profile.picture,
+                    email: doctor.emails[0].address,
+                    color: color,
+                    eventColor: color,
+                    specialties: doctor.specialties,
+                    //eventBackgroundColor    Like eventColor but only for the background color
+                    // eventBorderColor    Like eventColor but only for the border color
+                    // eventTextColor  Like eventColor but only for the text color
+                    // eventClassName  className(s) that will apply to events
+                    businessHours: workHours
+                });
+            });
+            callback(calResources);
+        }
     });
 
     this.autorun(function() {
@@ -371,7 +399,9 @@ Template.schedule.onRendered(function () {
                 }
             });
         }
+        //self.templateInstance().doctors = Meteor.users.find({'profile.group':'medical_doctor'}).fetch();
         $('#calendar').fullCalendar('refetchEvents');
+        //$('#calendar').fullCalendar('refetchResources');
     });
 });
 

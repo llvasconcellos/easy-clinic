@@ -7,7 +7,7 @@ schedule_listWeek: Lista Semana
 schedule_agendaDay: Agenda Dia
 schedule_agendaWeek: Agenda Semana
 schedule_month: Mês
-schedule_to-confirm: [A confirmar]
+schedule_to-confirm: "[A confirmar]"
 schedule_appointment-canceled: Consulta Cancelada
 schedule_timeline: Sua linha do tempo
 schedule_notAllowedError: Desculpe, este horário acabou de ser reservado por outra pessoa.
@@ -16,3 +16,5 @@ schedule_hours-ago: horas atrás
 schedule_hours-from-now: horas restantes
 schedule_no-appointment-today: Nenhum compromisso hoje.
 schedule_new-appointment: Agendar Consulta
+schedule_no-doctor-workhours-error: Por favor informe o horário de trabalho do médico antes de agendar uma consulta.
+schedule_no-specialties: Sem Especialidades

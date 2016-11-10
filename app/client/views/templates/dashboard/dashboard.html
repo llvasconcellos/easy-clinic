@@ -35,7 +35,7 @@
                                             </div>
                                             <div class="col-xs-7 content no-top-border">
                                                 <p class="m-b-xs"><strong>{{_ 'schedule_appointment'}}</strong></p>
-                                                <p>{{_ 'patients_patient'}}: <b>{{title}}</b></p>
+                                                <p>{{_ 'patients_patient'}}: <b>{{getTitle title}}</b></p>
                                                 {{#if patient}}
                                                     <a href="{{pathFor route='patientEdit' _id=patient}}" class="btn btn-sm btn-primary">
                                                         <i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}

@@ -29,6 +29,13 @@ Template.dashboard.onRendered(function(){
 });
 
 Template.dashboard.helpers({
+    getTitle: function(title){
+        if(title == 'to-confirm'){
+            return TAPi18n.__('schedule_to-confirm');
+        } else {
+            return title;
+        }
+    },
     schedule: function(){
         var start = new Date();
         start.setHours(0,0,0,0);
