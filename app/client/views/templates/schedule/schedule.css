@@ -65,14 +65,14 @@
     border: solid 3px #31dd81;
     float: left;
 }
-.fc-cell-text {
+.fc-resource-area .fc-cell-text {
     line-height: 16px;
     height: 35px;
     padding: 2px;
     margin-left: 42px;
     font-weight: bold;
 }
-.fc-cell-text small {
+.fc-resource-area .fc-cell-text small {
     font-weight: normal;
 }
 .cal-resource-count {

@@ -145,11 +145,23 @@ Template.schedule.onRendered(function () {
         return count;
     };
 
+    var workHoursStart = '06:00';
+    var workHoursEnd = '23:00';
+
+    if(this.data.settings){
+        if(this.data.settings.workHoursStart){
+            workHoursStart = this.data.settings.workHoursStart;
+        }
+        if(this.data.settings.workHoursEnd){
+            workHoursEnd = this.data.settings.workHoursEnd;
+        }
+    }
+
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
         slotDuration: '00:20:00',
-        minTime: this.data.settings.workHoursStart + ':00',
-        maxTime: this.data.settings.workHoursEnd + ':00',
+        minTime: workHoursStart + ':00',
+        maxTime: workHoursEnd + ':00',
         locale: TAPi18n.getLanguage().toLowerCase(),
         aspectRatio: 1.8,
         navLinks: true,
