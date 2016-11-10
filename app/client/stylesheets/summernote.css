@@ -1,3 +1,7 @@
+.note-editable {
+	font-size: 11px;
+	line-height: 1;
+}
 .note-editable h1, .note-editable h2, .note-editable h3, 
 .note-editable h4, .note-editable h5, .note-editable h6,
 .note-editable p  {

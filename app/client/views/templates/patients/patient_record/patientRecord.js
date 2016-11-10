@@ -114,7 +114,7 @@ var hashTagReplace = function(data, text){
 		}
 	},{
 		key: '#DATA_DA_CONSULTA', 
-		replace: moment().format('DD/MM/YYYY')
+		replace: moment().format('LLLL')
 	},{
 		key: '#HORARIO_DA_CONSULTA', 
 		replace: moment().format('HH:mm')
