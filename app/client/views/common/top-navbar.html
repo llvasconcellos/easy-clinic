@@ -19,6 +19,26 @@
                         <li><a href="#"><img src="/images/flags/32/Spain.png" alt="flag" data-pin-nopin="true" data-lang="es"></a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">{{eventsCount events}}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        {{#each events}}
+                        <li>
+                            <a href="/mailbox">
+                                <div>
+                                    <i class="fa fa-male"></i><i class="fa fa-female"></i> {{title}}
+                                    <a href="{{pathFor route='patientEdit' _id=patient}}" class="btn btn-sm btn-primary pull-right">
+                                        <i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}
+                                    </a>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        {{/each}}
+                    </ul>
+                </li>
                 <li>
                     <a class="logout" href="{{pathFor 'logout'}}">
                         <i class="fa fa-sign-out"></i> {{_ 'common_logout'}}

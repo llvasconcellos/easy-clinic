@@ -19,3 +19,4 @@ schedule_new-appointment: Agendar Consulta
 schedule_no-doctor-workhours-error: Por favor informe o horário de trabalho do médico antes de agendar uma consulta.
 schedule_no-specialties: Sem Especialidades
 schedule_patient-arrived: O Paciente Chegou?
+schedule_patient-has-arrived: Um paciente chegou para a consulta.

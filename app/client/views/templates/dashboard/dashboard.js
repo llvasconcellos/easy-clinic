@@ -29,6 +29,9 @@ Template.dashboard.onRendered(function(){
 });
 
 Template.dashboard.helpers({
+    patientArrived: function(status){
+        return (status == 'patient_arrived');
+    },
     getTitle: function(title){
         if(title == 'to-confirm'){
             return TAPi18n.__('schedule_to-confirm');

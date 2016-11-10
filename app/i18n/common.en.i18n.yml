@@ -60,3 +60,4 @@ common_back: Back
 common_yes: Yes
 common_no: No
 common_field-required: This field is required
+common_notification: Notification

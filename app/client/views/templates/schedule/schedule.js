@@ -93,12 +93,19 @@ Template.schedule.onRendered(function () {
             var scheduleEvent = $('#scheduleEventForm input[name=eventId]').val();
             var patient = $('#scheduleEventForm select[name=patients]').val();
             var patientArrived = $('#patient-arrived').prop('checked');
+            var status = 'to-confirm';
+            if(patient){
+                status = 'scheduled';
+            }
+            if(patientArrived){
+                status = 'patient_arrived';
+            }
             patient = Patients.findOne({_id: patient});
             if(patient){
                 Schedule.update(scheduleEvent, {$set: {
                     patient: patient._id,
                     title: patient.name,
-                    patient_arrived: patientArrived
+                    status: status
                 }}, function(error, result){
                     if (error) {
                         toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -275,7 +282,7 @@ Template.schedule.onRendered(function () {
                     end: end.format(),
                     title: 'to-confirm',
                     constraint: 'available_hours',
-                    patient_arrived: false
+                    status: 'to-confirm'
                 }, function(error, result){
                     calendar.fullCalendar('unselect');
                     if (error) {
@@ -295,15 +302,21 @@ Template.schedule.onRendered(function () {
             showEventModal(calEvent._id);
         },
         eventRender: function(event, element, timelineView) {
-            var icon = '<i class="fa fa-clock-o" aria-hidden="true"></i>';
+            var icon = '';
             var tooltip = event.title;
 
-            if(event.title == 'to-confirm'){
-                tooltip = TAPi18n.__('schedule_to-confirm');
-                element.find('.fc-content').css('background', '#E44F4F');
-                icon = '<i class="fa fa-hourglass-o" aria-hidden="true"></i>';
-            } else if(event.patient_arrived) {
-                icon = '<i class="fa fa-calendar-check-o" aria-hidden="true"></i>';
+            switch(event.status) {
+                case 'to-confirm':
+                    tooltip = TAPi18n.__('schedule_to-confirm');
+                    element.find('.fc-content').css('background', '#E44F4F');
+                    icon = '<i class="fa fa-hourglass-o" aria-hidden="true"></i>';
+                break;
+                case 'patient_arrived':
+                    icon = '<i class="fa fa-calendar-check-o" aria-hidden="true"></i>';
+                break;
+                case 'scheduled':
+                    icon = '<i class="fa fa-clock-o" aria-hidden="true"></i>';
+                break;
             }
 
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {
@@ -334,7 +347,7 @@ Template.schedule.onRendered(function () {
                 content: tooltip
             });
         },
-        //resourceOrder: '-type1,type2',
+        resourceOrder: 'title',
         resourceRender: function(resource, labelTds, bodyTds, view) {
             labelTds.find('.fc-cell-text').css('display', 'block');
             var html = '';

@@ -19,3 +19,4 @@ schedule_new-appointment: Schedule Appointment
 schedule_no-doctor-workhours-error: Please inform MD's work hours before scheduling appointments.
 schedule_no-specialties: No Specialties
 schedule_patient-arrived: Patient Has Arrieved?
+schedule_patient-has-arrived: A patient has arrieved for his appointment.

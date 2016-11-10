@@ -52,6 +52,10 @@ Meteor.publish('schedule', function () {
   return Schedule.find();
 });
 
+Meteor.publish('doctor-schedule', function (id) {
+  return Schedule.find({resourceId: id});
+});
+
 Meteor.publish('settings', function () {
   return Settings.find();
 });

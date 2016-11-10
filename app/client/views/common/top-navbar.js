@@ -1,3 +1,24 @@
+Template.topNavbar.onCreated(function () {
+    Meteor.subscribe('doctor-schedule', Meteor.userId());
+    var templateInstance = this;
+    this.autorun(function() {
+        templateInstance.events = Schedule.find({status: 'patient_arrived'}).fetch();
+         if(templateInstance.events){
+            toastr['info'](TAPi18n.__('schedule_patient-has-arrived'), TAPi18n.__('common_notification'));
+         }
+    });
+});
+
+Template.topNavbar.helpers({
+    events: function(){
+        this.events = Schedule.find({status: 'patient_arrived', resourceId: Meteor.userId()}).fetch();
+        return this.events;
+    },
+    eventsCount: function(events){
+        return events.length;
+    }
+});
+
 Template.topNavbar.rendered = function(){
     // #TODO: enable fixed navbar but also fixed left menu for phones
     // FIXED TOP NAVBAR OPTION 

@@ -20,8 +20,8 @@ scheduleSchema = {
     type: String,
     optional: true
   },
-  patient_arrived: {
-    type: Boolean
+  status: {
+    type: String
   }
 };
 
