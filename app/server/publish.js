@@ -36,6 +36,10 @@ Meteor.publish('importPatients', function () {
   return ImportPatients.find();
 });
 
+Meteor.publish('patient-encounters', function (patientId) {
+  return Encounters.find({'patient._id': patientId});
+});
+
 Meteor.publish('encounters', function () {
   return Encounters.find();
 });
@@ -50,6 +54,10 @@ Meteor.publish('singleSpecialty', function (id) {
 
 Meteor.publish('schedule', function () {
   return Schedule.find();
+});
+
+Meteor.publish('patient-schedule', function (id) {
+  return Schedule.find({patient: id});
 });
 
 Meteor.publish('doctor-schedule', function (id) {

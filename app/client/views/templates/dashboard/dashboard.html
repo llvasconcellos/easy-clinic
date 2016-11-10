@@ -37,7 +37,7 @@
                                                 <p class="m-b-xs"><strong>{{_ 'schedule_appointment'}}</strong></p>
                                                 <p>{{_ 'patients_patient'}}: <b>{{getTitle title}}</b></p>
                                                 {{#if patientArrived status}}
-                                                    <a href="{{pathFor route='patientEdit' _id=patient}}" class="btn btn-sm btn-primary">
+                                                    <a href="{{pathFor route='patientEdit' _id=patient query='start_encounter=true&eventId='}}{{_id}}" class="btn btn-sm btn-primary">
                                                         <i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}
                                                     </a>
                                                 {{/if}}

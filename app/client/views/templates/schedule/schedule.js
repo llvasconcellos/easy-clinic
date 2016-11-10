@@ -317,6 +317,12 @@ Template.schedule.onRendered(function () {
                 case 'scheduled':
                     icon = '<i class="fa fa-clock-o" aria-hidden="true"></i>';
                 break;
+                case 'attending':
+                    icon = '<i class="fa fa-handshake-o" aria-hidden="true"></i>';
+                break;
+                case 'finished':
+                    icon = '<i class="fa fa-check-circle" aria-hidden="true"></i>';
+                break;
             }
 
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {

@@ -13,6 +13,7 @@ T9n.map('pt', {
 	patient: "Paciente",
 	start: "Início",
 	end: "Fim",
+	time: "Tempo",
 	enabled: "Ativo",
 	disabled: "Inativo",
 	edit: "Editar",

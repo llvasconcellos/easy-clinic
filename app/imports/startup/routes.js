@@ -90,6 +90,8 @@ FlowRouter.route('/patients/:_id', {
     this.register('document-models', Meteor.subscribe('documentModels'));
     this.register('patient-records', Meteor.subscribe('patientRecords', params._id));
     this.register('settings', Meteor.subscribe('settings'));
+    this.register('patient-encounters', Meteor.subscribe('patient-encounters', params._id));
+    this.register('patient-schedule', Meteor.subscribe('patient-encounters', params._id));
   },
   action: function(params, queryParams) {
     BlazeLayout.render("mainLayout", {content: "patientForm"});

@@ -26,12 +26,12 @@
                     <ul class="dropdown-menu dropdown-alerts">
                         {{#each events}}
                         <li>
-                            <a href="/mailbox">
+                            <a href="{{pathFor route='patientEdit' _id=patient query='start_encounter=true&eventId='}}{{_id}}" title="{{_ 'patients_start-appointment'}}">
                                 <div>
                                     <i class="fa fa-male"></i><i class="fa fa-female"></i> {{title}}
-                                    <a href="{{pathFor route='patientEdit' _id=patient}}" class="btn btn-sm btn-primary pull-right">
-                                        <i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}
-                                    </a>
+                                    <span class="btn btn-sm btn-primary pull-right">
+                                        <i class="fa fa-play" aria-hidden="true"></i>
+                                    </span>
                                 </div>
                             </a>
                         </li>
