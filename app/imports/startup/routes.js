@@ -96,6 +96,21 @@ FlowRouter.route('/patients/:_id', {
   }
 });
 
+var reportRoutes = FlowRouter.group({
+  prefix: '/reports',
+  name: 'reports'
+});
+
+reportRoutes.route('/encounters', {
+  name: 'reportEncounters',
+  subscriptions: function(params) {
+    this.register('encounters', Meteor.subscribe('encounters'));
+  },
+  action: function() {
+    BlazeLayout.render('mainLayout', {content: 'reportEncounters'});
+  }
+});
+
 FlowRouter.route('/settings', {
   name: 'settingsForm',
   subscriptions: function(params) {

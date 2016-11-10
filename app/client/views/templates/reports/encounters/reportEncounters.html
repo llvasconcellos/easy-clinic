@@ -1,0 +1,22 @@
+<template name="reportEncounters">
+	{{> pageHeading title='reports_encounters'}}
+
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-12" id="tablebox">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>{{_ 'reports_encounters'}}
+							<small class="m-l-sm">{{_ 'reports_encounters-subtitle'}}</small>
+						</h5>
+						{{!-->iboxTools--}}
+					</div>
+					<div class="ibox-content">
+						{{> ReactiveDatatable id="report-table" tableData=reactiveDataFunction options=optionsObject useDefaults=true}}
+					</div>
+					<div id="table-footer" class="ibox-footer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

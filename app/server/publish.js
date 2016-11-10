@@ -36,6 +36,10 @@ Meteor.publish('importPatients', function () {
   return ImportPatients.find();
 });
 
+Meteor.publish('encounters', function () {
+  return Encounters.find();
+});
+
 Meteor.publish('specialties', function () {
   return Specialties.find();
 });

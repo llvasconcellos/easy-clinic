@@ -1,6 +1,6 @@
 Template.doctorForm.onCreated(function () {});
 
-var palette = ['#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B'];
+var palette = ['#3f81c6', '#504bd0', '#b1932c', '#dd4f97', '#17cccc', '#55a7ff', '#8a86ff', '#ebc444', '#ff86c3', '#31dd81', '#ff9055', '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E', '#607D8B'];
 Template.doctorForm.helpers({
 	saveButton: function () {
 		return Spacebars.SafeString('<i class="fa fa-floppy-o" aria-hidden="true"></i> ' + TAPi18n.__('common_save'));

@@ -277,7 +277,7 @@ Template.schedule.onRendered(function () {
             if(event.title == 'to-confirm'){
                 tooltip = TAPi18n.__('schedule_to-confirm');
                 element.find('.fc-content').css('background', '#E44F4F');
-                icon = '<i class="fa fa-hourglass" aria-hidden="true"></i>';
+                icon = '<i class="fa fa-hourglass-o" aria-hidden="true"></i>';
             }
 
             if((timelineView.name == "timelineDay") || (timelineView.name == "timelineThreeDays")) {

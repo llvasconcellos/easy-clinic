@@ -60,6 +60,19 @@
                     </ul>
                 </li>
 
+                <li class="{{isActivePath regex='reportEncounters'}}">
+                    <a href="{{pathFor route='reportEncounters'}}">
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                        <span class="nav-label">{{_ 'reports_reports'}}</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level collapse {{isActivePath regex='reportEncounters' className='in'}}">
+                        <li class="{{isActivePath regex='reportEncounters'}}">
+                            <a href="{{pathFor route='reportEncounters'}}" class="hide-on-phone">{{_ 'reports_encounters'}}</a>
+                        </li>
+                    </ul>
+                </li>
+
                 {{#if isInRole 'super-admin'}}
 	                <li class="{{isActivePath regex='settingsForm|specialtyList|documentModelList|icd10List|drugList|doctorList|users|import|recordsList'}}">
 	                    <a href="{{isActivePath regex='prescriptionList'}}">
