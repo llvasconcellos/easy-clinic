@@ -9,3 +9,14 @@
 	margin: 0 !important;
 	line-height: normal !important;
 }
+.summernote-print .table > thead > tr > th, 
+.summernote-print .table > tbody > tr > th,
+.summernote-print .table > tfoot > tr > th,
+.summernote-print .table > thead > tr > td,
+.summernote-print .table > tbody > tr > td,
+.summernote-print .table > tfoot > tr > td {
+    border-top: 1px solid #e7eaec;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: top;
+}
