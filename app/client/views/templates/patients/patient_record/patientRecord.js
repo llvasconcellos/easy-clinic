@@ -118,6 +118,15 @@ var hashTagReplace = function(data, text){
 		key: '#DATA_DA_CONSULTA', 
 		replace: moment().format('LLLL')
 	},{
+		key: '#DIA', 
+		replace: moment().format('D')
+	},{
+		key: '#MES', 
+		replace: moment().format('MMMM')
+	},{
+		key: '#ANO', 
+		replace: moment().format('YYYY')
+	},{
 		key: '#HORARIO_DA_CONSULTA', 
 		replace: moment().format('HH:mm')
 	},{
