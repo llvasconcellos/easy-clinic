@@ -15,8 +15,8 @@
 .summernote-print .table > thead > tr > td,
 .summernote-print .table > tbody > tr > td,
 .summernote-print .table > tfoot > tr > td {
-    border-top: 1px solid #e7eaec;
-    line-height: 1.42857;
-    padding: 8px;
-    vertical-align: top;
+	font-size: 11px;
+    line-height: 1;
+    padding: 4px;
+    vertical-align: middle;
 }
