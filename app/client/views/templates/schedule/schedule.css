@@ -125,3 +125,12 @@
 #patient-form-group.has-error .help-block {
     display: block;
 }
+.fc-datePicker-button:before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    content: "\f073";
+    margin-right: 8px;
+}

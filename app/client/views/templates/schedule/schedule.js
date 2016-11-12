@@ -175,6 +175,8 @@ Template.schedule.onRendered(function () {
         }
     }
 
+    var datePicker = null;
+
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
         slotDuration: '00:20:00',
@@ -187,9 +189,29 @@ Template.schedule.onRendered(function () {
         editable: true,
         resourceLabelText: TAPi18n.__('users_doctors'),
         header: {
-            left: 'today prev,next',
+            left: 'today prev,datePicker,next',
             center: 'title',
             right: 'timelineDay,agendaDay,listWeek,agendaWeek,month' //timelineThreeDays, listDay
+        },
+        customButtons: {
+            datePicker: {
+                text: moment().format('DD/MM/YYYY'),
+                click: function() {
+                    if(datePicker){
+                        datePicker.datepicker('show');
+                    } else {
+                        datePicker = $('.fc-datePicker-button ').datepicker({
+                            autoclose: true,
+                            language: TAPi18n.getLanguage(),
+                        })
+                        .datepicker('show')
+                        .on('changeDate', function(e) {
+                            $('.fc-datePicker-button ').html(moment(e.date).format('DD/MM/YYYY'));
+                            calendar.fullCalendar( 'gotoDate', e.date )
+                        });
+                    }
+                }
+            }
         },
         buttonText: {
             today: TAPi18n.__('schedule_today')
