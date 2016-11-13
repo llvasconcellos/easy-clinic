@@ -16,27 +16,25 @@ Template.patientTimeLine.onCreated(function(){
     });
 });
 
+var setPrintButtonClick = function(){
+	$('.print-document').off('click');
+	$('.print-document').click(function(event){
+		var id = $(this).data('id');
+		var content = $('#' + id).html();
+		$('iframe[name=summernotePrintFrame]').contents().find('body').addClass('summernote-print').html(content);
+		setTimeout(function () {
+			window.frames.summernotePrintFrame.window.focus();
+			window.frames.summernotePrintFrame.window.print();
+		}, 250);
+	});
+};
+
 Template.patientTimeLine.onRendered(function () {
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		//console.log(e.target); // newly activated tab
 		//console.log(e.relatedTarget); // previous active tab
 		runTimeline();
 	});
-	$(document).ready(function(){
-		
-	});
-	setTimeout(function(){
-		$('.print-document').click(function(event){
-			var id = $(this).data('id');
-			var content = $('#' + id).html();
-			$('iframe[name=summernotePrintFrame]').contents().find('body').addClass('summernote-print').html(content);
-			setTimeout(function () {
-				window.frames.summernotePrintFrame.window.focus();
-				window.frames.summernotePrintFrame.window.print();
-			}, 250);
-		});
-	}, 250);
-
 });
 
 
@@ -338,4 +336,8 @@ var runTimeline = function(){
 		//check if mobile or desktop device
 		return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
 	}
+
+	setTimeout(function(){
+		setPrintButtonClick();
+	}, 250);
 };
