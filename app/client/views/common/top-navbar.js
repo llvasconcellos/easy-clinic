@@ -2,7 +2,7 @@ Template.topNavbar.onCreated(function () {
     Meteor.subscribe('doctor-schedule', Meteor.userId());
     var templateInstance = this;
     this.autorun(function() {
-        templateInstance.events = Schedule.find({status: 'patient_arrived'}).fetch();
+        templateInstance.events = Schedule.find({status: 'patient_arrived', resourceId: Meteor.userId()}).fetch();
          if(templateInstance.events && (templateInstance.events.length > 0)){
             toastr['info'](TAPi18n.__('schedule_patient-has-arrived'), TAPi18n.__('common_notification'));
          }

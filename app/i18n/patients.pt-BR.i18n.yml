@@ -16,6 +16,7 @@ patient_records-item: Item
 patients_start-appointment: Iniciar Consulta
 patients_finish-appointment: Terminar Consulta
 patients_full-patient-register: Cadastro Completo
+patient_encounter-leave-confirmation: Você deve parar a consulta antes de sair desta página.
 schemas:
   patients:
     name:

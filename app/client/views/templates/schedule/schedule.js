@@ -148,7 +148,7 @@ Template.schedule.onRendered(function () {
         }
         $('.patients-chosen-select').trigger('chosen:updated');
 
-        $('#patient-arrived').bootstrapToggle(event.patient_arrived ? 'on' : 'off');
+        $('#patient-arrived').bootstrapToggle((event.status == 'patient_arrived') ? 'on' : 'off');
 
         setAppointmentFormModalButtons();
     };

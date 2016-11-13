@@ -16,6 +16,7 @@ patient_records-item: Item
 patients_start-appointment: Start Appointment
 patients_finish-appointment: Finish Appointment
 patients_full-patient-register: Full Register
+patient_encounter-leave-confirmation: You need to stop the encounter before leaving this page.
 schemas:
   patients:
     name:

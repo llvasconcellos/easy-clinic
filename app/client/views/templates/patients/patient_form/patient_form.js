@@ -53,13 +53,30 @@ Template.patientForm.helpers({
 	}
 });
 
-var startEncounter = function(templateInstance){
+var setAlertBeforeLeavePage = function(){
+	$(window).on('beforeunload', function(){
+	  return TAPi18n.__('patient_encounter-leave-confirmation');
+	});
+
+	Session.set('unsavedChanges', true);
+	preventRouteChange = function(targetContext) {
+		if (Session.get('unsavedChanges')) {
+			alert(TAPi18n.__('patient_encounter-leave-confirmation'));
+			return true;
+		}
+		return false;
+	}
+};
+
+var data = {};
+
+var startEncounter = function(){
 	eventId = FlowRouter.current().queryParams.eventId;
 
 	Encounters.insert({
 		patient: {
-			_id: templateInstance.data.patient._id,
-			name: templateInstance.data.patient.name
+			_id: data.patient._id,
+			name: data.patient.name
 		},
 		start: new Date(),
 		user: {
@@ -72,7 +89,11 @@ var startEncounter = function(templateInstance){
 		}
 		if(result){
 			encounter = result;
-			toggleStartBtnState();
+			var btn = $('.start-appointment');
+			var text = btn.find('strong').text();
+			if(text.trim() == TAPi18n.__('patients_start-appointment')){
+				toggleStartBtnState();
+			}
 			Schedule.update(eventId, 
 				{$set:{status: 'attending'}}, function(error, result){
 				if (error) {
@@ -80,13 +101,14 @@ var startEncounter = function(templateInstance){
 				}
 				if(result){
 					FlowRouter.setQueryParams({start_encounter: null, eventId: null});
+					setAlertBeforeLeavePage();
 				}
 			});
 		}
 	});
 };
 
-var stopEncounter = function(templateInstance){
+var stopEncounter = function(){
 	Encounters.update(encounter, {$set: {
 		end: new Date(),
 	}}, function(error, result){
@@ -100,15 +122,17 @@ var stopEncounter = function(templateInstance){
 					toastr['error'](error.message, TAPi18n.__('common_error'));
 				}
 			});
+			Session.set('unsavedChanges', false);
+			$(window).off('beforeunload');
 		}
 	});
 };
 
 Template.patientForm.onCreated(function () {
-	var templateInstance = this;
+
 	this.autorun(function() {
 		var record = Patients.findOne({_id: FlowRouter.getParam('_id')});
-		templateInstance.data.patient = record;
+		data.patient = record;
 	});
 
 	if(FlowRouter.current().queryParams.start_encounter){
