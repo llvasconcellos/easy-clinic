@@ -7,7 +7,6 @@ schedule_listWeek: List Week
 schedule_agendaDay: Schedule Day
 schedule_agendaWeek: Schedule Week
 schedule_month: Month
-schedule_to-confirm: "[To Confirm]"
 schedule_appointment-canceled: Appointment Canceled
 schedule_timeline: Your Timeline
 schedule_notAllowedError: Sorry, this timeslot has been reserved by somebody else just now.
@@ -18,5 +17,11 @@ schedule_no-appointment-today: No appointments for today.
 schedule_new-appointment: Schedule Appointment
 schedule_no-doctor-workhours-error: Please inform MD's work hours before scheduling appointments.
 schedule_no-specialties: No Specialties
-schedule_patient-arrived: Patient Has Arrieved?
 schedule_patient-has-arrived: A patient has arrieved for his appointment.
+schedule_status: Status
+schedule_status-waiting: Waiting
+schedule_status-scheduled: Scheduled
+schedule_status-attending: Attending
+schedule_status-finished: Finished
+schedule_status-no-show: No Show
+schedule_status-to-confirm: "[To Confirm]"

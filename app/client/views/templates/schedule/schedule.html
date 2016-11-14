@@ -56,10 +56,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="patient-arrived-group">
-                                        <div class="form-group" data-required="true">
-                                            <label for="c7RmbjqRTrYS5gXGA" class="control-label">{{_ 'schedule_patient-arrived'}}</label>
-                                            <input id="patient-arrived" type="checkbox" data-toggle="toggle" data-on="{{_ 'common_yes'}}" data-off="{{_ 'common_no'}}"> 
+                                    <div class="form-group status-group" data-required="true">
+                                        <label class="control-label">{{_ 'schedule_status'}}</label>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-xs btn-info btn-outline">
+                                                <input type="radio" name="status" value="scheduled" autocomplete="off"> {{_ 'schedule_status-scheduled'}}
+                                            </label>
+                                            <label class="btn btn-xs btn-info btn-outline">
+                                                <input type="radio" name="status" value="waiting" autocomplete="off"> {{_ 'schedule_status-waiting'}}
+                                            </label>
+                                            <label class="btn btn-xs btn-info btn-outline">
+                                                <input type="radio" name="status" value="attending" autocomplete="off"> {{_ 'schedule_status-attending'}}
+                                            </label>
+                                            <label class="btn btn-xs btn-info btn-outline">
+                                                <input type="radio" name="status" value="finished" autocomplete="off"> {{_ 'schedule_status-finished'}}
+                                            </label>
+                                            <label class="btn btn-xs btn-info btn-outline">
+                                                <input type="radio" name="status" value="no-show" autocomplete="off"> {{_ 'schedule_status-no-show'}}
+                                            </label>
                                         </div>
                                     </div>
                                 </form>

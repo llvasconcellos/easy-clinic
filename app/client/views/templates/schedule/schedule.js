@@ -55,11 +55,6 @@ Template.schedule.onRendered(function () {
     //     }
     // });
 
-    $('#patient-arrived').bootstrapToggle({
-        width: 70,
-        height: 34
-    });
-
     $('#scheduleEventForm').on('hidden.bs.modal', function (event) {
          $("#content-switcher").carousel(0);
          $('#patient-form-group').removeClass('has-error');
@@ -92,14 +87,7 @@ Template.schedule.onRendered(function () {
             $('#patient-form-group').removeClass('has-error');
             var scheduleEvent = $('#scheduleEventForm input[name=eventId]').val();
             var patient = $('#scheduleEventForm select[name=patients]').val();
-            var patientArrived = $('#patient-arrived').prop('checked');
-            var status = 'to-confirm';
-            if(patient){
-                status = 'scheduled';
-            }
-            if(patientArrived){
-                status = 'patient_arrived';
-            }
+            var status = $('#scheduleEventForm input[name=status]:checked').val();
             patient = Patients.findOne({_id: patient});
             if(patient){
                 Schedule.update(scheduleEvent, {$set: {
@@ -148,7 +136,8 @@ Template.schedule.onRendered(function () {
         }
         $('.patients-chosen-select').trigger('chosen:updated');
 
-        $('#patient-arrived').bootstrapToggle((event.status == 'patient_arrived') ? 'on' : 'off');
+        $('#scheduleEventForm input[name=status]').val([event.status]);
+        $(`#scheduleEventForm input[value=${event.status}]`).parent().button('toggle');
 
         setAppointmentFormModalButtons();
     };
@@ -203,6 +192,7 @@ Template.schedule.onRendered(function () {
                         datePicker = $('.fc-datePicker-button ').datepicker({
                             autoclose: true,
                             language: TAPi18n.getLanguage(),
+                            todayHighlight: true
                         })
                         .datepicker('show')
                         .on('changeDate', function(e) {
@@ -249,6 +239,9 @@ Template.schedule.onRendered(function () {
             month: { 
                 buttonText: TAPi18n.__('schedule_month')
             }
+        },
+        viewRender: function (view, element, context) {
+            $('.fc-datePicker-button ').html(view.intervalStart.format('DD/MM/YYYY'));
         },
         dayClick: function(date, jsEvent, view, resourceObj) {
             if (view.name == "month") {
@@ -329,11 +322,11 @@ Template.schedule.onRendered(function () {
 
             switch(event.status) {
                 case 'to-confirm':
-                    tooltip = TAPi18n.__('schedule_to-confirm');
+                    tooltip = TAPi18n.__('schedule_status-to-confirm');
                     element.find('.fc-content').css('background', '#E44F4F');
                     icon = '<i class="fa fa-hourglass-o" aria-hidden="true"></i>';
                 break;
-                case 'patient_arrived':
+                case 'waiting':
                     icon = '<i class="fa fa-calendar-check-o" aria-hidden="true"></i>';
                 break;
                 case 'scheduled':
@@ -341,6 +334,9 @@ Template.schedule.onRendered(function () {
                 break;
                 case 'attending':
                     icon = '<i class="fa fa-handshake-o" aria-hidden="true"></i>';
+                break;
+                case 'no-show':
+                    icon = '<i class="fa fa-user-times" aria-hidden="true"></i>';
                 break;
                 case 'finished':
                     icon = '<i class="fa fa-check-circle" aria-hidden="true"></i>';
@@ -351,7 +347,7 @@ Template.schedule.onRendered(function () {
                 element.find('.fc-title').html(icon);
             } else {
                 if(event.title == 'to-confirm'){
-                    element.find('.fc-title').html(TAPi18n.__('schedule_to-confirm'));
+                    element.find('.fc-title').html(TAPi18n.__('schedule_status-to-confirm'));
                 }
             }
             element.qtip({

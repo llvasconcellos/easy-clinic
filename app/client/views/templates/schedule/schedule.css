@@ -108,10 +108,6 @@
 .fc-body .fc-resource-area .fc-cell-content {
     padding-left: 8px;
 }
-.patient-arrived-group {
-    margin-top: 10px;
-    text-align: right;
-}
 #patient-form-group.has-error label {
     color: red;
 }
@@ -133,4 +129,13 @@
     -webkit-font-smoothing: antialiased;
     content: "\f073";
     margin-right: 8px;
+}
+.status-group {
+    padding: 10px;
+}
+.status-group > label {
+    display: block;
+}
+.status-group .btn {
+    margin: 4px;
 }

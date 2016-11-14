@@ -30,11 +30,11 @@ Template.dashboard.onRendered(function(){
 
 Template.dashboard.helpers({
     patientArrived: function(status){
-        return (status == 'patient_arrived');
+        return (status == 'waiting');
     },
     getTitle: function(title){
         if(title == 'to-confirm'){
-            return TAPi18n.__('schedule_to-confirm');
+            return TAPi18n.__('schedule_status-to-confirm');
         } else {
             return title;
         }
