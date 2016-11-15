@@ -219,7 +219,8 @@ Template.schedule.onRendered(function () {
                 ],
                 slotLabelInterval: {
                     minutes: 20
-                }
+                },
+                titleFormat: 'dddd – MMMM D, YYYY'
             },
             timelineThreeDays: {
                 type: 'timeline',
@@ -235,7 +236,8 @@ Template.schedule.onRendered(function () {
                 buttonText: TAPi18n.__('schedule_listWeek')
             },
             agendaDay: { 
-                buttonText: TAPi18n.__('schedule_agendaDay')
+                buttonText: TAPi18n.__('schedule_agendaDay'),
+                titleFormat: 'dddd – MMMM D, YYYY'
             },
             agendaWeek: { 
                 buttonText: TAPi18n.__('schedule_agendaWeek')
