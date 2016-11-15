@@ -1,6 +1,17 @@
 Settings = new Mongo.Collection('settings');
 
 var schema = {
+  // notifications: {
+  //   type: String,
+  //   label: function() {
+  //     return TAPi18n.__('settings_clinic-notifications');
+  //   },
+  //   autoform: {
+  //     placeholder: function() {
+  //       return TAPi18n.__('settings_clinic-notifications-placeholder');
+  //     }
+  //   }
+  // },
   workHoursStart: {
     type: String,
     max: 5,

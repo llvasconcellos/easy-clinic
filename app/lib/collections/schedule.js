@@ -22,14 +22,18 @@ scheduleSchema = {
   },
   status: {
     type: String
+  },
+  // notifiedAt: {
+  //   type: Date,
+  //   optional: true
+  // }
+  notified: {
+    type: Boolean,
+    optional: true
   }
 };
 
 Schedule.attachSchema(new SimpleSchema(scheduleSchema));
-
-if (Meteor.isClient) {
-  //var scheduleObserver = new PersistentMinimongo2(Schedule, 'schedule');
-}
 
 if (Meteor.isServer) {
   Schedule.allow({

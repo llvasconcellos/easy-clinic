@@ -136,8 +136,12 @@ Template.schedule.onRendered(function () {
         }
         $('.patients-chosen-select').trigger('chosen:updated');
 
-        $('#scheduleEventForm input[name=status]').val([event.status]);
-        $(`#scheduleEventForm input[value=${event.status}]`).parent().button('toggle');
+        var status = event.status;
+        if(status == 'to-confirm'){
+            status = 'scheduled';
+        }
+        $('#scheduleEventForm input[name=status]').val([status]);
+        $(`#scheduleEventForm input[value=${status}]`).parent().button('toggle');
 
         setAppointmentFormModalButtons();
     };

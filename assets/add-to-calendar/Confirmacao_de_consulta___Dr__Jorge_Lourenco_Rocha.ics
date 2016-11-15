@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+UID:20161112T155934Z-488441-P26479-08652-S20161116T150000Z@hidoctor.com.br
+DTSTART:20161116T130000
+DTEND:20161116T131500
+SUMMARY:Consulta Dr(a) Jorge Loureno Rocha
+DESCRIPTION:Email automático. Não responda - Por favor\, caso seja necessá
+ rio entrar em contato com seu médico\, use o telefone ou um dos meios des
+ critos abaixo.\n \n<!--\n body\, form\, p { padding: 0px\; margin: 0px\; 
+ } p { margin: 2px\; } blockquote { margin: 0px 0px 0px 30px\; } h1 { font
+ -size: 16px\; }  h2 { font-size: 14px\; }  h3 { font-size: 12px\; }\n-->C
+ onfirmação de consulta\njorgerocha.site.med.br\n \nPrezado(a) Leonardo\, 
+  \nestá confirmado seu horário para 16/11/2016 \, às 13:00 .  \nVocê está
+  convidado a acessar o meu site em:\nhttp:// jorgerocha.site.med.br   \nQ
+ ualquer dúvida\, estou à sua disposição.  \nAtenciosamente\,\n \nDr. Jorg
+ e Lourenço Rocha\n%SuipsMeInvite%  \nEnviado pela Plataforma HiDoctor 
+BEGIN:VALARM
+ACTION:DISPLAY
+SUMMARY:Consulta Dr(a) Jorge Loureno Rocha
+DESCRIPTION:Consulta Dr(a) Jorge Loureno Rocha
+TRIGGER:-P0DT0H60M0S
+DURATION:PT15M
+REPEAT:0
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+SUMMARY:Consulta Dr(a) Jorge Loureno Rocha
+DESCRIPTION:Consulta Dr(a) Jorge Loureno Rocha
+TRIGGER:-P0DT0H15M0S
+DURATION:PT15M
+REPEAT:0
+END:VALARM
+END:VEVENT
+END:VCALENDAR

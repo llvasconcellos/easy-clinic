@@ -4,3 +4,5 @@ settings_manage: Gerenciar Configurações da Aplicação
 settings_clinic-address: Endereço da Clínica
 settings_clinic-workhours-start: Horário de Abertura da Clínica
 settings_clinic-workhours-end: Horário de Fechamento da Clínica
+settings_clinic-notifications: SMS/Email - Tempo Antes da Notificação
+settings_clinic-notifications-placeholder: "Em minutos, separados por vírgula. Padrão: 120,1440,2880 (ou seja 2 horas, 1 dia, 2 dias)"
