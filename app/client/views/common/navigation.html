@@ -36,8 +36,8 @@
                     </div>
                 </li>
 
-                <li class="{{isActivePath regex='index'}}">
-                    <a href="{{pathFor route='index'}}" class="hide-on-phone"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
+                <li class="{{isActivePath regex='dashboard'}}">
+                    <a href="{{pathFor route='dashboard'}}" class="hide-on-phone"><i class="fa fa-dashboard"></i> <span class="nav-label">{{_ 'common_dashboard'}}</span> </a>
                 </li>
                 {{#if isInRole 'super-admin,administration,recepcionist'}}
                     <li class="{{isActivePath regex='schedule'}}">

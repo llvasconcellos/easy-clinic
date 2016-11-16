@@ -179,4 +179,5 @@ Template.documentModelForm.onRendered(function () {
 
 Template.documentModelForm.onDestroyed(function () {
 	$("textarea[name=model]").summernote('destroy');
+	AutoForm.resetForm('documentModelForm');
 });

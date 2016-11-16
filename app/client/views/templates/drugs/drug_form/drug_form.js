@@ -84,4 +84,6 @@ Template.drugForm.onRendered(function () {
 	});
 });
 
-Template.drugForm.onDestroyed(function () {});
+Template.drugForm.onDestroyed(function () {
+	AutoForm.resetForm('drugForm');
+});

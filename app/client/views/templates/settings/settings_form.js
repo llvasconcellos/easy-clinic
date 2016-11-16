@@ -71,4 +71,6 @@ Template.settingsForm.onRendered(function () {
 	});
 });
 
-Template.settingsForm.onDestroyed(function () {});
+Template.settingsForm.onDestroyed(function () {
+	AutoForm.resetForm('settingsForm');
+});

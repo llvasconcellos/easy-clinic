@@ -48,8 +48,8 @@ AccountsTemplates.configure({
 // meteor-useraccounts/flow-routing
 AccountsTemplates.configureRoute('signIn', {
   name: 'signIn',
-  path: '/sign-in',
-  redirect: '/',
+  path: '/',
+  redirect: '/dashboard',
 });
 /*AccountsTemplates.configureRoute('signUp', {
   name: 'signUp',
@@ -84,9 +84,9 @@ AccountsTemplates.configureRoute('resendVerificationEmail', {
 if (Meteor.isClient) {
   Template['atSelectInputOverride'].replaces('atSelectInput');
   Template['atPwdFormBtnOverride'].replaces('atPwdFormBtn');
-  // Accounts.onLogout(function(){
-  //   FlowRouter.redirect('signIn');
-  // });
+  Accounts.onLogout(function(){
+    FlowRouter.redirect('signIn');
+  });
   // Accounts.onLogin(function(){
   //   Meteor.logoutOtherClients();
   // });

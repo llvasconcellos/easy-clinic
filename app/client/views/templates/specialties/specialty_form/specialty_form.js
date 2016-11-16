@@ -64,4 +64,6 @@ Template.specialtyForm.onRendered(function () {
 	});
 });
 
-Template.specialtyForm.onDestroyed(function () {});
+Template.specialtyForm.onDestroyed(function () {
+	AutoForm.resetForm('specialtyForm');
+});

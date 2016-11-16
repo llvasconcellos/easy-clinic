@@ -69,7 +69,7 @@ Template.ReactiveDatatable.rendered = function() {
         reactiveDataTable.page = info.page;
     });
 
-    Template.parentData().dataTable = dt;
+    Template.parentData().dataTable = this.data.dataTable = dt;
 
     $(table).on( 'draw.dt', function () {
          $('.datatable-btn-copy').parent().parent().attr('title', TAPi18n.__('common_copy'));
@@ -81,3 +81,7 @@ Template.ReactiveDatatable.rendered = function() {
         reactiveDataTable.update(data.tableData());
     });
 };
+
+Template.ReactiveDatatable.onDestroyed(function(){
+    //this.data.dataTable.destroy(true);
+});

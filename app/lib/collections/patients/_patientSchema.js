@@ -39,13 +39,17 @@ patientSchema = {
     }
   },
   dateOfBirth: {
-    type: Date,
+    //type: Date,
+    type: String,
     label: function() {
       return TAPi18n.__('schemas.patients.dateOfBirth.label');
     },
     autoform: {
       placeholder: '__/__/____',
       afFieldInput: {
+        type: "text"
+      }
+      /*afFieldInput: {
         type: "bootstrap-datepicker",
         // #TODO: make this international
         datePickerOptions: {
@@ -53,7 +57,7 @@ patientSchema = {
           language: "pt-BR"
           //language: TAPi18n.getLanguage()
         }
-      }
+      }*/
     }
   },
   // healthInsurance: {
@@ -313,7 +317,8 @@ patientSchema = {
     }
   },
   returnDate: {
-    type: Date,
+    //type: Date,
+    type: String,
     optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.returnDate.label');
@@ -321,6 +326,9 @@ patientSchema = {
     autoform: {
       placeholder: '__/__/____',
       afFieldInput: {
+        type: "text"
+      }
+      /*afFieldInput: {
         type: "bootstrap-datepicker",
         // #TODO: make this international
         datePickerOptions: {
@@ -328,7 +336,7 @@ patientSchema = {
           language: "pt-BR"
           //language: TAPi18n.getLanguage()
         }
-      }
+      }*/
     }
   },
   email: {
@@ -347,13 +355,14 @@ patientSchema = {
   phone: {
     type: String,
     optional: true,
+    max: 15,
     label: function() {
       return TAPi18n.__('schemas.patients.phone.label');
     },
     autoform: {
       type: 'masked-input',
       mask: '(00) 0000-0000',
-      placeholder: '(___) ___-____',
+      placeholder: '(__) ____-____',
       // maskOptions: {
       //   onKeyPress: function(val, e, field, options) {
       //     field.mask(function (val) {
@@ -365,13 +374,14 @@ patientSchema = {
   },
   mobile: {
     type: String,
+    max: 15,
     label: function() {
       return TAPi18n.__('schemas.patients.mobile.label');
     },
     autoform: {
       type: 'masked-input',
-      mask: '(00) 0000-0000',
-      placeholder: '(___) ___-____',
+      mask: '(00) 00000-0000',
+      placeholder: '(__) _____-____',
       // maskOptions: {
       //   onKeyPress: function(val, e, field, options) {
       //     field.mask(function (val) {
@@ -452,7 +462,7 @@ patientSchema = {
     }
   },
   createdAt: {
-    type: Date,
+    type: String,
     autoform: {
       afFieldInput: {
         type: "hidden",

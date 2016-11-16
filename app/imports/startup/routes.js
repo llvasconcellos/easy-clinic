@@ -18,8 +18,8 @@ FlowRouter.triggers.enter(
   'terms-of-use', 
 ]});
 
-FlowRouter.route('/', {
-  name: 'index',
+FlowRouter.route('/dashboard', {
+  name: 'dashboard',
   subscriptions: function(params) {
     this.register('schedule', Meteor.subscribe('schedule'));
   },

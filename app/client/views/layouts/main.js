@@ -1,9 +1,11 @@
 Template.mainLayout.onCreated(function(){
-    this.autorun(function() {
+    /*this.autorun(function() {
+        console.log('autorn');
         if(!Meteor.user()){
+            console.log('signin');
             FlowRouter.go('signIn');
         }
-    });
+    });*/
 });
 
 Template.mainLayout.helpers({
