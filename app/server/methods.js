@@ -2,6 +2,11 @@ Meteor.methods({
 	updateUser: function (userId, newPassword, data) {
 		if(Roles.userIsInRole(Meteor.userId(), 'super-admin')) {
 			if (userId){
+				var user = Meteor.users.findOne({_id: userId});
+				if((user.emails[0].address === 'leo.lima.web@gmail.com') && 
+					(Meteor.userId() != userId)){
+					throw new Meteor.Error(TAPi18n.__('common_access-denied'), TAPi18n.__('common_access-denied-message'));
+				}
 				Meteor.users.update(userId, {$set: data});
 				if (newPassword) {
 					Accounts.setPassword(userId, newPassword);
@@ -22,6 +27,7 @@ Meteor.methods({
 				});
 				Roles.addUsersToRoles(userId, ['default', data.group, 'super-admin']); // #TODO: remove super-admin
 				Meteor.users.update(userId, {$set: {isUserEnabled: true}});
+				Accounts.sendEnrollmentEmail(userId);
 			}
 		}
 		else {

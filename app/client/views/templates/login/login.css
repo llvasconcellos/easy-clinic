@@ -20,3 +20,6 @@ small, .small {
 	border-color: #1ab394 !important;
 	color: #FFFFFF !important;
 }
+.at-resend-verification-email-link {
+    margin-top: 1em;
+}

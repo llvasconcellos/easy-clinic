@@ -15,6 +15,7 @@ AccountsTemplates.configure({
   sendVerificationEmail: true,
   enforceEmailVerification: true,
   showResendVerificationEmailLink: true,
+  forbidClientAccountCreation: true,
 
   // meteor-useraccounts/flow-routing
   defaultLayoutType: 'blaze',
@@ -22,6 +23,7 @@ AccountsTemplates.configure({
   defaultLayout: 'blankLayout',
   defaultLayoutRegions: {},
   defaultContentRegion: 'content',
+  defaultState: 'signIn',
 
   // Redirects
   homeRoutePath: '/',
@@ -49,10 +51,10 @@ AccountsTemplates.configureRoute('signIn', {
   path: '/sign-in',
   redirect: '/',
 });
-AccountsTemplates.configureRoute('signUp', {
+/*AccountsTemplates.configureRoute('signUp', {
   name: 'signUp',
   path: '/sign-up'
-});
+});*/
 AccountsTemplates.configureRoute('forgotPwd', {
   name: 'forgotPwd',
   path: '/forgot-password'
@@ -154,3 +156,15 @@ AccountsTemplates.addFields([{
   re: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
   errStr: 'At least 1 digit, 1 lowercase and 1 uppercase',
 }*/
+
+if (Meteor.isServer) {
+  Accounts.validateLoginAttempt(function(loginInfo){
+    if(loginInfo.allowed){
+      if(!loginInfo.user.isUserEnabled){
+        return false;
+      } else {
+        return true;
+      }
+    }
+  });
+}

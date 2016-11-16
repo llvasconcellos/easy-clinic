@@ -40,4 +40,23 @@ Accounts.emailTemplates.resetPassword = {
 		});
 	}
 };
-// Accounts.emailTemplates.enrollAccount = {}; => Same as resetPassword, but for verifying the users email address.
+
+Accounts.emailTemplates.enrollAccount = {
+	from: function(user) {
+		T9n.setLanguage(user.profile.language);
+		return T9n.get('appName') + " <contato@devhouse.com.br>"; // #TODO: make this a config setting
+	},
+	subject: function(user) {
+		T9n.setLanguage(user.profile.language);
+		return T9n.get('enrollAccountEmailSubject', true, {
+			appName: T9n.get('appName')
+		});
+	},
+	text: function(user, url) {
+		T9n.setLanguage(user.profile.language);
+		return T9n.get('enrollAccountEmailBody', true, {
+			name: user.profile.firstName,
+			url: url // #TODO: improve this emails and add html support
+		});
+	}
+};

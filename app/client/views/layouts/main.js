@@ -1,3 +1,11 @@
+Template.mainLayout.onCreated(function(){
+    this.autorun(function() {
+        if(!Meteor.user()){
+            FlowRouter.go('signIn');
+        }
+    });
+});
+
 Template.mainLayout.helpers({
     isReady: function(sub) {
         if(sub) {

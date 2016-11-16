@@ -48,7 +48,7 @@ jparker:gravatar
 # arunoda:fast-render
 promise@0.8.4_1
 datatables
-# zuuk:stale-session
+zuuk:stale-session
 
 aldeed:autoform
 aldeed:collection2

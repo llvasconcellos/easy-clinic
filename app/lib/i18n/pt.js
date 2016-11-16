@@ -21,5 +21,7 @@ T9n.map('pt', {
 	verifyEmailBody: "Olá, @{name}.\n\nPara verificar seu endereço de e-mail (@{emailAddress}) visite o seguinte link:\n\n@{url}\n\n Se você não pediu essa verificação, por favor ignore este email. Qualquer dúvida entre em contato conosco: @{supportEmail}.",
 	resetPasswordEmailSubject: "Como alterar sua senha no @{appName}",
 	resetPasswordEmailBody: "Olá, @{name}.\n\nPara alterar sua senha visite o seguinte link:\n\n@{url}\n\n Obrigado!",
+	enrollAccountEmailSubject: "Uma conta foi criada para você em @{appName}",
+	enrollAccountEmailBody: "Olá, @{name}.\n\nPara começar a usar o serviço visite o seguinte link:\n\n@{url}\n\n Obrigado!",
 	appointmentEmailNotificationSubject: "Confirmação de Consulta",
 });
