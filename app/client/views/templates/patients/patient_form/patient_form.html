@@ -14,16 +14,22 @@
 						<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>
 					</button>
 					<ul class="nav nav-tabs">
-						<li class="active"><a data-toggle="tab" href="#tab-1">
-							<h4>{{_ 'patients_data'}}
-								<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
-							</h4>
-						</a></li>
-						{{#with patient}}
-							<li class=""><a data-toggle="tab" href="#records-tab">
-								<h4>{{_ 'patients_records'}}</h4>
-							</a></li>
-						{{/with}}
+						<li class="active">
+							<a data-toggle="tab" href="#tab-1">
+								<h4>{{_ 'patients_data'}}
+									<small class="m-l-sm">{{_ 'patients_create-form-title'}}</small>
+								</h4>
+							</a>
+						</li>
+						{{#if isInRole 'super-admin,administration,medical_doctor,nurse'}}
+							{{#with patient}}
+								<li class="">
+									<a data-toggle="tab" href="#records-tab">
+										<h4>{{_ 'patients_records'}}</h4>
+									</a>
+								</li>
+							{{/with}}
+						{{/if}}
 					</ul>
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane active">
@@ -35,13 +41,15 @@
 								{{/if}}
 							</div>
 						</div>
-						{{#with patient}}
-							<div id="records-tab" class="tab-pane">
-								<div class="panel-body">
-									{{> patientRecord }}
+						{{#if isInRole 'super-admin,administration,medical_doctor,nurse'}}
+							{{#with patient}}
+								<div id="records-tab" class="tab-pane">
+									<div class="panel-body">
+										{{> patientRecord }}
+									</div>
 								</div>
-							</div>
-						{{/with}}
+							{{/with}}
+						{{/if}}
 					</div>
 				</div>
 			</div>

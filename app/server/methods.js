@@ -12,7 +12,10 @@ Meteor.methods({
 					Accounts.setPassword(userId, newPassword);
 				}
 				Roles.setUserRoles(userId, []);
-				Roles.addUsersToRoles(userId, ['default', data.group, 'super-admin']);
+				Roles.addUsersToRoles(userId, ['default', data['profile.group']]);
+				if(data["isSuperAdmin"]){
+					Roles.addUsersToRoles(userId, ['super-admin']);
+				}
 			}
 			else {
 				 var userId = Accounts.createUser({
@@ -23,10 +26,16 @@ Meteor.methods({
 						lastName: data['profile.lastName'],
 						group: data['profile.group'],
 						language: data['profile.language']
-					}
+					},
 				});
-				Roles.addUsersToRoles(userId, ['default', data.group, 'super-admin']); // #TODO: remove super-admin
-				Meteor.users.update(userId, {$set: {isUserEnabled: true}});
+				Roles.addUsersToRoles(userId, ['default', data['profile.group']]);
+				if(data["isSuperAdmin"]){
+					Roles.addUsersToRoles(userId, ['super-admin']);
+				}
+				Meteor.users.update(userId, {$set: {
+					isUserEnabled: data["isUserEnabled"],
+					isSuperAdmin: data["isSuperAdmin"]
+				}});
 				Accounts.sendEnrollmentEmail(userId);
 			}
 		}

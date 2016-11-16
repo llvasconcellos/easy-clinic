@@ -17,6 +17,7 @@ T9n.map('pt', {
 	enabled: "Ativo",
 	disabled: "Inativo",
 	edit: "Editar",
+	superAdmin: "Super Admin",
 	verifyEmailSubject: "[@{appName}] Verifique seu endereço de e-mail",
 	verifyEmailBody: "Olá, @{name}.\n\nPara verificar seu endereço de e-mail (@{emailAddress}) visite o seguinte link:\n\n@{url}\n\n Se você não pediu essa verificação, por favor ignore este email. Qualquer dúvida entre em contato conosco: @{supportEmail}.",
 	resetPasswordEmailSubject: "Como alterar sua senha no @{appName}",

@@ -36,7 +36,7 @@ AccountsTemplates.configure({
     info.profile.language = TAPi18n.getLanguage();
   },
   postSignUpHook: function(userId, info) {
-    Roles.addUsersToRoles(userId, ['default', info.profile.group, 'super-admin']); // #TODO: remove super-admin
+    Roles.addUsersToRoles(userId, ['default', info.profile.group]);
     Meteor.users.update(userId, {
       $set: {
         isUserEnabled: false

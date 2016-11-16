@@ -12,3 +12,4 @@ users_emailPlaceholder: Enter Email
 users_passwordPlaceholder: Enter Password
 users_changepassword: Change Password
 users_doctors: Medical Doctors
+users_super-admin: Super Admin

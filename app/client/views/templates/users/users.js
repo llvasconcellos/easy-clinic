@@ -95,6 +95,22 @@ Template.users.helpers({
 				return html;
 			}
 		},{
+			title: T9n.get('superAdmin'),
+			//width: '1%',
+			orderable: false,
+			data: 'isSuperAdmin',
+			render: function(cellData, renderType, currentRow) {
+				// var checkbox = '<input type="checkbox" class="js-switch"'; #TODO: editar direto na tabela
+				// checkbox += (currentRow.isUserEnabled) ? ' checked' : '';
+				// checkbox += '/>';
+				// return checkbox;
+				var html = '<span class="label label-';
+				html += (cellData) ? 'primary' : 'danger';
+				html += '">';
+				html += (cellData) ? T9n.get('enabled') : T9n.get('disabled');
+				return html;
+			}
+		},{
 			//title: T9n.get('edit'),
 			//width: '1%',
 			data: '_id',
@@ -114,6 +130,7 @@ var userEdit = (function(){
 	var password = null;
 	var group = null;
 	var enabled = null;
+	var superAdmin = null;
 	var save = null;
 
 	var _findElements = function() {
@@ -125,6 +142,7 @@ var userEdit = (function(){
 		password = form.find('input[name=password]');
 		group = form.find('select[name=group]');
 		enabled = form.find('input[name=enabled]');
+		superAdmin = form.find('input[name=super-admin]');
 		save = form.find('button[type=submit]');
 	};
 
@@ -183,7 +201,8 @@ var userEdit = (function(){
 				"profile.lastName": lastName.val(),
 				"profile.group": group.val(),
 				"profile.language":TAPi18n.getLanguage(),
-				"isUserEnabled": enabled.prop('checked')
+				"isUserEnabled": enabled.prop('checked'),
+				"isSuperAdmin": superAdmin.prop('checked')
 			}, function(error, result){
 				if (error) {
 					toastr['error'](error.message, TAPi18n.__('common_error'));
@@ -210,6 +229,7 @@ var userEdit = (function(){
 		email.val('');
 		password.val('');
 		enabled.iCheck('uncheck');
+		superAdmin.iCheck('uncheck');
 		form.off('submit');
 	};
 
@@ -254,6 +274,14 @@ var userEdit = (function(){
 				else {
 					enabled.iCheck('uncheck');
 				}
+
+				if (user.isSuperAdmin) {
+					superAdmin.iCheck('check');
+				}
+				else {
+					superAdmin.iCheck('uncheck');
+				}
+
 				Template.forEachCurrentlyRenderedInstance(function(template, index, templateArr){
 					if(template.fileId){
 						template.fileId.set(user.profile.picture);

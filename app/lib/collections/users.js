@@ -158,6 +158,10 @@ Schema.User = new SimpleSchema({
         type: Boolean,
         optional: true
     },
+    isSuperAdmin: {
+        type: Boolean,
+        optional: true
+    },
     // In order to avoid an 'Exception in setInterval callback' from Meteor
     heartbeat: {
         type: Date,
