@@ -6,9 +6,11 @@
 			<div class="col-sm-12">
 				<div class="tabs-container">
 					{{#if isEditForm}}
-						<button class="btn btn-sm btn-success pull-right m-t-n-xs start-appointment">
-							<strong><i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}</strong>
-						</button>
+						{{#if isInRole 'super-admin,medical_doctor'}}
+							<button class="btn btn-sm btn-success pull-right m-t-n-xs start-appointment">
+								<strong><i class="fa fa-play" aria-hidden="true"></i> {{_ 'patients_start-appointment'}}</strong>
+							</button>
+						{{/if}}
 					{{/if}}
 					<button class="btn btn-sm btn-primary pull-right m-t-n-xs new-record">
 						<strong><i class="fa fa-plus" aria-hidden="true"></i> {{_ 'patients_newpatient'}}</strong>

@@ -1,9 +1,9 @@
-/*import '/imports/client/datepicker/bootstrap-datepicker.js';
+import '/imports/client/datepicker/bootstrap-datepicker.js';
 import '/imports/client/datepicker/bootstrap-datepicker.pt-BR.min.js';
 import '/imports/client/datepicker/bootstrap-datepicker.es.min.js';
-import '/imports/client/datepicker/datepicker3.css';*/
+import '/imports/client/datepicker/datepicker3.css';
 
-//Template['datePickerOverride'].replaces('afBootstrapDatepicker');
+Template['datePickerOverride'].replaces('afBootstrapDatepicker');
 
 var eventId = null;
 var encounter = null;
@@ -219,7 +219,7 @@ Template.patientForm.onRendered(function () {
 		// });
 
 		// #TODO: make this international
-		$('input[name=dateOfBirth], input[name=returnDate]').mask('00/00/0000');
+		$('.input-group.date input').mask('00/00/0000');
 
 		$('textarea[name=obs]')
 			.css('display', 'block')

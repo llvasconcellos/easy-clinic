@@ -1,7 +1,7 @@
 Patients = new Mongo.Collection('patients');
 
 Patients.before.insert(function (userId, doc) {
-  doc.createdAt = Date.now();
+  doc.createdAt = new Date();
 });
 
 Patients.attachSchema(new SimpleSchema(patientSchema));

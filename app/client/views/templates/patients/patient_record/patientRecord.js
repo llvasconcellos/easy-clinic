@@ -83,8 +83,8 @@ Template.patientRecord.helpers({
 		return add + 1;
 	},
 	generateOutput: function(record){
-		if(name && (name.toLowerCase() != 'document')){
-			return `<p><b>${record.name}:</b> ${record.value}</p>`;
+		if(record.name && (record.name.toLowerCase() != 'document')){
+			return `<p><b>${record.label}:</b> ${record.value}</p><p>&nbsp;</p>`;
 		} else {
 			return record.value;
 		}

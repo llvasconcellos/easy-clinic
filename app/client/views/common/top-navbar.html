@@ -26,14 +26,26 @@
                     <ul class="dropdown-menu dropdown-alerts">
                         {{#each events}}
                         <li>
-                            <a href="{{pathFor route='patientEdit' _id=patient query='start_encounter=true&eventId='}}{{_id}}" title="{{_ 'patients_start-appointment'}}">
-                                <div>
-                                    <i class="fa fa-male"></i><i class="fa fa-female"></i> {{title}}
-                                    <span class="btn btn-sm btn-primary pull-right">
-                                        <i class="fa fa-play" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </a>
+                            {{#if isInRole 'medical_doctor'}}
+                                <a href="{{pathFor route='patientEdit' _id=patient query='start_encounter=true&eventId='}}{{_id}}" title="{{_ 'patients_start-appointment'}}">
+                                    <div>
+                                        <i class="fa fa-male"></i><i class="fa fa-female"></i> {{title}}
+                                        <span class="btn btn-sm btn-primary pull-right">
+                                            <i class="fa fa-play" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            {{/if}}
+                            {{#if isInRole 'nurse'}}
+                                <a href="{{pathFor route='patientEdit' _id=patient}}" title="{{_ 'patients_start-appointment'}}">
+                                    <div>
+                                        <i class="fa fa-male"></i><i class="fa fa-female"></i> {{title}}
+                                        <span class="btn btn-sm btn-primary pull-right">
+                                            <i class="fa fa-play" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            {{/if}}
                         </li>
                         <li class="divider"></li>
                         {{/each}}

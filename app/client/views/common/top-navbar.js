@@ -1,8 +1,18 @@
 Template.topNavbar.onCreated(function () {
-    Meteor.subscribe('doctor-schedule', Meteor.userId());
+    if (Roles.userIsInRole(Meteor.userId(), ['medical_doctor'])) {
+        Meteor.subscribe('doctor-schedule', Meteor.userId());
+    } else if (Roles.userIsInRole(Meteor.userId(), ['nurse'])) {
+        Meteor.subscribe('schedule');
+    }
+    
     var templateInstance = this;
     this.autorun(function() {
-        templateInstance.events = Schedule.find({status: 'waiting', resourceId: Meteor.userId()}).fetch();
+        if (Roles.userIsInRole(Meteor.userId(), ['medical_doctor'])) {
+            templateInstance.events = Schedule.find({status: 'waiting', resourceId: Meteor.userId()}).fetch();
+        } else if (Roles.userIsInRole(Meteor.userId(), ['nurse'])) {
+            templateInstance.events = Schedule.find({status: 'waiting'}).fetch();
+        }
+
          if(templateInstance.events && (templateInstance.events.length > 0)){
             toastr['info'](TAPi18n.__('schedule_patient-has-arrived'), TAPi18n.__('common_notification'));
          }
@@ -11,7 +21,12 @@ Template.topNavbar.onCreated(function () {
 
 Template.topNavbar.helpers({
     events: function(){
-        this.events = Schedule.find({status: 'waiting', resourceId: Meteor.userId()}).fetch();
+        if (Roles.userIsInRole(Meteor.userId(), ['medical_doctor'])) {
+            this.events = Schedule.find({status: 'waiting', resourceId: Meteor.userId()}).fetch();
+        } else if (Roles.userIsInRole(Meteor.userId(), ['nurse'])) {
+            this.events = Schedule.find({status: 'waiting'}).fetch();
+        }
+        
         return this.events;
     },
     eventsCount: function(events){

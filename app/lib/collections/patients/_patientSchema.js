@@ -39,17 +39,13 @@ patientSchema = {
     }
   },
   dateOfBirth: {
-    //type: Date,
-    type: String,
+    type: Date,
     label: function() {
       return TAPi18n.__('schemas.patients.dateOfBirth.label');
     },
     autoform: {
       placeholder: '__/__/____',
       afFieldInput: {
-        type: "text"
-      }
-      /*afFieldInput: {
         type: "bootstrap-datepicker",
         // #TODO: make this international
         datePickerOptions: {
@@ -57,7 +53,7 @@ patientSchema = {
           language: "pt-BR"
           //language: TAPi18n.getLanguage()
         }
-      }*/
+      }
     }
   },
   // healthInsurance: {
@@ -317,8 +313,7 @@ patientSchema = {
     }
   },
   returnDate: {
-    //type: Date,
-    type: String,
+    type: Date,
     optional: true,
     label: function() {
       return TAPi18n.__('schemas.patients.returnDate.label');
@@ -326,9 +321,6 @@ patientSchema = {
     autoform: {
       placeholder: '__/__/____',
       afFieldInput: {
-        type: "text"
-      }
-      /*afFieldInput: {
         type: "bootstrap-datepicker",
         // #TODO: make this international
         datePickerOptions: {
@@ -336,7 +328,7 @@ patientSchema = {
           language: "pt-BR"
           //language: TAPi18n.getLanguage()
         }
-      }*/
+      }
     }
   },
   email: {
@@ -462,7 +454,7 @@ patientSchema = {
     }
   },
   createdAt: {
-    type: String,
+    type: Date,
     autoform: {
       afFieldInput: {
         type: "hidden",
