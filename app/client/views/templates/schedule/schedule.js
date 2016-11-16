@@ -172,6 +172,7 @@ Template.schedule.onRendered(function () {
 
     var calendar = $('#calendar').fullCalendar({
         defaultView: 'timelineDay',
+        timezone: 'America/Sao_Paulo', // #TODO: make this i18n
         slotDuration: '00:20:00',
         minTime: workHoursStart + ':00',
         maxTime: workHoursEnd + ':00',
