@@ -13,3 +13,5 @@ users_passwordPlaceholder: Informe a Senha
 users_changepassword: Altere a Senha
 users_doctors: Médicos
 users_super-admin: Super Admin
+users_group: Grupo
+users_language: Língua

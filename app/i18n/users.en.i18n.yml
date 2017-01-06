@@ -13,3 +13,5 @@ users_passwordPlaceholder: Enter Password
 users_changepassword: Change Password
 users_doctors: Medical Doctors
 users_super-admin: Super Admin
+users_group: Group
+users_language: Language

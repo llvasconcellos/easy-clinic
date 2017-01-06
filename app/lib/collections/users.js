@@ -24,30 +24,18 @@ Schema.workHours = new SimpleSchema({
     }
 });
 
-Schema.UserProfile = new SimpleSchema({
+Schema.UserProfile = {
     firstName: {
         type: String,
-        label: function() {
-          return TAPi18n.__('users_firstName');
-        }
     },
     lastName: {
         type: String,
-        label: function() {
-          return TAPi18n.__('users_lastName');
-        }
     },
     group: {
         type: String,
-        label: function() {
-          return TAPi18n.__('users_lastName');
-        }
     },
     language: {
         type: String,
-        label: function() {
-          return TAPi18n.__('users_lastName');
-        }
     },
     CRM: {
         type: String,
@@ -93,7 +81,24 @@ Schema.UserProfile = new SimpleSchema({
     //     type: Schema.UserCountry,
     //     optional: true
     // }
-});
+};
+
+if (Meteor.isClient) {
+    Schema.UserProfile.firstName.label = function() {
+        return TAPi18n.__('users_firstName');
+    };
+    Schema.UserProfile.lastName.label = function() {
+        return TAPi18n.__('users_lastName');
+    };
+    Schema.UserProfile.group.label = function() {
+        return TAPi18n.__('users_group');
+    };
+    Schema.UserProfile.language.label = function() {
+        return TAPi18n.__('users_language');
+    };
+}
+
+Schema.UserProfile = new SimpleSchema(Schema.UserProfile);
 
 Schema.User = new SimpleSchema({
     profile: {
