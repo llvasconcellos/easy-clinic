@@ -85,7 +85,7 @@ if (Meteor.isClient) {
   Template['atSelectInputOverride'].replaces('atSelectInput');
   Template['atPwdFormBtnOverride'].replaces('atPwdFormBtn');
   Accounts.onLogout(function(){
-    FlowRouter.redirect('signIn');
+    FlowRouter.redirect(FlowRouter.path('signIn'));
   });
   // Accounts.onLogin(function(){
   //   Meteor.logoutOtherClients();
