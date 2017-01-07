@@ -241,7 +241,7 @@ patientSchema = {
   CPF: { // #TODO: international documents
     type: String,
     optional: true,
-    //unique: true,
+    unique: true,
     label: function() {
       return TAPi18n.__('schemas.patients.CPF.label');
     },
