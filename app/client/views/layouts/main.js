@@ -56,7 +56,6 @@ Template.mainLayout.rendered = function(){
 
 
     $(window).on('beforeunload', function () {
-        console.log('ajjjjjjjjjjjjjjjjjjjjjjjj');
         Meteor.logout();
     });
 
