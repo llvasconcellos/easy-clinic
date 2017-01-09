@@ -56,7 +56,15 @@ Template.mainLayout.rendered = function(){
 
 
     $(window).on('beforeunload', function () {
-        Meteor.logout();
+        if(performance) {
+            // Prevent from loggin out on page refresh
+            if (performance.navigation.type == 1) {
+              Meteor.logout();
+            }
+        }
+        else {
+            Meteor.logout();
+        }
     });
 
 
