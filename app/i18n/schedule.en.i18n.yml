@@ -25,3 +25,4 @@ schedule_status-attending: Attending
 schedule_status-finished: Finished
 schedule_status-no-show: No Show
 schedule_status-to-confirm: "[To Confirm]"
+schedule_long-press-to-add: "* Long Press to add appointment."

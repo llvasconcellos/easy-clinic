@@ -25,3 +25,4 @@ schedule_status-attending: Em Consulta
 schedule_status-finished: Finalizado
 schedule_status-no-show: Não Compareceu
 schedule_status-to-confirm: "[A confirmar]"
+schedule_long-press-to-add: "* Toque prolongado para adicionar consulta."
