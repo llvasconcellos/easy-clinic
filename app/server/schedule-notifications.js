@@ -41,7 +41,7 @@ ${Accounts.emailTemplates.siteName}
 };
 
 var sendSMS = function(patient, event){
-	var userName = 'Leonardo';
+	var userName = '***REMOVED***';
 	var AuthenticationToken = '***REMOVED***';
 	var url = 'https://api-messaging.movile.com/v1/send-sms';
 	
